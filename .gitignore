@@ -1,0 +1,47 @@
+﻿# ------------------------------------------------------------
+# Modern Life Inc. - generated / disposable files
+# ------------------------------------------------------------
+
+temp/
+**/temp/
+*.tmp
+*.temp
+
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.venv/
+venv/
+
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+*.log
+
+episodes/*/06_renders/tests/*.mp4
+episodes/*/06_renders/tests/*.mov
+episodes/*/06_renders/tests/*.mkv
+episodes/*/06_renders/tests/*_contact.jpg
+episodes/*/06_renders/tests/*_contact.png
+
+episodes/*/06_renders/final/*.mp4
+episodes/*/06_renders/final/*.mov
+
+*.zip
+*.7z
+*.rar
+
+.ai/AI_CONTEXT_SNAPSHOT.md
+
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+*.p12
+secrets/
+credentials/
