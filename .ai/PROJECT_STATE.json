@@ -32,10 +32,10 @@
                                                 "v6_15s_test":  "TECHNICAL PASS / VISUAL FAIL: render completed but failed visual acceptance for duplicated embedded props, weak composition/scale, mixed prop style, generic timing."
                                             },
     "git":  {
-                "available":  true,
                 "branch":  "main",
-                "current_commit":  "8bd2d32adbe9da2572ef57277dbba6f67c388587",
                 "origin":  "https://github.com/RafaelAlbaWebify/modern-life-inc-production.git",
-                "status_at_snapshot":  "clean"
+                "repository":  "https://github.com/RafaelAlbaWebify/modern-life-inc-production.git",
+                "default_working_branch":  "main",
+                "provenance_rule":  "Repository HEAD is authoritative. Live commit, status, and remote delta are generated into .ai/AI_CONTEXT_SNAPSHOT.md and must not be persisted as self-referential fields in tracked PROJECT_STATE.json."
             }
 }

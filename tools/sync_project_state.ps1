@@ -6,6 +6,9 @@ $ErrorActionPreference = "Stop"
 
 if (-not (Test-Path -LiteralPath (Join-Path $Root ".git"))) { throw "Not a Git repository: $Root" }
 
+# build_ai_context.ps1 writes only the ignored AI_CONTEXT_SNAPSHOT.md.
+# It MUST NOT rewrite PROJECT_STATE.json with HEAD, otherwise every sync
+# creates a new commit and immediately makes the stored SHA stale/self-referential.
 $Builder = Join-Path $Root "tools\build_ai_context.ps1"
 if (Test-Path -LiteralPath $Builder) {
     & powershell -ExecutionPolicy Bypass -File $Builder -Root $Root
@@ -75,3 +78,4 @@ Write-Host "Branch : $Branch"
 Write-Host "Commit : $Commit"
 Write-Host "Remote delta (behind ahead): $Counts"
 Write-Host "Working tree changes: $($Status.Count)"
+

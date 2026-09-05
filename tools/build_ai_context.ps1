@@ -1,38 +1,67 @@
 ﻿param([string]$Root = "C:\ModernLifeInc")
 $ErrorActionPreference = "Stop"
+
 $Ai = Join-Path $Root ".ai"
 $StatePath = Join-Path $Ai "PROJECT_STATE.json"
+if (-not (Test-Path -LiteralPath $StatePath)) { throw "Missing $StatePath" }
+
 $State = Get-Content -LiteralPath $StatePath -Raw | ConvertFrom-Json
 $Branch = (& git -C $Root branch --show-current).Trim()
 $Commit = (& git -C $Root rev-parse HEAD).Trim()
+$Origin = (& git -C $Root remote get-url origin 2>$null).Trim()
 $StatusLines = @(& git -C $Root status --porcelain)
 $Status = if ($StatusLines.Count -eq 0) { "clean" } else { $StatusLines -join "`n" }
-$Origin = (& git -C $Root remote get-url origin 2>$null)
 
-if (-not $State.git) { $State | Add-Member -NotePropertyName git -NotePropertyValue ([pscustomobject]@{}) }
-$State.git | Add-Member -NotePropertyName available -NotePropertyValue $true -Force
-$State.git | Add-Member -NotePropertyName branch -NotePropertyValue $Branch -Force
-$State.git | Add-Member -NotePropertyName current_commit -NotePropertyValue $Commit -Force
-$State.git | Add-Member -NotePropertyName origin -NotePropertyValue $Origin -Force
-$State.git | Add-Member -NotePropertyName status_at_snapshot -NotePropertyValue $Status -Force
-$State.last_update_date = Get-Date -Format "yyyy-MM-dd"
-$State | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath $StatePath -Encoding UTF8
+$Ahead = "unknown"
+$Behind = "unknown"
+& git -C $Root fetch origin --prune 2>$null | Out-Null
+if ($LASTEXITCODE -eq 0) {
+    $RemoteRef = "origin/$Branch"
+    & git -C $Root rev-parse --verify $RemoteRef *> $null
+    if ($LASTEXITCODE -eq 0) {
+        $Counts = (& git -C $Root rev-list --left-right --count "$RemoteRef...$Branch").Trim()
+        if ($Counts -match '^\s*(\d+)\s+(\d+)\s*$') {
+            $Behind = [int]$Matches[1]
+            $Ahead = [int]$Matches[2]
+        }
+    }
+}
 
 $Snapshot = @"
 # AI Context Snapshot
+
 Generated: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss K")
-Branch: $Branch
-Commit: $Commit
-Origin: $Origin
-Milestone: $($State.current_milestone)
-Operability: $($State.operability_percentage)%
-Production ready: $($State.readiness.production_ready)
+
+## Live Git provenance
+- Branch: $Branch
+- Commit: $Commit
+- Origin: $Origin
+- Ahead: $Ahead
+- Behind: $Behind
+- Working tree: $(if ($Status -eq "clean") { "clean" } else { "dirty" })
+
+```
+$Status
+```
+
+## Project state
+- Phase: $($State.current_phase)
+- Milestone: $($State.current_milestone)
+- Overall completion: $($State.overall_completion_percentage)%
+- Operability: $($State.operability_percentage)%
+- Testing: $($State.testing_percentage)%
+- Production ready: $($State.readiness.production_ready)
+- Publishable episode ready: $($State.readiness.publishable_episode_ready)
 
 ## Blockers
 $((@($State.current_blockers) | ForEach-Object { "- $_" }) -join "`n")
 
-## Next
+## Next actions
 $((@($State.next_recommended_actions) | ForEach-Object { "- $_" }) -join "`n")
+
+## Provenance rule
+The live Git values above are authoritative. `.ai/PROJECT_STATE.json` intentionally does not persist its own containing commit SHA.
 "@
+
 $Snapshot | Set-Content -LiteralPath (Join-Path $Ai "AI_CONTEXT_SNAPSHOT.md") -Encoding UTF8
-Write-Host "[PASS] AI context refreshed: $Commit" -ForegroundColor Green
+Write-Host "[PASS] AI context snapshot refreshed: $Commit" -ForegroundColor Green
