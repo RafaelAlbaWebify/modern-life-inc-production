@@ -45,3 +45,58 @@ episodes/*/06_renders/final/*.mov
 *.p12
 secrets/
 credentials/
+
+# === MLI DUAL LOCAL/GITHUB POLICY BEGIN ===
+
+# Local-only working asset staging
+assets/working/
+
+# Local-only scene staging
+episodes/*/05_scenes/working/
+
+# Disposable render intermediates
+temp/
+**/temp/
+
+# Active test renders
+episodes/*/06_renders/tests/*.mp4
+episodes/*/06_renders/tests/*.mov
+episodes/*/06_renders/tests/*.mkv
+episodes/*/06_renders/tests/*_contact.jpg
+episodes/*/06_renders/tests/*_contact.png
+
+# Regenerable final video binaries
+episodes/*/06_renders/final/*.mp4
+episodes/*/06_renders/final/*.mov
+
+# Raw generation / temporary exports
+*.tmp
+*.temp
+*.part
+*.crdownload
+
+# Safety / transfer archives
+*.zip
+*.7z
+*.rar
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Generated context snapshot: rebuild locally
+.ai/AI_CONTEXT_SNAPSHOT.md
+
+# Secrets
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+*.p12
+secrets/
+credentials/
+
+# === MLI DUAL LOCAL/GITHUB POLICY END ===
+
