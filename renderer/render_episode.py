@@ -97,7 +97,7 @@ def system_scene(scene: dict[str, Any]) -> Image.Image:
     return img
 
 
-def render_scene(scene: dict[str, Any], episode_dir: Path, output: Path) -> None:
+def render_scene(scene: dict[str, Any], episode_dir: Path, output: Path, allow_placeholders: bool = False) -> None:
     mode = scene.get("visual_mode", "SYSTEM").upper()
     base = scene.get("base_image")
 
@@ -111,7 +111,9 @@ def render_scene(scene: dict[str, Any], episode_dir: Path, output: Path) -> None
             draw.rectangle((0,0,W,H), fill=(0,0,0,28))
             draw_text_card(draw, scene.get("on_screen_text",""), 820, 68)
     elif mode in {"HYBRID", "HERO"}:
-        raise ValueError(f"{scene['id']} is {mode} but has no base_image")
+        if not allow_placeholders:
+            raise ValueError(f"{scene['id']} is {mode} but has no base_image")
+        img = system_scene({**scene, "layout": "single_focus", "on_screen_text": f"{mode} VISUAL PENDING"})
     else:
         img = system_scene(scene)
 
@@ -119,7 +121,7 @@ def render_scene(scene: dict[str, Any], episode_dir: Path, output: Path) -> None
     img.save(output, quality=95)
 
 
-def build_video(stills: list[tuple[Path, float]], output: Path, fps: int = 30) -> None:
+def build_video(stills: list[tuple[Path, float]], output: Path, fps: int = 30, audio: Path | None = None) -> None:
     concat = output.with_suffix(".concat.txt")
     lines = []
     for p, duration in stills:
@@ -132,11 +134,16 @@ def build_video(stills: list[tuple[Path, float]], output: Path, fps: int = 30) -
         lines.append(f"file '{safe}'")
     concat.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
-    cmd = [
-        "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat),
+    cmd = ["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat)]
+    if audio is not None:
+        cmd += ["-i", str(audio), "-map", "0:v:0", "-map", "1:a:0"]
+    cmd += [
         "-vf", f"fps={fps},format=yuv420p", "-c:v", "libx264", "-crf", "18",
-        "-preset", "medium", "-movflags", "+faststart", str(output)
+        "-preset", "medium", "-movflags", "+faststart"
     ]
+    if audio is not None:
+        cmd += ["-c:a", "aac", "-b:a", "192k", "-shortest"]
+    cmd += [str(output)]
     subprocess.run(cmd, check=True)
 
 
@@ -146,6 +153,8 @@ def main() -> None:
     ap.add_argument("--manifest", default="production_manifest.json")
     ap.add_argument("--output", default="output/preview.mp4")
     ap.add_argument("--limit", type=int, default=0, help="Render first N scenes only")
+    ap.add_argument("--allow-placeholders", action="store_true", help="Render missing HYBRID/HERO scenes as placeholders")
+    ap.add_argument("--audio", default="", help="Optional narration/audio file to mux into the video")
     args = ap.parse_args()
 
     episode_dir = Path(args.episode)
@@ -159,13 +168,16 @@ def main() -> None:
 
     for scene in scenes:
         out = still_dir / f"{scene['id']}.png"
-        render_scene(scene, episode_dir, out)
+        render_scene(scene, episode_dir, out, allow_placeholders=args.allow_placeholders)
         stills.append((out, float(scene["duration_sec"])))
         print(f"[PASS] {scene['id']} -> {out}")
 
     output = episode_dir / args.output
     output.parent.mkdir(parents=True, exist_ok=True)
-    build_video(stills, output, int(manifest.get("fps", 30)))
+    audio = Path(args.audio).resolve() if args.audio else None
+    if audio is not None and not audio.exists():
+        raise FileNotFoundError(f"Audio not found: {audio}")
+    build_video(stills, output, int(manifest.get("fps", 30)), audio=audio)
     print(f"[PASS] video -> {output}")
 
 
