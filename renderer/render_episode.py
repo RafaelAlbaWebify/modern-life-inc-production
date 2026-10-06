@@ -101,19 +101,20 @@ def render_scene(scene: dict[str, Any], episode_dir: Path, output: Path, allow_p
     mode = scene.get("visual_mode", "SYSTEM").upper()
     base = scene.get("base_image")
 
-    if mode in {"HYBRID", "HERO"} and base:
-        p = (episode_dir / base).resolve()
-        if not p.exists():
+    if mode in {"HYBRID", "HERO"}:
+        p = (episode_dir / base).resolve() if base else None
+        if p is not None and p.exists():
+            img = fit_cover(Image.open(p))
+            draw = ImageDraw.Draw(img, "RGBA")
+            if mode == "HYBRID":
+                draw.rectangle((0,0,W,H), fill=(0,0,0,28))
+                draw_text_card(draw, scene.get("on_screen_text",""), 820, 68)
+        elif allow_placeholders:
+            img = system_scene({**scene, "layout": "single_focus", "on_screen_text": f"{mode} VISUAL PENDING"})
+        elif p is not None:
             raise FileNotFoundError(f"Missing base image for {scene['id']}: {p}")
-        img = fit_cover(Image.open(p))
-        draw = ImageDraw.Draw(img, "RGBA")
-        if mode == "HYBRID":
-            draw.rectangle((0,0,W,H), fill=(0,0,0,28))
-            draw_text_card(draw, scene.get("on_screen_text",""), 820, 68)
-    elif mode in {"HYBRID", "HERO"}:
-        if not allow_placeholders:
+        else:
             raise ValueError(f"{scene['id']} is {mode} but has no base_image")
-        img = system_scene({**scene, "layout": "single_focus", "on_screen_text": f"{mode} VISUAL PENDING"})
     else:
         img = system_scene(scene)
 
