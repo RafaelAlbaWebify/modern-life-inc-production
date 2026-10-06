@@ -1,0 +1,562 @@
+[
+  {
+    "id": "S001",
+    "start_sec": 0,
+    "end_sec": 8,
+    "duration_sec": 8,
+    "section": "Hook",
+    "visual": "Four rapid false clues: stare, laugh, fast text, accidental touch",
+    "layout": "4-icon montage",
+    "on_screen_text": "NO SINGLE SIGN = PROOF"
+  },
+  {
+    "id": "S002",
+    "start_sec": 8,
+    "end_sec": 16,
+    "duration_sec": 8,
+    "section": "Hook",
+    "visual": "One figure surrounded by four question marks",
+    "layout": "single figure + icons",
+    "on_screen_text": ""
+  },
+  {
+    "id": "S003",
+    "start_sec": 16,
+    "end_sec": 25,
+    "duration_sec": 9,
+    "section": "Thesis",
+    "visual": "Four clues collapse into one word: PATTERN",
+    "layout": "diagram convergence",
+    "on_screen_text": "PATTERN"
+  },
+  {
+    "id": "S004",
+    "start_sec": 25,
+    "end_sec": 35,
+    "duration_sec": 10,
+    "section": "Thesis",
+    "visual": "Two people; several small amber signals appear between them",
+    "layout": "interaction + signal dots",
+    "on_screen_text": ""
+  },
+  {
+    "id": "S005",
+    "start_sec": 35,
+    "end_sec": 45,
+    "duration_sec": 10,
+    "section": "Thesis",
+    "visual": "Research card: behavior changes around people we like",
+    "layout": "evidence card",
+    "on_screen_text": "ATTRACTION CAN CHANGE BEHAVIOR"
+  },
+  {
+    "id": "S006",
+    "start_sec": 45,
+    "end_sec": 54,
+    "duration_sec": 9,
+    "section": "Transition",
+    "visual": "Seven numbered markers fan out",
+    "layout": "numbered diagram",
+    "on_screen_text": "7 QUIET SIGNS"
+  },
+  {
+    "id": "S007",
+    "start_sec": 54,
+    "end_sec": 64,
+    "duration_sec": 10,
+    "section": "Sign 1",
+    "visual": "Two people in café; empty seats visible; one chooses seat nearby",
+    "layout": "interaction",
+    "on_screen_text": "1. PROXIMITY"
+  },
+  {
+    "id": "S008",
+    "start_sec": 64,
+    "end_sec": 74,
+    "duration_sec": 10,
+    "section": "Sign 1",
+    "visual": "Figure starts conversation; speech bubble grows",
+    "layout": "interaction",
+    "on_screen_text": ""
+  },
+  {
+    "id": "S009",
+    "start_sec": 74,
+    "end_sec": 84,
+    "duration_sec": 10,
+    "section": "Sign 1",
+    "visual": "Conversation should end; one figure reopens it with new bubble",
+    "layout": "interaction",
+    "on_screen_text": ""
+  },
+  {
+    "id": "S010",
+    "start_sec": 84,
+    "end_sec": 94,
+    "duration_sec": 10,
+    "section": "Sign 1",
+    "visual": "Split screen: assigned desk vs voluntary approach",
+    "layout": "contrast",
+    "on_screen_text": "CHOICE MATTERS"
+  },
+  {
+    "id": "S011",
+    "start_sec": 94,
+    "end_sec": 104,
+    "duration_sec": 10,
+    "section": "Sign 1",
+    "visual": "Arrow loops back toward same person three times",
+    "layout": "diagram",
+    "on_screen_text": "REPEATED + VOLUNTARY"
+  },
+  {
+    "id": "S012",
+    "start_sec": 104,
+    "end_sec": 114,
+    "duration_sec": 10,
+    "section": "Sign 2",
+    "visual": "Two profile heads glance, look away, reconnect",
+    "layout": "face focus",
+    "on_screen_text": "2. MUTUAL EYE CONTACT"
+  },
+  {
+    "id": "S013",
+    "start_sec": 114,
+    "end_sec": 124,
+    "duration_sec": 10,
+    "section": "Sign 2",
+    "visual": "Single accidental glance shown as tiny weak signal",
+    "layout": "contrast",
+    "on_screen_text": "ONE GLANCE = WEAK"
+  },
+  {
+    "id": "S014",
+    "start_sec": 124,
+    "end_sec": 134,
+    "duration_sec": 10,
+    "section": "Sign 2",
+    "visual": "Shared gaze line appears between both faces",
+    "layout": "face focus",
+    "on_screen_text": "SHARED"
+  },
+  {
+    "id": "S015",
+    "start_sec": 134,
+    "end_sec": 144,
+    "duration_sec": 10,
+    "section": "Sign 2",
+    "visual": "Evidence card with eye icon + speed-dating silhouette",
+    "layout": "evidence card",
+    "on_screen_text": "MORE SHARED EYE CONTACT"
+  },
+  {
+    "id": "S016",
+    "start_sec": 144,
+    "end_sec": 154,
+    "duration_sec": 10,
+    "section": "Sign 2",
+    "visual": "Three side icons: culture, anxiety, personality",
+    "layout": "diagram",
+    "on_screen_text": "CONTEXT CHANGES GAZE"
+  },
+  {
+    "id": "S017",
+    "start_sec": 154,
+    "end_sec": 164,
+    "duration_sec": 10,
+    "section": "Sign 3",
+    "visual": "Two seated figures lean forward at same moment",
+    "layout": "interaction",
+    "on_screen_text": "3. SYNCHRONY"
+  },
+  {
+    "id": "S018",
+    "start_sec": 164,
+    "end_sec": 174,
+    "duration_sec": 10,
+    "section": "Sign 3",
+    "visual": "Two hands gesture with similar rhythm",
+    "layout": "interaction",
+    "on_screen_text": ""
+  },
+  {
+    "id": "S019",
+    "start_sec": 174,
+    "end_sec": 184,
+    "duration_sec": 10,
+    "section": "Sign 3",
+    "visual": "Two laugh marks appear simultaneously",
+    "layout": "interaction",
+    "on_screen_text": ""
+  },
+  {
+    "id": "S020",
+    "start_sec": 184,
+    "end_sec": 194,
+    "duration_sec": 10,
+    "section": "Sign 3",
+    "visual": "Bad interpretation crossed out: COPY = LOVE",
+    "layout": "contrast",
+    "on_screen_text": "NOT THAT SIMPLE"
+  },
+  {
+    "id": "S021",
+    "start_sec": 194,
+    "end_sec": 204,
+    "duration_sec": 10,
+    "section": "Sign 3",
+    "visual": "Waveforms align gradually",
+    "layout": "abstract diagram",
+    "on_screen_text": "SHARED RHYTHM"
+  },
+  {
+    "id": "S022",
+    "start_sec": 204,
+    "end_sec": 214,
+    "duration_sec": 10,
+    "section": "Sign 4",
+    "visual": "Speech bubbles progress: weather → work → fear/dream",
+    "layout": "conversation progression",
+    "on_screen_text": "4. MORE PERSONAL"
+  },
+  {
+    "id": "S023",
+    "start_sec": 214,
+    "end_sec": 224,
+    "duration_sec": 10,
+    "section": "Sign 4",
+    "visual": "One figure opens a small door/heart icon",
+    "layout": "visual metaphor",
+    "on_screen_text": ""
+  },
+  {
+    "id": "S024",
+    "start_sec": 224,
+    "end_sec": 234,
+    "duration_sec": 10,
+    "section": "Sign 4",
+    "visual": "Second figure responds with matching disclosure",
+    "layout": "interaction",
+    "on_screen_text": "RECIPROCAL"
+  },
+  {
+    "id": "S025",
+    "start_sec": 234,
+    "end_sec": 244,
+    "duration_sec": 10,
+    "section": "Sign 4",
+    "visual": "Split: oversharer-to-everyone vs selective disclosure",
+    "layout": "contrast",
+    "on_screen_text": "SELECTIVE DEPTH"
+  },
+  {
+    "id": "S026",
+    "start_sec": 244,
+    "end_sec": 254,
+    "duration_sec": 10,
+    "section": "Sign 4",
+    "visual": "Timeline shows conversations deepening over time",
+    "layout": "diagram",
+    "on_screen_text": "OVER TIME"
+  },
+  {
+    "id": "S027",
+    "start_sec": 254,
+    "end_sec": 264,
+    "duration_sec": 10,
+    "section": "Sign 5",
+    "visual": "Same story told to Person A and Person B",
+    "layout": "split interaction",
+    "on_screen_text": "5. RESPONSIVENESS"
+  },
+  {
+    "id": "S028",
+    "start_sec": 264,
+    "end_sec": 274,
+    "duration_sec": 10,
+    "section": "Sign 5",
+    "visual": "Person A: 'Oh, cool.' then turns away",
+    "layout": "contrast",
+    "on_screen_text": ""
+  },
+  {
+    "id": "S029",
+    "start_sec": 274,
+    "end_sec": 284,
+    "duration_sec": 10,
+    "section": "Sign 5",
+    "visual": "Person B asks follow-up; arrows connect ideas",
+    "layout": "interaction",
+    "on_screen_text": ""
+  },
+  {
+    "id": "S030",
+    "start_sec": 284,
+    "end_sec": 294,
+    "duration_sec": 10,
+    "section": "Sign 5",
+    "visual": "Icons: understood / valued / responded to",
+    "layout": "diagram",
+    "on_screen_text": "UNDERSTOOD • VALUED • HEARD"
+  },
+  {
+    "id": "S031",
+    "start_sec": 294,
+    "end_sec": 304,
+    "duration_sec": 10,
+    "section": "Sign 5",
+    "visual": "Memory icon crossed out; investment icon highlighted",
+    "layout": "contrast",
+    "on_screen_text": "INVESTMENT > MEMORY"
+  },
+  {
+    "id": "S032",
+    "start_sec": 304,
+    "end_sec": 314,
+    "duration_sec": 10,
+    "section": "Sign 6",
+    "visual": "Two speech bubbles interlock smoothly",
+    "layout": "conversation layout",
+    "on_screen_text": "6. EASY CONVERSATION"
+  },
+  {
+    "id": "S033",
+    "start_sec": 314,
+    "end_sec": 324,
+    "duration_sec": 10,
+    "section": "Sign 6",
+    "visual": "Awkward turn-taking blocks vs flowing connected chain",
+    "layout": "contrast",
+    "on_screen_text": ""
+  },
+  {
+    "id": "S034",
+    "start_sec": 324,
+    "end_sec": 334,
+    "duration_sec": 10,
+    "section": "Sign 6",
+    "visual": "Two simple waveforms gradually align",
+    "layout": "diagram",
+    "on_screen_text": "LANGUAGE-STYLE MATCHING"
+  },
+  {
+    "id": "S035",
+    "start_sec": 334,
+    "end_sec": 344,
+    "duration_sec": 10,
+    "section": "Sign 6",
+    "visual": "Function-word joke visual briefly appears then fades",
+    "layout": "micro gag",
+    "on_screen_text": "DON'T COUNT PRONOUNS"
+  },
+  {
+    "id": "S036",
+    "start_sec": 344,
+    "end_sec": 354,
+    "duration_sec": 10,
+    "section": "Sign 6",
+    "visual": "Two paths merge into one conversational path",
+    "layout": "visual metaphor",
+    "on_screen_text": "SHARED RHYTHM"
+  },
+  {
+    "id": "S037",
+    "start_sec": 354,
+    "end_sec": 364,
+    "duration_sec": 10,
+    "section": "Sign 7",
+    "visual": "Clock + calendar + two figures",
+    "layout": "diagram",
+    "on_screen_text": "7. A NEXT TIME"
+  },
+  {
+    "id": "S038",
+    "start_sec": 364,
+    "end_sec": 374,
+    "duration_sec": 10,
+    "section": "Sign 7",
+    "visual": "Message: 'You should come with me next week'",
+    "layout": "phone scene",
+    "on_screen_text": ""
+  },
+  {
+    "id": "S039",
+    "start_sec": 374,
+    "end_sec": 384,
+    "duration_sec": 10,
+    "section": "Sign 7",
+    "visual": "One figure sends article/song after conversation",
+    "layout": "phone scene",
+    "on_screen_text": ""
+  },
+  {
+    "id": "S040",
+    "start_sec": 384,
+    "end_sec": 394,
+    "duration_sec": 10,
+    "section": "Sign 7",
+    "visual": "Path from conversation → message → meetup",
+    "layout": "diagram",
+    "on_screen_text": "CONTACT HAS DIRECTION"
+  },
+  {
+    "id": "S041",
+    "start_sec": 394,
+    "end_sec": 404,
+    "duration_sec": 10,
+    "section": "Sign 7",
+    "visual": "Three cost icons: time, effort, risk",
+    "layout": "diagram",
+    "on_screen_text": "TIME • EFFORT • RISK"
+  },
+  {
+    "id": "S042",
+    "start_sec": 404,
+    "end_sec": 414,
+    "duration_sec": 10,
+    "section": "Synthesis",
+    "visual": "Seven small signals appear separately",
+    "layout": "diagram",
+    "on_screen_text": "ONE SIGN = AMBIGUOUS"
+  },
+  {
+    "id": "S043",
+    "start_sec": 414,
+    "end_sec": 424,
+    "duration_sec": 10,
+    "section": "Synthesis",
+    "visual": "Signals converge into one larger arrow",
+    "layout": "pattern build",
+    "on_screen_text": "CONVERGENCE"
+  },
+  {
+    "id": "S044",
+    "start_sec": 424,
+    "end_sec": 434,
+    "duration_sec": 10,
+    "section": "Synthesis",
+    "visual": "Word card: CONSISTENCY",
+    "layout": "heuristic card",
+    "on_screen_text": "CONSISTENCY"
+  },
+  {
+    "id": "S045",
+    "start_sec": 434,
+    "end_sec": 444,
+    "duration_sec": 10,
+    "section": "Synthesis",
+    "visual": "Same behavior repeated across three moments",
+    "layout": "diagram",
+    "on_screen_text": "DOES IT KEEP HAPPENING?"
+  },
+  {
+    "id": "S046",
+    "start_sec": 444,
+    "end_sec": 454,
+    "duration_sec": 10,
+    "section": "Synthesis",
+    "visual": "Word card: SELECTIVITY",
+    "layout": "heuristic card",
+    "on_screen_text": "SELECTIVITY"
+  },
+  {
+    "id": "S047",
+    "start_sec": 454,
+    "end_sec": 464,
+    "duration_sec": 10,
+    "section": "Synthesis",
+    "visual": "Same person with group vs visibly different behavior with one person",
+    "layout": "contrast",
+    "on_screen_text": "DIFFERENT WITH YOU?"
+  },
+  {
+    "id": "S048",
+    "start_sec": 464,
+    "end_sec": 474,
+    "duration_sec": 10,
+    "section": "Synthesis",
+    "visual": "Word card: RECIPROCITY",
+    "layout": "heuristic card",
+    "on_screen_text": "RECIPROCITY"
+  },
+  {
+    "id": "S049",
+    "start_sec": 474,
+    "end_sec": 484,
+    "duration_sec": 10,
+    "section": "Synthesis",
+    "visual": "One person takes small step; other meets halfway",
+    "layout": "interaction",
+    "on_screen_text": "DO THEY MEET YOU HALFWAY?"
+  },
+  {
+    "id": "S050",
+    "start_sec": 484,
+    "end_sec": 494,
+    "duration_sec": 10,
+    "section": "Caveat",
+    "visual": "Three figures: shy avoids gaze, anxious freezes, confident engages everyone",
+    "layout": "contrast",
+    "on_screen_text": "NO UNIVERSAL CODE"
+  },
+  {
+    "id": "S051",
+    "start_sec": 494,
+    "end_sec": 504,
+    "duration_sec": 10,
+    "section": "Caveat",
+    "visual": "Icons for culture, context, neurodiversity",
+    "layout": "diagram",
+    "on_screen_text": "CONTEXT MATTERS"
+  },
+  {
+    "id": "S052",
+    "start_sec": 504,
+    "end_sec": 514,
+    "duration_sec": 10,
+    "section": "Conclusion",
+    "visual": "Montage of proximity + disclosure + response + future contact",
+    "layout": "pattern build",
+    "on_screen_text": "A PLAUSIBLE EXPLANATION"
+  },
+  {
+    "id": "S053",
+    "start_sec": 514,
+    "end_sec": 524,
+    "duration_sec": 10,
+    "section": "Conclusion",
+    "visual": "Word PROOF fades out; PATTERN remains",
+    "layout": "text card",
+    "on_screen_text": "NOT CERTAINTY"
+  },
+  {
+    "id": "S054",
+    "start_sec": 524,
+    "end_sec": 534,
+    "duration_sec": 10,
+    "section": "Conclusion",
+    "visual": "Two figures finally talk directly",
+    "layout": "interaction",
+    "on_screen_text": "DIRECT COMMUNICATION WINS"
+  },
+  {
+    "id": "S055",
+    "start_sec": 534,
+    "end_sec": 544,
+    "duration_sec": 10,
+    "section": "End",
+    "visual": "Three words stack",
+    "layout": "heuristic card",
+    "on_screen_text": "CONSISTENCY\nSELECTIVITY\nRECIPROCITY"
+  },
+  {
+    "id": "S056",
+    "start_sec": 544,
+    "end_sec": 552,
+    "duration_sec": 8,
+    "section": "End",
+    "visual": "Modern Life Inc. logo/tagline",
+    "layout": "brand outro",
+    "on_screen_text": "UNDERSTAND PEOPLE. UNDERSTAND MODERN LIFE."
+  }
+]
