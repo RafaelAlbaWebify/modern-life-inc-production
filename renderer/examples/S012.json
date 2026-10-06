@@ -1,0 +1,51 @@
+{
+  "id": "S012",
+  "duration_sec": 10,
+  "layout": "two_person_gaze",
+  "background": "bg.abstract",
+  "transition_in": "fade",
+  "transition_out": "fade",
+  "layers": [
+    {
+      "type": "figure",
+      "id": "left",
+      "asset": "figure.standing.neutral",
+      "x": 0.28,
+      "y": 0.62,
+      "scale": 1,
+      "z": 1,
+      "motion": "none"
+    },
+    {
+      "type": "figure",
+      "id": "right",
+      "asset": "figure.standing.neutral",
+      "x": 0.72,
+      "y": 0.62,
+      "scale": 1,
+      "z": 1,
+      "motion": "none"
+    },
+    {
+      "type": "icon",
+      "id": "eye",
+      "asset": "icon.eye",
+      "x": 0.5,
+      "y": 0.36,
+      "scale": 0.8,
+      "z": 2,
+      "motion": "pulse"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "text": "2. MUTUAL EYE CONTACT",
+      "x": 0.5,
+      "y": 0.14,
+      "scale": 1,
+      "z": 3,
+      "motion": "fade"
+    }
+  ],
+  "notes": "Shared gaze concept; no implication of certainty."
+}
