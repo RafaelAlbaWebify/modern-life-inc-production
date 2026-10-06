@@ -1,126 +1,99 @@
-# Renderer Contract v1
+# Hybrid Compositor Contract v2
 
 ## Objective
 
-Render Modern Life Inc. episodes from declarative scene JSON using reusable vector/raster assets and a very small motion vocabulary.
+Compose Modern Life Inc. episodes from declarative scene JSON using three visual modes:
 
-The renderer must support the current MLI-001 storyboard without requiring:
-- skeletal rigs;
-- lip sync;
-- 3D;
-- frame-by-frame animation;
-- per-scene bespoke code.
+- SYSTEM
+- HYBRID
+- HERO
+
+The compositor is responsible for assembly and motion. It is **not** expected to generate images itself.
+
+## Visual modes
+
+### SYSTEM
+Scene built entirely from registered reusable assets, text, icons, diagrams and simple motion.
+
+### HYBRID
+Scene uses a generated or bespoke base image plus registered overlays.
+
+Required:
+- visual_mode = "HYBRID"
+- base_image reference
+- optional overlays
+
+### HERO
+Scene uses a unique high-impact illustration as the dominant visual.
+
+Required:
+- visual_mode = "HERO"
+- base_image reference
+
+Overlays should remain minimal.
 
 ## Pipeline
 
-scene JSON
-→ validate schema
-→ resolve assets/layout
-→ compose frame graph
-→ apply simple transforms over time
-→ render frames
-→ FFmpeg encode
-→ MP4
+storyboard
+→ visual classification
+→ image generation / asset selection
+→ scene JSON
+→ validation
+→ composition
+→ motion
+→ render
+→ encode
 
-## Required primitives
+## Scene fields
 
-### Layers
-- background
-- figure
-- icon
-- text
-- line/arrow
-- shape
-- image
-
-### Transforms
-- x/y position
-- scale
-- rotation
-- opacity
-- crop
-- z-order
-
-### Motions
-- fade
-- slide
-- slow push
-- pulse
-- reveal
-- highlight
-- none
-
-## Scene contract
-
-Every scene must define:
+Required:
 - id
-- duration
+- duration_sec
+- visual_mode
 - layout
 - background
 - layers
 
 Optional:
+- base_image
 - transition_in
 - transition_out
 - notes
 
-## Layouts v1
+## Base images
 
-- single_focus
-- two_person_conversation
-- two_person_gaze
-- split_contrast
-- evidence_card
-- three_item_heuristic
-- convergence
-- phone_message
-- timeline
-- group_vs_one
-- brand_outro
+Generated images are referenced by stable logical IDs, never absolute paths.
 
-## Asset IDs
+Examples:
+- hero.mli001.s001
+- hero.mli001.s012
+- hybrid.mli001.s007
 
-Assets are referenced by stable logical IDs, never absolute paths.
+The asset registry resolves those IDs to actual files.
 
-Example:
-- figure.standing.neutral
-- figure.sitting.engaged
-- icon.eye
-- icon.message
-- bg.cafe
-- bg.office
+## Motion primitives
 
-The asset registry maps logical IDs to actual files.
+- fade
+- slide
+- slow_push
+- pan
+- pulse
+- reveal
+- highlight
+- subtle_parallax
+- none
 
-## Rendering constraints
+## Scope rule
 
-- 1920x1080 master
-- 30 fps
-- safe margins: 10% outer frame
-- primary text max 2 lines
-- no more than 2 simultaneous human figures in normal scenes
-- no scene-specific code unless the primitive set genuinely cannot express the scene
+Do not add compositor features to solve one-off artistic problems.
 
-## Determinism
+If a scene needs something beyond the supported system:
+1. simplify composition;
+2. change scene classification;
+3. bake complexity into the generated base image.
 
-Same scene JSON + same assets + same renderer version should produce the same visual output.
+## Quality target
 
-## Failure behavior
-
-Validation must fail loudly on:
-- unknown layout
-- missing asset
-- unsupported motion
-- invalid duration
-- invalid layer type
-
-Do not silently substitute missing assets.
-
-## Performance principle
-
-Visual quality matters more than render speed, but architecture should remain simple enough to regenerate a full episode locally without manual editing.
-
-## Scope boundary
-
-v1 is only required to render the scene families already present in MLI-001.
-Do not build features for hypothetical future episodes.
+SYSTEM provides consistency and speed.
+HYBRID provides variety.
+HERO provides memorable visual peaks.
