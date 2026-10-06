@@ -1,41 +1,28 @@
-﻿{
-    "project_name":  "Modern Life Inc.",
-    "version":  "v6.1-control",
-    "last_update_date":  "2026-09-05",
-    "current_phase":  "V6 limited-animation production-system reset",
-    "current_milestone":  "Build and verify a clean modular v6.1 asset kit, then rerender a narration-aligned 15-second limited-animation benchmark.",
-    "overall_completion_percentage":  38,
-    "operability_percentage":  28,
-    "testing_percentage":  35,
-    "current_blockers":  [
-                             "Complete approved v6.1 modular asset kit not yet verified.",
-                             "Previous v6 pose assets embedded props and caused duplicate objects.",
-                             "Narration-aligned authored scene timelines are not yet validated."
-                         ],
-    "readiness":  {
-                      "development_ready":  true,
-                      "internal_testing_ready":  true,
-                      "external_testing_ready":  false,
-                      "real_prospect_ready":  false,
-                      "production_ready":  false,
-                      "publishable_episode_ready":  false
-                  },
-    "next_recommended_actions":  [
-                                     "Finish and approve prop-free Dave v6.1 pose batch.",
-                                     "Build matching atomic prop/background batch.",
-                                     "Create v6 asset registry.",
-                                     "Author first 15 seconds against actual narration beats.",
-                                     "Render and QC the v6.1 15-second benchmark."
-                                 ],
-    "last_verified_runtime_test_evidence":  {
-                                                "v6_migration":  "PASS: project reduced from about 1.4 GB to about 0.03 GB; 1.37 GB reclaimed; backup created.",
-                                                "v6_15s_test":  "TECHNICAL PASS / VISUAL FAIL: render completed but failed visual acceptance for duplicated embedded props, weak composition/scale, mixed prop style, generic timing."
-                                            },
-    "git":  {
-                "branch":  "main",
-                "origin":  "https://github.com/RafaelAlbaWebify/modern-life-inc-production.git",
-                "repository":  "https://github.com/RafaelAlbaWebify/modern-life-inc-production.git",
-                "default_working_branch":  "main",
-                "provenance_rule":  "Repository HEAD is authoritative. Live commit, status, and remote delta are generated into .ai/AI_CONTEXT_SNAPSHOT.md and must not be persisted as self-referential fields in tracked PROJECT_STATE.json."
-            }
+{
+  "project": "Modern Life Inc.",
+  "current_phase": "channel_os_reset",
+  "current_milestone": "brand repositioned; repository being converted to new operating model",
+  "overall_completion_percentage": 20,
+  "operability_percentage": 20,
+  "testing_percentage": 0,
+  "readiness": {
+    "production_ready": false,
+    "publishable_episode_ready": false
+  },
+  "current_blockers": [
+    "vidIQ is connected to ChatGPT but the YouTube channel is not yet authorized for private analytics",
+    "new renderer should not be built until visual grammar is validated against first episode"
+  ],
+  "next_recommended_actions": [
+    "build market intelligence dataset",
+    "rank first 30 topics",
+    "choose first new-positioning episode"
+  ],
+  "storage_policy": "minimal_retention",
+  "git": {
+    "branch": "main",
+    "repository": "https://github.com/RafaelAlbaWebify/modern-life-inc-production.git",
+    "default_working_branch": "main",
+    "provenance_rule": "Repository HEAD is authoritative. Live commit/status belong in generated snapshots, not tracked self-referential fields."
+  }
 }
