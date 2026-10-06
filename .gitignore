@@ -106,3 +106,5 @@ credentials/
 episodes/*/output/
 episodes/*/media/generated/
 *.concat.txt
+episodes/*/media/narration.wav
+episodes/*/media/*.wav
