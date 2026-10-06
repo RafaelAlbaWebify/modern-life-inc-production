@@ -59,3 +59,23 @@ Examples:
 ## Consistency rule
 
 All generated visuals should look like they could appear in the same issue of one editorial magazine.
+
+
+## Approved production baseline — 2026-10-06
+
+The current amber/charcoal cinematic-editorial direction is approved as good enough to begin production.
+
+Use:
+- warm cinematic/editorial scenes;
+- charcoal and near-black environments;
+- amber/orange focal light;
+- cream highlights;
+- expressive but believable human posture;
+- moderate illustration detail;
+- psychological/infographic overlays added by the compositor.
+
+Do not spend more cycles searching for a different art style before MLI-001 publishes.
+
+Generated images may be richer than SYSTEM scenes. Consistency will come primarily from palette, framing, typography, overlays and motion — not from forcing every layer to have identical detail.
+
+Prefer base images without embedded explanatory text. Text, arrows, labels and evidence markers should normally be added later by the compositor so they remain editable.

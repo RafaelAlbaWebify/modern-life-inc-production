@@ -11,12 +11,12 @@
     "Low visual-production cost",
     "Good first test of Modern Life Inc.'s new human-behavior positioning"
   ],
-  "research_status": "next",
-  "script_status": "pending",
-  "storyboard_status": "pending",
-  "voice_status": "pending",
-  "render_status": "pending",
-  "qa_status": "pending",
+  "research_status": "complete",
+  "script_status": "complete",
+  "storyboard_status": "complete",
+  "voice_status": "narration_ready",
+  "render_status": "mvp_in_progress",
+  "qa_status": "technical_pipeline_validation",
   "publish_status": "pending",
   "youtube_id": null,
   "drive_folder_id": null,
@@ -26,5 +26,6 @@
     "7d": null,
     "28d": null
   },
-  "lessons": []
+  "lessons": [],
+  "production_next": "Generate narration audio, render full rough cut, replace highest-impact placeholders, publish."
 }

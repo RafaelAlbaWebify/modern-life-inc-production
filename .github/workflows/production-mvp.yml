@@ -1,0 +1,71 @@
+name: Production MVP
+
+on:
+  push:
+    branches:
+      - production-mvp-v0.1
+  pull_request:
+    paths:
+      - "renderer/**"
+      - "tools/build_production_manifest.py"
+      - "episodes/MLI-001/storyboard.json"
+      - "episodes/MLI-001/visual_plan.json"
+      - "requirements.txt"
+      - ".github/workflows/production-mvp.yml"
+
+jobs:
+  rough-cut:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          ffmpeg -version
+
+      - name: Build production manifest
+        run: |
+          python tools/build_production_manifest.py --episode episodes/MLI-001
+
+      - name: Validate scene count
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("episodes/MLI-001/production_manifest.json")
+          data = json.loads(p.read_text())
+          assert len(data["scenes"]) == 56, len(data["scenes"])
+          assert sum(s["duration_sec"] for s in data["scenes"]) == 552
+          print("[PASS] 56 scenes / 552 seconds")
+          PY
+
+      - name: Render full placeholder rough cut
+        run: |
+          python renderer/render_episode.py \
+            --episode episodes/MLI-001 \
+            --allow-placeholders \
+            --output output/rough_cut.mp4
+
+      - name: Verify output
+        run: |
+          test -s episodes/MLI-001/output/rough_cut.mp4
+          ffprobe -v error \
+            -show_entries format=duration,size \
+            -of default=noprint_wrappers=1 \
+            episodes/MLI-001/output/rough_cut.mp4
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MLI-001-rough-cut
+          path: episodes/MLI-001/output/rough_cut.mp4
+          retention-days: 3

@@ -1,0 +1,57 @@
+{
+  "version": "0.1",
+  "episode_id": "MLI-001",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "S001",
+      "duration_sec": 8,
+      "visual_mode": "SYSTEM",
+      "layout": "diagram",
+      "visual": "Four ambiguous clues compete for attention.",
+      "on_screen_text": "ONE SIGN CAN MEAN ALMOST ANYTHING"
+    },
+    {
+      "id": "S002",
+      "duration_sec": 8,
+      "visual_mode": "SYSTEM",
+      "layout": "single_focus",
+      "visual": "One person surrounded by ambiguous signals.",
+      "on_screen_text": "DON'T DECODE ONE GESTURE"
+    },
+    {
+      "id": "S003",
+      "duration_sec": 9,
+      "visual_mode": "SYSTEM",
+      "layout": "diagram",
+      "visual": "Multiple clues converge into one pattern.",
+      "on_screen_text": "LOOK FOR A PATTERN"
+    },
+    {
+      "id": "S004",
+      "duration_sec": 10,
+      "visual_mode": "SYSTEM",
+      "layout": "two_person_conversation",
+      "visual": "Two people with multiple small signals between them.",
+      "on_screen_text": "REPEATED • SELECTIVE • RECIPROCAL"
+    },
+    {
+      "id": "S005",
+      "duration_sec": 10,
+      "visual_mode": "SYSTEM",
+      "layout": "evidence_card",
+      "visual": "Research claim that attraction can change behavior.",
+      "on_screen_text": "ATTRACTION CAN CHANGE BEHAVIOR"
+    },
+    {
+      "id": "S006",
+      "duration_sec": 9,
+      "visual_mode": "SYSTEM",
+      "layout": "diagram",
+      "visual": "Seven numbered signals appear.",
+      "on_screen_text": "7 QUIET SIGNS"
+    }
+  ]
+}
