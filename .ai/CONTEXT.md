@@ -1,38 +1,14 @@
-﻿# Modern Life Inc. — AI Bootstrap Context
+# AI Context
 
-## Purpose
-English-language YouTube production project for satirical economics / personal-finance explainers.
+Modern Life Inc. is an English-language faceless YouTube channel about the psychology of modern life.
 
-## Product direction
-- Channel: Modern Life Inc.
-- Recurring everyman: Dave.
-- Narration: VoiceBox using the Nova voice.
-- Assembly: Python/Pillow + FFmpeg/FFprobe.
-- Visual benchmark: Los Ecomonos mechanics and pacing, without copying protected artwork or characters.
-- Current production doctrine: authored limited-animation scenes, not automatic infographic layouts.
+Current umbrella:
+- relationships and attraction
+- social psychology and charisma
+- money psychology and consumer behavior
+- status, work and power
+- cognitive biases and self-control
 
-## Current milestone
-Build and verify a clean modular v6.1 asset kit, then rerender a narration-aligned 15-second benchmark.
+Production should prioritize visual clarity, automation, consistency and low complexity.
 
-## Critical architecture rules
-- One reusable asset file = one semantic thing.
-- Dave pose files contain Dave only; no embedded paycheck, bills, wallet, text, or background.
-- Props are separate transparent assets.
-- Backgrounds are independent.
-- Scene composition/timing are authored explicitly.
-- Renderer executes; renderer does not invent composition.
-- Normal scene grammar: illustrated scene + 2–4 cheap state/motion events + hard cut.
-- Do not use storyboard/contact sheets as video assets.
-- Do not use constant Ken Burns motion as the primary motion language.
-
-## Current state
-Development/internal testing are usable. External/publishing/production readiness have NOT passed.
-
-## Start every fresh session
-1. Read `.ai/CONTEXT.md`.
-2. Read `.ai/PROJECT_STATE.json`.
-3. Read `.ai/KNOWN_ISSUES.md`.
-4. Read `.ai/OPERABILITY.md`.
-5. Inspect Git status/current commit.
-6. Load only files relevant to the active workstream.
-7. Verify assumptions before changing code/assets.
+Do not restore the old Family-Dad / Dave / Art Deco economics production system unless explicitly requested.
