@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "assets": {
+    "bg.cafe": "assets/backgrounds/cafe.svg",
+    "bg.office": "assets/backgrounds/office.svg",
+    "bg.room": "assets/backgrounds/room.svg",
+    "bg.abstract": "assets/backgrounds/abstract.svg",
+    "figure.standing.neutral": "assets/figures/standing_neutral.svg",
+    "figure.standing.engaged": "assets/figures/standing_engaged.svg",
+    "figure.standing.withdrawn": "assets/figures/standing_withdrawn.svg",
+    "figure.sitting.neutral": "assets/figures/sitting_neutral.svg",
+    "figure.sitting.engaged": "assets/figures/sitting_engaged.svg",
+    "figure.walking": "assets/figures/walking.svg",
+    "figure.pointing": "assets/figures/pointing.svg",
+    "figure.phone": "assets/figures/phone.svg",
+    "figure.listening": "assets/figures/listening.svg",
+    "figure.thinking": "assets/figures/thinking.svg",
+    "icon.heart": "assets/icons/heart.svg",
+    "icon.eye": "assets/icons/eye.svg",
+    "icon.message": "assets/icons/message.svg",
+    "icon.phone": "assets/icons/phone.svg",
+    "icon.clock": "assets/icons/clock.svg",
+    "icon.calendar": "assets/icons/calendar.svg",
+    "icon.chair": "assets/icons/chair.svg",
+    "icon.arrow": "assets/icons/arrow.svg",
+    "icon.question": "assets/icons/question.svg",
+    "icon.warning": "assets/icons/warning.svg",
+    "icon.people": "assets/icons/people.svg"
+  }
+}
