@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Modern Life Inc Scene v1",
+  "type": "object",
+  "required": [
+    "id",
+    "duration_sec",
+    "layout",
+    "background",
+    "layers"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "duration_sec": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "layout": {
+      "type": "string",
+      "enum": [
+        "single_focus",
+        "two_person_conversation",
+        "two_person_gaze",
+        "split_contrast",
+        "evidence_card",
+        "three_item_heuristic",
+        "convergence",
+        "phone_message",
+        "timeline",
+        "group_vs_one",
+        "brand_outro"
+      ]
+    },
+    "background": {
+      "type": "string"
+    },
+    "transition_in": {
+      "type": "string",
+      "enum": [
+        "none",
+        "fade",
+        "slide"
+      ]
+    },
+    "transition_out": {
+      "type": "string",
+      "enum": [
+        "none",
+        "fade",
+        "slide"
+      ]
+    },
+    "layers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "figure",
+              "icon",
+              "text",
+              "line",
+              "shape",
+              "image"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "asset": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "text": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "x": {
+            "type": "number"
+          },
+          "y": {
+            "type": "number"
+          },
+          "scale": {
+            "type": "number"
+          },
+          "rotation": {
+            "type": "number"
+          },
+          "opacity": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "z": {
+            "type": "integer"
+          },
+          "motion": {
+            "type": "string",
+            "enum": [
+              "none",
+              "fade",
+              "slide",
+              "slow_push",
+              "pulse",
+              "reveal",
+              "highlight"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}
