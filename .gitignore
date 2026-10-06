@@ -102,3 +102,7 @@ credentials/
 
 
 00_admin/sync/LAST_SYNC_REPORT.txt
+
+episodes/*/output/
+episodes/*/media/generated/
+*.concat.txt
