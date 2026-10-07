@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "episode": "MLI-001",
+  "engine": "cosyvoice",
+  "language": "en",
+  "voice_profile": "Modern Life Narrator v1",
+  "instruct": "Speak like a calm, intelligent documentary narrator. Conversational and thoughtful. Use natural pauses between ideas and subtle emphasis on contrasts and key conclusions. Let important short sentences breathe. Keep the delivery warm, curious, confident and understated. Never sound theatrical, excited, motivational or salesy.",
+  "chunks": [
+    {
+      "id": "001",
+      "section": "hook",
+      "text": "Most people look for attraction in the wrong place.\n\nThey look for one dramatic clue.\n\nA long stare. A nervous laugh. A text sent too quickly. A hand that brushes yours.\n\nBut one signal can mean almost anything."
+    },
+    {
+      "id": "002",
+      "section": "hook",
+      "text": "Someone can hold eye contact because they're confident. They can laugh because they're friendly. They can stand close because the room is crowded.\n\nAttraction is not a magic trick you decode from one gesture.\n\nWhat matters is a pattern."
+    },
+    {
+      "id": "003",
+      "section": "hook",
+      "text": "Research on interpersonal attraction shows that when people like someone, it often changes how they behave around that person.\n\nNot always in obvious ways. And not always in the same way.\n\nBut there are a few quiet signals that become more meaningful when they show up together.\n\nHere are seven of them."
+    },
+    {
+      "id": "004",
+      "section": "sign-1",
+      "text": "One. They keep finding reasons to be near you.\n\nOne of the strongest clues is also one of the simplest.\n\nThey keep ending up around you."
+    },
+    {
+      "id": "005",
+      "section": "sign-1",
+      "text": "They start conversations. They extend conversations that could have ended. They choose the seat near you. They find small reasons to come back.\n\nThat matters because direct behaviors like proximity and talking to someone are more strongly linked with attraction than many of the subtle body-language cues people obsess over."
+    },
+    {
+      "id": "006",
+      "section": "sign-1",
+      "text": "But context matters.\n\nA coworker who sits next to you every day because your desks are assigned is not sending a signal.\n\nThe interesting part is choice.\n\nDo they keep creating contact when they don't have to?"
+    },
+    {
+      "id": "007",
+      "section": "sign-1",
+      "text": "One moment means very little.\n\nRepeated voluntary contact means more."
+    },
+    {
+      "id": "008",
+      "section": "sign-2",
+      "text": "Two. Eye contact becomes mutual, not accidental.\n\nEye contact is probably one of the most overused attraction clichés.\n\nBut there is some real evidence behind it."
+    },
+    {
+      "id": "009",
+      "section": "sign-2",
+      "text": "In a speed-dating study using mobile eye tracking, people were more likely to choose partners with whom they shared more eye contact.\n\nThe key word is shared.\n\nA random glance across a room is weak evidence."
+    },
+    {
+      "id": "010",
+      "section": "sign-2",
+      "text": "What matters more is a pattern where eye contact keeps happening, lasts a little longer, and feels mutual rather than one-sided.\n\nStill, this is not proof.\n\nSome people naturally make strong eye contact. Others avoid it even when they're very interested."
+    },
+    {
+      "id": "011",
+      "section": "sign-2",
+      "text": "Culture, anxiety, personality and neurodiversity all change how people use gaze.\n\nSo don't ask: Did they look at me?\n\nAsk: Does our eye contact keep becoming a two-way interaction?"
+    },
+    {
+      "id": "012",
+      "section": "sign-3",
+      "text": "Three. You start moving and talking in sync.\n\nSometimes attraction shows up as rhythm.\n\nYou start matching each other's pace."
+    },
+    {
+      "id": "013",
+      "section": "sign-3",
+      "text": "You lean in at similar moments. You laugh at the same time. Your gestures begin to mirror each other. The conversation starts flowing with less effort.\n\nResearchers often call this mimicry or synchrony."
+    },
+    {
+      "id": "014",
+      "section": "sign-3",
+      "text": "And studies of attraction have found that these kinds of coordinated behaviors are associated with rapport and interpersonal attraction.\n\nBut there is an important distinction.\n\nSynchrony is not exclusive to romance."
+    },
+    {
+      "id": "015",
+      "section": "sign-3",
+      "text": "Friends do it. Good teammates do it. People who simply get along do it.\n\nSo the signal is not: They copied my posture, therefore they like me.\n\nThe signal is: Our interaction keeps becoming unusually coordinated.\n\nThat becomes more interesting when it appears alongside other signs."
+    },
+    {
+      "id": "016",
+      "section": "sign-4",
+      "text": "Four. The conversation becomes more personal.\n\nPeople usually don't reveal themselves at random.\n\nAs relationships develop, conversations often move from safe facts to more personal territory."
+    },
+    {
+      "id": "017",
+      "section": "sign-4",
+      "text": "What they care about. What they're afraid of. What they're working toward. What has hurt them. What they actually think.\n\nResearch on self-disclosure has found a two-way relationship between disclosure and liking."
+    },
+    {
+      "id": "018",
+      "section": "sign-4",
+      "text": "People tend to disclose more to people they already like. And opening up to someone can also increase feelings of closeness.\n\nAgain, personality matters.\n\nSome people tell their life story to the person next to them in a supermarket queue."
+    },
+    {
+      "id": "019",
+      "section": "sign-4",
+      "text": "So the useful question is not: Did they tell me something personal?\n\nIt is: Are they becoming more open with me over time, and is that openness reciprocal?"
+    },
+    {
+      "id": "020",
+      "section": "sign-5",
+      "text": "Five. They respond to you, not just to the topic.\n\nThis one is quieter.\n\nImagine you tell two people the same story."
+    },
+    {
+      "id": "021",
+      "section": "sign-5",
+      "text": "The first person says: Oh, cool. Then changes the subject.\n\nThe second person asks what happened next. They notice how you felt about it. They bring it up later. They connect it to something else you've told them.\n\nThat difference is called responsiveness."
+    },
+    {
+      "id": "022",
+      "section": "sign-5",
+      "text": "Research on intimacy suggests that closeness does not come only from revealing personal information.\n\nIt also depends on whether the other person makes you feel understood, valued and responded to."
+    },
+    {
+      "id": "023",
+      "section": "sign-5",
+      "text": "This is more useful than the popular claim that: If they remember tiny details, they're attracted to you.\n\nMemory alone is too ambiguous.\n\nThe stronger pattern is investment.\n\nThey don't just hear you. They build on what you say."
+    },
+    {
+      "id": "024",
+      "section": "sign-6",
+      "text": "Six. The conversation starts to feel unusually easy.\n\nYou may have had this experience.\n\nYou meet someone and, strangely quickly, talking to them feels effortless."
+    },
+    {
+      "id": "025",
+      "section": "sign-6",
+      "text": "You don't constantly search for the next topic. You pick up each other's rhythm. One thought naturally turns into another.\n\nResearchers studying speed dating have found that something called language-style matching can predict mutual romantic interest."
+    },
+    {
+      "id": "026",
+      "section": "sign-6",
+      "text": "That does not mean you should start counting pronouns and conjunctions during a date.\n\nThe practical point is simpler.\n\nWhen two people become engaged with each other, the interaction itself can start becoming more synchronized."
+    },
+    {
+      "id": "027",
+      "section": "sign-6",
+      "text": "The conversation feels less like two people taking turns performing... and more like one shared rhythm.\n\nIt is subtle.\n\nBut when it happens repeatedly, it can be meaningful."
+    },
+    {
+      "id": "028",
+      "section": "sign-7",
+      "text": "Seven. They create a reason for there to be a next time.\n\nThis may be the most useful signal of all.\n\nBecause it costs something.\n\nTime. Effort. Risk."
+    },
+    {
+      "id": "029",
+      "section": "sign-7",
+      "text": "They mention a place you should both go. They send you something related to your conversation. They suggest continuing the discussion later. They message after the interaction. They create another opportunity to see you."
+    },
+    {
+      "id": "030",
+      "section": "sign-7",
+      "text": "Research following people after speed-dating interactions shows that initial romantic interest predicts later behaviors like direct messaging, going on dates and relationship initiation.\n\nThat makes intuitive sense.\n\nAttraction that never changes behavior is very hard to distinguish from imagination."
+    },
+    {
+      "id": "031",
+      "section": "sign-7",
+      "text": "Future contact gives the signal direction.\n\nBut even here, friendship can look similar.\n\nSo the real answer is not hidden inside Sign Number Seven.\n\nIt is hidden in what happens when several signs converge."
+    },
+    {
+      "id": "032",
+      "section": "pattern",
+      "text": "This is the mistake most people make.\n\nThey notice one cue... and turn it into certainty.\n\nInstead, look for three things.\n\nConsistency. Does the behavior happen repeatedly?"
+    },
+    {
+      "id": "033",
+      "section": "pattern",
+      "text": "Selectivity. Do they behave this way with you more than they do with everyone else?\n\nAnd reciprocity. When you move a little closer, open up, or initiate contact... do they meet you halfway?"
+    },
+    {
+      "id": "034",
+      "section": "pattern",
+      "text": "That combination is much more informative than any isolated piece of body language.\n\nAnd there is another reason not to overinterpret a single sign.\n\nPeople who fear rejection may actually hide some of the most direct behaviors associated with attraction."
+    },
+    {
+      "id": "035",
+      "section": "pattern",
+      "text": "A shy person may avoid eye contact. Someone anxious may become quieter. Someone confident may appear interested in everyone.\n\nThere is no universal code.\n\nThere are only patterns."
+    },
+    {
+      "id": "036",
+      "section": "closing",
+      "text": "So if someone keeps choosing your company... shares more of themselves... responds closely to what you say... falls into sync with you... and keeps creating reasons for another interaction... then yes, attraction becomes a more plausible explanation."
+    },
+    {
+      "id": "037",
+      "section": "closing",
+      "text": "Not a certainty.\n\nA plausible explanation.\n\nAnd that distinction matters.\n\nBecause the only reliable way to know what someone feels... is eventually to communicate."
+    },
+    {
+      "id": "038",
+      "section": "closing",
+      "text": "Until then, don't look for one perfect sign.\n\nLook for the pattern.\n\nConsistency. Selectivity. Reciprocity.\n\nThat's where the signal gets stronger."
+    }
+  ]
+}
