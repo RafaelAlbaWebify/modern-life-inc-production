@@ -43,14 +43,15 @@
     "ffmpeg_filter": "rubberband=tempo=0.94:pitch=0.9438743127"
   },
   "chunking": {
-    "strategy": "manifest_chunk_single_request",
+    "strategy": "manifest_chunk_single_request_with_explicit_group_overrides",
     "pause_ms_default": 500,
     "pause_ms_range": [
       350,
       650
     ],
     "paragraph_pause_ms": null,
-    "chunk_pause_ms": 650
+    "chunk_pause_ms": 650,
+    "group_pause_ms_default": 600
   },
   "runtime_policy": {
     "voicestudio_generate_endpoint": "avoid_until_revalidated",
@@ -72,5 +73,5 @@
       "reason": "Chunk 001 sounded somewhat artificial; chunk 002 became unacceptable after WPM-based time stretching. Do not use pacing normalization."
     }
   },
-  "next_step": "Regenerate MLI-001 chunks 001-002 as one PocketTTS request per manifest chunk, without per-chunk time stretching; quality-review before any full-episode run."
+  "next_step": "Regenerate MLI-001 chunks 001-002. Chunk 001 stays one request; chunk 002 uses two explicit synthesis groups to reduce rushed delivery without time stretching. Quality-review before full episode."
 }
