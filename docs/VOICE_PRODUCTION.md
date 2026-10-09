@@ -85,6 +85,19 @@ Typical pause guidance:
 
 These are defaults, not hard rules. Natural delivery takes precedence.
 
+## Pacing normalization
+
+PocketTTS can vary speaking rate between otherwise similar semantic chunks. The production pipeline therefore measures each generated chunk before final assembly.
+
+- raw pacing ceiling: **155 WPM**
+- chunks at or below the ceiling are left untouched
+- chunks above the ceiling are slowed with Rubber Band tempo-only processing
+- slow chunks are **never sped up**
+- minimum per-chunk tempo factor: **0.80** to avoid excessive time stretching
+- the global final post-process (`tempo 0.94`, pitch -1 semitone) still runs after assembly
+
+This rule was introduced after the MLI-001 acceptance test: chunk 001 was about 146 WPM while chunk 002 was about 178 WPM, and chunk 002 audibly felt too fast. The goal is to cap fast outliers without flattening naturally slower delivery.
+
 ## Known failure modes and rejected paths
 
 ### VoiceStudio /generate
