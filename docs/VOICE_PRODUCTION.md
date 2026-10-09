@@ -85,18 +85,13 @@ Typical pause guidance:
 
 These are defaults, not hard rules. Natural delivery takes precedence.
 
-## Pacing normalization
+## Chunk synthesis policy
 
-PocketTTS can vary speaking rate between otherwise similar semantic chunks. The production pipeline therefore measures each generated chunk before final assembly.
+The WPM-based time-stretch experiment was rejected because it introduced audible artifacts and made chunk 002 unacceptable.
 
-- raw pacing ceiling: **155 WPM**
-- chunks at or below the ceiling are left untouched
-- chunks above the ceiling are slowed with Rubber Band tempo-only processing
-- slow chunks are **never sped up**
-- minimum per-chunk tempo factor: **0.80** to avoid excessive time stretching
-- the global final post-process (`tempo 0.94`, pitch -1 semitone) still runs after assembly
+Each authored manifest chunk is now synthesized as **one PocketTTS request** instead of splitting every paragraph into separate micro-requests. This gives PocketTTS more linguistic context and avoids stitching independently generated takes inside one chunk.
 
-This rule was introduced after the MLI-001 acceptance test: chunk 001 was about 146 WPM while chunk 002 was about 178 WPM, and chunk 002 audibly felt too fast. The goal is to cap fast outliers without flattening naturally slower delivery.
+Between manifest chunks, the pipeline inserts the configured pause (currently 650 ms). No per-chunk tempo normalization is applied. The only tempo/pitch processing retained is the final global post-process after assembly.
 
 ## Known failure modes and rejected paths
 
@@ -162,7 +157,7 @@ From the repository root, run:
 .\\tools\\generate_pockettts_narration.ps1
 ```
 
-The generator reads `config/voice_production.json`, resolves/exports the `Modern Life Narrator v1` reference when needed, keeps one PocketTTS sidecar alive across the batch, preserves authored paragraph boundaries as semantic units, inserts the configured pauses, writes resumable per-chunk WAVs, assembles `narration_raw.wav`, applies the locked Rubber Band tempo/pitch processing, and produces:
+The generator reads `config/voice_production.json`, resolves/exports the `Modern Life Narrator v1` reference when needed, keeps one PocketTTS sidecar alive across the batch, synthesizes each manifest chunk as one contextual request, inserts the configured between-chunk pause, writes resumable per-chunk WAVs, assembles `narration_raw.wav`, applies the locked global Rubber Band tempo/pitch processing, and produces:
 
 `episodes/MLI-001/media/narration.wav`
 
@@ -179,3 +174,7 @@ Existing chunk WAVs are skipped unless `-Force` is supplied. Use `-NoAssemble` t
 Before changing narration engines, voice identity, tempo, pitch, sample rate, chunking strategy, pause strategy, or recovery procedure, read this file and `config/voice_production.json`.
 
 If a new voice configuration is approved, update both files in the same change so the repository remains the canonical external memory for voice production.
+
+## Acceptance note — 2026-10-09
+
+A two-chunk test with WPM normalization was rejected: chunk 001 still sounded somewhat artificial, and chunk 002 was audibly degraded by time stretching. The WPM-normalization approach was removed. Full-episode generation must not proceed until the single-request-per-chunk test passes.
