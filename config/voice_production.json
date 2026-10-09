@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "source_of_truth": "docs/VOICE_PRODUCTION.md",
+  "voice": {
+    "name": "Modern Life Narrator v1",
+    "profile_kind": "design",
+    "observed_profile_id": "e46c2df1",
+    "resolve_by_name": true,
+    "reference_runtime_filename": "ModernLifeNarrator_reference.wav",
+    "quality_target": [
+      "adult female narrator",
+      "calm",
+      "intelligent",
+      "conversational",
+      "thoughtful",
+      "documentary-like",
+      "warm",
+      "confident",
+      "understated"
+    ]
+  },
+  "engine": {
+    "id": "pockettts",
+    "package_version": "2.1.0",
+    "invocation": "direct_sidecar",
+    "sidecar_path": "%APPDATA%\\VoiceStudio\\runtime\\project\\backend\\engines\\pockettts\\main.py",
+    "python_path": "%APPDATA%\\VoiceStudio\\runtime\\project\\.venv\\Scripts\\python.exe",
+    "keep_process_alive_for_batch": true,
+    "language": "en",
+    "huggingface_repo": "kyutai/pocket-tts",
+    "requires_gated_access": true
+  },
+  "audio": {
+    "sample_rate_hz": 24000,
+    "channels": 1,
+    "sample_format": "pcm_s16le",
+    "container": "wav"
+  },
+  "postprocess": {
+    "tempo": 0.94,
+    "pitch_semitones": -1,
+    "pitch_ratio": 0.9438743127,
+    "ffmpeg_filter": "rubberband=tempo=0.94:pitch=0.9438743127"
+  },
+  "chunking": {
+    "strategy": "semantic_units",
+    "pause_ms_default": 500,
+    "pause_ms_range": [
+      350,
+      650
+    ]
+  },
+  "runtime_policy": {
+    "voicestudio_generate_endpoint": "avoid_until_revalidated",
+    "production_path": "direct_pockettts_sidecar",
+    "wav_artifacts_committed": false
+  },
+  "rejected": {
+    "cosyvoice_local": "Too slow on GTX 1060 3 GB with reference audio; persistent sidecar did not solve inference cost.",
+    "old_reference_MLI001_Chunk01_wav": "Produced an undesirably child-like cloned voice in PocketTTS."
+  },
+  "validation": {
+    "date": "2026-10-09",
+    "test_raw_audio_seconds": 39.42,
+    "test_generation_seconds": 31.35,
+    "test_final_audio_seconds": 41.936167,
+    "whole_batch_generation_to_audio_ratio": 0.8
+  },
+  "next_step": "Replace/adapt legacy CosyVoice narration generation so MLI-001 reads this config, uses one persistent PocketTTS sidecar, assembles chunks, applies post-processing, and writes episodes/MLI-001/media/narration.wav."
+}
