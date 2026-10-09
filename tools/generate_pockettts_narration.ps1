@@ -2,6 +2,7 @@ param(
     [string]$Episode = "episodes/MLI-001",
     [string]$Reference = "",
     [int]$StartAt = 1,
+    [int]$EndAt = 0,
     [switch]$Force,
     [switch]$NoAssemble
 )
@@ -27,6 +28,10 @@ $ArgsList = @(
     "--config", $ConfigPath,
     "--start-at", [string]$StartAt
 )
+
+if ($EndAt -gt 0) {
+    $ArgsList += @("--end-at", [string]$EndAt)
+}
 
 if ($Reference) {
     $ArgsList += @("--reference", $Reference)
