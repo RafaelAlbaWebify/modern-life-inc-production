@@ -324,6 +324,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--reference")
     parser.add_argument("--api-base", default="http://127.0.0.1:3900")
     parser.add_argument("--start-at", type=int, default=1)
+    parser.add_argument("--end-at", type=int)
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--no-assemble", action="store_true")
     return parser.parse_args()
@@ -366,10 +367,14 @@ def main() -> int:
     chunk_pause_ms = int(chunking.get("chunk_pause_ms", max(chunking["pause_ms_range"])))
 
     selected = [
-        chunk for chunk in manifest["chunks"] if int(chunk["id"]) >= int(args.start_at)
+        chunk
+        for chunk in manifest["chunks"]
+        if int(chunk["id"]) >= int(args.start_at)
+        and (args.end_at is None or int(chunk["id"]) <= int(args.end_at))
     ]
     if not selected:
-        raise RuntimeError(f"No chunks selected from --start-at {args.start_at}.")
+        limit = f" through --end-at {args.end_at}" if args.end_at is not None else ""
+        raise RuntimeError(f"No chunks selected from --start-at {args.start_at}{limit}.")
 
     started = time.perf_counter()
     generated = 0
