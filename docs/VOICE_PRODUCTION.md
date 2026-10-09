@@ -159,7 +159,7 @@ Resume from a chunk with:
 .\\tools\\generate_pockettts_narration.ps1 -StartAt 17
 ```
 
-Existing chunk WAVs are skipped unless `-Force` is supplied. Use `-NoAssemble` to generate/review chunks without creating the final narration.
+Existing chunk WAVs are skipped unless `-Force` is supplied. Use `-NoAssemble` to generate/review chunks without creating the final narration. For a bounded acceptance test, use for example `-StartAt 1 -EndAt 2 -Force -NoAssemble`.
 
 ## Operator rule
 
