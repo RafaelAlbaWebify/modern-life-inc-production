@@ -43,13 +43,13 @@
     "ffmpeg_filter": "rubberband=tempo=0.94:pitch=0.9438743127"
   },
   "chunking": {
-    "strategy": "semantic_units",
+    "strategy": "manifest_chunk_single_request",
     "pause_ms_default": 500,
     "pause_ms_range": [
       350,
       650
     ],
-    "paragraph_pause_ms": 500,
+    "paragraph_pause_ms": null,
     "chunk_pause_ms": 650
   },
   "runtime_policy": {
@@ -66,14 +66,11 @@
     "test_raw_audio_seconds": 39.42,
     "test_generation_seconds": 31.35,
     "test_final_audio_seconds": 41.936167,
-    "whole_batch_generation_to_audio_ratio": 0.8
+    "whole_batch_generation_to_audio_ratio": 0.8,
+    "acceptance_test_2026_10_09": {
+      "status": "failed",
+      "reason": "Chunk 001 sounded somewhat artificial; chunk 002 became unacceptable after WPM-based time stretching. Do not use pacing normalization."
+    }
   },
-  "next_step": "Regenerate MLI-001 chunks 001-002 with pacing normalization, compare them, then generate the remaining episode and assemble narration.wav.",
-  "pacing": {
-    "enabled": true,
-    "max_raw_wpm": 155,
-    "minimum_tempo_factor": 0.8,
-    "method": "chunk_level_rubberband_tempo_only",
-    "rationale": "PocketTTS can vary delivery speed between semantic chunks. Slow only chunks above the raw WPM ceiling; never speed up slower chunks."
-  }
+  "next_step": "Regenerate MLI-001 chunks 001-002 as one PocketTTS request per manifest chunk, without per-chunk time stretching; quality-review before any full-episode run."
 }
