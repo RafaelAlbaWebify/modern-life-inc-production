@@ -1,10 +1,9 @@
 {
-  "version": 1,
+  "version": 2,
   "episode": "MLI-001",
-  "engine": "cosyvoice",
+  "engine": "pockettts",
   "language": "en",
   "voice_profile": "Modern Life Narrator v1",
-  "instruct": "Speak like a calm, intelligent documentary narrator. Conversational and thoughtful. Use natural pauses between ideas and subtle emphasis on contrasts and key conclusions. Let important short sentences breathe. Keep the delivery warm, curious, confident and understated. Never sound theatrical, excited, motivational or salesy.",
   "chunks": [
     {
       "id": "001",
@@ -196,5 +195,6 @@
       "section": "closing",
       "text": "Until then, don't look for one perfect sign.\n\nLook for the pattern.\n\nConsistency. Selectivity. Reciprocity.\n\nThat's where the signal gets stronger."
     }
-  ]
+  ],
+  "production_config": "config/voice_production.json"
 }
