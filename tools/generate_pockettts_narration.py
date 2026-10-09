@@ -23,7 +23,6 @@ import sys
 import time
 import urllib.request
 import wave
-import tempfile
 from pathlib import Path
 
 
@@ -226,98 +225,23 @@ def silence(sample_rate: int, milliseconds: int) -> bytes:
     samples = round(sample_rate * milliseconds / 1000.0)
     return b"\x00\x00" * samples
 
-def count_words(text: str) -> int:
-    return len(re.findall(r"\b[\w’'-]+\b", text, flags=re.UNICODE))
-
-
-def wav_duration(path: Path) -> float:
-    with wave.open(str(path), "rb") as wav:
-        return wav.getnframes() / wav.getframerate()
-
-
-def normalize_chunk_pacing(path: Path, text: str, config: dict) -> tuple[float, float, float]:
-    """Slow overly fast chunks without altering pitch. Never speeds audio up."""
-    pacing = config.get("pacing", {})
-    duration_before = wav_duration(path)
-    words = count_words(text)
-    raw_wpm = (words * 60.0 / duration_before) if duration_before > 0 else 0.0
-
-    if not pacing.get("enabled", False):
-        return raw_wpm, raw_wpm, 1.0
-
-    max_wpm = float(pacing.get("max_raw_wpm", 155))
-    minimum_tempo = float(pacing.get("minimum_tempo_factor", 0.80))
-    if raw_wpm <= max_wpm or words == 0:
-        print(f"    [PACE] {raw_wpm:.1f} WPM <= {max_wpm:.1f}; unchanged")
-        return raw_wpm, raw_wpm, 1.0
-
-    tempo = max(minimum_tempo, max_wpm / raw_wpm)
-    ffmpeg = shutil.which("ffmpeg")
-    if not ffmpeg:
-        raise RuntimeError("ffmpeg was not found on PATH for pacing normalization.")
-
-    with tempfile.TemporaryDirectory(prefix="mli-pacing-") as temp_dir:
-        temp_output = Path(temp_dir) / "paced.wav"
-        command = [
-            ffmpeg,
-            "-v",
-            "error",
-            "-y",
-            "-i",
-            str(path),
-            "-af",
-            f"rubberband=tempo={tempo:.8f}",
-            "-c:a",
-            "pcm_s16le",
-            str(temp_output),
-        ]
-        result = subprocess.run(command, check=False)
-        if result.returncode != 0 or not temp_output.is_file():
-            raise RuntimeError(
-                f"Chunk pacing normalization failed with exit code {result.returncode}."
-            )
-        shutil.copyfile(temp_output, path)
-
-    duration_after = wav_duration(path)
-    final_wpm = words * 60.0 / duration_after if duration_after > 0 else 0.0
-    print(
-        f"    [PACE] {raw_wpm:.1f} -> {final_wpm:.1f} WPM "
-        f"(tempo {tempo:.3f}, {duration_before:.2f}s -> {duration_after:.2f}s)"
-    )
-    return raw_wpm, final_wpm, tempo
-
-
-
 def build_chunk(
     engine: PocketTTS,
     chunk: dict,
     language: str,
     reference: Path,
-    paragraph_pause_ms: int,
+    paragraph_pause_ms: int | None,
 ) -> tuple[bytes, int]:
-    units = semantic_segments(str(chunk["text"]))
-    if not units:
+    """Synthesize one manifest chunk as one request to preserve prosody/context."""
+    text = str(chunk["text"]).strip()
+    if not text:
         raise RuntimeError(f"Chunk {chunk['id']} has no speakable text.")
 
-    combined = bytearray()
-    sample_rate = None
-    for index, unit in enumerate(units, start=1):
-        print(f"    [UNIT {index}/{len(units)}] {unit[:72]}")
-        pcm, sr, audio_seconds, elapsed = engine.synthesize(unit, language, reference)
-        print(f"        {audio_seconds:.2f}s audio / {elapsed:.2f}s generation")
-        if sample_rate is None:
-            sample_rate = sr
-        elif sample_rate != sr:
-            raise RuntimeError(
-                f"Sample rate changed inside chunk {chunk['id']}: "
-                f"{sample_rate} -> {sr}"
-            )
-        combined.extend(pcm)
-        if index < len(units):
-            combined.extend(silence(sr, paragraph_pause_ms))
-
-    assert sample_rate is not None
-    return bytes(combined), sample_rate
+    preview = re.sub(r"\s+", " ", text)[:96]
+    print(f"    [SYNTH] {preview}")
+    pcm, sr, audio_seconds, elapsed = engine.synthesize(text, language, reference)
+    print(f"        {audio_seconds:.2f}s audio / {elapsed:.2f}s generation")
+    return pcm, sr
 
 
 def assemble_chunks(
@@ -425,7 +349,7 @@ def main() -> int:
     chunks_dir.mkdir(parents=True, exist_ok=True)
 
     chunking = config["chunking"]
-    paragraph_pause_ms = int(chunking.get("paragraph_pause_ms", chunking["pause_ms_default"]))
+    paragraph_pause_ms = chunking.get("paragraph_pause_ms")
     chunk_pause_ms = int(chunking.get("chunk_pause_ms", max(chunking["pause_ms_range"])))
 
     selected = [
@@ -459,7 +383,6 @@ def main() -> int:
                 paragraph_pause_ms,
             )
             write_wav(output, pcm, sample_rate)
-            normalize_chunk_pacing(output, str(chunk["text"]), config)
             generated += 1
             print(f"[PASS] {chunk_id} -> {output}")
 
