@@ -1,69 +1,150 @@
-# Voice Production — CosyVoice 3
+# Voice Production — Modern Life Narrator v1
 
-## Locked production voice
+## Canonical production voice
 
 **Modern Life Narrator v1**
 
-- Engine: CosyVoice 3
-- Voice: built-in female voice
+This file is the human-readable source of truth for narration production. Machine-readable settings live in `config/voice_production.json`.
+
+### Validated production path
+
+- Engine: PocketTTS 2.1.0
+- Runtime: direct PocketTTS sidecar, kept alive for the whole batch
 - Language: English
-- Delivery: calm, intelligent, conversational documentary narration
-- Target chunk size: roughly 15–25 seconds
-- Hardware validated: GTX 1060 3 GB for short chunks
+- Voice profile name in VoiceStudio: `Modern Life Narrator v1`
+- VoiceStudio profile ID observed during validation: `e46c2df1`
+- VoiceStudio profile kind: `design`
+- Canonical reference asset at runtime: `ModernLifeNarrator_reference.wav`
+- Reference source: VoiceStudio profile audio for `Modern Life Narrator v1`
+- Output: 24 kHz, mono, PCM16 WAV
+- Post-processing tempo: 0.94
+- Post-processing pitch: -1 semitone
+- Typical deliberate pause range: 350–650 ms, chosen by semantic emphasis
 
-Long single requests are deliberately avoided. On the validated machine a 60–90 second request stalled, while ~15 second chunks completed successfully and retained the desired delivery.
+The profile ID is an implementation detail of the current local VoiceStudio database and may change if the profile is recreated. Production code should prefer the configured profile name and resolve/export its audio when needed.
 
-## Source of truth
+## Production architecture
 
-`episodes/MLI-001/narration_chunks.json` contains:
+VoiceStudio is used to design and manage the voice. It is **not** the preferred production runtime.
 
-- exact spoken text;
-- stable chunk IDs;
-- narrative section;
-- engine/language;
-- the locked narration instruction.
+For production narration:
 
-WAV files are local production artifacts and are not committed.
+1. Resolve/export the reference WAV for `Modern Life Narrator v1`.
+2. Launch the PocketTTS sidecar directly:
+   `%APPDATA%\VoiceStudio\runtime\project\backend\engines\pockettts\main.py`.
+3. Keep one sidecar process alive for the entire narration batch.
+4. Generate semantic chunks with the same reference audio.
+5. Insert deliberate silence between chunks.
+6. Assemble the raw narration.
+7. Apply final Rubber Band processing:
+   - tempo `0.94`
+   - pitch ratio `0.9438743127` (-1 semitone)
+8. Save the final narration as 24 kHz mono PCM16 WAV.
 
-## Generate
+The VoiceStudio `POST /generate` route is currently considered unreliable for this production path. It has timed out for 120–600 seconds while direct PocketTTS sidecar generation remained healthy. Do not use `/generate` as the default narration path unless it is revalidated.
 
-Start VoiceStudio first, then from the repository root:
+## Validated performance
 
-```powershell
-.\tools\generate_cosyvoice_narration.ps1
-```
+A direct eight-segment test produced:
 
-The script:
+- 39.42 s raw audio
+- 31.35 s total generation time, including first model load
+- ~0.80 generation-time / audio-time ratio for the whole batch
+- 41.94 s after final tempo/pitch processing
+- post-processing took about one second
 
-1. verifies the VoiceStudio backend is reachable;
-2. generates each missing chunk through `POST /generate`;
-3. leaves successful chunks in place so the run is resumable;
-4. retries a failed chunk;
-5. stops on a persistent failure rather than silently skipping audio;
-6. concatenates all chunks to `episodes/MLI-001/media/narration.wav`.
+Typical steady-state segment generation after model load was roughly 1.2–4.7 seconds for segments of about 2–8 seconds of speech.
 
-## Resume
+This is fast enough for full-episode production on the validated machine.
 
-If a run stops at chunk 17:
+## Quality target
 
-```powershell
-.\tools\generate_cosyvoice_narration.ps1 -StartAt 17
-```
+Delivery should remain:
 
-Existing WAVs are skipped unless `-Force` is supplied.
+- adult female narrator
+- calm
+- intelligent
+- conversational
+- thoughtful
+- documentary-like
+- warm and confident
+- understated rather than theatrical
+- no motivational/sales cadence
 
-To generate/review chunks without assembling the final narration:
+The validated voice is intentionally processed slightly slower and slightly lower to add weight without making it sound artificially deep.
 
-```powershell
-.\tools\generate_cosyvoice_narration.ps1 -NoAssemble
-```
+## Chunking and pauses
 
-## Quality gate
+Chunk on semantic units, not arbitrary character counts. Prefer complete thoughts and short paragraphs.
 
-Automation success is not artistic approval.
+Typical pause guidance:
 
-Before rendering the episode, listen to the generated chunks and regenerate any take with bad pronunciation, pacing, emphasis, glitches or tonal drift. Once approved, assemble `narration.wav` and use:
+- 350 ms: minor transition
+- 500 ms: normal sentence/block emphasis
+- 600–650 ms: stronger rhetorical transition or conclusion
 
-```powershell
-.\tools\render_with_narration.ps1
-```
+These are defaults, not hard rules. Natural delivery takes precedence.
+
+## Known failure modes and rejected paths
+
+### VoiceStudio /generate
+
+Observed after restart:
+
+- PocketTTS correctly selected as active engine
+- `pocket_tts` import succeeded in the VoiceStudio venv
+- `POST /generate` still timed out
+- no orphan PocketTTS sidecar was present
+- direct sidecar generation succeeded
+
+Conclusion: direct sidecar is the production path until `/generate` is revalidated.
+
+### CosyVoice 3 local
+
+Rejected for local production on the validated GTX 1060 3 GB system.
+
+With reference audio, persistent-sidecar inference remained around 44–54x RTF for short phrases. Keeping the model loaded did not solve the bottleneck. Local CosyVoice is not a practical production runtime on this hardware.
+
+### PocketTTS with old CosyVoice-derived reference
+
+The older `MLI001_Chunk01.wav` reference produced an undesirably child-like voice in PocketTTS. That reference is rejected for production.
+
+The current `Modern Life Narrator v1` design reference is the approved reference path.
+
+### Hugging Face access
+
+PocketTTS voice cloning requires approved access to `kyutai/pocket-tts` and local Hugging Face authentication. If cloning unexpectedly falls back to `kyutai/pocket-tts-without-voice-cloning`, verify gated-repository access before debugging synthesis.
+
+## Windows / VoiceStudio runtime
+
+Validated paths:
+
+- VoiceStudio project:
+  `%APPDATA%\VoiceStudio\runtime\project`
+- Python:
+  `%APPDATA%\VoiceStudio\runtime\project\.venv\Scripts\python.exe`
+- PocketTTS sidecar:
+  `%APPDATA%\VoiceStudio\runtime\project\backend\engines\pockettts\main.py`
+
+Do not hard-code the Windows username in repository scripts.
+
+## Current episode
+
+MLI-001:
+
+**7 Quiet Signs Someone Is More Attracted to You Than They Let On**
+
+Current narration inputs:
+
+- `episodes/MLI-001/narration.txt`
+- `episodes/MLI-001/narration_chunks.json`
+
+The previous CosyVoice narration pipeline is legacy. The next production task is to replace/adapt it so it reads `config/voice_production.json`, keeps one PocketTTS sidecar alive across the batch, inserts semantic pauses, applies the locked tempo/pitch post-process, and produces:
+
+`episodes/MLI-001/media/narration.wav`
+
+## Operator rule
+
+Before changing narration engines, voice identity, tempo, pitch, sample rate, chunking strategy, pause strategy, or recovery procedure, read this file and `config/voice_production.json`.
+
+If a new voice configuration is approved, update both files in the same change so the repository remains the canonical external memory for voice production.
