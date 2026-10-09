@@ -139,9 +139,27 @@ Current narration inputs:
 - `episodes/MLI-001/narration.txt`
 - `episodes/MLI-001/narration_chunks.json`
 
-The previous CosyVoice narration pipeline is legacy. The next production task is to replace/adapt it so it reads `config/voice_production.json`, keeps one PocketTTS sidecar alive across the batch, inserts semantic pauses, applies the locked tempo/pitch post-process, and produces:
+The previous CosyVoice narration pipeline is legacy. The active generator is now:
+
+`tools/generate_pockettts_narration.ps1`
+
+From the repository root, run:
+
+```powershell
+.\\tools\\generate_pockettts_narration.ps1
+```
+
+The generator reads `config/voice_production.json`, resolves/exports the `Modern Life Narrator v1` reference when needed, keeps one PocketTTS sidecar alive across the batch, preserves authored paragraph boundaries as semantic units, inserts the configured pauses, writes resumable per-chunk WAVs, assembles `narration_raw.wav`, applies the locked Rubber Band tempo/pitch processing, and produces:
 
 `episodes/MLI-001/media/narration.wav`
+
+Resume from a chunk with:
+
+```powershell
+.\\tools\\generate_pockettts_narration.ps1 -StartAt 17
+```
+
+Existing chunk WAVs are skipped unless `-Force` is supplied. Use `-NoAssemble` to generate/review chunks without creating the final narration.
 
 ## Operator rule
 
