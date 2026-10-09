@@ -13,7 +13,12 @@
     {
       "id": "002",
       "section": "hook",
-      "text": "Someone can hold eye contact because they're confident. They can laugh because they're friendly. They can stand close because the room is crowded.\n\nAttraction is not a magic trick you decode from one gesture.\n\nWhat matters is a pattern."
+      "text": "Someone can hold eye contact because they're confident. They can laugh because they're friendly. They can stand close because the room is crowded.\n\nAttraction is not a magic trick you decode from one gesture.\n\nWhat matters is a pattern.",
+      "synthesis_groups": [
+        "Someone can hold eye contact because they're confident. They can laugh because they're friendly. They can stand close because the room is crowded.",
+        "Attraction is not a magic trick you decode from one gesture.\n\nWhat matters is a pattern."
+      ],
+      "group_pause_ms": 600
     },
     {
       "id": "003",
