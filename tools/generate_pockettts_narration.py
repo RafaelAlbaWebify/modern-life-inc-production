@@ -232,16 +232,41 @@ def build_chunk(
     reference: Path,
     paragraph_pause_ms: int | None,
 ) -> tuple[bytes, int]:
-    """Synthesize one manifest chunk as one request to preserve prosody/context."""
+    """Synthesize one contextual request, or a small set of explicit groups."""
     text = str(chunk["text"]).strip()
     if not text:
         raise RuntimeError(f"Chunk {chunk['id']} has no speakable text.")
 
-    preview = re.sub(r"\s+", " ", text)[:96]
-    print(f"    [SYNTH] {preview}")
-    pcm, sr, audio_seconds, elapsed = engine.synthesize(text, language, reference)
-    print(f"        {audio_seconds:.2f}s audio / {elapsed:.2f}s generation")
-    return pcm, sr
+    groups = chunk.get("synthesis_groups")
+    if not groups:
+        groups = [text]
+
+    group_pause_ms = int(chunk.get("group_pause_ms", 600))
+    combined = bytearray()
+    sample_rate = None
+
+    for index, group in enumerate(groups, start=1):
+        group = str(group).strip()
+        preview = re.sub(r"\s+", " ", group)[:96]
+        label = f"[SYNTH {index}/{len(groups)}]" if len(groups) > 1 else "[SYNTH]"
+        print(f"    {label} {preview}")
+        pcm, sr, audio_seconds, elapsed = engine.synthesize(group, language, reference)
+        print(f"        {audio_seconds:.2f}s audio / {elapsed:.2f}s generation")
+
+        if sample_rate is None:
+            sample_rate = sr
+        elif sample_rate != sr:
+            raise RuntimeError(
+                f"Sample rate changed inside chunk {chunk['id']}: "
+                f"{sample_rate} -> {sr}"
+            )
+
+        combined.extend(pcm)
+        if index < len(groups):
+            combined.extend(silence(sr, group_pause_ms))
+
+    assert sample_rate is not None
+    return bytes(combined), sample_rate
 
 
 def assemble_chunks(
