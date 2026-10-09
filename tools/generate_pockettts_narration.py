@@ -145,7 +145,7 @@ class PocketTTS:
         )
         return self
 
-    def synthesize(self, text: str, language: str, reference: Path) -> tuple[bytes, int, float]:
+    def synthesize(self, text: str, language: str, reference: Path) -> tuple[bytes, int, float, float]:
         if not self.proc:
             raise RuntimeError("PocketTTS sidecar is not running.")
 
