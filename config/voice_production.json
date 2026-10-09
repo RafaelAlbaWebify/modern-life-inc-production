@@ -48,7 +48,9 @@
     "pause_ms_range": [
       350,
       650
-    ]
+    ],
+    "paragraph_pause_ms": 500,
+    "chunk_pause_ms": 650
   },
   "runtime_policy": {
     "voicestudio_generate_endpoint": "avoid_until_revalidated",
@@ -66,5 +68,5 @@
     "test_final_audio_seconds": 41.936167,
     "whole_batch_generation_to_audio_ratio": 0.8
   },
-  "next_step": "Replace/adapt legacy CosyVoice narration generation so MLI-001 reads this config, uses one persistent PocketTTS sidecar, assembles chunks, applies post-processing, and writes episodes/MLI-001/media/narration.wav."
+  "next_step": "Run tools/generate_pockettts_narration.ps1 for MLI-001, quality-review generated chunks/narration.wav, then render the episode with tools/render_with_narration.ps1."
 }
