@@ -89,7 +89,9 @@ These are defaults, not hard rules. Natural delivery takes precedence.
 
 The WPM-based time-stretch experiment was rejected because it introduced audible artifacts and made chunk 002 unacceptable.
 
-Each authored manifest chunk is now synthesized as **one PocketTTS request** instead of splitting every paragraph into separate micro-requests. This gives PocketTTS more linguistic context and avoids stitching independently generated takes inside one chunk.
+By default, each authored manifest chunk is synthesized as **one PocketTTS request** instead of splitting every paragraph into separate micro-requests. This gives PocketTTS more linguistic context and avoids the artificial timbre observed with aggressive micro-segmentation.
+
+For a specific chunk that is naturally rushed, the manifest may define a small number of explicit `synthesis_groups`. These are human-reviewed semantic groups, not automatic WPM correction. The groups are synthesized independently and joined with a short configured pause. No time stretching is used.
 
 Between manifest chunks, the pipeline inserts the configured pause (currently 650 ms). No per-chunk tempo normalization is applied. The only tempo/pitch processing retained is the final global post-process after assembly.
 
@@ -178,3 +180,7 @@ If a new voice configuration is approved, update both files in the same change s
 ## Acceptance note — 2026-10-09
 
 A two-chunk test with WPM normalization was rejected: chunk 001 still sounded somewhat artificial, and chunk 002 was audibly degraded by time stretching. The WPM-normalization approach was removed. Full-episode generation must not proceed until the single-request-per-chunk test passes.
+
+### Chunk 002 pacing experiment
+
+Chunk 002 remained naturally faster even after switching to single-request synthesis. Because PocketTTS does not expose a native speech-rate control in the validated VoiceStudio integration, chunk 002 is being tested with two explicit semantic synthesis groups separated by 600 ms. Chunk 001 remains a single request. This preserves natural voice quality while testing whether a small contextual split can reduce rushed delivery without time stretching.
