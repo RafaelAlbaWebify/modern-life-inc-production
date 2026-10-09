@@ -68,5 +68,12 @@
     "test_final_audio_seconds": 41.936167,
     "whole_batch_generation_to_audio_ratio": 0.8
   },
-  "next_step": "Run tools/generate_pockettts_narration.ps1 for MLI-001, quality-review generated chunks/narration.wav, then render the episode with tools/render_with_narration.ps1."
+  "next_step": "Regenerate MLI-001 chunks 001-002 with pacing normalization, compare them, then generate the remaining episode and assemble narration.wav.",
+  "pacing": {
+    "enabled": true,
+    "max_raw_wpm": 155,
+    "minimum_tempo_factor": 0.8,
+    "method": "chunk_level_rubberband_tempo_only",
+    "rationale": "PocketTTS can vary delivery speed between semantic chunks. Slow only chunks above the raw WPM ceiling; never speed up slower chunks."
+  }
 }
