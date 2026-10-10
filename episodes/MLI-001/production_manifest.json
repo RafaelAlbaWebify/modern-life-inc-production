@@ -1,5 +1,5 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "episode_id": "MLI-001",
   "width": 1920,
   "height": 1080,
@@ -7,51 +7,471 @@
   "scenes": [
     {
       "id": "S001",
-      "duration_sec": 8,
-      "visual_mode": "SYSTEM",
-      "layout": "diagram",
-      "visual": "Four ambiguous clues compete for attention.",
-      "on_screen_text": "ONE SIGN CAN MEAN ALMOST ANYTHING"
+      "duration_sec": 6.076,
+      "visual_mode": "HERO",
+      "layout": "4-icon_montage",
+      "visual": "Four rapid false clues: stare, laugh, fast text, accidental touch",
+      "on_screen_text": "NO SINGLE SIGN = PROOF",
+      "base_image": "media/generated/S001.png"
     },
     {
       "id": "S002",
-      "duration_sec": 8,
-      "visual_mode": "SYSTEM",
-      "layout": "single_focus",
-      "visual": "One person surrounded by ambiguous signals.",
-      "on_screen_text": "DON'T DECODE ONE GESTURE"
+      "duration_sec": 6.076,
+      "visual_mode": "HYBRID",
+      "layout": "single_figure_+_icons",
+      "visual": "One figure surrounded by four question marks",
+      "on_screen_text": "",
+      "base_image": "media/generated/S002.png"
     },
     {
       "id": "S003",
-      "duration_sec": 9,
+      "duration_sec": 6.835,
       "visual_mode": "SYSTEM",
-      "layout": "diagram",
-      "visual": "Multiple clues converge into one pattern.",
-      "on_screen_text": "LOOK FOR A PATTERN"
+      "layout": "diagram_convergence",
+      "visual": "Four clues collapse into one word: PATTERN",
+      "on_screen_text": "PATTERN"
     },
     {
       "id": "S004",
-      "duration_sec": 10,
-      "visual_mode": "SYSTEM",
-      "layout": "two_person_conversation",
-      "visual": "Two people with multiple small signals between them.",
-      "on_screen_text": "REPEATED • SELECTIVE • RECIPROCAL"
+      "duration_sec": 7.595,
+      "visual_mode": "HYBRID",
+      "layout": "interaction_+_signal_dots",
+      "visual": "Two people; several small amber signals appear between them",
+      "on_screen_text": "",
+      "base_image": "media/generated/S004.png"
     },
     {
       "id": "S005",
-      "duration_sec": 10,
+      "duration_sec": 7.595,
       "visual_mode": "SYSTEM",
       "layout": "evidence_card",
-      "visual": "Research claim that attraction can change behavior.",
+      "visual": "Research card: behavior changes around people we like",
       "on_screen_text": "ATTRACTION CAN CHANGE BEHAVIOR"
     },
     {
       "id": "S006",
-      "duration_sec": 9,
+      "duration_sec": 6.835,
+      "visual_mode": "SYSTEM",
+      "layout": "numbered_diagram",
+      "visual": "Seven numbered markers fan out",
+      "on_screen_text": "7 QUIET SIGNS"
+    },
+    {
+      "id": "S007",
+      "duration_sec": 9.119,
+      "visual_mode": "HYBRID",
+      "layout": "two_person_conversation",
+      "visual": "Two people in caf\u00e9; empty seats visible; one chooses seat nearby",
+      "on_screen_text": "1. PROXIMITY",
+      "base_image": "media/generated/S007.png"
+    },
+    {
+      "id": "S008",
+      "duration_sec": 9.119,
+      "visual_mode": "SYSTEM",
+      "layout": "two_person_conversation",
+      "visual": "Figure starts conversation; speech bubble grows",
+      "on_screen_text": ""
+    },
+    {
+      "id": "S009",
+      "duration_sec": 9.119,
+      "visual_mode": "SYSTEM",
+      "layout": "two_person_conversation",
+      "visual": "Conversation should end; one figure reopens it with new bubble",
+      "on_screen_text": ""
+    },
+    {
+      "id": "S010",
+      "duration_sec": 9.119,
+      "visual_mode": "SYSTEM",
+      "layout": "contrast",
+      "visual": "Split screen: assigned desk vs voluntary approach",
+      "on_screen_text": "CHOICE MATTERS"
+    },
+    {
+      "id": "S011",
+      "duration_sec": 9.119,
       "visual_mode": "SYSTEM",
       "layout": "diagram",
-      "visual": "Seven numbered signals appear.",
-      "on_screen_text": "7 QUIET SIGNS"
+      "visual": "Arrow loops back toward same person three times",
+      "on_screen_text": "REPEATED + VOLUNTARY"
+    },
+    {
+      "id": "S012",
+      "duration_sec": 8.791,
+      "visual_mode": "HERO",
+      "layout": "two_person_gaze",
+      "visual": "Two profile heads glance, look away, reconnect",
+      "on_screen_text": "2. MUTUAL EYE CONTACT",
+      "base_image": "media/generated/S012.png"
+    },
+    {
+      "id": "S013",
+      "duration_sec": 8.791,
+      "visual_mode": "SYSTEM",
+      "layout": "contrast",
+      "visual": "Single accidental glance shown as tiny weak signal",
+      "on_screen_text": "ONE GLANCE = WEAK"
+    },
+    {
+      "id": "S014",
+      "duration_sec": 8.791,
+      "visual_mode": "HYBRID",
+      "layout": "two_person_gaze",
+      "visual": "Shared gaze line appears between both faces",
+      "on_screen_text": "SHARED",
+      "base_image": "media/generated/S014.png"
+    },
+    {
+      "id": "S015",
+      "duration_sec": 8.791,
+      "visual_mode": "SYSTEM",
+      "layout": "evidence_card",
+      "visual": "Evidence card with eye icon + speed-dating silhouette",
+      "on_screen_text": "MORE SHARED EYE CONTACT"
+    },
+    {
+      "id": "S016",
+      "duration_sec": 8.791,
+      "visual_mode": "SYSTEM",
+      "layout": "diagram",
+      "visual": "Three side icons: culture, anxiety, personality",
+      "on_screen_text": "CONTEXT CHANGES GAZE"
+    },
+    {
+      "id": "S017",
+      "duration_sec": 8.349,
+      "visual_mode": "HYBRID",
+      "layout": "two_person_conversation",
+      "visual": "Two seated figures lean forward at same moment",
+      "on_screen_text": "3. SYNCHRONY",
+      "base_image": "media/generated/S017.png"
+    },
+    {
+      "id": "S018",
+      "duration_sec": 8.349,
+      "visual_mode": "SYSTEM",
+      "layout": "two_person_conversation",
+      "visual": "Two hands gesture with similar rhythm",
+      "on_screen_text": ""
+    },
+    {
+      "id": "S019",
+      "duration_sec": 8.349,
+      "visual_mode": "SYSTEM",
+      "layout": "two_person_conversation",
+      "visual": "Two laugh marks appear simultaneously",
+      "on_screen_text": ""
+    },
+    {
+      "id": "S020",
+      "duration_sec": 8.349,
+      "visual_mode": "SYSTEM",
+      "layout": "contrast",
+      "visual": "Bad interpretation crossed out: COPY = LOVE",
+      "on_screen_text": "NOT THAT SIMPLE"
+    },
+    {
+      "id": "S021",
+      "duration_sec": 8.349,
+      "visual_mode": "HERO",
+      "layout": "abstract_diagram",
+      "visual": "Waveforms align gradually",
+      "on_screen_text": "SHARED RHYTHM",
+      "base_image": "media/generated/S021.png"
+    },
+    {
+      "id": "S022",
+      "duration_sec": 8.74,
+      "visual_mode": "HYBRID",
+      "layout": "two_person_conversation",
+      "visual": "Speech bubbles progress: weather \u2192 work \u2192 fear/dream",
+      "on_screen_text": "4. MORE PERSONAL",
+      "base_image": "media/generated/S022.png"
+    },
+    {
+      "id": "S023",
+      "duration_sec": 8.74,
+      "visual_mode": "HERO",
+      "layout": "single_focus",
+      "visual": "One figure opens a small door/heart icon",
+      "on_screen_text": "",
+      "base_image": "media/generated/S023.png"
+    },
+    {
+      "id": "S024",
+      "duration_sec": 8.74,
+      "visual_mode": "SYSTEM",
+      "layout": "two_person_conversation",
+      "visual": "Second figure responds with matching disclosure",
+      "on_screen_text": "RECIPROCAL"
+    },
+    {
+      "id": "S025",
+      "duration_sec": 8.74,
+      "visual_mode": "SYSTEM",
+      "layout": "contrast",
+      "visual": "Split: oversharer-to-everyone vs selective disclosure",
+      "on_screen_text": "SELECTIVE DEPTH"
+    },
+    {
+      "id": "S026",
+      "duration_sec": 8.74,
+      "visual_mode": "SYSTEM",
+      "layout": "diagram",
+      "visual": "Timeline shows conversations deepening over time",
+      "on_screen_text": "OVER TIME"
+    },
+    {
+      "id": "S027",
+      "duration_sec": 9.966,
+      "visual_mode": "HYBRID",
+      "layout": "split_contrast",
+      "visual": "Same story told to Person A and Person B",
+      "on_screen_text": "5. RESPONSIVENESS",
+      "base_image": "media/generated/S027.png"
+    },
+    {
+      "id": "S028",
+      "duration_sec": 9.966,
+      "visual_mode": "SYSTEM",
+      "layout": "contrast",
+      "visual": "Person A: 'Oh, cool.' then turns away",
+      "on_screen_text": ""
+    },
+    {
+      "id": "S029",
+      "duration_sec": 9.966,
+      "visual_mode": "SYSTEM",
+      "layout": "two_person_conversation",
+      "visual": "Person B asks follow-up; arrows connect ideas",
+      "on_screen_text": ""
+    },
+    {
+      "id": "S030",
+      "duration_sec": 9.966,
+      "visual_mode": "SYSTEM",
+      "layout": "diagram",
+      "visual": "Icons: understood / valued / responded to",
+      "on_screen_text": "UNDERSTOOD \u2022 VALUED \u2022 HEARD"
+    },
+    {
+      "id": "S031",
+      "duration_sec": 9.966,
+      "visual_mode": "SYSTEM",
+      "layout": "contrast",
+      "visual": "Memory icon crossed out; investment icon highlighted",
+      "on_screen_text": "INVESTMENT > MEMORY"
+    },
+    {
+      "id": "S032",
+      "duration_sec": 9.064,
+      "visual_mode": "HYBRID",
+      "layout": "two_person_conversation",
+      "visual": "Two speech bubbles interlock smoothly",
+      "on_screen_text": "6. EASY CONVERSATION",
+      "base_image": "media/generated/S032.png"
+    },
+    {
+      "id": "S033",
+      "duration_sec": 9.064,
+      "visual_mode": "SYSTEM",
+      "layout": "contrast",
+      "visual": "Awkward turn-taking blocks vs flowing connected chain",
+      "on_screen_text": ""
+    },
+    {
+      "id": "S034",
+      "duration_sec": 9.064,
+      "visual_mode": "SYSTEM",
+      "layout": "diagram",
+      "visual": "Two simple waveforms gradually align",
+      "on_screen_text": "LANGUAGE-STYLE MATCHING"
+    },
+    {
+      "id": "S035",
+      "duration_sec": 9.064,
+      "visual_mode": "SYSTEM",
+      "layout": "single_focus",
+      "visual": "Function-word joke visual briefly appears then fades",
+      "on_screen_text": "DON'T COUNT PRONOUNS"
+    },
+    {
+      "id": "S036",
+      "duration_sec": 9.064,
+      "visual_mode": "HERO",
+      "layout": "single_focus",
+      "visual": "Two paths merge into one conversational path",
+      "on_screen_text": "SHARED RHYTHM",
+      "base_image": "media/generated/S036.png"
+    },
+    {
+      "id": "S037",
+      "duration_sec": 10.596,
+      "visual_mode": "SYSTEM",
+      "layout": "diagram",
+      "visual": "Clock + calendar + two figures",
+      "on_screen_text": "7. A NEXT TIME"
+    },
+    {
+      "id": "S038",
+      "duration_sec": 10.596,
+      "visual_mode": "HYBRID",
+      "layout": "phone_message",
+      "visual": "Message: 'You should come with me next week'",
+      "on_screen_text": "",
+      "base_image": "media/generated/S038.png"
+    },
+    {
+      "id": "S039",
+      "duration_sec": 10.596,
+      "visual_mode": "SYSTEM",
+      "layout": "phone_message",
+      "visual": "One figure sends article/song after conversation",
+      "on_screen_text": ""
+    },
+    {
+      "id": "S040",
+      "duration_sec": 10.596,
+      "visual_mode": "SYSTEM",
+      "layout": "diagram",
+      "visual": "Path from conversation \u2192 message \u2192 meetup",
+      "on_screen_text": "CONTACT HAS DIRECTION"
+    },
+    {
+      "id": "S041",
+      "duration_sec": 10.596,
+      "visual_mode": "SYSTEM",
+      "layout": "diagram",
+      "visual": "Three cost icons: time, effort, risk",
+      "on_screen_text": "TIME \u2022 EFFORT \u2022 RISK"
+    },
+    {
+      "id": "S042",
+      "duration_sec": 4.711,
+      "visual_mode": "SYSTEM",
+      "layout": "diagram",
+      "visual": "Seven small signals appear separately",
+      "on_screen_text": "ONE SIGN = AMBIGUOUS"
+    },
+    {
+      "id": "S043",
+      "duration_sec": 4.711,
+      "visual_mode": "HERO",
+      "layout": "convergence",
+      "visual": "Signals converge into one larger arrow",
+      "on_screen_text": "CONVERGENCE",
+      "base_image": "media/generated/S043.png"
+    },
+    {
+      "id": "S044",
+      "duration_sec": 4.711,
+      "visual_mode": "SYSTEM",
+      "layout": "three_item_heuristic",
+      "visual": "Word card: CONSISTENCY",
+      "on_screen_text": "CONSISTENCY"
+    },
+    {
+      "id": "S045",
+      "duration_sec": 4.711,
+      "visual_mode": "SYSTEM",
+      "layout": "diagram",
+      "visual": "Same behavior repeated across three moments",
+      "on_screen_text": "DOES IT KEEP HAPPENING?"
+    },
+    {
+      "id": "S046",
+      "duration_sec": 4.711,
+      "visual_mode": "SYSTEM",
+      "layout": "three_item_heuristic",
+      "visual": "Word card: SELECTIVITY",
+      "on_screen_text": "SELECTIVITY"
+    },
+    {
+      "id": "S047",
+      "duration_sec": 4.711,
+      "visual_mode": "HYBRID",
+      "layout": "contrast",
+      "visual": "Same person with group vs visibly different behavior with one person",
+      "on_screen_text": "DIFFERENT WITH YOU?",
+      "base_image": "media/generated/S047.png"
+    },
+    {
+      "id": "S048",
+      "duration_sec": 4.711,
+      "visual_mode": "SYSTEM",
+      "layout": "three_item_heuristic",
+      "visual": "Word card: RECIPROCITY",
+      "on_screen_text": "RECIPROCITY"
+    },
+    {
+      "id": "S049",
+      "duration_sec": 4.711,
+      "visual_mode": "HYBRID",
+      "layout": "two_person_conversation",
+      "visual": "One person takes small step; other meets halfway",
+      "on_screen_text": "DO THEY MEET YOU HALFWAY?",
+      "base_image": "media/generated/S049.png"
+    },
+    {
+      "id": "S050",
+      "duration_sec": 4.711,
+      "visual_mode": "HYBRID",
+      "layout": "contrast",
+      "visual": "Three figures: shy avoids gaze, anxious freezes, confident engages everyone",
+      "on_screen_text": "NO UNIVERSAL CODE",
+      "base_image": "media/generated/S050.png"
+    },
+    {
+      "id": "S051",
+      "duration_sec": 4.711,
+      "visual_mode": "SYSTEM",
+      "layout": "diagram",
+      "visual": "Icons for culture, context, neurodiversity",
+      "on_screen_text": "CONTEXT MATTERS"
+    },
+    {
+      "id": "S052",
+      "duration_sec": 7.646,
+      "visual_mode": "HERO",
+      "layout": "convergence",
+      "visual": "Montage of proximity + disclosure + response + future contact",
+      "on_screen_text": "A PLAUSIBLE EXPLANATION",
+      "base_image": "media/generated/S052.png"
+    },
+    {
+      "id": "S053",
+      "duration_sec": 7.646,
+      "visual_mode": "SYSTEM",
+      "layout": "single_focus",
+      "visual": "Word PROOF fades out; PATTERN remains",
+      "on_screen_text": "NOT CERTAINTY"
+    },
+    {
+      "id": "S054",
+      "duration_sec": 7.646,
+      "visual_mode": "HYBRID",
+      "layout": "two_person_conversation",
+      "visual": "Two figures finally talk directly",
+      "on_screen_text": "DIRECT COMMUNICATION WINS",
+      "base_image": "media/generated/S054.png"
+    },
+    {
+      "id": "S055",
+      "duration_sec": 7.646,
+      "visual_mode": "SYSTEM",
+      "layout": "three_item_heuristic",
+      "visual": "Three words stack",
+      "on_screen_text": "CONSISTENCY\nSELECTIVITY\nRECIPROCITY"
+    },
+    {
+      "id": "S056",
+      "duration_sec": 6.117,
+      "visual_mode": "SYSTEM",
+      "layout": "brand_outro",
+      "visual": "Modern Life Inc. logo/tagline",
+      "on_screen_text": "UNDERSTAND PEOPLE. UNDERSTAND MODERN LIFE."
     }
   ]
 }
