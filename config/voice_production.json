@@ -58,7 +58,13 @@
     "production_path": "direct_pockettts_sidecar",
     "wav_artifacts_committed": false,
     "auto_restore_pockettts": true,
-    "auto_restore_command": "VoiceStudio bundled uv sync --project %APPDATA%\\VoiceStudio\\runtime\\project --extra pockettts"
+    "auto_restore_command": "VoiceStudio bundled uv sync --project %APPDATA%\\VoiceStudio\\runtime\\project --extra pockettts",
+    "selective_regeneration": {
+      "supported": true,
+      "parameter": "-Only",
+      "example": "-Only \"003,009,010\"",
+      "behavior": "Regenerate only listed chunk IDs, then assemble the complete narration from all existing chunk WAVs."
+    }
   },
   "rejected": {
     "cosyvoice_local": "Too slow on GTX 1060 3 GB with reference audio; persistent sidecar did not solve inference cost.",
@@ -91,5 +97,5 @@
       ]
     }
   },
-  "next_step": "Regenerate chunk 005 and reassemble narration. Then use the engagement QA to tighten hook/caveat pacing before final visual timing."
+  "next_step": "Regenerate only retention-edited MLI-001 chunks with -Only, assemble narration.wav, compare against the previous full narration, then promote the retention rules to production standard if accepted."
 }
