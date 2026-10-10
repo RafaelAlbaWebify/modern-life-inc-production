@@ -26,11 +26,13 @@
     "S001": {
       "mode": "HERO",
       "section": "Hook",
-      "status": "missing",
+      "status": "locked",
       "final_file": "media/generated/S001.png",
       "source_candidate": null,
-      "attempts": 0,
-      "notes": ""
+      "attempts": 1,
+      "notes": "Batch 001 approved and locked after visual review; hyperreal style, good narrative fit, retained as production asset.",
+      "drive_file_id": "1qHa2U8QUU9zvH6i6kAjaiNs6NjxAQcf2",
+      "selected_candidate": "Google Drive approved/S001.png"
     },
     "S002": {
       "mode": "HYBRID",
@@ -53,11 +55,13 @@
     "S007": {
       "mode": "HERO",
       "section": "Sign 1",
-      "status": "missing",
+      "status": "locked",
       "final_file": "media/generated/S007.png",
       "source_candidate": null,
-      "attempts": 0,
-      "notes": ""
+      "attempts": 1,
+      "notes": "Batch 001 approved and locked after visual review; hyperreal style, good narrative fit, retained as production asset.",
+      "drive_file_id": "1r6nxuqBhwgp8TH2SffGYofrLdXXEDzOd",
+      "selected_candidate": "Google Drive approved/S007.png"
     },
     "S008": {
       "mode": "HYBRID",
@@ -116,11 +120,13 @@
     "S017": {
       "mode": "HERO",
       "section": "Sign 3",
-      "status": "missing",
+      "status": "locked",
       "final_file": "media/generated/S017.png",
       "source_candidate": null,
-      "attempts": 0,
-      "notes": ""
+      "attempts": 1,
+      "notes": "Batch 001 approved and locked after visual review; hyperreal style, good narrative fit, retained as production asset.",
+      "drive_file_id": "1spz7rR3EaNs8whhg_byP0uPctNrAMCzF",
+      "selected_candidate": "Google Drive approved/S017.png"
     },
     "S018": {
       "mode": "HYBRID",
@@ -152,11 +158,13 @@
     "S023": {
       "mode": "HERO",
       "section": "Sign 4",
-      "status": "missing",
+      "status": "locked",
       "final_file": "media/generated/S023.png",
       "source_candidate": null,
-      "attempts": 0,
-      "notes": ""
+      "attempts": 1,
+      "notes": "Batch 001 approved and locked after visual review; hyperreal style, good narrative fit, retained as production asset.",
+      "drive_file_id": "1ZaYwtKoYdWnK2DkAsiDnjwWNrmUtNu_9",
+      "selected_candidate": "Google Drive approved/S023.png"
     },
     "S024": {
       "mode": "HYBRID",
