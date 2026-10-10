@@ -1,0 +1,315 @@
+{
+  "version": "1.0",
+  "episode_id": "MLI-001",
+  "style_status": "locked",
+  "style_rule": "Hyperreal cinematic photography; retention first; no fantasy glow/particles/light trails.",
+  "workflow": {
+    "statuses": [
+      "missing",
+      "queued",
+      "generated",
+      "approved",
+      "retry",
+      "rejected",
+      "locked"
+    ],
+    "batch_priority": [
+      "HERO",
+      "HYBRID"
+    ],
+    "default_batch_size": 4,
+    "final_directory": "media/generated",
+    "review_directory": "media/generated/_review",
+    "rejected_directory": "media/generated/_rejected"
+  },
+  "assets": {
+    "S001": {
+      "mode": "HERO",
+      "section": "Hook",
+      "status": "missing",
+      "final_file": "media/generated/S001.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S002": {
+      "mode": "HYBRID",
+      "section": "Hook",
+      "status": "missing",
+      "final_file": "media/generated/S002.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S004": {
+      "mode": "HYBRID",
+      "section": "Thesis",
+      "status": "missing",
+      "final_file": "media/generated/S004.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S007": {
+      "mode": "HERO",
+      "section": "Sign 1",
+      "status": "missing",
+      "final_file": "media/generated/S007.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S008": {
+      "mode": "HYBRID",
+      "section": "Sign 1",
+      "status": "missing",
+      "final_file": "media/generated/S008.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S009": {
+      "mode": "HYBRID",
+      "section": "Sign 1",
+      "status": "missing",
+      "final_file": "media/generated/S009.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S010": {
+      "mode": "HYBRID",
+      "section": "Sign 1",
+      "status": "missing",
+      "final_file": "media/generated/S010.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S012": {
+      "mode": "HERO",
+      "section": "Sign 2",
+      "status": "approved",
+      "final_file": "media/generated/S012.png",
+      "source_candidate": "candlelit_dinner_date_romance.png",
+      "attempts": 1,
+      "notes": "Approved HERO: strong mutual eye-contact scene; locked hyperreal cinematic style."
+    },
+    "S013": {
+      "mode": "HYBRID",
+      "section": "Sign 2",
+      "status": "missing",
+      "final_file": "media/generated/S013.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S014": {
+      "mode": "HYBRID",
+      "section": "Sign 2",
+      "status": "missing",
+      "final_file": "media/generated/S014.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S017": {
+      "mode": "HERO",
+      "section": "Sign 3",
+      "status": "missing",
+      "final_file": "media/generated/S017.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S018": {
+      "mode": "HYBRID",
+      "section": "Sign 3",
+      "status": "missing",
+      "final_file": "media/generated/S018.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S019": {
+      "mode": "HYBRID",
+      "section": "Sign 3",
+      "status": "missing",
+      "final_file": "media/generated/S019.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S022": {
+      "mode": "HYBRID",
+      "section": "Sign 4",
+      "status": "missing",
+      "final_file": "media/generated/S022.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S023": {
+      "mode": "HERO",
+      "section": "Sign 4",
+      "status": "missing",
+      "final_file": "media/generated/S023.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S024": {
+      "mode": "HYBRID",
+      "section": "Sign 4",
+      "status": "missing",
+      "final_file": "media/generated/S024.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S025": {
+      "mode": "HYBRID",
+      "section": "Sign 4",
+      "status": "missing",
+      "final_file": "media/generated/S025.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S027": {
+      "mode": "HERO",
+      "section": "Sign 5",
+      "status": "missing",
+      "final_file": "media/generated/S027.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S028": {
+      "mode": "HYBRID",
+      "section": "Sign 5",
+      "status": "missing",
+      "final_file": "media/generated/S028.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S029": {
+      "mode": "HYBRID",
+      "section": "Sign 5",
+      "status": "missing",
+      "final_file": "media/generated/S029.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S032": {
+      "mode": "HERO",
+      "section": "Sign 6",
+      "status": "missing",
+      "final_file": "media/generated/S032.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S033": {
+      "mode": "HYBRID",
+      "section": "Sign 6",
+      "status": "missing",
+      "final_file": "media/generated/S033.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S036": {
+      "mode": "HYBRID",
+      "section": "Sign 6",
+      "status": "missing",
+      "final_file": "media/generated/S036.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S037": {
+      "mode": "HERO",
+      "section": "Sign 7",
+      "status": "missing",
+      "final_file": "media/generated/S037.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S038": {
+      "mode": "HYBRID",
+      "section": "Sign 7",
+      "status": "missing",
+      "final_file": "media/generated/S038.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S039": {
+      "mode": "HYBRID",
+      "section": "Sign 7",
+      "status": "missing",
+      "final_file": "media/generated/S039.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S045": {
+      "mode": "HYBRID",
+      "section": "Synthesis",
+      "status": "missing",
+      "final_file": "media/generated/S045.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S047": {
+      "mode": "HYBRID",
+      "section": "Synthesis",
+      "status": "missing",
+      "final_file": "media/generated/S047.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S049": {
+      "mode": "HYBRID",
+      "section": "Synthesis",
+      "status": "missing",
+      "final_file": "media/generated/S049.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S050": {
+      "mode": "HYBRID",
+      "section": "Caveat",
+      "status": "missing",
+      "final_file": "media/generated/S050.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    },
+    "S052": {
+      "mode": "HERO",
+      "section": "Conclusion",
+      "status": "approved",
+      "final_file": "media/generated/S052.png",
+      "source_candidate": "golden_candlelit_romance_montage.png",
+      "attempts": 1,
+      "notes": "Approved HERO: strong conclusion montage; locked hyperreal cinematic style."
+    },
+    "S054": {
+      "mode": "HERO",
+      "section": "Conclusion",
+      "status": "missing",
+      "final_file": "media/generated/S054.png",
+      "source_candidate": null,
+      "attempts": 0,
+      "notes": ""
+    }
+  }
+}
