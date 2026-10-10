@@ -22,6 +22,35 @@ if (-not (Test-Path -LiteralPath $Python)) {
     throw "VoiceStudio Python not found: $Python"
 }
 
+# VoiceStudio may recreate/sync its runtime after reboot and drop optional extras.
+# Self-heal PocketTTS before starting narration production.
+& $Python -c "import pocket_tts" 2>$null
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "[REPAIR] PocketTTS missing from VoiceStudio runtime. Restoring..." -ForegroundColor Yellow
+
+    $Uv = "C:\Program Files\VoiceStudio\resources\tools\uv.exe"
+    if (-not (Test-Path -LiteralPath $Uv)) {
+        throw "VoiceStudio uv was not found: $Uv"
+    }
+
+    $VSRoot = Split-Path -Parent (Split-Path -Parent $Python)
+
+    & $Uv sync --project $VSRoot --extra pockettts
+    if ($LASTEXITCODE -ne 0) {
+        throw "Automatic PocketTTS restore failed."
+    }
+
+    & $Python -c "import pocket_tts"
+    if ($LASTEXITCODE -ne 0) {
+        throw "PocketTTS is still unavailable after automatic restore."
+    }
+
+    Write-Host "[READY] PocketTTS restored." -ForegroundColor Green
+}
+else {
+    Write-Host "[READY] PocketTTS import OK." -ForegroundColor Green
+}
+
 $ArgsList = @(
     (Join-Path $Root "tools\generate_pockettts_narration.py"),
     "--episode", (Join-Path $Root $Episode),
