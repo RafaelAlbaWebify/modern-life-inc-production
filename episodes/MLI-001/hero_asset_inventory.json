@@ -1,0 +1,79 @@
+{
+  "version": "1.0",
+  "episode_id": "MLI-001",
+  "policy": "retention_first_do_not_force_reuse",
+  "required_hero_scenes": [
+    "S001",
+    "S007",
+    "S012",
+    "S017",
+    "S023",
+    "S027",
+    "S032",
+    "S037",
+    "S052",
+    "S054"
+  ],
+  "candidates": [
+    {
+      "candidate": "candlelit_dinner_date_romance.png",
+      "decision": "approve",
+      "assign_to": "S012",
+      "reason": "Strong mutual eye-contact scene; directly supports Sign 2 and matches the locked hyperreal cinematic style."
+    },
+    {
+      "candidate": "cinematic_dinner_with_two_hearts_aligned.png",
+      "decision": "reject_for_final",
+      "assign_to": null,
+      "reason": "Too literal/romantic and visually redundant with S012; does not communicate synchrony cleanly enough."
+    },
+    {
+      "candidate": "whispering_heartlight.png",
+      "decision": "reject_for_final",
+      "assign_to": null,
+      "reason": "Too much symbolic/fantasy glow for the locked hyperreal production standard."
+    },
+    {
+      "candidate": "candlelit_romance_over_dinner.png",
+      "decision": "reserve",
+      "assign_to": null,
+      "reason": "Usable hyperreal human interaction, but too similar to the approved S012 eye-contact shot to justify another HERO."
+    },
+    {
+      "candidate": "paths_to_romance_at_dusk.png",
+      "decision": "reject_for_final",
+      "assign_to": null,
+      "reason": "Conceptual path/light treatment feels more artificial than the locked style and is weaker than a believable future-contact scene for S037."
+    },
+    {
+      "candidate": "golden_candlelit_romance_montage.png",
+      "decision": "approve",
+      "assign_to": "S052",
+      "reason": "Best fit for the conclusion montage combining multiple attraction patterns; visually rich without needing a literal diagram."
+    },
+    {
+      "candidate": "imagegen.png",
+      "decision": "reserve",
+      "assign_to": null,
+      "reason": "Potentially reusable as a supporting human shot, but not distinctive enough to replace one of the remaining HERO briefs without weakening scene-to-narration alignment."
+    }
+  ],
+  "coverage": {
+    "approved": [
+      "S012",
+      "S052"
+    ],
+    "missing": [
+      "S001",
+      "S007",
+      "S017",
+      "S023",
+      "S027",
+      "S032",
+      "S037",
+      "S054"
+    ],
+    "approved_count": 2,
+    "remaining_count": 8
+  }
+}
