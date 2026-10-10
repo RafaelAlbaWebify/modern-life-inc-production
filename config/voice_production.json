@@ -64,7 +64,8 @@
       "parameter": "-Only",
       "example": "-Only \"003,009,010\"",
       "behavior": "Regenerate only listed chunk IDs, then assemble the complete narration from all existing chunk WAVs."
-    }
+    },
+    "retention_edit_stage": "required_before_visual_timing_lock"
   },
   "rejected": {
     "cosyvoice_local": "Too slow on GTX 1060 3 GB with reference audio; persistent sidecar did not solve inference cost.",
@@ -95,7 +96,16 @@
         "Strong memorable anchors: 'What matters is a pattern', 'The key word is shared', 'Time. Effort. Risk.', and 'Consistency. Selectivity. Reciprocity.'",
         "Voice is consistent and credible, but the calm delivery needs visual pacing and occasional rhetorical contrast to sustain attention."
       ]
+    },
+    "retention_pass_2026_10_10": {
+      "status": "accepted",
+      "script_words_before": 1197,
+      "script_words_after": 1101,
+      "reduction_percent": 8,
+      "narration_seconds_before": 482.22,
+      "narration_seconds_after": 447.9468,
+      "verdict": "Preferred. Faster hook and less academic midsection without losing evidence-backed caution."
     }
   },
-  "next_step": "Regenerate only retention-edited MLI-001 chunks with -Only, assemble narration.wav, compare against the previous full narration, then promote the retention rules to production standard if accepted."
+  "next_step": "Retime MLI-001 storyboard and production manifest to the accepted 447.95-second narration, then continue visual production."
 }
