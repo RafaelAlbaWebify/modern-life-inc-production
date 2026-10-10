@@ -78,7 +78,18 @@
       "status": "accepted",
       "scope": "MLI-001 chunks 001-002",
       "result": "Single contextual synthesis removed the artificial timbre. Chunk 002 uses two explicit semantic synthesis groups with a 600 ms pause to avoid rushed delivery. No per-chunk time stretching."
+    },
+    "full_episode_2026_10_10": {
+      "status": "needs_targeted_fix",
+      "known_issue": "Chunk 005 exceeded PocketTTS's 50-token comfort limit and emitted a warning. It is now split into two semantic synthesis groups.",
+      "engagement_status": "good foundation, not yet maximally engaging",
+      "engagement_notes": [
+        "Hook is conceptually strong but becomes academic too early.",
+        "Repeated caveats create some mid-video drag.",
+        "Strong memorable anchors: 'What matters is a pattern', 'The key word is shared', 'Time. Effort. Risk.', and 'Consistency. Selectivity. Reciprocity.'",
+        "Voice is consistent and credible, but the calm delivery needs visual pacing and occasional rhetorical contrast to sustain attention."
+      ]
     }
   },
-  "next_step": "Run the full MLI-001 narration command. The wrapper now self-checks and automatically restores PocketTTS if VoiceStudio dropped the optional package after reboot."
+  "next_step": "Regenerate chunk 005 and reassemble narration. Then use the engagement QA to tighten hook/caveat pacing before final visual timing."
 }
