@@ -55,3 +55,27 @@ Run:
 Generated visual production is complete when all required HERO/HYBRID assets exist in `media/generated/`.
 
 SYSTEM scenes are produced by the renderer and do not require generated photographic assets.
+
+
+## Google Drive staging
+
+Google Drive is the persistent binary staging area for generated visual assets.
+
+Canonical Drive structure:
+
+- `/Google Drive/Modern Life Inc Production/MLI-001/review/`
+- `/Google Drive/Modern Life Inc Production/MLI-001/approved/`
+- `/Google Drive/Modern Life Inc Production/MLI-001/rejected/`
+- `/Google Drive/Modern Life Inc Production/MLI-001/style_anchor_mli.png`
+
+Workflow:
+
+1. Generate a batch.
+2. Upload candidates to `review/` immediately while the generated files are still available in the active session.
+3. Review each candidate.
+4. Approved assets are promoted to the canonical scene name in `approved/` (for example `S017.png`).
+5. Rejected assets are moved to `rejected/`.
+6. GitHub remains the canonical source for prompts, manifests, review state and batch metadata.
+7. The local repo receives final approved assets for rendering under `episodes/<episode>/media/generated/`.
+
+This avoids depending on transient chat/session storage for production assets.
