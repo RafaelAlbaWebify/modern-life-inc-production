@@ -1,0 +1,12 @@
+{
+  "version": "1.0",
+  "provider": "openai_images_api",
+  "model_env": "OPENAI_IMAGE_MODEL",
+  "default_model": "gpt-image-2",
+  "source_size": "1536x1024",
+  "output_size": "1920x1080",
+  "quality": "high",
+  "one_prompt_per_asset": true,
+  "no_collages": true,
+  "notes": "Generated candidates are normalized to 16:9 and written directly to the batch candidate paths. API usage is billed separately from ChatGPT subscriptions."
+}
