@@ -24,15 +24,11 @@ Attraction is not a magic trick you decode from one gesture.
 
 What matters is a pattern.
 
-Research on interpersonal attraction shows that when people like someone, it often changes how they behave around that person.
+When someone is attracted to you, it often leaks into behavior.
 
-Not always in obvious ways.
+Not in one perfect sign. In a cluster of small choices that keep pointing the same way.
 
-And not always in the same way.
-
-But there are a few quiet signals that become more meaningful when they show up together.
-
-Here are seven of them.
+Here are seven patterns worth noticing.
 
 ### 1. They keep finding reasons to be near you
 
@@ -65,28 +61,19 @@ Eye contact is probably one of the most overused attraction clichés.
 
 But there is some real evidence behind it.
 
-In a speed-dating study using mobile eye tracking, people were more likely to choose partners with whom they shared more eye contact.
+In speed-dating research, people were more likely to choose partners with whom they shared more eye contact.
 
 The key word is shared.
 
-A random glance across a room is weak evidence.
+One random glance means very little.
 
-What matters more is a pattern where eye contact keeps happening, lasts a little longer, and feels mutual rather than one-sided.
+What matters is whether eye contact keeps happening, lasts a little longer, and feels mutual.
 
-Still, this is not proof.
+It still isn't proof. Some people naturally hold eye contact; others avoid it even when they're interested.
 
-Some people naturally make strong eye contact.
-Others avoid it even when they're very interested.
+People use eye contact differently, so don't ask, "Did they look at me?"
 
-Culture, anxiety, personality and neurodiversity all change how people use gaze.
-
-So don't ask:
-
-"Did they look at me?"
-
-Ask:
-
-"Does our eye contact keep becoming a two-way interaction?"
+Ask, "Does our eye contact keep becoming a two-way interaction?"
 
 ### 3. You start moving and talking in sync
 
@@ -96,30 +83,20 @@ You start matching each other's pace.
 
 You lean in at similar moments.
 You laugh at the same time.
-Your gestures begin to mirror each other.
-The conversation starts flowing with less effort.
+Your gestures start to mirror each other.
+The conversation flows with less effort.
 
-Researchers often call this mimicry or synchrony.
+Researchers call this synchrony.
 
-And studies of attraction have found that these kinds of coordinated behaviors are associated with rapport and interpersonal attraction.
+That kind of coordination is linked with rapport and attraction.
 
-But there is an important distinction.
+But it is not uniquely romantic.
 
-Synchrony is not exclusive to romance.
+Friends do it. Good teammates do it. People who simply click do it.
 
-Friends do it.
-Good teammates do it.
-People who simply get along do it.
+So one mirrored gesture proves nothing.
 
-So the signal is not:
-
-"They copied my posture, therefore they like me."
-
-The signal is:
-
-"Our interaction keeps becoming unusually coordinated."
-
-That becomes more interesting when it appears alongside other signs.
+What matters is when your interaction keeps becoming unusually coordinated — especially alongside other signs.
 
 ### 4. The conversation becomes more personal
 
@@ -127,29 +104,15 @@ People usually don't reveal themselves at random.
 
 As relationships develop, conversations often move from safe facts to more personal territory.
 
-What they care about.
-What they're afraid of.
-What they're working toward.
-What has hurt them.
-What they actually think.
+What they care about. What they're afraid of. What they're working toward. What has hurt them. What they actually think.
 
-Research on self-disclosure has found a two-way relationship between disclosure and liking.
+People tend to open up more to people they like, and that openness can create more closeness.
 
-People tend to disclose more to people they already like.
+Of course, some people tell their life story to a stranger in a supermarket queue.
 
-And opening up to someone can also increase feelings of closeness.
+So the interesting signal is not one personal confession. It is growing openness over time.
 
-Again, personality matters.
-
-Some people tell their life story to the person next to them in a supermarket queue.
-
-So the useful question is not:
-
-"Did they tell me something personal?"
-
-It is:
-
-"Are they becoming more open with me over time, and is that openness reciprocal?"
+Ask instead: "Are they becoming more open with me over time — and am I seeing that openness come back when I open up too?"
 
 ### 5. They respond to you, not just to the topic
 
@@ -199,21 +162,15 @@ You pick up each other's rhythm.
 
 One thought naturally turns into another.
 
-Researchers studying speed dating have found that something called language-style matching can predict mutual romantic interest.
+Speed-dating research has found that even the way two people speak can start to align when mutual interest is there.
 
-That does not mean you should start counting pronouns and conjunctions during a date.
+You do not need to count pronouns on a date.
 
-The practical point is simpler.
+The practical point is simpler: when two people become engaged with each other, the interaction itself starts to synchronize.
 
-When two people become engaged with each other, the interaction itself can start becoming more synchronized.
+The conversation feels less like two people taking turns performing... and more like one shared rhythm.
 
-The conversation feels less like two people taking turns performing...
-
-and more like one shared rhythm.
-
-It is subtle.
-
-But when it happens repeatedly, it can be meaningful.
+Subtle, yes. But repeated ease is more interesting than one perfect line.
 
 ### 7. They create a reason for there to be a next time
 
@@ -269,19 +226,13 @@ When you move a little closer, open up, or initiate contact...
 
 do they meet you halfway?
 
-That combination is much more informative than any isolated piece of body language.
+That combination tells you far more than any isolated piece of body language.
 
-And there is another reason not to overinterpret a single sign.
+And remember: people who fear rejection may hide the very behaviors you are looking for.
 
-People who fear rejection may actually hide some of the most direct behaviors associated with attraction.
+A shy person may avoid eye contact. Someone anxious may become quieter. Someone confident may seem interested in everyone.
 
-A shy person may avoid eye contact.
-Someone anxious may become quieter.
-Someone confident may appear interested in everyone.
-
-There is no universal code.
-
-There are only patterns.
+There is no universal code. There are only patterns.
 
 So if someone keeps choosing your company...
 
