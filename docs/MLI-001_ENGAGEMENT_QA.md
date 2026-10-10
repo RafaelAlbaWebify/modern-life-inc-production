@@ -157,3 +157,32 @@ Target:
 - remove roughly 8-12% of narration words
 - keep scientific caution while making the episode feel more direct
 - aim for stronger momentum rather than a longer runtime
+
+
+## Retention-pass validation — 2026-10-10
+
+The revised narration was reviewed end to end.
+
+- previous final narration: ~482.2 s (8:02)
+- revised narration: ~447.95 s (7:28)
+- time reduction: ~34.3 s
+- script reduction: 1197 -> 1101 words (-8.0%)
+
+### Result
+
+The revised version is preferred.
+
+The opening reaches the premise and first useful material faster. The middle is less academic, especially Signs 3, 4 and 6. Scientific caution remains, but repeated qualification no longer dominates the rhythm.
+
+The calmer narrator now works better because the script supplies more contrast and forward motion. The episode still depends on visual pacing, but the audio no longer feels as if visuals must rescue a flat middle.
+
+No major audible defects were found in the revised assembled narration.
+
+### Engagement assessment
+
+- previous version: ~7/10 audio-only engagement
+- revised version: ~8/10 audio-only engagement
+- voice quality: approved
+- pacing: approved
+- retention edit: approved
+- ready for visual timing lock: yes, subject to production manifest/storyboard retiming to the new narration
