@@ -3,6 +3,7 @@ param(
     [string]$Reference = "",
     [int]$StartAt = 1,
     [int]$EndAt = 0,
+    [string]$Only = "",
     [switch]$Force,
     [switch]$NoAssemble
 )
@@ -60,6 +61,9 @@ $ArgsList = @(
 
 if ($EndAt -gt 0) {
     $ArgsList += @("--end-at", [string]$EndAt)
+}
+if ($Only) {
+    $ArgsList += @("--only", $Only)
 }
 
 if ($Reference) {
