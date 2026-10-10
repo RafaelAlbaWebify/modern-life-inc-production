@@ -1,7 +1,8 @@
 {
-  "version": "1.0",
+  "version": "2.0",
   "episode_id": "MLI-001",
-  "style_contract": "16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays",
+  "optimization_goal": "viewer_retention_first",
+  "style_contract": "16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays",
   "assets": [
     {
       "id": "S001",
@@ -10,7 +11,7 @@
       "visual": "Four rapid false clues: stare, laugh, fast text, accidental touch",
       "on_screen_text": "NO SINGLE SIGN = PROOF",
       "output": "media/generated/S001.png",
-      "prompt": "Four rapid false clues: stare, laugh, fast text, accidental touch. Create a strong focal composition with emotional immediacy and a premium thumbnail-like visual hierarchy. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "prompt": "Four rapid false clues: stare, laugh, fast text, accidental touch. Create a premium emotionally immediate photographic composition with a strong focal subject and memorable visual hierarchy. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     },
     {
       "id": "S002",
@@ -19,7 +20,7 @@
       "visual": "One figure surrounded by four question marks",
       "on_screen_text": "",
       "output": "media/generated/S002.png",
-      "prompt": "One figure surrounded by four question marks. Create a clean supporting composition designed to accept UI/text overlays without visual clutter. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "prompt": "One figure surrounded by four question marks. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     },
     {
       "id": "S004",
@@ -28,16 +29,43 @@
       "visual": "Two people; several small amber signals appear between them",
       "on_screen_text": "",
       "output": "media/generated/S004.png",
-      "prompt": "Two people; several small amber signals appear between them. Create a clean supporting composition designed to accept UI/text overlays without visual clutter. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "prompt": "Two people; several small amber signals appear between them. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     },
     {
       "id": "S007",
-      "mode": "HYBRID",
+      "mode": "HERO",
       "section": "Sign 1",
       "visual": "Two people in café; empty seats visible; one chooses seat nearby",
       "on_screen_text": "1. PROXIMITY",
       "output": "media/generated/S007.png",
-      "prompt": "Two people in café; empty seats visible; one chooses seat nearby. Create a clean supporting composition designed to accept UI/text overlays without visual clutter. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "prompt": "Two people in café; empty seats visible; one chooses seat nearby. Create a premium emotionally immediate photographic composition with a strong focal subject and memorable visual hierarchy. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
+    },
+    {
+      "id": "S008",
+      "mode": "HYBRID",
+      "section": "Sign 1",
+      "visual": "Figure starts conversation; speech bubble grows",
+      "on_screen_text": "",
+      "output": "media/generated/S008.png",
+      "prompt": "Figure starts conversation; speech bubble grows. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
+    },
+    {
+      "id": "S009",
+      "mode": "HYBRID",
+      "section": "Sign 1",
+      "visual": "Conversation should end; one figure reopens it with new bubble",
+      "on_screen_text": "",
+      "output": "media/generated/S009.png",
+      "prompt": "Conversation should end; one figure reopens it with new bubble. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
+    },
+    {
+      "id": "S010",
+      "mode": "HYBRID",
+      "section": "Sign 1",
+      "visual": "Split screen: assigned desk vs voluntary approach",
+      "on_screen_text": "CHOICE MATTERS",
+      "output": "media/generated/S010.png",
+      "prompt": "Split screen: assigned desk vs voluntary approach. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     },
     {
       "id": "S012",
@@ -46,7 +74,16 @@
       "visual": "Two profile heads glance, look away, reconnect",
       "on_screen_text": "2. MUTUAL EYE CONTACT",
       "output": "media/generated/S012.png",
-      "prompt": "Two profile heads glance, look away, reconnect. Create a strong focal composition with emotional immediacy and a premium thumbnail-like visual hierarchy. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "prompt": "Two profile heads glance, look away, reconnect. Create a premium emotionally immediate photographic composition with a strong focal subject and memorable visual hierarchy. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
+    },
+    {
+      "id": "S013",
+      "mode": "HYBRID",
+      "section": "Sign 2",
+      "visual": "Single accidental glance shown as tiny weak signal",
+      "on_screen_text": "ONE GLANCE = WEAK",
+      "output": "media/generated/S013.png",
+      "prompt": "Single accidental glance shown as tiny weak signal. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     },
     {
       "id": "S014",
@@ -55,25 +92,34 @@
       "visual": "Shared gaze line appears between both faces",
       "on_screen_text": "SHARED",
       "output": "media/generated/S014.png",
-      "prompt": "Shared gaze line appears between both faces. Create a clean supporting composition designed to accept UI/text overlays without visual clutter. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "prompt": "Shared gaze line appears between both faces. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     },
     {
       "id": "S017",
-      "mode": "HYBRID",
+      "mode": "HERO",
       "section": "Sign 3",
       "visual": "Two seated figures lean forward at same moment",
       "on_screen_text": "3. SYNCHRONY",
       "output": "media/generated/S017.png",
-      "prompt": "Two seated figures lean forward at same moment. Create a clean supporting composition designed to accept UI/text overlays without visual clutter. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "prompt": "Two seated figures lean forward at same moment. Create a premium emotionally immediate photographic composition with a strong focal subject and memorable visual hierarchy. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     },
     {
-      "id": "S021",
-      "mode": "HERO",
+      "id": "S018",
+      "mode": "HYBRID",
       "section": "Sign 3",
-      "visual": "Waveforms align gradually",
-      "on_screen_text": "SHARED RHYTHM",
-      "output": "media/generated/S021.png",
-      "prompt": "Waveforms align gradually. Create a strong focal composition with emotional immediacy and a premium thumbnail-like visual hierarchy. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "visual": "Two hands gesture with similar rhythm",
+      "on_screen_text": "",
+      "output": "media/generated/S018.png",
+      "prompt": "Two hands gesture with similar rhythm. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
+    },
+    {
+      "id": "S019",
+      "mode": "HYBRID",
+      "section": "Sign 3",
+      "visual": "Two laugh marks appear simultaneously",
+      "on_screen_text": "",
+      "output": "media/generated/S019.png",
+      "prompt": "Two laugh marks appear simultaneously. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     },
     {
       "id": "S022",
@@ -82,7 +128,7 @@
       "visual": "Speech bubbles progress: weather → work → fear/dream",
       "on_screen_text": "4. MORE PERSONAL",
       "output": "media/generated/S022.png",
-      "prompt": "Speech bubbles progress: weather → work → fear/dream. Create a clean supporting composition designed to accept UI/text overlays without visual clutter. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "prompt": "Speech bubbles progress: weather → work → fear/dream. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     },
     {
       "id": "S023",
@@ -91,34 +137,88 @@
       "visual": "One figure opens a small door/heart icon",
       "on_screen_text": "",
       "output": "media/generated/S023.png",
-      "prompt": "One figure opens a small door/heart icon. Create a strong focal composition with emotional immediacy and a premium thumbnail-like visual hierarchy. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "prompt": "One figure opens a small door/heart icon. Create a premium emotionally immediate photographic composition with a strong focal subject and memorable visual hierarchy. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
+    },
+    {
+      "id": "S024",
+      "mode": "HYBRID",
+      "section": "Sign 4",
+      "visual": "Second figure responds with matching disclosure",
+      "on_screen_text": "RECIPROCAL",
+      "output": "media/generated/S024.png",
+      "prompt": "Second figure responds with matching disclosure. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
+    },
+    {
+      "id": "S025",
+      "mode": "HYBRID",
+      "section": "Sign 4",
+      "visual": "Split: oversharer-to-everyone vs selective disclosure",
+      "on_screen_text": "SELECTIVE DEPTH",
+      "output": "media/generated/S025.png",
+      "prompt": "Split: oversharer-to-everyone vs selective disclosure. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     },
     {
       "id": "S027",
-      "mode": "HYBRID",
+      "mode": "HERO",
       "section": "Sign 5",
       "visual": "Same story told to Person A and Person B",
       "on_screen_text": "5. RESPONSIVENESS",
       "output": "media/generated/S027.png",
-      "prompt": "Same story told to Person A and Person B. Create a clean supporting composition designed to accept UI/text overlays without visual clutter. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "prompt": "Same story told to Person A and Person B. Create a premium emotionally immediate photographic composition with a strong focal subject and memorable visual hierarchy. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
+    },
+    {
+      "id": "S028",
+      "mode": "HYBRID",
+      "section": "Sign 5",
+      "visual": "Person A: 'Oh, cool.' then turns away",
+      "on_screen_text": "",
+      "output": "media/generated/S028.png",
+      "prompt": "Person A: 'Oh, cool.' then turns away. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
+    },
+    {
+      "id": "S029",
+      "mode": "HYBRID",
+      "section": "Sign 5",
+      "visual": "Person B asks follow-up; arrows connect ideas",
+      "on_screen_text": "",
+      "output": "media/generated/S029.png",
+      "prompt": "Person B asks follow-up; arrows connect ideas. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     },
     {
       "id": "S032",
-      "mode": "HYBRID",
+      "mode": "HERO",
       "section": "Sign 6",
       "visual": "Two speech bubbles interlock smoothly",
       "on_screen_text": "6. EASY CONVERSATION",
       "output": "media/generated/S032.png",
-      "prompt": "Two speech bubbles interlock smoothly. Create a clean supporting composition designed to accept UI/text overlays without visual clutter. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "prompt": "Two speech bubbles interlock smoothly. Create a premium emotionally immediate photographic composition with a strong focal subject and memorable visual hierarchy. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
+    },
+    {
+      "id": "S033",
+      "mode": "HYBRID",
+      "section": "Sign 6",
+      "visual": "Awkward turn-taking blocks vs flowing connected chain",
+      "on_screen_text": "",
+      "output": "media/generated/S033.png",
+      "prompt": "Awkward turn-taking blocks vs flowing connected chain. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     },
     {
       "id": "S036",
-      "mode": "HERO",
+      "mode": "HYBRID",
       "section": "Sign 6",
       "visual": "Two paths merge into one conversational path",
       "on_screen_text": "SHARED RHYTHM",
       "output": "media/generated/S036.png",
-      "prompt": "Two paths merge into one conversational path. Create a strong focal composition with emotional immediacy and a premium thumbnail-like visual hierarchy. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "prompt": "Two paths merge into one conversational path. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
+    },
+    {
+      "id": "S037",
+      "mode": "HERO",
+      "section": "Sign 7",
+      "visual": "Clock + calendar + two figures",
+      "on_screen_text": "7. A NEXT TIME",
+      "output": "media/generated/S037.png",
+      "prompt": "Clock + calendar + two figures. Create a premium emotionally immediate photographic composition with a strong focal subject and memorable visual hierarchy. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     },
     {
       "id": "S038",
@@ -127,16 +227,25 @@
       "visual": "Message: 'You should come with me next week'",
       "on_screen_text": "",
       "output": "media/generated/S038.png",
-      "prompt": "Message: 'You should come with me next week'. Create a clean supporting composition designed to accept UI/text overlays without visual clutter. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "prompt": "Message: 'You should come with me next week'. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     },
     {
-      "id": "S043",
-      "mode": "HERO",
+      "id": "S039",
+      "mode": "HYBRID",
+      "section": "Sign 7",
+      "visual": "One figure sends article/song after conversation",
+      "on_screen_text": "",
+      "output": "media/generated/S039.png",
+      "prompt": "One figure sends article/song after conversation. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
+    },
+    {
+      "id": "S045",
+      "mode": "HYBRID",
       "section": "Synthesis",
-      "visual": "Signals converge into one larger arrow",
-      "on_screen_text": "CONVERGENCE",
-      "output": "media/generated/S043.png",
-      "prompt": "Signals converge into one larger arrow. Create a strong focal composition with emotional immediacy and a premium thumbnail-like visual hierarchy. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "visual": "Same behavior repeated across three moments",
+      "on_screen_text": "DOES IT KEEP HAPPENING?",
+      "output": "media/generated/S045.png",
+      "prompt": "Same behavior repeated across three moments. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     },
     {
       "id": "S047",
@@ -145,7 +254,7 @@
       "visual": "Same person with group vs visibly different behavior with one person",
       "on_screen_text": "DIFFERENT WITH YOU?",
       "output": "media/generated/S047.png",
-      "prompt": "Same person with group vs visibly different behavior with one person. Create a clean supporting composition designed to accept UI/text overlays without visual clutter. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "prompt": "Same person with group vs visibly different behavior with one person. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     },
     {
       "id": "S049",
@@ -154,7 +263,7 @@
       "visual": "One person takes small step; other meets halfway",
       "on_screen_text": "DO THEY MEET YOU HALFWAY?",
       "output": "media/generated/S049.png",
-      "prompt": "One person takes small step; other meets halfway. Create a clean supporting composition designed to accept UI/text overlays without visual clutter. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "prompt": "One person takes small step; other meets halfway. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     },
     {
       "id": "S050",
@@ -163,7 +272,7 @@
       "visual": "Three figures: shy avoids gaze, anxious freezes, confident engages everyone",
       "on_screen_text": "NO UNIVERSAL CODE",
       "output": "media/generated/S050.png",
-      "prompt": "Three figures: shy avoids gaze, anxious freezes, confident engages everyone. Create a clean supporting composition designed to accept UI/text overlays without visual clutter. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "prompt": "Three figures: shy avoids gaze, anxious freezes, confident engages everyone. Create a believable photographic supporting scene with clean negative space for restrained graphic overlays and on-screen text. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     },
     {
       "id": "S052",
@@ -172,16 +281,16 @@
       "visual": "Montage of proximity + disclosure + response + future contact",
       "on_screen_text": "A PLAUSIBLE EXPLANATION",
       "output": "media/generated/S052.png",
-      "prompt": "Montage of proximity + disclosure + response + future contact. Create a strong focal composition with emotional immediacy and a premium thumbnail-like visual hierarchy. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "prompt": "Montage of proximity + disclosure + response + future contact. Create a premium emotionally immediate photographic composition with a strong focal subject and memorable visual hierarchy. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     },
     {
       "id": "S054",
-      "mode": "HYBRID",
+      "mode": "HERO",
       "section": "Conclusion",
       "visual": "Two figures finally talk directly",
       "on_screen_text": "DIRECT COMMUNICATION WINS",
       "output": "media/generated/S054.png",
-      "prompt": "Two figures finally talk directly. Create a clean supporting composition designed to accept UI/text overlays without visual clutter. 16:9 cinematic editorial illustration, warm charcoal and near-black palette, amber/orange focal lighting, warm ivory highlights, believable human body language, moderate detail, elegant modern psychology-documentary aesthetic, subtle depth and atmosphere, clean composition, no baked text, no arrows, no labels, leave negative space for overlays."
+      "prompt": "Two figures finally talk directly. Create a premium emotionally immediate photographic composition with a strong focal subject and memorable visual hierarchy. 16:9 hyperrealistic cinematic photography, real people in believable modern environments, natural skin texture, realistic body language, warm charcoal and near-black palette, practical amber/orange lighting from lamps, windows or sunset, warm ivory highlights, shallow depth of field when appropriate, restrained premium psychology-documentary aesthetic, no fantasy glow, no floating particles, no magical light trails, no baked text, no arrows, no labels, leave negative space for compositor overlays."
     }
   ]
 }
