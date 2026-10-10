@@ -33,7 +33,12 @@
     {
       "id": "005",
       "section": "sign-1",
-      "text": "They start conversations. They extend conversations that could have ended. They choose the seat near you. They find small reasons to come back.\n\nThat matters because direct behaviors like proximity and talking to someone are more strongly linked with attraction than many of the subtle body-language cues people obsess over."
+      "text": "They start conversations. They extend conversations that could have ended. They choose the seat near you. They find small reasons to come back.\n\nThat matters because direct behaviors like proximity and talking to someone are more strongly linked with attraction than many of the subtle body-language cues people obsess over.",
+      "synthesis_groups": [
+        "They start conversations. They extend conversations that could have ended. They choose the seat near you. They find small reasons to come back.",
+        "That matters because direct behaviors like proximity and talking to someone are more strongly linked with attraction than many of the subtle body-language cues people obsess over."
+      ],
+      "group_pause_ms": 500
     },
     {
       "id": "006",
