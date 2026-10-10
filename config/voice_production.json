@@ -71,7 +71,12 @@
     "acceptance_test_2026_10_09": {
       "status": "failed",
       "reason": "Chunk 001 sounded somewhat artificial; chunk 002 became unacceptable after WPM-based time stretching. Do not use pacing normalization."
+    },
+    "acceptance_test_2026_10_10": {
+      "status": "accepted",
+      "scope": "MLI-001 chunks 001-002",
+      "result": "Single contextual synthesis removed the artificial timbre. Chunk 002 uses two explicit semantic synthesis groups with a 600 ms pause to avoid rushed delivery. No per-chunk time stretching."
     }
   },
-  "next_step": "Regenerate MLI-001 chunks 001-002. Chunk 001 stays one request; chunk 002 uses two explicit synthesis groups to reduce rushed delivery without time stretching. Quality-review before full episode."
+  "next_step": "Generate all MLI-001 narration chunks with the accepted PocketTTS pipeline, assemble narration.wav, then quality-review only the final narration and selectively regenerate any bad chunks."
 }
