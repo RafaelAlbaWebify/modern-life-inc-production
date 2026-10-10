@@ -65,7 +65,13 @@
       "example": "-Only \"003,009,010\"",
       "behavior": "Regenerate only listed chunk IDs, then assemble the complete narration from all existing chunk WAVs."
     },
-    "retention_edit_stage": "required_before_visual_timing_lock"
+    "retention_edit_stage": "required_before_visual_timing_lock",
+    "narration_driven_storyboard_timing": {
+      "required": true,
+      "command": ".\\tools\\retime_storyboard_to_narration.ps1",
+      "authority": "assembled narration.wav plus generated narration chunk durations",
+      "rebuilds_production_manifest": true
+    }
   },
   "rejected": {
     "cosyvoice_local": "Too slow on GTX 1060 3 GB with reference audio; persistent sidecar did not solve inference cost.",
@@ -107,5 +113,5 @@
       "verdict": "Preferred. Faster hook and less academic midsection without losing evidence-backed caution."
     }
   },
-  "next_step": "Retime MLI-001 storyboard and production manifest to the accepted 447.95-second narration, then continue visual production."
+  "next_step": "Run narration-driven storyboard retiming locally, verify storyboard duration equals accepted narration duration, then continue final visual production."
 }
