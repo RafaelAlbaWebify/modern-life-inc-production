@@ -198,3 +198,7 @@ Generate the full episode in one resumable run:
 ```
 
 Existing approved chunks are skipped. Review the assembled `episodes/MLI-001/media/narration.wav`; regenerate only chunks with an audible defect. This is the preferred workflow over pre-testing every chunk individually.
+
+## Automatic runtime repair
+
+VoiceStudio may recreate or resync its Python runtime after a PC/app restart and drop the optional `pockettts` extra. The production wrapper now checks `import pocket_tts` before every run. If the import fails, it automatically restores the package using VoiceStudio's bundled `uv` with the `pockettts` extra, verifies the import, and only then starts synthesis. Manual reinstall should no longer be necessary.
