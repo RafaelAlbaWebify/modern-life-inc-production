@@ -336,6 +336,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--api-base", default="http://127.0.0.1:3900")
     parser.add_argument("--start-at", type=int, default=1)
     parser.add_argument("--end-at", type=int)
+    parser.add_argument("--only", help="Comma-separated chunk IDs to generate, e.g. 003,009,010")
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--no-assemble", action="store_true")
     return parser.parse_args()
@@ -377,13 +378,25 @@ def main() -> int:
     paragraph_pause_ms = chunking.get("paragraph_pause_ms")
     chunk_pause_ms = int(chunking.get("chunk_pause_ms", max(chunking["pause_ms_range"])))
 
+    only_ids = None
+    if args.only:
+        only_ids = {part.strip().zfill(3) for part in args.only.split(",") if part.strip()}
+
     selected = [
         chunk
         for chunk in manifest["chunks"]
-        if int(chunk["id"]) >= int(args.start_at)
-        and (args.end_at is None or int(chunk["id"]) <= int(args.end_at))
+        if (
+            str(chunk["id"]).zfill(3) in only_ids
+            if only_ids is not None
+            else (
+                int(chunk["id"]) >= int(args.start_at)
+                and (args.end_at is None or int(chunk["id"]) <= int(args.end_at))
+            )
+        )
     ]
     if not selected:
+        if only_ids is not None:
+            raise RuntimeError(f"No chunks selected by --only {args.only!r}.")
         limit = f" through --end-at {args.end_at}" if args.end_at is not None else ""
         raise RuntimeError(f"No chunks selected from --start-at {args.start_at}{limit}.")
 
