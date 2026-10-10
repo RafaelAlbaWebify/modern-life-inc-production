@@ -184,3 +184,17 @@ A two-chunk test with WPM normalization was rejected: chunk 001 still sounded so
 ### Chunk 002 pacing experiment
 
 Chunk 002 remained naturally faster even after switching to single-request synthesis. Because PocketTTS does not expose a native speech-rate control in the validated VoiceStudio integration, chunk 002 is being tested with two explicit semantic synthesis groups separated by 600 ms. Chunk 001 remains a single request. This preserves natural voice quality while testing whether a small contextual split can reduce rushed delivery without time stretching.
+
+## Acceptance note — 2026-10-10
+
+The revised PocketTTS strategy is accepted for production after reviewing MLI-001 chunks 001 and 002. Single contextual synthesis removed the artificial timbre. Chunk 002 remains the explicit exception: two semantic synthesis groups joined by a 600 ms pause to avoid rushed delivery. No per-chunk time stretching is used.
+
+### Fast production workflow
+
+Generate the full episode in one resumable run:
+
+```powershell
+.\\tools\\generate_pockettts_narration.ps1
+```
+
+Existing approved chunks are skipped. Review the assembled `episodes/MLI-001/media/narration.wav`; regenerate only chunks with an audible defect. This is the preferred workflow over pre-testing every chunk individually.
