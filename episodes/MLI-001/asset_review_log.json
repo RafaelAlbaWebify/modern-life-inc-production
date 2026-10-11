@@ -68,29 +68,32 @@
     "S008": {
       "mode": "HYBRID",
       "section": "Sign 1",
-      "status": "missing",
+      "status": "generated",
       "final_file": "media/generated/S008.png",
-      "source_candidate": null,
-      "attempts": 0,
-      "notes": ""
+      "source_candidate": "MLI-001_S008_candidate_01.png",
+      "attempts": 1,
+      "notes": "Candidate saved to Drive. Preliminary QA: shows group conversation; conversational initiation not yet explicit. Needs final narrative QA.",
+      "drive_file_id": "1MkVghnnrpImADyxWDMycChv4-PEtt3_E"
     },
     "S009": {
       "mode": "HYBRID",
       "section": "Sign 1",
-      "status": "missing",
+      "status": "generated",
       "final_file": "media/generated/S009.png",
-      "source_candidate": null,
-      "attempts": 0,
-      "notes": ""
+      "source_candidate": "MLI-001_S009_candidate_01.png",
+      "attempts": 1,
+      "notes": "Candidate saved to Drive. Preliminary QA: group conversation, but reopening an ending exchange is not visually clear. Needs final narrative QA.",
+      "drive_file_id": "1XFjn-9DeeyAZQYsD7OOI76Y9MEz-Rx5z"
     },
     "S010": {
       "mode": "HYBRID",
       "section": "Sign 1",
-      "status": "missing",
+      "status": "retry",
       "final_file": "media/generated/S010.png",
-      "source_candidate": null,
-      "attempts": 0,
-      "notes": ""
+      "source_candidate": "MLI-001_S010_candidate_01_REJECTED.png",
+      "attempts": 1,
+      "notes": "Rejected candidate retained in Drive: repeated bar scene, lacked required assigned-desk versus voluntary-approach contrast.",
+      "drive_file_id": "1APthYfL1ZdI1zCNFAoD1i4i2SY0Cs692"
     },
     "S012": {
       "mode": "HERO",
@@ -104,11 +107,12 @@
     "S013": {
       "mode": "HYBRID",
       "section": "Sign 2",
-      "status": "missing",
+      "status": "retry",
       "final_file": "media/generated/S013.png",
-      "source_candidate": null,
-      "attempts": 0,
-      "notes": ""
+      "source_candidate": "MLI-001_S013_candidate_01_REJECTED.png",
+      "attempts": 1,
+      "notes": "Rejected candidate retained in Drive: group conversation did not isolate a single accidental glance/weak signal.",
+      "drive_file_id": "1l_jYvx8dkvV3yX7Wc3fE7mdkFchzjcXv"
     },
     "S014": {
       "mode": "HYBRID",
