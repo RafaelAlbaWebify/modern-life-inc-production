@@ -37,20 +37,22 @@
     "S002": {
       "mode": "HYBRID",
       "section": "Hook",
-      "status": "missing",
+      "status": "generated",
       "final_file": "media/generated/S002.png",
-      "source_candidate": null,
-      "attempts": 0,
-      "notes": ""
+      "source_candidate": "MLI-001_S002_candidate_03.png",
+      "attempts": 3,
+      "notes": "Candidate 03 uploaded to Drive staging. Narrative/overlay QA pending; not approved or locked.",
+      "drive_file_id": "1XTfgkFBHNcQFb-XCVEVupfimkaL8INH2"
     },
     "S004": {
       "mode": "HYBRID",
       "section": "Thesis",
-      "status": "missing",
+      "status": "generated",
       "final_file": "media/generated/S004.png",
-      "source_candidate": null,
-      "attempts": 0,
-      "notes": ""
+      "source_candidate": "MLI-001_S004_candidate_01.png",
+      "attempts": 1,
+      "notes": "Candidate 01 uploaded to Drive staging. Visual QA pending; not approved or locked.",
+      "drive_file_id": "1-nk15ckBymkse_RRwLnKOG-x3sWz-T-R"
     },
     "S007": {
       "mode": "HERO",
