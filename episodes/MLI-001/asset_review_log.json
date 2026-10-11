@@ -88,12 +88,12 @@
     "S010": {
       "mode": "HYBRID",
       "section": "Sign 1",
-      "status": "retry",
+      "status": "generated",
       "final_file": "media/generated/S010.png",
-      "source_candidate": "MLI-001_S010_candidate_01_REJECTED.png",
-      "attempts": 1,
-      "notes": "Rejected candidate retained in Drive: repeated bar scene, lacked required assigned-desk versus voluntary-approach contrast.",
-      "drive_file_id": "1APthYfL1ZdI1zCNFAoD1i4i2SY0Cs692"
+      "source_candidate": "MLI-001_S010_candidate_02.png",
+      "attempts": 2,
+      "notes": "Candidate 02 saved in Drive. Split contrast between work interaction and voluntary social approach; pending final QA, not approved or locked.",
+      "drive_file_id": "1mNur3Ls3QTH0NGJSxPBvygp6q5oZFrlw"
     },
     "S012": {
       "mode": "HERO",
@@ -109,10 +109,10 @@
       "section": "Sign 2",
       "status": "retry",
       "final_file": "media/generated/S013.png",
-      "source_candidate": "MLI-001_S013_candidate_01_REJECTED.png",
-      "attempts": 1,
-      "notes": "Rejected candidate retained in Drive: group conversation did not isolate a single accidental glance/weak signal.",
-      "drive_file_id": "1l_jYvx8dkvV3yX7Wc3fE7mdkFchzjcXv"
+      "source_candidate": "MLI-001_S013_candidate_03_REJECTED.png",
+      "attempts": 3,
+      "notes": "Candidates 02 and 03 persisted in Drive but rejected: contrast montage instead of a single isolated accidental glance. Need single-frame, neutral/non-romantic eye glance and negative space for compositor.",
+      "drive_file_id": "1QJp5dK7kL5BjTeeAojvpPG87wQP_ZL0l"
     },
     "S014": {
       "mode": "HYBRID",
