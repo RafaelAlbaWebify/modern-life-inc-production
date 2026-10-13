@@ -22,13 +22,18 @@ def main() -> None:
     scenes = {scene["id"]: scene for scene in manifest["scenes"]}
     OUTPUT.mkdir(parents=True, exist_ok=True)
     for sid, filename in CANDIDATES.items():
-        source = STAGING / filename
-        if not source.is_file():
-            raise FileNotFoundError(f"Download candidate ZIP into {STAGING}: {filename}")
+        matches = list(STAGING.rglob(filename))
+        if len(matches) != 1:
+            found = [str(p.relative_to(STAGING)) for p in STAGING.rglob("*.png")]
+            raise FileNotFoundError(
+                f"Expected exactly one {filename} under {STAGING}; found {len(matches)}. "
+                f"PNG inventory: {found}"
+            )
+        source = matches[0]
         with Image.open(source) as image:
             image.verify()
-        scene = {**scenes[sid], "base_image": filename}
-        render_scene(scene, STAGING, OUTPUT / f"{sid}_hybrid_preview.png", False)
+        scene = {**scenes[sid], "base_image": source.name}
+        render_scene(scene, source.parent, OUTPUT / f"{sid}_hybrid_preview.png", False)
         print(f"[PASS] {sid} composite -> {OUTPUT / (sid + '_hybrid_preview.png')}")
     print("[INFO] Preview only: no files promoted, no QA status modified.")
 
