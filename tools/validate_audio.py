@@ -8,9 +8,14 @@ from pathlib import Path
 
 def probe(path: Path) -> dict:
     cmd = [
-        "ffprobe", "-v", "error",
-        "-show_entries", "format=duration:stream=codec_type,codec_name,sample_rate,channels",
-        "-of", "json", str(path),
+        "ffprobe",
+        "-v",
+        "error",
+        "-show_entries",
+        "format=duration:stream=codec_type,codec_name,sample_rate,channels",
+        "-of",
+        "json",
+        str(path),
     ]
     r = subprocess.run(cmd, capture_output=True, text=True, check=True)
     return json.loads(r.stdout)

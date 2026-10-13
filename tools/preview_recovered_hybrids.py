@@ -1,13 +1,15 @@
 """Build QA stills for recovered candidates without promoting unapproved assets."""
+
 from __future__ import annotations
 import json
+import importlib
 from pathlib import Path
 import sys
-from tempfile import TemporaryDirectory
 from PIL import Image
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from renderer.render_episode import render_scene
+render_episode = importlib.import_module("renderer.render_episode")
 EPISODE = ROOT / "episodes" / "MLI-001"
 STAGING = EPISODE / "media" / "generated" / "_review" / "recovered"
 OUTPUT = EPISODE / "output" / "hybrid_review"
@@ -16,6 +18,7 @@ CANDIDATES = {
     "S004": "MLI-001_S004_candidate_01.png",
     "S010": "MLI-001_S010_candidate_02.png",
 }
+
 
 def main() -> None:
     manifest = json.loads((EPISODE / "production_manifest.json").read_text(encoding="utf-8"))
@@ -33,9 +36,12 @@ def main() -> None:
         with Image.open(source) as image:
             image.verify()
         scene = {**scenes[sid], "base_image": source.name}
-        render_scene(scene, source.parent, OUTPUT / f"{sid}_hybrid_preview.png", False)
+        render_episode.render_scene(
+            scene, source.parent, OUTPUT / f"{sid}_hybrid_preview.png", False
+        )
         print(f"[PASS] {sid} composite -> {OUTPUT / (sid + '_hybrid_preview.png')}")
     print("[INFO] Preview only: no files promoted, no QA status modified.")
+
 
 if __name__ == "__main__":
     main()

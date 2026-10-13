@@ -95,11 +95,14 @@ def main() -> int:
                 quality=args.quality,
                 n=1,
             )
-            item = result.data[0]
-            if not getattr(item, "b64_json", None):
+            items = result.data or []
+            if not items:
+                raise RuntimeError("No image returned.")
+            payload = items[0].b64_json
+            if not isinstance(payload, str) or not payload:
                 raise RuntimeError("No base64 image payload returned.")
 
-            out_path.write_bytes(base64.b64decode(item.b64_json))
+            out_path.write_bytes(base64.b64decode(payload))
             normalize_16x9(out_path)
 
             row = review_log["assets"][sid]
@@ -121,7 +124,7 @@ def main() -> int:
         )
         time.sleep(0.5)
 
-    print(f"[DONE] generated={len(assets)-failures} failed={failures}")
+    print(f"[DONE] generated={len(assets) - failures} failed={failures}")
     return 1 if failures else 0
 
 

@@ -11,7 +11,9 @@ def main() -> int:
     args = ap.parse_args()
 
     episode = Path(args.episode)
-    prompt_manifest = json.loads((episode / "visual_asset_prompts.json").read_text(encoding="utf-8"))
+    prompt_manifest = json.loads(
+        (episode / "visual_asset_prompts.json").read_text(encoding="utf-8")
+    )
 
     missing = []
     present = []
@@ -20,7 +22,9 @@ def main() -> int:
         row = {"id": asset["id"], "mode": asset["mode"], "path": str(path)}
         (present if path.is_file() else missing).append(row)
 
-    print(f"[ASSETS] present={len(present)} missing={len(missing)} total={len(prompt_manifest['assets'])}")
+    print(
+        f"[ASSETS] present={len(present)} missing={len(missing)} total={len(prompt_manifest['assets'])}"
+    )
     for row in missing:
         print(f"[MISSING] {row['id']} {row['mode']} -> {row['path']}")
 
