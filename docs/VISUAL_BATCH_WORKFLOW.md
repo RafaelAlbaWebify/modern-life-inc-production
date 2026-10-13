@@ -85,7 +85,7 @@ This avoids depending on transient chat/session storage for production assets.
 When generated images are already available in the local review folder, reuse the same batch tool rather than manually copying them to final scene paths:
 
 ```powershell
-python .\tools\prepare_visual_batch.py --episode .\episodes\MLI-001 --import-dir .\episodes\MLI-001\media\generated\_review\recovered
+python .\tools\prepare_visual_batch.py --episode .\episodes\MLI-001 --import-dir .\episodes\MLI-001\media\generated\_review\recovered --ids S014,S018,S019,S022
 ```
 
-The importer accepts PNG filenames containing one scene token such as `MLI-001_S014.png` or `S014_candidate.png`. It searches below the selected source folder, validates the image files, rejects unknown, duplicate or approved scene IDs, and creates `_review/import_NNN/` candidate copies plus `output/visual_review/import_NNN/` composited previews. It updates the existing review log to `generated`, **not** `approved`, and never writes final `media/generated/SNNN.png` files. Inspect previews and use `review_visual_asset.py` for an explicit approval decision. Never treat a successful compositor test as proof of visual suitability.
+The importer accepts PNG filenames containing one scene token such as `MLI-001_S014.png` or `S014_candidate.png`. The optional `--ids` filter selects exactly the requested scenes so older rejected candidates are not re-imported. It searches below the selected source folder, validates the image files, rejects unknown, duplicate or approved scene IDs, and creates `_review/import_NNN/` candidate copies plus `output/visual_review/import_NNN/` composited previews. It updates the existing review log to `generated`, **not** `approved`, and never writes final `media/generated/SNNN.png` files. Inspect previews and use `review_visual_asset.py` for an explicit approval decision. Never treat a successful compositor test as proof of visual suitability.
