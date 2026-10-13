@@ -33,7 +33,7 @@ def import_staged_candidates(episode: Path, source: Path) -> int:
         raise ValueError("Import from a staging directory, never from the final asset directory")
     discovered: dict[str, Path] = {}
     for png in sorted(source.rglob("*.png")):
-        match = re.search(r"(?<![A-Za-z0-9])S\\d{3}(?!\\d)", png.stem, flags=re.I)
+        match = re.search(r"(?<![A-Za-z0-9])S\d{3}(?!\d)", png.stem, flags=re.I)
         if not match:
             continue
         sid = match.group(0).upper()
@@ -66,10 +66,10 @@ def import_staged_candidates(episode: Path, source: Path) -> int:
         render_episode.render_scene(scene, batch_dir, preview_dir / f"{sid}_preview.png", False)
         row = log["assets"][sid]
         row["status"] = "generated"
-        row["source_candidate"] = str(dest.relative_to(episode)).replace("\\\\", "/")
+        row["source_candidate"] = str(dest.relative_to(episode)).replace("\\", "/")
         row["notes"] = "Staged and composited for editorial review; not approved."
         print(f"[STAGED] {sid}: {dest.name} -> {preview_dir / (sid + '_preview.png')}")
-    log_path.write_text(json.dumps(log, indent=2) + "\\n", encoding="utf-8")
+    log_path.write_text(json.dumps(log, indent=2) + "\n", encoding="utf-8")
     print(f"[REVIEW] {len(discovered)} candidate(s); no final files overwritten or approved.")
     return 0
 
