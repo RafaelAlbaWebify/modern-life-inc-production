@@ -2,7 +2,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
+import shutil
 from pathlib import Path
+
+from PIL import Image
 
 
 PRIORITY = {"HERO": 0, "HYBRID": 1}
@@ -12,14 +16,75 @@ def load(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def import_staged_candidates(episode: Path, source: Path) -> int:
+    """Import scene-labelled PNGs, build previews and keep editorial approval explicit."""
+    import importlib
+    import sys
+
+    source = source.resolve()
+    if not source.is_dir():
+        raise ValueError(f"Candidate directory does not exist: {source}")
+    log_path = episode / "asset_review_log.json"
+    log = load(log_path)
+    manifest = load(episode / "production_manifest.json")
+    scenes = {scene["id"]: scene for scene in manifest["scenes"]}
+    final = (episode / "media" / "generated").resolve()
+    if source == final or source == episode.resolve():
+        raise ValueError("Import from a staging directory, never from the final asset directory")
+    discovered: dict[str, Path] = {}
+    for png in sorted(source.rglob("*.png")):
+        match = re.search(r"(?<![A-Za-z0-9])S\\d{3}(?!\\d)", png.stem, flags=re.I)
+        if not match:
+            continue
+        sid = match.group(0).upper()
+        if sid not in log["assets"] or sid not in scenes:
+            raise ValueError(f"Unrecognized scene ID {sid}: {png}")
+        if sid in discovered:
+            raise ValueError(f"Multiple candidates for {sid}: {discovered[sid]} and {png}")
+        if log["assets"][sid]["status"] in {"locked", "approved"}:
+            raise ValueError(f"{sid} is already approved/locked; refusing to replace it")
+        with Image.open(png) as image:
+            image.verify()
+        discovered[sid] = png
+    if not discovered:
+        raise ValueError(f"No scene-labelled PNG candidates found in {source}")
+
+    review = final / "_review"
+    n = 1
+    while (review / f"import_{n:03d}").exists():
+        n += 1
+    batch_dir = review / f"import_{n:03d}"
+    preview_dir = episode / "output" / "visual_review" / f"import_{n:03d}"
+    batch_dir.mkdir(parents=True)
+    preview_dir.mkdir(parents=True, exist_ok=True)
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    render_episode = importlib.import_module("renderer.render_episode")
+    for sid, original in discovered.items():
+        dest = batch_dir / f"{sid}_candidate.png"
+        shutil.copy2(original, dest)
+        scene = {**scenes[sid], "base_image": dest.name}
+        render_episode.render_scene(scene, batch_dir, preview_dir / f"{sid}_preview.png", False)
+        row = log["assets"][sid]
+        row["status"] = "generated"
+        row["source_candidate"] = str(dest.relative_to(episode)).replace("\\\\", "/")
+        row["notes"] = "Staged and composited for editorial review; not approved."
+        print(f"[STAGED] {sid}: {dest.name} -> {preview_dir / (sid + '_preview.png')}")
+    log_path.write_text(json.dumps(log, indent=2) + "\\n", encoding="utf-8")
+    print(f"[REVIEW] {len(discovered)} candidate(s); no final files overwritten or approved.")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--episode", required=True)
     ap.add_argument("--size", type=int, default=4)
     ap.add_argument("--mode", choices=["HERO", "HYBRID"])
+    ap.add_argument("--import-dir", type=Path, help="Import already generated candidate PNGs and preview them")
     args = ap.parse_args()
 
-    episode = Path(args.episode)
+    episode = Path(args.episode).resolve()
+    if args.import_dir is not None:
+        return import_staged_candidates(episode, args.import_dir)
     prompts = load(episode / "visual_asset_prompts.json")
     log_path = episode / "asset_review_log.json"
     log = load(log_path)
