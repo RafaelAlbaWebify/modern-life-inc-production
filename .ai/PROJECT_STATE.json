@@ -1,24 +1,25 @@
 {
   "project": "Modern Life Inc.",
   "current_phase": "mli001_end_to_end_validation",
-  "current_milestone": "MLI-001 manifest reconciled (56 scenes, 10 HERO, 22 HYBRID, 24 SYSTEM); renderer static compatibility checked; full render not yet executed",
+  "current_milestone": "56-scene manifest reconciled; GitHub Actions render test committed but no execution result verified",
   "readiness": {
     "production_ready": false,
     "publishable_episode_ready": false,
     "manifest_reconciled": true,
     "renderer_static_check_passed": true,
     "full_render_verified": false,
-    "local_narration_wav_verified": false
+    "local_narration_wav_verified": false,
+    "full_render_ci_result": "unverified: zero PR-associated runs returned for commit 13d53f9b; commit statuses empty"
   },
   "current_blockers": [
-    "Full 56-scene rough cut with placeholders and narration has not been demonstrated in this session",
+    "GitHub Actions full render test has not been observed running or passing; verify Actions workflow result",
     "Approved visual binaries must be brought from Drive into the local episode media/generated directory before final render",
     "Renderer uses static images; production polish and true motion/overlay behaviour are not yet validated"
   ],
   "next_recommended_actions": [
-    "Run render_with_narration.ps1 using existing local media/narration.wav and verify ffprobe duration/streams",
-    "Review the full 56-scene output and fix any rendering errors",
-    "Only then complete missing visual assets and final audiovisual QA"
+    "Inspect GitHub Actions workflow 'MLI-001 full render smoke test' and run it via Run workflow if absent",
+    "Capture pass/fail and ffprobe output; repair concrete errors only",
+    "Validate narration mux using existing local WAV once visual smoke render passes"
   ],
   "storage_policy": "minimal_retention",
   "git": {
@@ -37,6 +38,7 @@
     },
     "manifest_duration_seconds": 447.948,
     "classification_mismatches": 0,
-    "renderer_check": "static only; no MP4 produced in this check"
+    "renderer_check": "static only; no MP4 produced in this check",
+    "render_ci": "Workflow file exists; no verified run outcome; check is not a PASS"
   }
 }
