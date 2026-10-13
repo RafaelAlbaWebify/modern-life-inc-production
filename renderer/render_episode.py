@@ -121,6 +121,32 @@ def hybrid_overlay(draw: ImageDraw.ImageDraw, scene: dict[str, Any]) -> None:
         draw.rectangle((0, 0, W//2, H), fill=(15, 15, 15, 75))
         draw.line((W//2, 75, W//2, H-75), fill=(255, 176, 32, 230), width=8)
         draw.text((170, 175), "OBLIGATION", font=font(52, True), fill=(244, 239, 230, 230))
+    else:
+        layout = scene.get("layout", "")
+        if "phone" in layout:
+            draw.rounded_rectangle((730, 160, 1200, 730), radius=48,
+                                   outline=(244,239,230,235), width=10,
+                                   fill=(15,15,15,165))
+            draw.rounded_rectangle((800, 300, 1100, 365), radius=26,
+                                   fill=(244,239,230,215))
+            draw.rounded_rectangle((860, 425, 1130, 495), radius=26,
+                                   fill=(255,176,32,225))
+        elif "contrast" in layout:
+            draw.rectangle((0,0,W//2,H), fill=(15,15,15,85))
+            draw.line((W//2,100,W//2,H-100), fill=(255,176,32,230), width=9)
+        elif "conversation" in layout or "gaze" in layout or "interaction" in layout:
+            draw.rounded_rectangle((1360,170,1690,285),radius=45,
+                                   fill=(244,239,230,195))
+            draw.polygon([(1440,280),(1500,280),(1460,320)],
+                         fill=(244,239,230,195))
+        elif "diagram" in layout or "pattern" in layout:
+            for x in (650,960,1270):
+                draw.ellipse((x-22,190,x+22,234),fill=(255,176,32,220))
+            draw.line((670,212,1250,212),fill=(255,176,32,190),width=7)
+        else:
+            draw.line((400,185,1520,185),fill=(255,176,32,180),width=7)
+
+
 
 def render_scene(scene: dict[str, Any], episode_dir: Path, output: Path, allow_placeholders: bool = False) -> None:
     mode = scene.get("visual_mode", "SYSTEM").upper()
