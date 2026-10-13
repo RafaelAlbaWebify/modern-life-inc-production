@@ -1,4 +1,5 @@
 """Executable acceptance contracts for the MLI-001 production manifest."""
+
 from __future__ import annotations
 
 import json

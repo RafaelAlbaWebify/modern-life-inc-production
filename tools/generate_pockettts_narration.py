@@ -9,6 +9,7 @@ This intentionally bypasses VoiceStudio POST /generate. VoiceStudio is only
 used to resolve/export the saved voice profile when no local reference WAV is
 available.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -138,13 +139,12 @@ class PocketTTS:
         ready = recv_frame(self.proc)
         if ready.get("op") != "ready":
             raise RuntimeError(f"Unexpected PocketTTS startup frame: {ready}")
-        print(
-            f"[READY] {ready.get('engine', 'pockettts')} "
-            f"{ready.get('sample_rate', '?')} Hz"
-        )
+        print(f"[READY] {ready.get('engine', 'pockettts')} {ready.get('sample_rate', '?')} Hz")
         return self
 
-    def synthesize(self, text: str, language: str, reference: Path) -> tuple[bytes, int, float, float]:
+    def synthesize(
+        self, text: str, language: str, reference: Path
+    ) -> tuple[bytes, int, float, float]:
         if not self.proc:
             raise RuntimeError("PocketTTS sidecar is not running.")
 
@@ -163,10 +163,7 @@ class PocketTTS:
             msg = recv_frame(self.proc)
             op = msg.get("op")
             if op == "progress":
-                print(
-                    f"        {msg.get('stage', 'progress')} "
-                    f"{msg.get('percent', '?')}%"
-                )
+                print(f"        {msg.get('stage', 'progress')} {msg.get('percent', '?')}%")
                 continue
             if op == "error":
                 detail = msg.get("message") or "PocketTTS synthesis failed"
@@ -224,6 +221,7 @@ def silence(sample_rate: int, milliseconds: int) -> bytes:
     samples = round(sample_rate * milliseconds / 1000.0)
     return b"\x00\x00" * samples
 
+
 def build_chunk(
     engine: PocketTTS,
     chunk: dict,
@@ -256,8 +254,7 @@ def build_chunk(
             sample_rate = sr
         elif sample_rate != sr:
             raise RuntimeError(
-                f"Sample rate changed inside chunk {chunk['id']}: "
-                f"{sample_rate} -> {sr}"
+                f"Sample rate changed inside chunk {chunk['id']}: {sample_rate} -> {sr}"
             )
 
         combined.extend(pcm)

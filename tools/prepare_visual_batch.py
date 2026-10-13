@@ -69,14 +69,18 @@ def main() -> int:
         row["status"] = "queued"
         row["attempts"] = int(row.get("attempts", 0)) + 1
         candidate_name = f"{sid}_candidate_{row['attempts']:02d}.png"
-        batch_assets.append({
-            "id": sid,
-            "mode": row["mode"],
-            "section": row["section"],
-            "candidate_file": str((batch_dir / candidate_name).relative_to(episode)).replace("\\", "/"),
-            "final_file": row["final_file"],
-            "prompt": p["prompt"],
-        })
+        batch_assets.append(
+            {
+                "id": sid,
+                "mode": row["mode"],
+                "section": row["section"],
+                "candidate_file": str((batch_dir / candidate_name).relative_to(episode)).replace(
+                    "\\", "/"
+                ),
+                "final_file": row["final_file"],
+                "prompt": p["prompt"],
+            }
+        )
 
     batch_manifest = {
         "episode_id": log["episode_id"],

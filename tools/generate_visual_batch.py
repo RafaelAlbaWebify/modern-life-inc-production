@@ -121,7 +121,7 @@ def main() -> int:
         )
         time.sleep(0.5)
 
-    print(f"[DONE] generated={len(assets)-failures} failed={failures}")
+    print(f"[DONE] generated={len(assets) - failures} failed={failures}")
     return 1 if failures else 0
 
 

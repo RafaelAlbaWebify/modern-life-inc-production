@@ -19,7 +19,9 @@ ORANGE = "#FF7A00"
 def font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
     candidates = [
         "C:/Windows/Fonts/arialbd.ttf" if bold else "C:/Windows/Fonts/arial.ttf",
-        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf" if bold else "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+        if bold
+        else "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
     ]
     for candidate in candidates:
         p = Path(candidate)
@@ -40,19 +42,31 @@ def draw_text_card(draw: ImageDraw.ImageDraw, text: str, y: int, size: int = 88)
     tw = bbox[2] - bbox[0]
     th = bbox[3] - bbox[1]
     x = (W - tw) // 2
-    draw.rounded_rectangle((x - 38, y - 24, x + tw + 38, y + th + 28), radius=24, fill=(15,15,15,205))
+    draw.rounded_rectangle(
+        (x - 38, y - 24, x + tw + 38, y + th + 28), radius=24, fill=(15, 15, 15, 205)
+    )
     draw.multiline_text((x, y), text, font=f, fill=IVORY, spacing=12, align="center")
 
 
-def figure(draw: ImageDraw.ImageDraw, x: int, y: int, scale: float = 1.0, engaged: bool = False) -> None:
+def figure(
+    draw: ImageDraw.ImageDraw, x: int, y: int, scale: float = 1.0, engaged: bool = False
+) -> None:
     r = int(46 * scale)
-    draw.ellipse((x-r, y-r, x+r, y+r), fill=IVORY)
+    draw.ellipse((x - r, y - r, x + r, y + r), fill=IVORY)
     body_w = int(74 * scale)
     body_h = int(180 * scale)
     lean = int(22 * scale) if engaged else 0
-    draw.rounded_rectangle((x-body_w//2+lean, y+r-4, x+body_w//2+lean, y+r+body_h), radius=int(30*scale), fill=IVORY)
-    arm_y = y + int(105*scale)
-    draw.line((x+lean, arm_y, x+int(110*scale), arm_y-int(30*scale)), fill=AMBER if engaged else IVORY, width=max(4,int(12*scale)))
+    draw.rounded_rectangle(
+        (x - body_w // 2 + lean, y + r - 4, x + body_w // 2 + lean, y + r + body_h),
+        radius=int(30 * scale),
+        fill=IVORY,
+    )
+    arm_y = y + int(105 * scale)
+    draw.line(
+        (x + lean, arm_y, x + int(110 * scale), arm_y - int(30 * scale)),
+        fill=AMBER if engaged else IVORY,
+        width=max(4, int(12 * scale)),
+    )
 
 
 def system_scene(scene: dict[str, Any]) -> Image.Image:
@@ -67,27 +81,29 @@ def system_scene(scene: dict[str, Any]) -> Image.Image:
         figure(draw, 600, 570, 1.15, engaged=True)
         figure(draw, 1320, 570, 1.15, engaged=True)
         draw.line((720, 455, 1200, 455), fill=AMBER, width=10)
-        draw.polygon([(1180,438),(1225,455),(1180,472)], fill=AMBER)
+        draw.polygon([(1180, 438), (1225, 455), (1180, 472)], fill=AMBER)
     elif "contrast" in layout:
-        draw.line((W//2, 120, W//2, H-120), fill=CHARCOAL, width=6)
+        draw.line((W // 2, 120, W // 2, H - 120), fill=CHARCOAL, width=6)
         figure(draw, 500, 590, 1.0, engaged=False)
         figure(draw, 1420, 590, 1.0, engaged=True)
         draw.text((360, 260), "WEAK", font=font(58, True), fill="#888888")
         draw.text((1280, 260), "STRONGER", font=font(58, True), fill=AMBER)
     elif "diagram" in layout or "pattern" in layout or "heuristic" in layout:
-        cx, cy = W//2, H//2 + 30
-        for i, dx in enumerate((-420,-210,0,210,420)):
+        cx, cy = W // 2, H // 2 + 30
+        for i, dx in enumerate((-420, -210, 0, 210, 420)):
             x = cx + dx
-            draw.ellipse((x-44, cy-44, x+44, cy+44), fill=IVORY if i % 2 == 0 else AMBER)
+            draw.ellipse((x - 44, cy - 44, x + 44, cy + 44), fill=IVORY if i % 2 == 0 else AMBER)
             if i != 2:
                 draw.line((x, cy, cx, cy), fill=ORANGE, width=8)
-        draw.ellipse((cx-70, cy-70, cx+70, cy+70), outline=AMBER, width=12)
+        draw.ellipse((cx - 70, cy - 70, cx + 70, cy + 70), outline=AMBER, width=12)
     elif "phone" in layout:
-        draw.rounded_rectangle((670,180,1250,900), radius=70, outline=IVORY, width=16, fill="#151515")
-        draw.rounded_rectangle((760,330,1150,450), radius=30, fill=CHARCOAL)
-        draw.rounded_rectangle((870,510,1160,630), radius=30, fill=AMBER)
+        draw.rounded_rectangle(
+            (670, 180, 1250, 900), radius=70, outline=IVORY, width=16, fill="#151515"
+        )
+        draw.rounded_rectangle((760, 330, 1150, 450), radius=30, fill=CHARCOAL)
+        draw.rounded_rectangle((870, 510, 1160, 630), radius=30, fill=AMBER)
     else:
-        figure(draw, W//2, 570, 1.25, engaged=True)
+        figure(draw, W // 2, 570, 1.25, engaged=True)
 
     # Small visual-label for debugging; removable in production.
     draw.text((70, 58), scene.get("id", ""), font=font(34, True), fill=AMBER)
@@ -97,58 +113,68 @@ def system_scene(scene: dict[str, Any]) -> Image.Image:
     return img
 
 
-
 def hybrid_overlay(draw: ImageDraw.ImageDraw, scene: dict[str, Any]) -> None:
     """Deterministic editorial overlays, separate from photographic backgrounds."""
     sid = scene.get("id", "")
     if sid == "S002":
         for x, y in ((180, 220), (1530, 190), (250, 690), (1560, 710)):
-            draw.text((x, y), "?", font=font(118, True), fill=(255, 176, 32, 225),
-                      stroke_width=3, stroke_fill=(15, 15, 15, 170))
+            draw.text(
+                (x, y),
+                "?",
+                font=font(118, True),
+                fill=(255, 176, 32, 225),
+                stroke_width=3,
+                stroke_fill=(15, 15, 15, 170),
+            )
     elif sid == "S004":
         for x, y, r in ((730, 350, 13), (930, 290, 18), (1140, 390, 12)):
-            draw.ellipse((x-r, y-r, x+r, y+r), fill=(255, 176, 32, 230))
+            draw.ellipse((x - r, y - r, x + r, y + r), fill=(255, 176, 32, 230))
     elif sid in {"S008", "S009"}:
         # Static speech bubbles; animation is not implemented by this renderer.
-        anchors = ((1230, 205, 1660, 360),) if sid == "S008" else (
-            (240, 215, 620, 355), (1120, 175, 1670, 365))
+        anchors = (
+            ((1230, 205, 1660, 360),)
+            if sid == "S008"
+            else ((240, 215, 620, 355), (1120, 175, 1670, 365))
+        )
         for i, (x0, y0, x1, y1) in enumerate(anchors):
             fill = (255, 176, 32, 215) if sid == "S009" and i == 1 else (244, 239, 230, 195)
-            draw.rounded_rectangle((x0, y0, x1, y1), radius=54,
-                                   fill=fill, outline=(15, 15, 15, 160), width=5)
-            draw.polygon([(x0+85, y1-2), (x0+132, y1-2), (x0+105, y1+45)], fill=fill)
+            draw.rounded_rectangle(
+                (x0, y0, x1, y1), radius=54, fill=fill, outline=(15, 15, 15, 160), width=5
+            )
+            draw.polygon([(x0 + 85, y1 - 2), (x0 + 132, y1 - 2), (x0 + 105, y1 + 45)], fill=fill)
     elif sid == "S010":
-        draw.rectangle((0, 0, W//2, H), fill=(15, 15, 15, 75))
-        draw.line((W//2, 75, W//2, H-75), fill=(255, 176, 32, 230), width=8)
+        draw.rectangle((0, 0, W // 2, H), fill=(15, 15, 15, 75))
+        draw.line((W // 2, 75, W // 2, H - 75), fill=(255, 176, 32, 230), width=8)
         draw.text((170, 175), "OBLIGATION", font=font(52, True), fill=(244, 239, 230, 230))
     else:
         layout = scene.get("layout", "")
         if "phone" in layout:
-            draw.rounded_rectangle((730, 160, 1200, 730), radius=48,
-                                   outline=(244,239,230,235), width=10,
-                                   fill=(15,15,15,165))
-            draw.rounded_rectangle((800, 300, 1100, 365), radius=26,
-                                   fill=(244,239,230,215))
-            draw.rounded_rectangle((860, 425, 1130, 495), radius=26,
-                                   fill=(255,176,32,225))
+            draw.rounded_rectangle(
+                (730, 160, 1200, 730),
+                radius=48,
+                outline=(244, 239, 230, 235),
+                width=10,
+                fill=(15, 15, 15, 165),
+            )
+            draw.rounded_rectangle((800, 300, 1100, 365), radius=26, fill=(244, 239, 230, 215))
+            draw.rounded_rectangle((860, 425, 1130, 495), radius=26, fill=(255, 176, 32, 225))
         elif "contrast" in layout:
-            draw.rectangle((0,0,W//2,H), fill=(15,15,15,85))
-            draw.line((W//2,100,W//2,H-100), fill=(255,176,32,230), width=9)
+            draw.rectangle((0, 0, W // 2, H), fill=(15, 15, 15, 85))
+            draw.line((W // 2, 100, W // 2, H - 100), fill=(255, 176, 32, 230), width=9)
         elif "conversation" in layout or "gaze" in layout or "interaction" in layout:
-            draw.rounded_rectangle((1360,170,1690,285),radius=45,
-                                   fill=(244,239,230,195))
-            draw.polygon([(1440,280),(1500,280),(1460,320)],
-                         fill=(244,239,230,195))
+            draw.rounded_rectangle((1360, 170, 1690, 285), radius=45, fill=(244, 239, 230, 195))
+            draw.polygon([(1440, 280), (1500, 280), (1460, 320)], fill=(244, 239, 230, 195))
         elif "diagram" in layout or "pattern" in layout:
-            for x in (650,960,1270):
-                draw.ellipse((x-22,190,x+22,234),fill=(255,176,32,220))
-            draw.line((670,212,1250,212),fill=(255,176,32,190),width=7)
+            for x in (650, 960, 1270):
+                draw.ellipse((x - 22, 190, x + 22, 234), fill=(255, 176, 32, 220))
+            draw.line((670, 212, 1250, 212), fill=(255, 176, 32, 190), width=7)
         else:
-            draw.line((400,185,1520,185),fill=(255,176,32,180),width=7)
+            draw.line((400, 185, 1520, 185), fill=(255, 176, 32, 180), width=7)
 
 
-
-def render_scene(scene: dict[str, Any], episode_dir: Path, output: Path, allow_placeholders: bool = False) -> None:
+def render_scene(
+    scene: dict[str, Any], episode_dir: Path, output: Path, allow_placeholders: bool = False
+) -> None:
     mode = scene.get("visual_mode", "SYSTEM").upper()
     base = scene.get("base_image")
 
@@ -158,11 +184,13 @@ def render_scene(scene: dict[str, Any], episode_dir: Path, output: Path, allow_p
             img = fit_cover(Image.open(p))
             draw = ImageDraw.Draw(img, "RGBA")
             if mode == "HYBRID":
-                draw.rectangle((0,0,W,H), fill=(0,0,0,28))
+                draw.rectangle((0, 0, W, H), fill=(0, 0, 0, 28))
                 hybrid_overlay(draw, scene)
-                draw_text_card(draw, scene.get("on_screen_text",""), 820, 68)
+                draw_text_card(draw, scene.get("on_screen_text", ""), 820, 68)
         elif allow_placeholders:
-            img = system_scene({**scene, "layout": "single_focus", "on_screen_text": f"{mode} VISUAL PENDING"})
+            img = system_scene(
+                {**scene, "layout": "single_focus", "on_screen_text": f"{mode} VISUAL PENDING"}
+            )
         elif p is not None:
             raise FileNotFoundError(f"Missing base image for {scene['id']}: {p}")
         else:
@@ -174,7 +202,9 @@ def render_scene(scene: dict[str, Any], episode_dir: Path, output: Path, allow_p
     img.save(output, quality=95)
 
 
-def build_video(stills: list[tuple[Path, float]], output: Path, fps: int = 30, audio: Path | None = None) -> None:
+def build_video(
+    stills: list[tuple[Path, float]], output: Path, fps: int = 30, audio: Path | None = None
+) -> None:
     concat = output.with_suffix(".concat.txt")
     lines = []
     for p, duration in stills:
@@ -191,8 +221,16 @@ def build_video(stills: list[tuple[Path, float]], output: Path, fps: int = 30, a
     if audio is not None:
         cmd += ["-i", str(audio), "-map", "0:v:0", "-map", "1:a:0"]
     cmd += [
-        "-vf", f"fps={fps},format=yuv420p", "-c:v", "libx264", "-crf", "18",
-        "-preset", "medium", "-movflags", "+faststart"
+        "-vf",
+        f"fps={fps},format=yuv420p",
+        "-c:v",
+        "libx264",
+        "-crf",
+        "18",
+        "-preset",
+        "medium",
+        "-movflags",
+        "+faststart",
     ]
     if audio is not None:
         cmd += ["-c:a", "aac", "-b:a", "192k", "-shortest"]
@@ -206,15 +244,21 @@ def main() -> None:
     ap.add_argument("--manifest", default="production_manifest.json")
     ap.add_argument("--output", default="output/preview.mp4")
     ap.add_argument("--limit", type=int, default=0, help="Render first N scenes only")
-    ap.add_argument("--allow-placeholders", action="store_true", help="Render missing HYBRID/HERO scenes as placeholders")
-    ap.add_argument("--audio", default="", help="Optional narration/audio file to mux into the video")
+    ap.add_argument(
+        "--allow-placeholders",
+        action="store_true",
+        help="Render missing HYBRID/HERO scenes as placeholders",
+    )
+    ap.add_argument(
+        "--audio", default="", help="Optional narration/audio file to mux into the video"
+    )
     args = ap.parse_args()
 
     episode_dir = Path(args.episode)
     manifest = json.loads((episode_dir / args.manifest).read_text(encoding="utf-8"))
     scenes = manifest["scenes"]
     if args.limit > 0:
-        scenes = scenes[:args.limit]
+        scenes = scenes[: args.limit]
 
     still_dir = episode_dir / "output" / "stills"
     stills: list[tuple[Path, float]] = []
