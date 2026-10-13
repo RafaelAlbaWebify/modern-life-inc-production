@@ -1,4 +1,5 @@
 """Regression: a file on disk must not silently approve a visual asset."""
+
 from __future__ import annotations
 
 import json
