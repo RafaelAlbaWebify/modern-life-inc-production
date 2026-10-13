@@ -30,11 +30,7 @@ def main() -> int:
     review.mkdir(parents=True, exist_ok=True)
     rejected.mkdir(parents=True, exist_ok=True)
 
-    # Final files on disk always win: if present, mark approved unless already locked.
-    for sid, row in log["assets"].items():
-        final_path = episode / row["final_file"]
-        if final_path.is_file() and row["status"] not in {"locked"}:
-            row["status"] = "approved"
+    # Approval is an explicit editorial decision. File presence must never promote status.
 
     candidates = []
     prompt_by_id = {row["id"]: row for row in prompts["assets"]}
