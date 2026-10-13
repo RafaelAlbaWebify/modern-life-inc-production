@@ -59,35 +59,38 @@
     {
       "id": "S007",
       "duration_sec": 9.119,
-      "visual_mode": "HYBRID",
+      "visual_mode": "HERO",
       "layout": "two_person_conversation",
-      "visual": "Two people in caf\u00e9; empty seats visible; one chooses seat nearby",
+      "visual": "Two people in café; empty seats visible; one chooses seat nearby",
       "on_screen_text": "1. PROXIMITY",
       "base_image": "media/generated/S007.png"
     },
     {
       "id": "S008",
       "duration_sec": 9.119,
-      "visual_mode": "SYSTEM",
+      "visual_mode": "HYBRID",
       "layout": "two_person_conversation",
       "visual": "Figure starts conversation; speech bubble grows",
-      "on_screen_text": ""
+      "on_screen_text": "",
+      "base_image": "media/generated/S008.png"
     },
     {
       "id": "S009",
       "duration_sec": 9.119,
-      "visual_mode": "SYSTEM",
+      "visual_mode": "HYBRID",
       "layout": "two_person_conversation",
       "visual": "Conversation should end; one figure reopens it with new bubble",
-      "on_screen_text": ""
+      "on_screen_text": "",
+      "base_image": "media/generated/S009.png"
     },
     {
       "id": "S010",
       "duration_sec": 9.119,
-      "visual_mode": "SYSTEM",
+      "visual_mode": "HYBRID",
       "layout": "contrast",
       "visual": "Split screen: assigned desk vs voluntary approach",
-      "on_screen_text": "CHOICE MATTERS"
+      "on_screen_text": "CHOICE MATTERS",
+      "base_image": "media/generated/S010.png"
     },
     {
       "id": "S011",
@@ -109,10 +112,11 @@
     {
       "id": "S013",
       "duration_sec": 8.791,
-      "visual_mode": "SYSTEM",
+      "visual_mode": "HYBRID",
       "layout": "contrast",
       "visual": "Single accidental glance shown as tiny weak signal",
-      "on_screen_text": "ONE GLANCE = WEAK"
+      "on_screen_text": "ONE GLANCE = WEAK",
+      "base_image": "media/generated/S013.png"
     },
     {
       "id": "S014",
@@ -142,7 +146,7 @@
     {
       "id": "S017",
       "duration_sec": 8.349,
-      "visual_mode": "HYBRID",
+      "visual_mode": "HERO",
       "layout": "two_person_conversation",
       "visual": "Two seated figures lean forward at same moment",
       "on_screen_text": "3. SYNCHRONY",
@@ -151,18 +155,20 @@
     {
       "id": "S018",
       "duration_sec": 8.349,
-      "visual_mode": "SYSTEM",
+      "visual_mode": "HYBRID",
       "layout": "two_person_conversation",
       "visual": "Two hands gesture with similar rhythm",
-      "on_screen_text": ""
+      "on_screen_text": "",
+      "base_image": "media/generated/S018.png"
     },
     {
       "id": "S019",
       "duration_sec": 8.349,
-      "visual_mode": "SYSTEM",
+      "visual_mode": "HYBRID",
       "layout": "two_person_conversation",
       "visual": "Two laugh marks appear simultaneously",
-      "on_screen_text": ""
+      "on_screen_text": "",
+      "base_image": "media/generated/S019.png"
     },
     {
       "id": "S020",
@@ -175,18 +181,17 @@
     {
       "id": "S021",
       "duration_sec": 8.349,
-      "visual_mode": "HERO",
+      "visual_mode": "SYSTEM",
       "layout": "abstract_diagram",
       "visual": "Waveforms align gradually",
-      "on_screen_text": "SHARED RHYTHM",
-      "base_image": "media/generated/S021.png"
+      "on_screen_text": "SHARED RHYTHM"
     },
     {
       "id": "S022",
       "duration_sec": 8.74,
       "visual_mode": "HYBRID",
       "layout": "two_person_conversation",
-      "visual": "Speech bubbles progress: weather \u2192 work \u2192 fear/dream",
+      "visual": "Speech bubbles progress: weather → work → fear/dream",
       "on_screen_text": "4. MORE PERSONAL",
       "base_image": "media/generated/S022.png"
     },
@@ -202,18 +207,20 @@
     {
       "id": "S024",
       "duration_sec": 8.74,
-      "visual_mode": "SYSTEM",
+      "visual_mode": "HYBRID",
       "layout": "two_person_conversation",
       "visual": "Second figure responds with matching disclosure",
-      "on_screen_text": "RECIPROCAL"
+      "on_screen_text": "RECIPROCAL",
+      "base_image": "media/generated/S024.png"
     },
     {
       "id": "S025",
       "duration_sec": 8.74,
-      "visual_mode": "SYSTEM",
+      "visual_mode": "HYBRID",
       "layout": "contrast",
       "visual": "Split: oversharer-to-everyone vs selective disclosure",
-      "on_screen_text": "SELECTIVE DEPTH"
+      "on_screen_text": "SELECTIVE DEPTH",
+      "base_image": "media/generated/S025.png"
     },
     {
       "id": "S026",
@@ -226,7 +233,7 @@
     {
       "id": "S027",
       "duration_sec": 9.966,
-      "visual_mode": "HYBRID",
+      "visual_mode": "HERO",
       "layout": "split_contrast",
       "visual": "Same story told to Person A and Person B",
       "on_screen_text": "5. RESPONSIVENESS",
@@ -235,18 +242,20 @@
     {
       "id": "S028",
       "duration_sec": 9.966,
-      "visual_mode": "SYSTEM",
+      "visual_mode": "HYBRID",
       "layout": "contrast",
       "visual": "Person A: 'Oh, cool.' then turns away",
-      "on_screen_text": ""
+      "on_screen_text": "",
+      "base_image": "media/generated/S028.png"
     },
     {
       "id": "S029",
       "duration_sec": 9.966,
-      "visual_mode": "SYSTEM",
+      "visual_mode": "HYBRID",
       "layout": "two_person_conversation",
       "visual": "Person B asks follow-up; arrows connect ideas",
-      "on_screen_text": ""
+      "on_screen_text": "",
+      "base_image": "media/generated/S029.png"
     },
     {
       "id": "S030",
@@ -254,7 +263,7 @@
       "visual_mode": "SYSTEM",
       "layout": "diagram",
       "visual": "Icons: understood / valued / responded to",
-      "on_screen_text": "UNDERSTOOD \u2022 VALUED \u2022 HEARD"
+      "on_screen_text": "UNDERSTOOD • VALUED • HEARD"
     },
     {
       "id": "S031",
@@ -267,7 +276,7 @@
     {
       "id": "S032",
       "duration_sec": 9.064,
-      "visual_mode": "HYBRID",
+      "visual_mode": "HERO",
       "layout": "two_person_conversation",
       "visual": "Two speech bubbles interlock smoothly",
       "on_screen_text": "6. EASY CONVERSATION",
@@ -276,10 +285,11 @@
     {
       "id": "S033",
       "duration_sec": 9.064,
-      "visual_mode": "SYSTEM",
+      "visual_mode": "HYBRID",
       "layout": "contrast",
       "visual": "Awkward turn-taking blocks vs flowing connected chain",
-      "on_screen_text": ""
+      "on_screen_text": "",
+      "base_image": "media/generated/S033.png"
     },
     {
       "id": "S034",
@@ -300,7 +310,7 @@
     {
       "id": "S036",
       "duration_sec": 9.064,
-      "visual_mode": "HERO",
+      "visual_mode": "HYBRID",
       "layout": "single_focus",
       "visual": "Two paths merge into one conversational path",
       "on_screen_text": "SHARED RHYTHM",
@@ -309,10 +319,11 @@
     {
       "id": "S037",
       "duration_sec": 10.596,
-      "visual_mode": "SYSTEM",
+      "visual_mode": "HERO",
       "layout": "diagram",
       "visual": "Clock + calendar + two figures",
-      "on_screen_text": "7. A NEXT TIME"
+      "on_screen_text": "7. A NEXT TIME",
+      "base_image": "media/generated/S037.png"
     },
     {
       "id": "S038",
@@ -326,17 +337,18 @@
     {
       "id": "S039",
       "duration_sec": 10.596,
-      "visual_mode": "SYSTEM",
+      "visual_mode": "HYBRID",
       "layout": "phone_message",
       "visual": "One figure sends article/song after conversation",
-      "on_screen_text": ""
+      "on_screen_text": "",
+      "base_image": "media/generated/S039.png"
     },
     {
       "id": "S040",
       "duration_sec": 10.596,
       "visual_mode": "SYSTEM",
       "layout": "diagram",
-      "visual": "Path from conversation \u2192 message \u2192 meetup",
+      "visual": "Path from conversation → message → meetup",
       "on_screen_text": "CONTACT HAS DIRECTION"
     },
     {
@@ -345,7 +357,7 @@
       "visual_mode": "SYSTEM",
       "layout": "diagram",
       "visual": "Three cost icons: time, effort, risk",
-      "on_screen_text": "TIME \u2022 EFFORT \u2022 RISK"
+      "on_screen_text": "TIME • EFFORT • RISK"
     },
     {
       "id": "S042",
@@ -358,11 +370,10 @@
     {
       "id": "S043",
       "duration_sec": 4.711,
-      "visual_mode": "HERO",
+      "visual_mode": "SYSTEM",
       "layout": "convergence",
       "visual": "Signals converge into one larger arrow",
-      "on_screen_text": "CONVERGENCE",
-      "base_image": "media/generated/S043.png"
+      "on_screen_text": "CONVERGENCE"
     },
     {
       "id": "S044",
@@ -375,10 +386,11 @@
     {
       "id": "S045",
       "duration_sec": 4.711,
-      "visual_mode": "SYSTEM",
+      "visual_mode": "HYBRID",
       "layout": "diagram",
       "visual": "Same behavior repeated across three moments",
-      "on_screen_text": "DOES IT KEEP HAPPENING?"
+      "on_screen_text": "DOES IT KEEP HAPPENING?",
+      "base_image": "media/generated/S045.png"
     },
     {
       "id": "S046",
@@ -451,7 +463,7 @@
     {
       "id": "S054",
       "duration_sec": 7.646,
-      "visual_mode": "HYBRID",
+      "visual_mode": "HERO",
       "layout": "two_person_conversation",
       "visual": "Two figures finally talk directly",
       "on_screen_text": "DIRECT COMMUNICATION WINS",
