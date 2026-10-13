@@ -26,13 +26,15 @@ def test_import_staged_four_scene_batch(tmp_path: Path) -> None:
             "mode": "HYBRID",
             "section": "test",
         }
-        scenes.append({
-            "id": sid,
-            "visual_mode": "HYBRID",
-            "base_image": f"media/generated/{sid}.png",
-            "layout": "interaction",
-            "on_screen_text": "",
-        })
+        scenes.append(
+            {
+                "id": sid,
+                "visual_mode": "HYBRID",
+                "base_image": f"media/generated/{sid}.png",
+                "layout": "interaction",
+                "on_screen_text": "",
+            }
+        )
     log = {"episode_id": "MLI-001", "assets": records}
     (episode / "asset_review_log.json").write_text(json.dumps(log), encoding="utf-8")
     (episode / "production_manifest.json").write_text(
@@ -49,7 +51,9 @@ def test_import_staged_four_scene_batch(tmp_path: Path) -> None:
     for sid in ids:
         assert updated["assets"][sid]["status"] == "generated"
         assert not (episode / "media" / "generated" / f"{sid}.png").exists()
-        assert (episode / "media" / "generated" / "_review" / "import_001" /
-                f"{sid}_candidate.png").is_file()
-        assert (episode / "output" / "visual_review" / "import_001" /
-                f"{sid}_preview.png").is_file()
+        assert (
+            episode / "media" / "generated" / "_review" / "import_001" / f"{sid}_candidate.png"
+        ).is_file()
+        assert (
+            episode / "output" / "visual_review" / "import_001" / f"{sid}_preview.png"
+        ).is_file()
