@@ -16,7 +16,7 @@ def load(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def import_staged_candidates(episode: Path, source: Path) -> int:
+def import_staged_candidates(episode: Path, source: Path, requested: set[str] | None = None) -> int:
     """Import scene-labelled PNGs, build previews and keep editorial approval explicit."""
     import importlib
     import sys
@@ -37,6 +37,8 @@ def import_staged_candidates(episode: Path, source: Path) -> int:
         if not match:
             continue
         sid = match.group(0).upper()
+        if requested is not None and sid not in requested:
+            continue
         if sid not in log["assets"] or sid not in scenes:
             raise ValueError(f"Unrecognized scene ID {sid}: {png}")
         if sid in discovered:
@@ -46,6 +48,8 @@ def import_staged_candidates(episode: Path, source: Path) -> int:
         with Image.open(png) as image:
             image.verify()
         discovered[sid] = png
+    if requested is not None and set(discovered) != requested:
+        raise ValueError(f"Requested scene IDs not found: {sorted(requested - set(discovered))}")
     if not discovered:
         raise ValueError(f"No scene-labelled PNG candidates found in {source}")
 
@@ -79,12 +83,16 @@ def main() -> int:
     ap.add_argument("--episode", required=True)
     ap.add_argument("--size", type=int, default=4)
     ap.add_argument("--mode", choices=["HERO", "HYBRID"])
-    ap.add_argument("--import-dir", type=Path, help="Import already generated candidate PNGs and preview them")
+    ap.add_argument(
+        "--import-dir", type=Path, help="Import already generated candidate PNGs and preview them"
+    )
+    ap.add_argument("--ids", help="Comma-separated scene IDs to import; skips all other PNGs")
     args = ap.parse_args()
 
     episode = Path(args.episode).resolve()
     if args.import_dir is not None:
-        return import_staged_candidates(episode, args.import_dir)
+        requested = {part.strip().upper() for part in args.ids.split(",")} if args.ids else None
+        return import_staged_candidates(episode, args.import_dir, requested)
     prompts = load(episode / "visual_asset_prompts.json")
     log_path = episode / "asset_review_log.json"
     log = load(log_path)
