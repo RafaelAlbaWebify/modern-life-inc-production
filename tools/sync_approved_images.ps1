@@ -12,16 +12,32 @@ $Assets = [ordered]@{
  S037 = "1KMZq345UCp8yFSMBDFQ7CR26nqeIX_8w"
  S054 = "1pd7Tlu4cvEAjiTZ8hLs50g7R5K2lydx9"
 }
-if (-not (Get-Command rclone -ErrorAction SilentlyContinue)) {
- throw "rclone is required. Install once: winget install Rclone.Rclone ; restart PowerShell."
+$RcloneCommand = Get-Command rclone -ErrorAction SilentlyContinue
+if (-not $RcloneCommand) {
+    Write-Host "[SETUP] Installing rclone via winget..."
+    if (-not (Get-Command winget -ErrorAction SilentlyContinue)) { throw "winget not available; install App Installer or rclone first" }
+    & winget install --id Rclone.Rclone --exact --accept-package-agreements --accept-source-agreements
+    if ($LASTEXITCODE -ne 0) { throw "winget failed installing rclone" }
+    $RcloneCommand = Get-Command rclone -ErrorAction SilentlyContinue
+    if (-not $RcloneCommand) {
+        $Candidates = @(
+            (Join-Path $env:LOCALAPPDATA "Microsoft/WinGet/Links/rclone.exe"),
+            (Join-Path $env:ProgramFiles "rclone/rclone.exe")
+        )
+        foreach ($Candidate in $Candidates) {
+            if (Test-Path -LiteralPath $Candidate) { $RcloneCommand = $Candidate; break }
+        }
+    }
+    if (-not $RcloneCommand) { throw "rclone installed but executable not found in current shell; open a new PowerShell window and retry" }
 }
-$Remotes = @(rclone listremotes)
+$RcloneExe = if ($RcloneCommand -is [string]) { $RcloneCommand } else { $RcloneCommand.Source }
+$Remotes = @(& $RcloneExe listremotes)
 if ($LASTEXITCODE -ne 0) { throw "rclone remote query failed" }
 if ("$($Remote):" -notin $Remotes) {
  Write-Host "One-time Google OAuth configuration required; create remote named '$Remote' with storage type 'drive'."
- rclone config
+ & $RcloneExe config
  if ($LASTEXITCODE -ne 0) { throw "rclone config failed" }
- $Remotes = @(rclone listremotes)
+ $Remotes = @(& $RcloneExe listremotes)
  if ("$($Remote):" -notin $Remotes) { throw "Remote '$Remote' not configured" }
 }
 New-Item -ItemType Directory -Path $Target -Force | Out-Null
@@ -38,7 +54,7 @@ foreach ($Id in $Assets.Keys) {
  }
  $Temp = Join-Path $Target "$Id.download.png"
  if (Test-Path -LiteralPath $Temp) { Remove-Item -LiteralPath $Temp -Force }
- & rclone backend copyid "$($Remote):" $Assets[$Id] $Temp
+ & $RcloneExe backend copyid "$($Remote):" $Assets[$Id] $Temp
  if ($LASTEXITCODE -ne 0) { throw "Drive download failed for $Id" }
  if (-not (Test-Path -LiteralPath $Temp)) { throw "Download missing for $Id" }
  $Bytes = [System.IO.File]::ReadAllBytes($Temp)
