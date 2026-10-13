@@ -40,6 +40,21 @@ if ("$($Remote):" -notin $Remotes) {
  $Remotes = @(& $RcloneExe listremotes)
  if ("$($Remote):" -notin $Remotes) { throw "Remote '$Remote' not configured" }
 }
+# Test the remote before copying; expired/revoked OAuth credentials require
+# the account owner to approve reconnect in their browser.
+$Probe = & $RcloneExe lsf "$($Remote):" --max-depth 1 2>&1 | Out-String
+if ($LASTEXITCODE -ne 0) {
+    $Diagnostic = $Probe -join ""
+    if ($Diagnostic -match "invalid_grant|token expired|token has been expired|try refreshing with") {
+        Write-Host "[AUTH] Existing Google Drive token expired/revoked. Reauthorize once in your browser."
+        & $RcloneExe config reconnect "$($Remote):"
+        if ($LASTEXITCODE -ne 0) { throw "Google Drive reconnection was not completed" }
+        & $RcloneExe lsf "$($Remote):" --max-depth 1 1>$null
+        if ($LASTEXITCODE -ne 0) { throw "Google Drive still inaccessible after reconnect" }
+    } else {
+        throw "Cannot access Google Drive remote: $Diagnostic"
+    }
+}
 New-Item -ItemType Directory -Path $Target -Force | Out-Null
 $Downloaded = 0
 foreach ($Id in $Assets.Keys) {
