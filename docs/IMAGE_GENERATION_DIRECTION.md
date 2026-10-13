@@ -2,7 +2,7 @@
 
 ## Master visual language
 
-Editorial psychological illustration for a faceless YouTube channel.
+For MLI-001, the current approved baseline is hyperreal cinematic photography for HERO/HYBRID base images; SYSTEM scenes use vector-style graphic composition. Historical illustration-only guidance below is superseded for the photographic base layer.
 
 Core traits:
 - dark charcoal / near-black background
@@ -13,7 +13,7 @@ Core traits:
 - subtle geometric environments
 - symbolic visual metaphors
 - high contrast
-- no photorealism
+- photorealism for HERO/HYBRID photography; restrained vector graphics only for SYSTEM/overlays
 - no visible brand logos
 - no embedded text unless explicitly requested
 - composition optimized for 16:9 video

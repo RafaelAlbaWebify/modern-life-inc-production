@@ -1,4 +1,4 @@
-# Hybrid Compositor Contract v2
+# Hybrid Compositor Contract v2 — specification and implementation status
 
 ## Objective
 
@@ -8,7 +8,7 @@ Compose Modern Life Inc. episodes from declarative scene JSON using three visual
 - HYBRID
 - HERO
 
-The compositor is responsible for assembly and motion. It is **not** expected to generate images itself.
+The compositor is responsible for assembly. **Current MLI-001 implementation renders still frames and composites them with FFmpeg; the motion primitives listed below are aspirational and not accepted as implemented.** It is not expected to generate images itself.
 
 ## Visual modes
 
@@ -62,7 +62,7 @@ Optional:
 
 ## Base images
 
-Generated images are referenced by stable logical IDs, never absolute paths.
+**Specification target:** generated images use stable logical IDs resolved via the asset registry. **Current implementation:** scene JSON uses `base_image` relative filenames resolved within the episode media directory; logical-ID lookup is not implemented. Do not claim compliance with this target until an end-to-end test exists.
 
 Examples:
 - hero.mli001.s001

@@ -1,7 +1,7 @@
 {
   "project": "Modern Life Inc.",
   "current_phase": "mli001_visual_completion_and_qa",
-  "current_milestone": "Three local HYBRID previews S002 S004 S010 rendered successfully; six-hour workflow elapsed, optimizing for publishable MLI-001 over incremental scripting",
+  "current_milestone": "PR #12 merged; strict preflight and placeholder CI smoke passed; four visual candidates downloaded to local review; editorial approval and final render pending",
   "readiness": {
     "production_ready": false,
     "publishable_episode_ready": false,
@@ -20,14 +20,14 @@
     ]
   },
   "current_blockers": [
-    "Editorial inspection of preview PNGs not yet performed",
-    "24 required base images not installed in final media/generated; 8 locked installed",
-    "Final strict render and visual QA pending"
+    "Local 8/32 locked assets; additional staged candidates are not accepted final assets",
+    "Final strict render with no placeholders and audiovisual editorial acceptance pending",
+    "S012 and S052 approved source binaries not installed"
   ],
   "next_recommended_actions": [
-    "Review S002 S004 S010 previews as a single batch (montage), then promote or revise only if acceptable",
-    "Produce/recover unresolved photo assets in coherent batches instead of one scene per conversation",
-    "Render strictly without placeholders and conduct full audiovisual QA before release"
+    "Validate four newly staged candidate photos for S014 S018 S019 S022 and accept only with explicit review decision",
+    "Close original 32-image asset gap using existing visual workflow in batches",
+    "Perform strict no-placeholder final render, audiovisual QA and publish checklist"
   ],
   "storage_policy": "minimal_retention",
   "git": {
@@ -47,7 +47,7 @@
     "manifest_duration_seconds": 447.948,
     "classification_mismatches": 0,
     "renderer_check": "static only; no MP4 produced in this check",
-    "render_ci": "Run 38372452795 succeeded: all steps passed including full visual render and three-scene synthetic audio mux; artifact 11799169245",
+    "render_ci": "Production MVP run 38419495365 succeeded after fixing legacy 552-second assertion",
     "real_narration_render": {
       "source": "User-supplied Windows PowerShell output, 2026-10-13",
       "scene_count": 56,

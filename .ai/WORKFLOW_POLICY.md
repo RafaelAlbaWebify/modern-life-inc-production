@@ -2,7 +2,7 @@
 
 ## Mandatory operating rules
 1. Deliver complete functional increments; avoid one PR/commit per minor component. Define deliverable and acceptance criteria before work.
-2. Before opening a PR, run Ruff lint, Ruff format check, Pyright, and pytest. A PR is blocked if any fails; if a tool is not configured, set it up in the existing project rather than claiming preflight passed. Record exact results. These checks have not yet been established as passing in this repository.
+2. Before opening a PR, run Ruff lint, Ruff format check, Pyright, and pytest. A PR is blocked if any fails; if a tool is not configured, set it up in the existing project rather than claiming preflight passed. Record exact results. Preflight was verified green on 2026-10-13 (PR #12 / run 38414510274). Re-run and record results for every new PR.
 3. Minimize manual user intervention. Request local/browser checks only when access to the PC, Chrome, or an external service makes them essential; combine operations into one operator step.
 4. Reuse existing architecture and files; no parallel scripts, duplicate state stores, or alternative pipelines without a demonstrated requirement.
 5. Measure progress by usable, verified functionality and publication readiness, not commit count, PR count, or chat turns.

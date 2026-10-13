@@ -4,7 +4,7 @@
 
 Keep the first upload moving without blocking on VoiceBox automation.
 
-VoiceBox/Nova is currently the only manual production step.
+The locked narration was generated with VoiceStudio PocketTTS. The final local WAV was verified at 447.947 seconds; it is not stored in GitHub. This document describes the handoff, not the current TTS creation step.
 
 ## Input
 
@@ -41,6 +41,6 @@ Output:
 
 ## Current rule
 
-Do not spend time automating VoiceBox before MLI-001 publishes.
+Do not spend time changing the approved PocketTTS narration before MLI-001 publishes.
 
 After the first upload, measure whether manual narration generation is a meaningful bottleneck. If it is, automate or replace it with a CLI/API-capable TTS system.
