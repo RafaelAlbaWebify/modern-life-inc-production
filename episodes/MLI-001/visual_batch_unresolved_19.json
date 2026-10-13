@@ -1,0 +1,102 @@
+{
+  "batch_id": "MLI001-visual-19-unresolved-v1",
+  "episode_id": "MLI-001",
+  "purpose": "19 previously missing or rejected photoreal base images for verified episode storyboard",
+  "assets": [
+    {
+      "id": "S008",
+      "candidate_file": "media/generated/_review/S008_candidate_next.png",
+      "prompt": "ONE standalone 16:9 still photograph, not a collage or storyboard. In a quiet modern cafe, one adult turns toward another adult at the next table and naturally initiates a friendly conversation with an open-hand gesture; the listener makes eye contact; exactly two people in focus; candid documentary moment. Contemporary everyday environment, diverse plausible adult individuals, natural realistic facial anatomy and hands, documentary photography, premium cinematic amber practical lighting and charcoal shadows, nuanced expressions, tasteful shallow depth of field, physically believable scene, room for later graphic overlays. No business settings, office towers, skylines, laptop productivity, airport, suitcases, charts or corporate imagery. No watermarks, captions, labels, scene IDs, symbols, speech balloons, drawn effects or embedded text."
+    },
+    {
+      "id": "S009",
+      "candidate_file": "media/generated/_review/S009_candidate_next.png",
+      "prompt": "ONE standalone 16:9 still photograph, not a collage or storyboard. At a cafe exit, two adults had just said goodbye but one turns back with a friendly smile and a small beckoning gesture, beginning a new sentence as the other pauses to listen; exactly two people, dynamic moment, not a group. Contemporary everyday environment, diverse plausible adult individuals, natural realistic facial anatomy and hands, documentary photography, premium cinematic amber practical lighting and charcoal shadows, nuanced expressions, tasteful shallow depth of field, physically believable scene, room for later graphic overlays. No business settings, office towers, skylines, laptop productivity, airport, suitcases, charts or corporate imagery. No watermarks, captions, labels, scene IDs, symbols, speech balloons, drawn effects or embedded text."
+    },
+    {
+      "id": "S013",
+      "candidate_file": "media/generated/_review/S013_candidate_next.png",
+      "prompt": "ONE standalone 16:9 still photograph, not a collage or storyboard. In a cafe, a person makes a momentary accidental glance toward another person passing behind, then immediately looks away; unreciprocated gaze, not a romantic exchange, single fleeting look. Contemporary everyday environment, diverse plausible adult individuals, natural realistic facial anatomy and hands, documentary photography, premium cinematic amber practical lighting and charcoal shadows, nuanced expressions, tasteful shallow depth of field, physically believable scene, room for later graphic overlays. No business settings, office towers, skylines, laptop productivity, airport, suitcases, charts or corporate imagery. No watermarks, captions, labels, scene IDs, symbols, speech balloons, drawn effects or embedded text."
+    },
+    {
+      "id": "S014",
+      "candidate_file": "media/generated/_review/S014_candidate_next.png",
+      "prompt": "ONE standalone 16:9 still photograph, not a collage or storyboard. Intimate medium close shot of exactly two adult acquaintances seated opposite each other in a cozy cafe, looking directly into one another's eyes at the same instant, clear unobstructed faces and both pupils visible, attentive relaxed expressions; visual evidence of shared mutual eye contact. Contemporary everyday environment, diverse plausible adult individuals, natural realistic facial anatomy and hands, documentary photography, premium cinematic amber practical lighting and charcoal shadows, nuanced expressions, tasteful shallow depth of field, physically believable scene, room for later graphic overlays. No business settings, office towers, skylines, laptop productivity, airport, suitcases, charts or corporate imagery. No watermarks, captions, labels, scene IDs, symbols, speech balloons, drawn effects or embedded text."
+    },
+    {
+      "id": "S018",
+      "candidate_file": "media/generated/_review/S018_candidate_next.png",
+      "prompt": "ONE standalone 16:9 still photograph, not a collage or storyboard. Close-up of two adults sitting across a cafe table, both hands making nearly identical gentle conversational gestures at the same time, natural mirroring without touching; show both sets of hands clearly with partial faces in background. Contemporary everyday environment, diverse plausible adult individuals, natural realistic facial anatomy and hands, documentary photography, premium cinematic amber practical lighting and charcoal shadows, nuanced expressions, tasteful shallow depth of field, physically believable scene, room for later graphic overlays. No business settings, office towers, skylines, laptop productivity, airport, suitcases, charts or corporate imagery. No watermarks, captions, labels, scene IDs, symbols, speech balloons, drawn effects or embedded text."
+    },
+    {
+      "id": "S019",
+      "candidate_file": "media/generated/_review/S019_candidate_next.png",
+      "prompt": "ONE standalone 16:9 still photograph, not a collage or storyboard. Exactly two adult friends seated together in a cafe both breaking into genuine laughter simultaneously, natural unposed expressions, reciprocal smiles and visible eyes, neither posing for camera. Contemporary everyday environment, diverse plausible adult individuals, natural realistic facial anatomy and hands, documentary photography, premium cinematic amber practical lighting and charcoal shadows, nuanced expressions, tasteful shallow depth of field, physically believable scene, room for later graphic overlays. No business settings, office towers, skylines, laptop productivity, airport, suitcases, charts or corporate imagery. No watermarks, captions, labels, scene IDs, symbols, speech balloons, drawn effects or embedded text."
+    },
+    {
+      "id": "S022",
+      "candidate_file": "media/generated/_review/S022_candidate_next.png",
+      "prompt": "ONE standalone 16:9 still photograph, not a collage or storyboard. Two adults talking face-to-face in a private quiet cafe booth, one leaning forward and sharing a meaningful personal feeling while the other listens with empathy; visual progression from small talk to trust captured as emotionally intimate body language, no text. Contemporary everyday environment, diverse plausible adult individuals, natural realistic facial anatomy and hands, documentary photography, premium cinematic amber practical lighting and charcoal shadows, nuanced expressions, tasteful shallow depth of field, physically believable scene, room for later graphic overlays. No business settings, office towers, skylines, laptop productivity, airport, suitcases, charts or corporate imagery. No watermarks, captions, labels, scene IDs, symbols, speech balloons, drawn effects or embedded text."
+    },
+    {
+      "id": "S024",
+      "candidate_file": "media/generated/_review/S024_candidate_next.png",
+      "prompt": "ONE standalone 16:9 still photograph, not a collage or storyboard. A close two-person cafe scene: after one adult shares something vulnerable, the other adult reciprocates by speaking honestly, holding gentle eye contact with an open posture; clear mutual exchange. Contemporary everyday environment, diverse plausible adult individuals, natural realistic facial anatomy and hands, documentary photography, premium cinematic amber practical lighting and charcoal shadows, nuanced expressions, tasteful shallow depth of field, physically believable scene, room for later graphic overlays. No business settings, office towers, skylines, laptop productivity, airport, suitcases, charts or corporate imagery. No watermarks, captions, labels, scene IDs, symbols, speech balloons, drawn effects or embedded text."
+    },
+    {
+      "id": "S025",
+      "candidate_file": "media/generated/_review/S025_candidate_next.png",
+      "prompt": "ONE standalone 16:9 still photograph, not a collage or storyboard. Wide natural cafe setting featuring one central adult speaking animatedly and superficially to a loose group in the background while in foreground a different pair exchange private focused sincere conversation; clear selective disclosure contrast within one believable frame. Contemporary everyday environment, diverse plausible adult individuals, natural realistic facial anatomy and hands, documentary photography, premium cinematic amber practical lighting and charcoal shadows, nuanced expressions, tasteful shallow depth of field, physically believable scene, room for later graphic overlays. No business settings, office towers, skylines, laptop productivity, airport, suitcases, charts or corporate imagery. No watermarks, captions, labels, scene IDs, symbols, speech balloons, drawn effects or embedded text."
+    },
+    {
+      "id": "S028",
+      "candidate_file": "media/generated/_review/S028_candidate_next.png",
+      "prompt": "ONE standalone 16:9 still photograph, not a collage or storyboard. Two adults in cafe; one recounts an interesting story with expressive gesture while the other glances away at a phone and responds distractedly, emotional difference very clear without caricature. Contemporary everyday environment, diverse plausible adult individuals, natural realistic facial anatomy and hands, documentary photography, premium cinematic amber practical lighting and charcoal shadows, nuanced expressions, tasteful shallow depth of field, physically believable scene, room for later graphic overlays. No business settings, office towers, skylines, laptop productivity, airport, suitcases, charts or corporate imagery. No watermarks, captions, labels, scene IDs, symbols, speech balloons, drawn effects or embedded text."
+    },
+    {
+      "id": "S029",
+      "candidate_file": "media/generated/_review/S029_candidate_next.png",
+      "prompt": "ONE standalone 16:9 still photograph, not a collage or storyboard. Two adults in cafe; one tells a story and the other responds with engaged follow-up question, leaning toward speaker with inquisitive expression and hand gesture, strong reciprocal connection. Contemporary everyday environment, diverse plausible adult individuals, natural realistic facial anatomy and hands, documentary photography, premium cinematic amber practical lighting and charcoal shadows, nuanced expressions, tasteful shallow depth of field, physically believable scene, room for later graphic overlays. No business settings, office towers, skylines, laptop productivity, airport, suitcases, charts or corporate imagery. No watermarks, captions, labels, scene IDs, symbols, speech balloons, drawn effects or embedded text."
+    },
+    {
+      "id": "S033",
+      "candidate_file": "media/generated/_review/S033_candidate_next.png",
+      "prompt": "ONE standalone 16:9 still photograph, not a collage or storyboard. Two adults conversing at a cafe table with one beginning to talk while the other politely waits and smiles; visible hesitation and interrupted conversational rhythm, natural not posed, leave negative space for comparison overlay. Contemporary everyday environment, diverse plausible adult individuals, natural realistic facial anatomy and hands, documentary photography, premium cinematic amber practical lighting and charcoal shadows, nuanced expressions, tasteful shallow depth of field, physically believable scene, room for later graphic overlays. No business settings, office towers, skylines, laptop productivity, airport, suitcases, charts or corporate imagery. No watermarks, captions, labels, scene IDs, symbols, speech balloons, drawn effects or embedded text."
+    },
+    {
+      "id": "S036",
+      "candidate_file": "media/generated/_review/S036_candidate_next.png",
+      "prompt": "ONE standalone 16:9 still photograph, not a collage or storyboard. Two adults walking together along a tree-lined urban street, engaged in smoothly flowing conversation, similar relaxed walking rhythm and postures, warm late afternoon realistic setting. Contemporary everyday environment, diverse plausible adult individuals, natural realistic facial anatomy and hands, documentary photography, premium cinematic amber practical lighting and charcoal shadows, nuanced expressions, tasteful shallow depth of field, physically believable scene, room for later graphic overlays. No business settings, office towers, skylines, laptop productivity, airport, suitcases, charts or corporate imagery. No watermarks, captions, labels, scene IDs, symbols, speech balloons, drawn effects or embedded text."
+    },
+    {
+      "id": "S038",
+      "candidate_file": "media/generated/_review/S038_candidate_next.png",
+      "prompt": "ONE standalone 16:9 still photograph, not a collage or storyboard. Close-up of adult hands holding a modern smartphone while seated in cafe; screen deliberately blank and dark for later compositor text; warm real ambient setting, no legible interface or words. Contemporary everyday environment, diverse plausible adult individuals, natural realistic facial anatomy and hands, documentary photography, premium cinematic amber practical lighting and charcoal shadows, nuanced expressions, tasteful shallow depth of field, physically believable scene, room for later graphic overlays. No business settings, office towers, skylines, laptop productivity, airport, suitcases, charts or corporate imagery. No watermarks, captions, labels, scene IDs, symbols, speech balloons, drawn effects or embedded text."
+    },
+    {
+      "id": "S039",
+      "candidate_file": "media/generated/_review/S039_candidate_next.png",
+      "prompt": "ONE standalone 16:9 still photograph, not a collage or storyboard. Natural close-up of a hand sharing something on a smartphone while another adult nearby smiles with interest, cafe table and two coffee cups in soft focus; screen blank for later overlay, no legible words. Contemporary everyday environment, diverse plausible adult individuals, natural realistic facial anatomy and hands, documentary photography, premium cinematic amber practical lighting and charcoal shadows, nuanced expressions, tasteful shallow depth of field, physically believable scene, room for later graphic overlays. No business settings, office towers, skylines, laptop productivity, airport, suitcases, charts or corporate imagery. No watermarks, captions, labels, scene IDs, symbols, speech balloons, drawn effects or embedded text."
+    },
+    {
+      "id": "S045",
+      "candidate_file": "media/generated/_review/S045_candidate_next.png",
+      "prompt": "ONE standalone 16:9 still photograph, not a collage or storyboard. Candid adults interacting in a softly lit cafe, one relaxed while another attentive, nonverbal chemistry communicated through subtle body language and reciprocal orientation, generous negative space for pattern graphic. Contemporary everyday environment, diverse plausible adult individuals, natural realistic facial anatomy and hands, documentary photography, premium cinematic amber practical lighting and charcoal shadows, nuanced expressions, tasteful shallow depth of field, physically believable scene, room for later graphic overlays. No business settings, office towers, skylines, laptop productivity, airport, suitcases, charts or corporate imagery. No watermarks, captions, labels, scene IDs, symbols, speech balloons, drawn effects or embedded text."
+    },
+    {
+      "id": "S047",
+      "candidate_file": "media/generated/_review/S047_candidate_next.png",
+      "prompt": "ONE standalone 16:9 still photograph, not a collage or storyboard. Two adults pause on a pleasant city sidewalk after a cafe date, facing each other in a warm but restrained farewell, one makes a small effort to prolong the encounter, early evening. Contemporary everyday environment, diverse plausible adult individuals, natural realistic facial anatomy and hands, documentary photography, premium cinematic amber practical lighting and charcoal shadows, nuanced expressions, tasteful shallow depth of field, physically believable scene, room for later graphic overlays. No business settings, office towers, skylines, laptop productivity, airport, suitcases, charts or corporate imagery. No watermarks, captions, labels, scene IDs, symbols, speech balloons, drawn effects or embedded text."
+    },
+    {
+      "id": "S049",
+      "candidate_file": "media/generated/_review/S049_candidate_next.png",
+      "prompt": "ONE standalone 16:9 still photograph, not a collage or storyboard. Exactly two adults relaxed at a cafe table, one person smiles while asking a thoughtful question, the other responds with comfortable open body language; subtle genuine attraction, no exaggerated romance. Contemporary everyday environment, diverse plausible adult individuals, natural realistic facial anatomy and hands, documentary photography, premium cinematic amber practical lighting and charcoal shadows, nuanced expressions, tasteful shallow depth of field, physically believable scene, room for later graphic overlays. No business settings, office towers, skylines, laptop productivity, airport, suitcases, charts or corporate imagery. No watermarks, captions, labels, scene IDs, symbols, speech balloons, drawn effects or embedded text."
+    },
+    {
+      "id": "S050",
+      "candidate_file": "media/generated/_review/S050_candidate_next.png",
+      "prompt": "ONE standalone 16:9 still photograph, not a collage or storyboard. A candid photo of the same two adults walking away from a cafe together in conversation, mutually engaged, shared forward motion conveying a voluntary plan to see each other again, warm evening. Contemporary everyday environment, diverse plausible adult individuals, natural realistic facial anatomy and hands, documentary photography, premium cinematic amber practical lighting and charcoal shadows, nuanced expressions, tasteful shallow depth of field, physically believable scene, room for later graphic overlays. No business settings, office towers, skylines, laptop productivity, airport, suitcases, charts or corporate imagery. No watermarks, captions, labels, scene IDs, symbols, speech balloons, drawn effects or embedded text."
+    }
+  ]
+}
