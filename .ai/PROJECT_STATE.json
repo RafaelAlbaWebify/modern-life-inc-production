@@ -1,7 +1,7 @@
 {
   "project": "Modern Life Inc.",
   "current_phase": "mli001_visual_completion_and_qa",
-  "current_milestone": "Eight locked images S001 S007 S017 S023 S027 S032 S037 S054 installed locally, user PowerShell verification 2026-10-13",
+  "current_milestone": "Three local HYBRID previews S002 S004 S010 rendered successfully; six-hour workflow elapsed, optimizing for publishable MLI-001 over incremental scripting",
   "readiness": {
     "production_ready": false,
     "publishable_episode_ready": false,
@@ -12,18 +12,22 @@
     "full_render_ci_result": "successful per GitHub Actions workflow screenshot; detailed logs/artifact not independently retrieved",
     "audio_mux_smoke_test": "passed in CI run 38372452795, job full-render, Verify audio mux and timing success",
     "real_audio_full_render_verified": true,
-    "locked_assets_installed_local": 8
+    "locked_assets_installed_local": 8,
+    "hybrid_previews_generated_local": [
+      "S002",
+      "S004",
+      "S010"
+    ]
   },
   "current_blockers": [
-    "Five staged images awaiting QA",
-    "Two approved but not locked assets (S012 S052) require source verification",
-    "17 scenes unresolved (16 missing, 1 retry)",
-    "Final full production render visual QA pending"
+    "Editorial inspection of preview PNGs not yet performed",
+    "24 required base images not installed in final media/generated; 8 locked installed",
+    "Final strict render and visual QA pending"
   ],
   "next_recommended_actions": [
-    "Recover staged candidates S002 S004 S008 S009 S010 in a single archive for review",
-    "Resolve approved S012 and S052 file provenance",
-    "Complete 16 missing and S013 retry, followed by strict no-placeholder render"
+    "Review S002 S004 S010 previews as a single batch (montage), then promote or revise only if acceptable",
+    "Produce/recover unresolved photo assets in coherent batches instead of one scene per conversation",
+    "Render strictly without placeholders and conduct full audiovisual QA before release"
   ],
   "storage_policy": "minimal_retention",
   "git": {
