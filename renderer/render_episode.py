@@ -182,11 +182,8 @@ def render_scene(
         p = (episode_dir / base).resolve() if base else None
         if p is not None and p.exists():
             img = fit_cover(Image.open(p))
-            draw = ImageDraw.Draw(img, "RGBA")
-            if mode == "HYBRID":
-                draw.rectangle((0, 0, W, H), fill=(0, 0, 0, 28))
-                hybrid_overlay(draw, scene)
-                draw_text_card(draw, scene.get("on_screen_text", ""), 820, 68)
+            # HERO and HYBRID photography stays unmodified: no speech bubbles,
+            # titles, captions, darkening, or compositor graphics over the photo.
         elif allow_placeholders:
             img = system_scene(
                 {**scene, "layout": "single_focus", "on_screen_text": f"{mode} VISUAL PENDING"}
