@@ -1,12 +1,13 @@
 """Build QA stills for recovered candidates without promoting unapproved assets."""
 from __future__ import annotations
 import json
+import importlib
 from pathlib import Path
 import sys
 from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from renderer import render_episode
+render_episode = importlib.import_module("renderer.render_episode")
 EPISODE = ROOT / "episodes" / "MLI-001"
 STAGING = EPISODE / "media" / "generated" / "_review" / "recovered"
 OUTPUT = EPISODE / "output" / "hybrid_review"
