@@ -56,11 +56,36 @@ jobs:
           assert abs(actual-expected)<0.5, f"Duration mismatch {actual} vs {expected}"
           print(f"PASS: {len(m['scenes'])} scenes, {actual:.3f}s, 1920x1080")
           PY
+      - name: Generate synthetic narration for mux smoke test
+        run: |
+          ffmpeg -hide_banner -loglevel error -y -f lavfi -i "sine=frequency=440:sample_rate=24000:duration=20" -ac 1 -c:a pcm_s16le /tmp/mli001_synthetic_voice.wav
+      - name: Render three scenes with audio via production renderer
+        run: |
+          python renderer/render_episode.py --episode episodes/MLI-001 --limit 3 --allow-placeholders --audio /tmp/mli001_synthetic_voice.wav --output output/rough_cut_audio_smoke.mp4
+      - name: Verify audio mux and timing
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          m=json.loads(Path("episodes/MLI-001/production_manifest.json").read_text())
+          expected=sum(float(s["duration_sec"]) for s in m["scenes"][:3])
+          path="episodes/MLI-001/output/rough_cut_audio_smoke.mp4"
+          p=json.loads(subprocess.check_output(["ffprobe","-v","error","-show_format","-show_streams","-of","json",path]))
+          streams=p["streams"]
+          video=[s for s in streams if s["codec_type"]=="video"]
+          audio=[s for s in streams if s["codec_type"]=="audio"]
+          duration=float(p["format"]["duration"])
+          assert len(video)==1 and len(audio)==1, (video,audio)
+          assert audio[0]["codec_name"]=="aac", audio[0]
+          assert abs(duration-expected)<0.5, (duration,expected)
+          print(f"PASS audio mux: {duration:.3f}s, video and AAC audio streams")
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: mli001-rough-cut-smoke
           path: |
             episodes/MLI-001/output/rough_cut_visual_smoke.mp4
+            episodes/MLI-001/output/rough_cut_audio_smoke.mp4
           retention-days: 3
           if-no-files-found: ignore
