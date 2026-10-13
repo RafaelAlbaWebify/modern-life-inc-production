@@ -1,0 +1,66 @@
+name: MLI-001 full render smoke test
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/mli001-render-smoke.yml'
+      - 'renderer/render_episode.py'
+      - 'episodes/MLI-001/production_manifest.json'
+      - 'episodes/MLI-001/visual_plan.json'
+
+jobs:
+  full-render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          python -m pip install -r requirements.txt
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+      - name: Validate manifest modes
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          e = Path("episodes/MLI-001")
+          manifest = json.loads((e/"production_manifest.json").read_text())
+          plan = json.loads((e/"visual_plan.json").read_text())
+          scenes = manifest["scenes"]
+          assert len(scenes) == len(plan["modes"]) == 56
+          assert all(s["visual_mode"] == plan["modes"][s["id"]] for s in scenes)
+          assert all(("base_image" in s) == (s["visual_mode"] != "SYSTEM") for s in scenes)
+          print("56 scenes and all classifications verified")
+          PY
+      - name: Render complete video with placeholders, no narration
+        run: |
+          python renderer/render_episode.py --episode episodes/MLI-001 --allow-placeholders --output output/rough_cut_visual_smoke.mp4
+      - name: Verify MP4 video and duration
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          m=json.loads(Path("episodes/MLI-001/production_manifest.json").read_text())
+          expected=sum(float(x["duration_sec"]) for x in m["scenes"])
+          p="episodes/MLI-001/output/rough_cut_visual_smoke.mp4"
+          d=json.loads(subprocess.check_output(["ffprobe","-v","error","-show_format","-show_streams","-of","json",p]))
+          v=[s for s in d["streams"] if s["codec_type"]=="video"]
+          actual=float(d["format"]["duration"])
+          assert len(v)==1, f"Expected one video stream, got {len(v)}"
+          assert int(v[0]["width"])==1920 and int(v[0]["height"])==1080
+          assert abs(actual-expected)<0.5, f"Duration mismatch {actual} vs {expected}"
+          print(f"PASS: {len(m['scenes'])} scenes, {actual:.3f}s, 1920x1080")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mli001-rough-cut-smoke
+          path: |
+            episodes/MLI-001/output/rough_cut_visual_smoke.mp4
+          retention-days: 3
+          if-no-files-found: ignore
