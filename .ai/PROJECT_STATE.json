@@ -1,26 +1,27 @@
 {
   "project": "Modern Life Inc.",
-  "current_phase": "mli001_end_to_end_validation",
-  "current_milestone": "56-scene silent visual render and 3-scene synthetic AAC mux verified successful in GitHub Actions run 38372452795; actual narration synchronization pending",
+  "current_phase": "mli001_visual_completion_and_qa",
+  "current_milestone": "Real narration full rough cut passed locally: 56 scenes, narration WAV 447.947s, MP4 447.947s, AAC, 1920x1080; visual editorial QA pending",
   "readiness": {
     "production_ready": false,
     "publishable_episode_ready": false,
     "manifest_reconciled": true,
     "renderer_static_check_passed": true,
     "full_render_verified": true,
-    "local_narration_wav_verified": false,
+    "local_narration_wav_verified": true,
     "full_render_ci_result": "successful per GitHub Actions workflow screenshot; detailed logs/artifact not independently retrieved",
-    "audio_mux_smoke_test": "passed in CI run 38372452795, job full-render, Verify audio mux and timing success"
+    "audio_mux_smoke_test": "passed in CI run 38372452795, job full-render, Verify audio mux and timing success",
+    "real_audio_full_render_verified": true
   },
   "current_blockers": [
-    "Actual finalized ~447.95s narration.wav is not yet accessible for real-audio integration validation",
-    "32 photographic scene assets are not yet all approved and available for final renderer input",
-    "Final full-length audiovisual editorial QA and publication pending"
+    "Full-length rough cut is technically generated, but artistic/narrative QA and placeholders are pending",
+    "Not all 32 HERO/HYBRID assets are approved and synchronized to the production PC",
+    "FFmpeg emitted nonfatal '100 buffers queued' warning; monitor if reproducing with final assets"
   ],
   "next_recommended_actions": [
-    "Locate finalized narration WAV on production PC or connected storage and verify actual 56-scene narration render",
-    "Review finalized narrated rough cut",
-    "Complete remaining production visual assets and final QA"
+    "Inspect rough_cut_with_voice.mp4 visually to identify placeholder and quality issues",
+    "Prioritize missing/weak HERO and HYBRID assets using retention criteria",
+    "Re-render and check final version before publishing"
   ],
   "storage_policy": "minimal_retention",
   "git": {
@@ -40,6 +41,18 @@
     "manifest_duration_seconds": 447.948,
     "classification_mismatches": 0,
     "renderer_check": "static only; no MP4 produced in this check",
-    "render_ci": "Run 38372452795 succeeded: all steps passed including full visual render and three-scene synthetic audio mux; artifact 11799169245"
+    "render_ci": "Run 38372452795 succeeded: all steps passed including full visual render and three-scene synthetic audio mux; artifact 11799169245",
+    "real_narration_render": {
+      "source": "User-supplied Windows PowerShell output, 2026-10-13",
+      "scene_count": 56,
+      "wav_duration_seconds": 447.947,
+      "mp4_duration_seconds": 447.947,
+      "width": 1920,
+      "height": 1080,
+      "audio_codec": "aac",
+      "status": "passed automated local checks",
+      "output": "C:\\ModernLifeInc\\episodes\\MLI-001\\output\\rough_cut_with_voice.mp4",
+      "caveat": "Visual quality not reviewed"
+    }
   }
 }
