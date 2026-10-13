@@ -1,7 +1,7 @@
 {
   "project": "Modern Life Inc.",
   "current_phase": "mli001_end_to_end_validation",
-  "current_milestone": "GitHub Actions full 56-scene visual smoke test shown successful in user screenshot (2026-10-13); narration mux and editorial review pending",
+  "current_milestone": "56-scene visual render smoke passed; CI audio-mux test added for 3 scenes with synthetic narration, execution pending",
   "readiness": {
     "production_ready": false,
     "publishable_episode_ready": false,
@@ -9,7 +9,8 @@
     "renderer_static_check_passed": true,
     "full_render_verified": true,
     "local_narration_wav_verified": false,
-    "full_render_ci_result": "successful per GitHub Actions workflow screenshot; detailed logs/artifact not independently retrieved"
+    "full_render_ci_result": "successful per GitHub Actions workflow screenshot; detailed logs/artifact not independently retrieved",
+    "audio_mux_smoke_test": "configured; pending CI execution"
   },
   "current_blockers": [
     "Final narration WAV mux and audiovisual synchronization not yet validated",
@@ -17,9 +18,9 @@
     "End-to-end publishable QA remains pending"
   ],
   "next_recommended_actions": [
-    "Validate visual artifact and audio mux against final narration WAV",
-    "Confirm visual output timing and sample scenes in player",
-    "After technical validation, complete missing approved images and final QA"
+    "Verify GitHub Actions 'MLI-001 full render smoke test' run for commit da93a89 and inspect audio-mux test result",
+    "Once passed, validate actual 447.95-second narration.wav from local/Drive storage",
+    "Review end-to-end rough cut and proceed to visual asset completion"
   ],
   "storage_policy": "minimal_retention",
   "git": {
