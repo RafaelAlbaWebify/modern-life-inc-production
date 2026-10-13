@@ -1,25 +1,25 @@
 {
   "project": "Modern Life Inc.",
   "current_phase": "mli001_end_to_end_validation",
-  "current_milestone": "56-scene manifest reconciled; GitHub Actions render test committed but no execution result verified",
+  "current_milestone": "GitHub Actions full 56-scene visual smoke test shown successful in user screenshot (2026-10-13); narration mux and editorial review pending",
   "readiness": {
     "production_ready": false,
     "publishable_episode_ready": false,
     "manifest_reconciled": true,
     "renderer_static_check_passed": true,
-    "full_render_verified": false,
+    "full_render_verified": true,
     "local_narration_wav_verified": false,
-    "full_render_ci_result": "unverified: zero PR-associated runs returned for commit 13d53f9b; commit statuses empty"
+    "full_render_ci_result": "successful per GitHub Actions workflow screenshot; detailed logs/artifact not independently retrieved"
   },
   "current_blockers": [
-    "GitHub Actions full render test has not been observed running or passing; verify Actions workflow result",
-    "Approved visual binaries must be brought from Drive into the local episode media/generated directory before final render",
-    "Renderer uses static images; production polish and true motion/overlay behaviour are not yet validated"
+    "Final narration WAV mux and audiovisual synchronization not yet validated",
+    "Final visual assets not all approved/local",
+    "End-to-end publishable QA remains pending"
   ],
   "next_recommended_actions": [
-    "Inspect GitHub Actions workflow 'MLI-001 full render smoke test' and run it via Run workflow if absent",
-    "Capture pass/fail and ffprobe output; repair concrete errors only",
-    "Validate narration mux using existing local WAV once visual smoke render passes"
+    "Validate visual artifact and audio mux against final narration WAV",
+    "Confirm visual output timing and sample scenes in player",
+    "After technical validation, complete missing approved images and final QA"
   ],
   "storage_policy": "minimal_retention",
   "git": {
@@ -39,6 +39,6 @@
     "manifest_duration_seconds": 447.948,
     "classification_mismatches": 0,
     "renderer_check": "static only; no MP4 produced in this check",
-    "render_ci": "Workflow file exists; no verified run outcome; check is not a PASS"
+    "render_ci": "GitHub Actions green success displayed in screenshot, workflow 'MLI-001 full render smoke test', run #1, approximately 2m29s; no audio validation"
   }
 }
