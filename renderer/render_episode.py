@@ -97,6 +97,31 @@ def system_scene(scene: dict[str, Any]) -> Image.Image:
     return img
 
 
+
+def hybrid_overlay(draw: ImageDraw.ImageDraw, scene: dict[str, Any]) -> None:
+    """Deterministic editorial overlays, separate from photographic backgrounds."""
+    sid = scene.get("id", "")
+    if sid == "S002":
+        for x, y in ((180, 220), (1530, 190), (250, 690), (1560, 710)):
+            draw.text((x, y), "?", font=font(118, True), fill=(255, 176, 32, 225),
+                      stroke_width=3, stroke_fill=(15, 15, 15, 170))
+    elif sid == "S004":
+        for x, y, r in ((730, 350, 13), (930, 290, 18), (1140, 390, 12)):
+            draw.ellipse((x-r, y-r, x+r, y+r), fill=(255, 176, 32, 230))
+    elif sid in {"S008", "S009"}:
+        # Static speech bubbles; animation is not implemented by this renderer.
+        anchors = ((1230, 205, 1660, 360),) if sid == "S008" else (
+            (240, 215, 620, 355), (1120, 175, 1670, 365))
+        for i, (x0, y0, x1, y1) in enumerate(anchors):
+            fill = (255, 176, 32, 215) if sid == "S009" and i == 1 else (244, 239, 230, 195)
+            draw.rounded_rectangle((x0, y0, x1, y1), radius=54,
+                                   fill=fill, outline=(15, 15, 15, 160), width=5)
+            draw.polygon([(x0+85, y1-2), (x0+132, y1-2), (x0+105, y1+45)], fill=fill)
+    elif sid == "S010":
+        draw.rectangle((0, 0, W//2, H), fill=(15, 15, 15, 75))
+        draw.line((W//2, 75, W//2, H-75), fill=(255, 176, 32, 230), width=8)
+        draw.text((170, 175), "OBLIGATION", font=font(52, True), fill=(244, 239, 230, 230))
+
 def render_scene(scene: dict[str, Any], episode_dir: Path, output: Path, allow_placeholders: bool = False) -> None:
     mode = scene.get("visual_mode", "SYSTEM").upper()
     base = scene.get("base_image")
@@ -108,6 +133,7 @@ def render_scene(scene: dict[str, Any], episode_dir: Path, output: Path, allow_p
             draw = ImageDraw.Draw(img, "RGBA")
             if mode == "HYBRID":
                 draw.rectangle((0,0,W,H), fill=(0,0,0,28))
+                hybrid_overlay(draw, scene)
                 draw_text_card(draw, scene.get("on_screen_text",""), 820, 68)
         elif allow_placeholders:
             img = system_scene({**scene, "layout": "single_focus", "on_screen_text": f"{mode} VISUAL PENDING"})
