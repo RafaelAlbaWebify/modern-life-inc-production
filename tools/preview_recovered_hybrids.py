@@ -2,11 +2,12 @@
 from __future__ import annotations
 import json
 from pathlib import Path
+import sys
 from tempfile import TemporaryDirectory
 from PIL import Image
-from renderer.render_episode import render_scene
-
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from renderer.render_episode import render_scene
 EPISODE = ROOT / "episodes" / "MLI-001"
 STAGING = EPISODE / "media" / "generated" / "_review" / "recovered"
 OUTPUT = EPISODE / "output" / "hybrid_review"
