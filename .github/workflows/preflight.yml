@@ -6,31 +6,7 @@ on:
       - feature/**
   pull_request:
 
-permissions:
-  contents: write
-
 jobs:
-  normalize-format:
-    if: github.event_name == 'push'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref_name }}
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - run: python -m pip install ruff
-      - name: Normalize existing Python format in feature branch
-        run: |
-          python -m ruff format .
-          if ! git diff --quiet; then
-            git config user.name 'github-actions[bot]'
-            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            git add -- '*.py'
-            git commit -m 'Normalize Python formatting for mandatory preflight'
-            git push origin HEAD:${{ github.ref_name }}
-          fi
   python-preflight:
     runs-on: ubuntu-latest
     timeout-minutes: 15
