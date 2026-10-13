@@ -37,22 +37,24 @@ jobs:
           assert all(("base_image" in s) == (s["visual_mode"] != "SYSTEM") for s in scenes)
           print("56 scenes and all classifications verified")
           PY
-      - name: Verify five HYBRID overlay compositions
+      - name: Verify all HYBRID overlay compositions
         run: |
           python - <<'PY'
-          import tempfile
+          import tempfile, json
           from pathlib import Path
           from PIL import Image, ImageChops
           from renderer.render_episode import render_scene
           with tempfile.TemporaryDirectory() as tmp:
               root=Path(tmp)
-              for sid in ("S002","S004","S008","S009","S010"):
+              manifest=json.loads(Path("episodes/MLI-001/production_manifest.json").read_text())
+              hybrid=[scene for scene in manifest["scenes"] if scene["visual_mode"]=="HYBRID"]
+              assert len(hybrid)==22
+              for scene in hybrid:
+                  sid=scene["id"]
                   base=root/(sid+".png")
                   Image.new("RGB",(1920,1080),(65,65,65)).save(base)
                   out=root/(sid+"_out.png")
-                  render_scene({"id":sid,"visual_mode":"HYBRID","base_image":base.name,
-                                "on_screen_text":"CHOICE MATTERS" if sid=="S010" else ""},
-                               root,out,False)
+                  render_scene({**scene, "base_image":base.name},root,out,False)
                   with Image.open(out) as im:
                       assert im.size==(1920,1080)
                       assert ImageChops.difference(im.convert("RGB"),Image.new("RGB",im.size,(65,65,65))).getbbox()
