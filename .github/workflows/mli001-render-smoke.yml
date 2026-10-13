@@ -37,6 +37,27 @@ jobs:
           assert all(("base_image" in s) == (s["visual_mode"] != "SYSTEM") for s in scenes)
           print("56 scenes and all classifications verified")
           PY
+      - name: Verify five HYBRID overlay compositions
+        run: |
+          python - <<'PY'
+          import tempfile
+          from pathlib import Path
+          from PIL import Image, ImageChops
+          from renderer.render_episode import render_scene
+          with tempfile.TemporaryDirectory() as tmp:
+              root=Path(tmp)
+              for sid in ("S002","S004","S008","S009","S010"):
+                  base=root/(sid+".png")
+                  Image.new("RGB",(1920,1080),(65,65,65)).save(base)
+                  out=root/(sid+"_out.png")
+                  render_scene({"id":sid,"visual_mode":"HYBRID","base_image":base.name,
+                                "on_screen_text":"CHOICE MATTERS" if sid=="S010" else ""},
+                               root,out,False)
+                  with Image.open(out) as im:
+                      assert im.size==(1920,1080)
+                      assert ImageChops.difference(im.convert("RGB"),Image.new("RGB",im.size,(65,65,65))).getbbox()
+                  print("PASS HYBRID overlay",sid)
+          PY
       - name: Render complete video with placeholders, no narration
         run: |
           python renderer/render_episode.py --episode episodes/MLI-001 --allow-placeholders --output output/rough_cut_visual_smoke.mp4
