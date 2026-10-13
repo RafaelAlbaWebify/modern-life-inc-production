@@ -1,7 +1,7 @@
 {
   "project": "Modern Life Inc.",
   "current_phase": "mli001_visual_completion_and_qa",
-  "current_milestone": "Real narration full rough cut passed locally: 56 scenes, narration WAV 447.947s, MP4 447.947s, AAC, 1920x1080; visual editorial QA pending",
+  "current_milestone": "Eight locked images S001 S007 S017 S023 S027 S032 S037 S054 installed locally, user PowerShell verification 2026-10-13",
   "readiness": {
     "production_ready": false,
     "publishable_episode_ready": false,
@@ -11,17 +11,19 @@
     "local_narration_wav_verified": true,
     "full_render_ci_result": "successful per GitHub Actions workflow screenshot; detailed logs/artifact not independently retrieved",
     "audio_mux_smoke_test": "passed in CI run 38372452795, job full-render, Verify audio mux and timing success",
-    "real_audio_full_render_verified": true
+    "real_audio_full_render_verified": true,
+    "locked_assets_installed_local": 8
   },
   "current_blockers": [
-    "Full-length rough cut is technically generated, but artistic/narrative QA and placeholders are pending",
-    "Not all 32 HERO/HYBRID assets are approved and synchronized to the production PC",
-    "FFmpeg emitted nonfatal '100 buffers queued' warning; monitor if reproducing with final assets"
+    "Five staged images awaiting QA",
+    "Two approved but not locked assets (S012 S052) require source verification",
+    "17 scenes unresolved (16 missing, 1 retry)",
+    "Final full production render visual QA pending"
   ],
   "next_recommended_actions": [
-    "Inspect rough_cut_with_voice.mp4 visually to identify placeholder and quality issues",
-    "Prioritize missing/weak HERO and HYBRID assets using retention criteria",
-    "Re-render and check final version before publishing"
+    "Recover staged candidates S002 S004 S008 S009 S010 in a single archive for review",
+    "Resolve approved S012 and S052 file provenance",
+    "Complete 16 missing and S013 retry, followed by strict no-placeholder render"
   ],
   "storage_policy": "minimal_retention",
   "git": {
@@ -53,6 +55,7 @@
       "status": "passed automated local checks",
       "output": "C:\\ModernLifeInc\\episodes\\MLI-001\\output\\rough_cut_with_voice.mp4",
       "caveat": "Visual quality not reviewed"
-    }
+    },
+    "locked_assets_local": "PowerShell confirmed 8 PNG filenames copied to media/generated; binary quality and content not inspected locally"
   }
 }
