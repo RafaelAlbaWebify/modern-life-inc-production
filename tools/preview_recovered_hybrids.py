@@ -3,11 +3,10 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import sys
-from tempfile import TemporaryDirectory
 from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from renderer.render_episode import render_scene
+from renderer import render_episode
 EPISODE = ROOT / "episodes" / "MLI-001"
 STAGING = EPISODE / "media" / "generated" / "_review" / "recovered"
 OUTPUT = EPISODE / "output" / "hybrid_review"
@@ -33,7 +32,7 @@ def main() -> None:
         with Image.open(source) as image:
             image.verify()
         scene = {**scenes[sid], "base_image": source.name}
-        render_scene(scene, source.parent, OUTPUT / f"{sid}_hybrid_preview.png", False)
+        render_episode.render_scene(scene, source.parent, OUTPUT / f"{sid}_hybrid_preview.png", False)
         print(f"[PASS] {sid} composite -> {OUTPUT / (sid + '_hybrid_preview.png')}")
     print("[INFO] Preview only: no files promoted, no QA status modified.")
 
