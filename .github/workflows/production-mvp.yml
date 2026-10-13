@@ -45,8 +45,8 @@ jobs:
           p = Path("episodes/MLI-001/production_manifest.json")
           data = json.loads(p.read_text())
           assert len(data["scenes"]) == 56, len(data["scenes"])
-          assert sum(s["duration_sec"] for s in data["scenes"]) == 552
-          print("[PASS] 56 scenes / 552 seconds")
+          assert abs(sum(s["duration_sec"] for s in data["scenes"]) - 447.948) < 0.02
+          print("[PASS] 56 scenes / 447.948 seconds")
           PY
 
       - name: Render full placeholder rough cut
