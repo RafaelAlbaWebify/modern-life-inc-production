@@ -41,7 +41,7 @@
       "final_file": "media/generated/S002.png",
       "source_candidate": "MLI-001_S002_candidate_03.png",
       "attempts": 3,
-      "notes": "Candidate 03 uploaded to Drive staging. Narrative/overlay QA pending; not approved or locked.",
+      "notes": "2026-10-13 QA: candidate_03 visually usable as base for one-person question motif; HYBRID requires question marks in renderer. Retain candidate for compositing review; NOT locked.",
       "drive_file_id": "1XTfgkFBHNcQFb-XCVEVupfimkaL8INH2"
     },
     "S004": {
@@ -51,7 +51,7 @@
       "final_file": "media/generated/S004.png",
       "source_candidate": "MLI-001_S004_candidate_01.png",
       "attempts": 1,
-      "notes": "Candidate 01 uploaded to Drive staging. Visual QA pending; not approved or locked.",
+      "notes": "2026-10-13 QA: candidate_01 usable as two-person interaction, but small amber signal dots must be rendered as graphics rather than baked-in fantasy effects. Retain pending composite review.",
       "drive_file_id": "1-nk15ckBymkse_RRwLnKOG-x3sWz-T-R"
     },
     "S007": {
@@ -68,21 +68,21 @@
     "S008": {
       "mode": "HYBRID",
       "section": "Sign 1",
-      "status": "generated",
+      "status": "retry",
       "final_file": "media/generated/S008.png",
       "source_candidate": "MLI-001_S008_candidate_01.png",
       "attempts": 1,
-      "notes": "Candidate saved to Drive. Preliminary QA: shows group conversation; conversational initiation not yet explicit. Needs final narrative QA.",
+      "notes": "2026-10-13 QA: candidate_01 depicts group conversation; fails to clearly show one person initiating a conversation. Retry with explicit two-person interaction and initiating gesture.",
       "drive_file_id": "1MkVghnnrpImADyxWDMycChv4-PEtt3_E"
     },
     "S009": {
       "mode": "HYBRID",
       "section": "Sign 1",
-      "status": "generated",
+      "status": "retry",
       "final_file": "media/generated/S009.png",
       "source_candidate": "MLI-001_S009_candidate_01.png",
       "attempts": 1,
-      "notes": "Candidate saved to Drive. Preliminary QA: group conversation, but reopening an ending exchange is not visually clear. Needs final narrative QA.",
+      "notes": "2026-10-13 QA: candidate_01 depicts a similar group conversation and does not show one person reopening an ending exchange. Retry with explicit second interaction cue; vary composition from S008.",
       "drive_file_id": "1XFjn-9DeeyAZQYsD7OOI76Y9MEz-Rx5z"
     },
     "S010": {
@@ -92,7 +92,7 @@
       "final_file": "media/generated/S010.png",
       "source_candidate": "MLI-001_S010_candidate_02.png",
       "attempts": 2,
-      "notes": "Candidate 02 saved in Drive. Split contrast between work interaction and voluntary social approach; pending final QA, not approved or locked.",
+      "notes": "2026-10-13 QA: candidate_02 visually promising as split work/voluntary interaction. Verify clear left/right contrast and legibility of CHOICE MATTERS overlay before approval.",
       "drive_file_id": "1mNur3Ls3QTH0NGJSxPBvygp6q5oZFrlw"
     },
     "S012": {
