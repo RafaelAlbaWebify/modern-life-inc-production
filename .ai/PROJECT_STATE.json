@@ -1,22 +1,24 @@
 {
   "project": "Modern Life Inc.",
-  "current_phase": "channel_os_reset",
-  "current_milestone": "brand repositioned; repository being converted to new operating model",
-  "overall_completion_percentage": 20,
-  "operability_percentage": 20,
-  "testing_percentage": 0,
+  "current_phase": "mli001_end_to_end_validation",
+  "current_milestone": "MLI-001 manifest reconciled (56 scenes, 10 HERO, 22 HYBRID, 24 SYSTEM); renderer static compatibility checked; full render not yet executed",
   "readiness": {
     "production_ready": false,
-    "publishable_episode_ready": false
+    "publishable_episode_ready": false,
+    "manifest_reconciled": true,
+    "renderer_static_check_passed": true,
+    "full_render_verified": false,
+    "local_narration_wav_verified": false
   },
   "current_blockers": [
-    "vidIQ is connected to ChatGPT but the YouTube channel is not yet authorized for private analytics",
-    "new renderer should not be built until visual grammar is validated against first episode"
+    "Full 56-scene rough cut with placeholders and narration has not been demonstrated in this session",
+    "Approved visual binaries must be brought from Drive into the local episode media/generated directory before final render",
+    "Renderer uses static images; production polish and true motion/overlay behaviour are not yet validated"
   ],
   "next_recommended_actions": [
-    "build market intelligence dataset",
-    "rank first 30 topics",
-    "choose first new-positioning episode"
+    "Run render_with_narration.ps1 using existing local media/narration.wav and verify ffprobe duration/streams",
+    "Review the full 56-scene output and fix any rendering errors",
+    "Only then complete missing visual assets and final audiovisual QA"
   ],
   "storage_policy": "minimal_retention",
   "git": {
@@ -24,5 +26,17 @@
     "repository": "https://github.com/RafaelAlbaWebify/modern-life-inc-production.git",
     "default_working_branch": "main",
     "provenance_rule": "Repository HEAD is authoritative. Live commit/status belong in generated snapshots, not tracked self-referential fields."
+  },
+  "last_verified": {
+    "scope": "repository source and manifest",
+    "scene_count": 56,
+    "visual_modes": {
+      "HERO": 10,
+      "HYBRID": 22,
+      "SYSTEM": 24
+    },
+    "manifest_duration_seconds": 447.948,
+    "classification_mismatches": 0,
+    "renderer_check": "static only; no MP4 produced in this check"
   }
 }
