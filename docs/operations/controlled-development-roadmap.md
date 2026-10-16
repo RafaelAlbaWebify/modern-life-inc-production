@@ -14,7 +14,7 @@ Reference: VERIDRA controlled development roadmap. This roadmap concerns **devel
 - Preserve local images, WAVs and modified manifests. Keep private or binary data out of repository.
 
 ## Phase 1 — Controlled production governance (0%)
-- **1.1 — Context and state (35%)**: `modern-life-inc.md` accurately identifies project, commands, main HEAD, branches, latest verified CI and NEXT. Evidence: file in main, reviewed content, green PR CI.
+- **1.1 — Context and state (35%)**: `youtube.md` accurately identifies project, commands, main HEAD, branches, latest verified CI and NEXT. Evidence: file in main, reviewed content, green PR CI.
 - **1.2 — Weighted roadmap and EA (35%)**: this file has stable numbering/weights, binary progress rules and demonstrable EA calculations. Evidence: review/test of sums and merged file plus green CI.
 - **1.3 — Preflight and preservation (30%)**: recorded repeatable Windows preflight, no destructive operations, clear merge authorization process. Evidence: preflight output, CI and accepted merged governance workflow.
 - **Total phase progress: 0%**; governance files in PR are not merged.
