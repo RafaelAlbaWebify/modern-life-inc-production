@@ -24,7 +24,7 @@
 - Goal: original, engaging, low-cost, as-automated-as-practical episodes with human editorial QA.
 - Reference direction: simple reusable visual language; avoid unneeded photorealistic continuity burden.
 - Repository: RafaelAlbaWebify/modern-life-inc-production; protected target branch: main.
-- Working review branch: feature/controlled-development-context-20261016; PR pending creation.
+- Working review branch: feature/controlled-development-context-20261016; active PR #15.
 - Windows workspace: C:\ModernLifeInc; preserve uncommitted production_manifest.json and media/.
 - Canonical episode: episodes/MLI-001; storyboard and production_manifest.json contain 56 timed scenes.
 - Composition: 10 HERO, 22 HYBRID, 24 SYSTEM; classification does NOT imply animation.
