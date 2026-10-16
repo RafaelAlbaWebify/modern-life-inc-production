@@ -23,7 +23,7 @@
 - Purpose: Modern Life Inc., an English-language faceless YouTube channel on modern-life psychology.
 - Goal: original, engaging, low-cost, as-automated-as-practical episodes with human editorial QA.
 - Reference direction: simple reusable visual language; avoid unneeded photorealistic continuity burden.
-- Repository: RafaelAlbaWebify/modern-life-inc-production; protected target branch: main.
+- Repository: RafaelAlbaWebify/modern-life-inc-production; target branch: main.
 - Working review branch: feature/controlled-development-context-20261016; active PR #15.
 - Windows workspace: C:\ModernLifeInc; preserve uncommitted production_manifest.json and media/.
 - Canonical episode: episodes/MLI-001; storyboard and production_manifest.json contain 56 timed scenes.
@@ -39,8 +39,8 @@
 ## STATE
 - Verified main HEAD: be7116d09e3823538fe76cfb1f49c23c47cb3135 (PR #14 merged 2026-10-13).
 - Open PR inventory on 2026-10-16 before this work: none.
-- Latest observed CI overall: preflight run 38437852866, green on unmerged
-  feature/clean-photographic-scenes commit 0794b933 (2026-10-13).
+- Governance PR #15 latest checked head: 20653fa; CI in progress at this state update.
+- Separate clean-photo branch 0794b933: preflight run 38437852866 green, not merged.
 - Main render smoke observed green at ab25857, run 38420189513; not proof of current main full QA.
 - 14 historical PRs merged; MLI-001 placeholder-enabled audio MP4 technically verified locally.
 - Eight local locked scene assets reported; remaining photographic quality/availability not fully verified.
