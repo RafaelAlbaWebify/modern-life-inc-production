@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 1.3 (2026-10-25)
+Version: 1.4 (2026-10-25)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -144,3 +144,13 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 5. Script title/hook and claims edited for narrative retention and accuracy; thumbnail and final branding consistent with channel assets.
 6. Export native source quality honestly (768x432 tests scaled to 1080p, not new native 1080p details); reconsider production render resolution before publishing.
 7. Explicit human final screening and approval. Record per-stage acceptance in GitHub metadata; verify Drive uploads separately if requested.
+
+
+## 2026-10-25: User review and camera-direction correction (v1.4)
+- User watched MLI_PILOT_001_ENHANCED.mp4 and rejected the repetitive/brusque zoom, experienced as seemingly constant zoom-out. This is explicit creative feedback: DO NOT automate alternating zoom-in/out, or add motion solely to make still pictures move.
+- Narrative-first movement rule: default is a STILL frame. Any pan/zoom must have a declared narrative purpose, target subject/prop, approximate narration beat, intensity and easing. Subtle camera work is optional, not a quota. Prefer natural cuts, new image compositions and purposeful visual reveals over repetitive digital zoom.
+- Changed tools/build-mli-pilot-enhanced.py to remove the generic alternating camera effect. SC01, SC02, SC03, SC05 and SC06 use static framing. Only SC04 ("The change begins when you put the phone down") applies a max 2% SMOOTHSTEP push aimed toward the lower-right placed phone after about 55% of that scene's speech duration. This is a PROPOSED editorial test, not visually or perceptually approved. It follows the six accepted existing images and original voice clips.
+- The previous MLI_PILOT_001_ENHANCED.mp4 is an experimental rejected camera-motion version. Do not treat it as a master.
+- Re-render command: download latest https://raw.githubusercontent.com/RafaelAlbaWebify/modern-life-inc-production/main/tools/build-mli-pilot-enhanced.py to $env:TEMP\build-mli-pilot-enhanced.py, run python $env:TEMP\build-mli-pilot-enhanced.py --pause 0.25. Creates a separate enhanced_MLI_PILOT_001_timestamp folder; retains originals and previous output.
+- Source updated and read back in GitHub. The revised local MP4 is not yet rendered/visually verified; requires user execution and review before acceptance. Script SRT remains approximate external subtitle timing; optional soundtrack is only present if provided with proven usage rights.
+- Later improvement: explicitly author scene/shot motion cues in a small JSON storyboard (e.g., hold / target / onset / speed / easing) rather than hardcoding per-scene camera rules. Introduce scene-internal cuts on actual story beats when justified, not automatic motion.
