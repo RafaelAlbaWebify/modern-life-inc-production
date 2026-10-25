@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Modern Life Inc pilot: synced Ken Burns motion, optional licensed music, SRT captions.
+"""Modern Life Inc pilot: narratively directed selective movement, optional licensed music, SRT captions.
 Windows Python 3.10+ standard library, FFmpeg + FFprobe in PATH.
 Existing VoiceStudio SC01.wav .. SC06.wav; no speech/image regeneration.
 """
@@ -97,18 +97,25 @@ def main():
         pause = args.pause if i != 5 else 0
         duration = item["audio_seconds"] + pause
         clip = folder / f"{scene}.mp4"
-        # zoompan generated once per output frame. Alternating in/out movement ~4%,
-        # ensuring mild motion without distorting character identity.
+        # Directional motion is editorial, NOT decoration.
+        # Only SC04 visually marks "put the phone down": hold still, then
+        # make a slow 2% push toward the phone on the rooftop (lower right).
+        # Do not animate the other five scenes without a narrative beat map.
         frames = math.ceil(duration * 30)
-        if i % 2 == 0:
-            zoom = "min(zoom+0.00045,1.045)"
+        if scene == "SC04":
+            onset = math.floor(item["audio_seconds"] * 0.55 * 30)
+            progress = f"min(max((on-{onset})/{max(1,frames-onset-1)},0),1)"
+            # Smoothstep interpolation eliminates abrupt changes in speed.
+            ease = f"({progress})*({progress})*(3-2*({progress}))"
+            zoom = f"1+0.02*({ease})"
+            vf = (
+                "scale=1920:1080:flags=lanczos,"
+                f"zoompan=z='{zoom}':"
+                "x='(iw-iw/zoom)*0.67':y='(ih-ih/zoom)*0.75':"
+                "d=1:s=1920x1080:fps=30,format=yuv420p"
+            )
         else:
-            zoom = "max(1.045-on*0.00045,1.0)"
-        vf = (
-            "scale=1920:1080:flags=lanczos,"
-            f"zoompan=z='{zoom}':x='iw/2-iw/zoom/2':y='ih/2-ih/zoom/2':d=1:"
-            "s=1920x1080:fps=30,format=yuv420p"
-        )
+            vf = "scale=1920:1080:flags=lanczos,setsar=1,format=yuv420p"
         run("ffmpeg","-hide_banner","-loglevel","error","-y",
             "-loop","1","-framerate","30","-i",item["image"],
             "-i",item["wav"],"-map","0:v:0","-map","1:a:0",
