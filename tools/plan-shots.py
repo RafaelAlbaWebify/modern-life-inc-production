@@ -39,14 +39,21 @@ def render(d,s):
  return "\n".join(sections)
 def main():
  p=argparse.ArgumentParser()
- p.add_argument("--shots",required=True)
- p.add_argument("--out",required=True)
- a=p.parse_args();d=json.loads(pathlib.Path(a.shots).read_text(encoding="utf-8"))
+ repo_root=pathlib.Path(__file__).resolve().parents[1]
+ p.add_argument("--shots",default=None,help="Shot JSON; default relative to this script's repository")
+ p.add_argument("--out",default=None,help="Output directory; defaults to Downloads")
+ a=p.parse_args()
+ shots=pathlib.Path(a.shots).expanduser().resolve() if a.shots else repo_root/"episodes"/"MLI_PILOT_001"/"shots.json"
+ output=pathlib.Path(a.out).expanduser().resolve() if a.out else pathlib.Path.home()/"Downloads"/"MLI_PILOT_001_PROMPTS"
+ if not shots.is_file():
+  print(f"Missing shot contract: {shots}. For a standalone script pass --shots ABSOLUTE_PATH.",file=sys.stderr)
+  return 2
+ d=json.loads(shots.read_text(encoding="utf-8"))
  errors=check(d)
  if errors:
   for e in errors:print("FAIL:",e,file=sys.stderr)
   return 2
- out=pathlib.Path(a.out);out.mkdir(parents=True,exist_ok=True)
+ out=output;out.mkdir(parents=True,exist_ok=True)
  manifest={"episode_id":d["episode_id"],"schema_version":1,"shots":[]}
  for s in d["scenes"]:
   prompt=render(d,s)
