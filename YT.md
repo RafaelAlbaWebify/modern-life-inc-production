@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 1.7 (2026-10-25)
+Version: 1.8 (2026-10-25)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -201,3 +201,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Six frames extracted at 3, 10, 16, 22, 28, 34 s visually checked; foreground iconic lead stays consistent and secondary supporting figures present in SC02, SC03, SC06. Visual story is improved over V1 but NOT approved for release.
 - SC05 still actively holds phone while writing, contradicting intentional boundaries. SC06 friend adds warmth, but lead gaze is downward and engagement with friend could be stronger. Each of six still images lasts ~5-7 seconds, limiting narrative variety despite new background characters. Proposed: SC05 phone aside, SC06 protagonist responsive, a few additional meaningful story-beat cuts rather than arbitrary zoom.
 - Do not claim subjective voice quality audited by human listening. Final release must review SRT real-word timing and any captions burned in. Preserve this V2 render as baseline, not master.
+
+## 2026-10-25: Production reproducibility redesign (v1.8)
+- Postmortem: repeated visual corrections are not just weak prompts. Root cause is narration-to-six-images coupling, no explicit shot grammar, vague prop/eyeline/hand constraints, no semantic QC, generic movement and probabilistic image editing; FLUX.2 Klein can violate complex instructions. The four-step low-memory setup is a feasibility baseline, not guaranteed production quality.
+- New production design recorded in docs/production-pipeline-contract.md; it is a **proposal, not yet implemented or validated**. Includes structured shots.json, character/style references, precise required/forbidden actions, bounded generation attempts, targeted test panel, configurable renderer, QA gates and explicit human acceptance.
+- Example SC05: phone must be on separate shelf and never in protagonist's hands; SC06: lead must make eye contact with friend. Define observable visual facts, not vague mood adjectives.
+- Do not repeatedly re-render 6-scene videos just to discover failed shots. Validate the plan and image candidates before montage; pilot 3 representative difficult shots, assess engine quality before locking.
