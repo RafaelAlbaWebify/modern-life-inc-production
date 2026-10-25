@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 1.6 (2026-10-25)
+Version: 1.7 (2026-10-25)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -177,3 +177,13 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - For local cleanup, use a strict allowlist of output folders: enhanced_MLI_PILOT_001_*, synced_MLI_PILOT_001_*, roughcut_MLI_PILOT_001_*. Never delete models, WAVs, story_consistency original/revised, CHARACTER_REFERENCE, sources or source code. Preview first, quarantine old render folders in Downloads; preserve latest run. Do not permanently delete without review. Cloud cleanup cannot be inferred from local naming.
 - Google Drive production folder was inspected: contains scene assets and storyboard, rejected candidates and prior transfer/test assets. Do not bulk-delete: old scene images may be required for future episodes, and uploaded local FLUX2 final candidates were not independently verified there. No Drive deletions made.
 - GitHub source, narration, scripts and evidence are retained. No confirmed obsolete code or large generated MP4 files identified via GitHub inventory, so no repository deletion was made. GitHub cleanup requires a targeted review/manifest, not blind deletion.
+
+
+## 2026-10-25: Six-image V2 storyboard & local batch (v1.7)
+- User wants greater narrative variety, secondary generic characters with ordinary stylized faces, and a fixed iconic original protagonist. Secondary faces should have normally drawn facial features; only the protagonist retains minimal face and orange headphones.
+- Six V2 images generated (1672x941): SC01 desk notifications; SC02 urban street plus ordinary-faced passersby; SC03 café plus background patrons; SC04 rooftop sunset phone laid aside; SC05 desk writing but phone STILL in hand (known QC fail); SC06 sofa conversation with female friend and cat. The six-image ZIP was provided in ChatGPT, NOT confirmed uploaded to Drive or saved to local PC. No V2 video rendered yet. The protagonist's face and illustrated style are retained in candidates, but human final approval is pending.
+- Exact visual + narrative map and open issues are in episodes/MLI_PILOT_001/V2-storyboard.md. These are candidates; do NOT overwrite first-generation source image folders or claim an approved master.
+- tools/build-mli-pilot-enhanced.py now accepts --images-dir LOCATION containing SC01.png..SC06.png. Supports both legacy 768x432 and V2 1672x941. This script reads existing local WAV voice clips; outputs still go to Windows Downloads as agreed. SC04 legacy selective phone zoom is disabled for --images-dir because new scene's phone is at a different location: camera defaults STATIC in V2.
+- V2 run: extract MLI_PILOT_001_V2_IMAGES.zip into $HOME\Downloads\MLI_PILOT_001_V2_IMAGES (files directly inside directory); download latest GitHub script; run python $env:TEMP\build-mli-pilot-enhanced.py --pause 0.25 --images-dir "$HOME\Downloads\MLI_PILOT_001_V2_IMAGES".
+- Important: native size 1672x941 is near 16:9 but not exact; scale to 1920x1080 can cause slight aspect mismatch, check visually. Text-based caption SRT remains estimated; not aligned/embedded.
+- Current status: script/source/metadata saved and verified in GitHub; image package produced in conversation, V2 local video execution, visual QA, Drive upload, release all pending.
