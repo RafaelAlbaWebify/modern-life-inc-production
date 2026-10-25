@@ -55,6 +55,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--root", default=r"C:\AI\MLI-FluxTest-Vulkan")
     ap.add_argument("--audio-dir", default=None)
+    ap.add_argument("--output-dir", default=None, help="Render output parent; defaults to Windows Downloads")
     ap.add_argument("--pause", type=float, default=0.25)
     ap.add_argument("--music", default=None, help="Optional locally licensed music file")
     ap.add_argument("--music-volume", type=float, default=0.08, help="Linear amplitude, only if music supplied")
@@ -86,7 +87,12 @@ def main():
         if not math.isfinite(length) or length < 0.2:
             raise ValueError(f"Invalid duration: {wav}")
         items.append(dict(id=scene,image=image,wav=wav,audio_seconds=length))
-    folder = root / ("enhanced_MLI_PILOT_001_" + datetime.datetime.now().strftime("%Y%m%d_%H%M%S"))
+    # Output isolation: never create test renders inside the source/model workspace.
+    # On Windows, respect OneDrive Known Folder redirection when configured by allowing
+    # --output-dir; the default below is the normal user Downloads location.
+    output_parent = pathlib.Path(args.output_dir) if args.output_dir else pathlib.Path.home() / "Downloads"
+    output_parent.mkdir(parents=True, exist_ok=True)
+    folder = output_parent / ("MLI_PILOT_001_" + datetime.datetime.now().strftime("%Y%m%d_%H%M%S"))
     folder.mkdir(parents=True, exist_ok=False)
     clips = []
     subtitles = []
