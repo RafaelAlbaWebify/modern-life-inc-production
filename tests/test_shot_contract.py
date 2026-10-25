@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Unit tests for contract validation; no model or network required."""
-import importlib.util,json,pathlib,unittest
+import importlib.util,json,pathlib,unittest,os,tempfile,subprocess,sys
 root=pathlib.Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location("planner",root/"tools"/"plan-shots.py")
 planner=importlib.util.module_from_spec(spec);spec.loader.exec_module(planner)
@@ -21,6 +21,12 @@ class ContractTests(unittest.TestCase):
   prompt=planner.render(self.d,self.d["scenes"][4])
   self.assertIn("pen right hand",prompt)
   self.assertIn("phone in any hand",prompt)
+ def test_invocation_from_unrelated_cwd(self):
+  with tempfile.TemporaryDirectory() as elsewhere, tempfile.TemporaryDirectory() as outputs:
+   cmd=[sys.executable,str(root/"tools"/"plan-shots.py"),"--out",outputs]
+   p=subprocess.run(cmd,cwd=elsewhere,capture_output=True,text=True)
+   self.assertEqual(p.returncode,0,p.stderr)
+   self.assertTrue((pathlib.Path(outputs)/"SC05.txt").exists())
  def test_SC06_gaze(self):
   prompt=planner.render(self.d,self.d["scenes"][5])
   self.assertIn("protagonist looking at friend",prompt)
