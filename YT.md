@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 1.0 (2026-10-22)
+Version: 1.1 (2026-10-25)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -53,3 +53,30 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - [ ] Independently verified external writes.
 - [ ] Accurately disclosed every incomplete/blocked item with evidence.
 - [ ] Provided actionable links and next state without overclaiming.
+
+## Local FLUX.2 Klein pilot — confirmed state (2026-10-25)
+
+### Environment
+- Windows PowerShell 7; GTX 1060 3 GB; 32 GB RAM. Vulkan CLI: C:\AI\MLI-FluxTest-Vulkan\sd-cli.exe. Models: C:\AI\MLI-FluxTest\models\ (flux-2-klein-4b-q4_0.gguf, Qwen3-4B-Q4_K_S.gguf, flux2-vae.safetensors).
+- Proven config: --backend te=cpu,diffusion=vulkan0,vae=cpu; --params-backend te=cpu,diffusion=cpu,vae=cpu; -r CHARACTER_REFERENCE.png; --ref-image-args preset=flux2; Euler, 4 steps, CFG 1, 768x432 (16:9 TEST quality), unique scene seeds.
+- GPU out-of-memory can occur while running a 3D game. Validate exit code, output nonzero file, and logs; do not report success based solely on script message.
+
+### Identity and image-reference findings
+- The APPROVED channel avatar and banner define the canonical protagonist. Do not replace or redesign him to suit the generator.
+- Prompt-only generations drifted toward an anime-like character. A full-scene reference preserved the character better, but repeatedly copied room/desk/phone. A crop centered on the protagonist improved obedience to new environments.
+- Reference: C:\AI\MLI-FluxTest-Vulkan\story_consistency_revised\CHARACTER_REFERENCE.png, a 290x380 crop that still includes phone/background elements. It is NOT a neutral-background cutout.
+
+### Candidate 6-scene storyline and asset map
+- Source originals folder: C:\AI\MLI-FluxTest-Vulkan\story_consistency_20261024_210606
+- Source revised folder: C:\AI\MLI-FluxTest-Vulkan\story_consistency_revised
+- Selected in order: SC01.png [desk and incoming messages; original]; SC02.png [walking and checking phone; original]; SC03_V2.png [real cafe, cup held, phone on table; revised]; SC04_V2.png [rooftop, phone laid aside; revised]; SC05.png [writing priorities but holding phone; original, prop mismatch]; SC06_V2.png [reading on couch, phone on side table; revised, face still slightly worried].
+- These are 6/6 local CANDIDATES suitable for a rough-cut evaluation, not a finished video; 1080p native quality, narration and video pacing have NOT been validated.
+- Measured SC04_V2 164.8s and SC06_V2 174.5s; no claim about 1080p generation performance.
+- Recent local generated files have NOT been verified in Google Drive. Do not conflate them with older cloud MLI_PILOT_001 files.
+
+### Immediate production gate
+1. Finalize short English narration and scene-duration map and save lightweight scripts/metadata to GitHub.
+2. Stage exactly the six chosen PNGs non-destructively under stable names, checking all files/dimensions and preserving originals.
+3. Obtain WAV voice locally using VoiceStudio, then verify audio and actual duration.
+4. Render a rough-cut MP4 using FFmpeg (scale/pad 768x432 source to 1920x1080; upscaling does not add source detail). Align scenes with spoken lines.
+5. Review complete rough-cut for character identity, image/script match, rhythm, sound, and scene transitions before final approval. Prefer batched resumable steps rather than repeated micro-tests.
