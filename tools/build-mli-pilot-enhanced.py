@@ -109,7 +109,7 @@ def main():
         # make a slow 2% push toward the phone on the rooftop (lower right).
         # Do not animate the other five scenes without a narrative beat map.
         frames = math.ceil(duration * 30)
-        if scene == "SC04":
+        if scene == "SC04" and not args.images_dir:
             onset = math.floor(item["audio_seconds"] * 0.55 * 30)
             progress = f"min(max((on-{onset})/{max(1,frames-onset-1)},0),1)"
             # Smoothstep interpolation eliminates abrupt changes in speed.
