@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 2.1 (2026-10-25)
+Version: 2.2 (2026-10-25)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -234,3 +234,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Outputs: $HOME\Downloads\MLI_ENGINE_GATE_timestamp\ with prompts, images, invocation logs, tests log, engine_gate_results.json, README. Also ZIP in Downloads for review. Never writes render files inside repo or model folders; no model download or modification.
 - Gate checks technical PNG signature, nontrivial file length, 768x432 dimensions and exit code. Semantic compliance of people/hands/phone and character consistency NEEDS VISUAL REVIEW. The tool does NOT claim semantic auto-QC or produce complete episode. IMPORTANT: script committed but has not yet been run on user's GPU; errors/CLI compatibility still subject to live execution.
 - From ANY PowerShell path: `& { $s=Join-Path $env:TEMP 'run-mli-engine-gate.ps1'; Invoke-WebRequest 'https://raw.githubusercontent.com/RafaelAlbaWebify/modern-life-inc-production/main/tools/run-mli-engine-gate.ps1' -OutFile $s; & $s }`
+
+## 2026-10-25: Profiling before further image generation (v2.2)
+- Parsed existing engine-gate run 20261025_180715: diffusion seconds SC01 58.38, SC02 54.06, SC05 53.03; VAE decode 59.57, 59.31, 56.40; total 166.21, 160.14, 152.02. Residual (NOT solely model load): 48.26, 46.77, 42.59 seconds. Approximate means: diffusion 55.16, VAE 58.43, residual 45.87, total 159.46.
+- Main bottleneck is not only diffusion: current CPU VAE decode ~58.4s/image, ~36.6% of measured total. Do NOT infer precise model-loading time from residual or claim persistent CLI reuse works before confirming actual local `sd-cli --help`/server capability.
+- Added tools/profile-flux-logs.py offline profiler for ZIP, directory or individual log. Produces profile.csv and profile.json to Downloads/MLI_PROFILE (or --out) with timings, residual and parsing warnings, independent of working directory. Reuses prior data; no GPU run required. A new local integration test is still pending.
+- Gate stays unapproved semantically: SC02 protagonist lacks orange headphones; semantic QC and bounded retries needed. Next performance test should isolate model load/encode and compare alternative VAE/backend only if VRAM feasibility and CLI compatibility are verified, preserving source models/config.
