@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 1.1 (2026-10-25)
+Version: 1.2 (2026-10-25)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -80,3 +80,33 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 3. Obtain WAV voice locally using VoiceStudio, then verify audio and actual duration.
 4. Render a rough-cut MP4 using FFmpeg (scale/pad 768x432 source to 1920x1080; upscaling does not add source detail). Align scenes with spoken lines.
 5. Review complete rough-cut for character identity, image/script match, rhythm, sound, and scene transitions before final approval. Prefer batched resumable steps rather than repeated micro-tests.
+
+
+
+## 2026-10-25: Complete practical pilot handover (v1.2)
+
+### Confirmed milestones and reproducible setup
+- Local image generation: stable-diffusion.cpp FLUX.2 Klein 4B quantized (flux-2-klein-4b-q4_0.gguf), Qwen3-4B-Q4_K_S.gguf, flux2-vae.safetensors under C:\AI\MLI-FluxTest\models, with C:\AI\MLI-FluxTest-Vulkan\sd-cli.exe. Tested on GTX 1060 3GB, Xeon E5-1620 v3, ~32GB RAM, PowerShell 7.
+- Working image options: --backend "te=cpu,diffusion=vulkan0,vae=cpu" --params-backend "te=cpu,diffusion=cpu,vae=cpu" -r <reference_png> --ref-image-args "preset=flux2" --cfg-scale 1 --sampling-method euler --steps 4 --flash-attn off,diffusion=on -W 768 -H 432 -t 4, per-scene prompt, seed and output. Logs showed EDIT mode and successful saves. GPU OOM while a 3D game ran; close games during generation. 768x432 is TEST quality, not native 1080p.
+- Prompt-only character was wrong/anime-like; approved YouTube avatar/banner are the canonical design. Full-scene reference copied desks/bedrooms too often. Cropping original SC01 to 290x380 character-focused CHARACTER_REFERENCE.png improved scene obedience while preserving the protagonist. Crop still includes phone/background, not transparent/isolated cutout.
+- Original images: C:\AI\MLI-FluxTest-Vulkan\story_consistency_20261024_210606\. Revised images and reference: C:\AI\MLI-FluxTest-Vulkan\story_consistency_revised\. Selected order: SC01.png, SC02.png, SC03_V2.png, SC04_V2.png, SC05.png, SC06_V2.png. SC03_V2=real café; SC04_V2=rooftop, phone set aside; SC06_V2=sofa reading, phone separated. SC05 still holds phone while writing; SC04/SC06 expressions pensive. These are rough-cut candidate assets, not publication-approved.
+- GitHub artifacts: episodes/MLI_PILOT_001/narration.md (English script, 6 scene lines) and tools/build-mli-pilot-roughcut.ps1 (existing equal-duration montage builder). Voice batch PowerShell was supplied in chat, NOT previously committed to repository; do not misrepresent its source.
+
+### Local narration API: resolved failures
+- VoiceStudio 0.5.6 listening on http://localhost:3900. GET /health returned ok. GET /v1/audio/voices showed profile Modern Life Narrator v1, English voice_id e46c2df1.
+- POST /v1/audio/speech with JSON {model:'omnivoice',voice:'e46c2df1',input:'text',response_format:'wav',speed:1.0} and Invoke-WebRequest -OutFile produced real WAV after profile repair.
+- Failure 1: pockettts sidecar ModuleNotFoundError 'pocket_tts' despite model hint, related to active engine routing. Failure 2 after switching to omnivoice-subprocess: automatic reference transcription needs STT model. Profile under Saved voices > Edit had 3-second reference clip and EMPTY required Transcript. User filled 'Here's a quick sample of this voice so you can hear how it sounds.' (must correspond to actual recorded speech); afterward synthesis succeeded, 4.35s WAV via ffprobe. No additional speech recognition model installed.
+- VoiceStudio warned OmniVoice wants ~6GB VRAM while GTX 1060 has 3GB; short segments work, longer generation might be slow or OOM. Synthesize 6 sequential individual scene WAVs, verify each with ffprobe, preserve for resumability. Local intended directory C:\AI\MLI-FluxTest-Vulkan\pilot_audio\.
+
+### Video renders verified in conversation
+- Silent test: uploaded MLI_PILOT_001_ROUGHCUT.mp4, 60.00s H.264 1920x1080 30fps, NO AUDIO; 6 images x 10.0 s as specified by manifest. Staging run roughcut_MLI_PILOT_001_20261025_080025.
+- Narrated test: uploaded MLI_PILOT_001_ROUGHCUT(2).mp4, probed 35.76 seconds, H.264 1920x1080, AAC audio sampled at 24000 Hz. Manifest contains six 5.96-second scenes, staged under roughcut_MLI_PILOT_001_20261025_111354. Local PNGs and manifest supplied by user, assistant did not produce locally on their PC. Source images remain 768x432 upscaled at encoding; 1080p container != native visual resolution.
+- Current significant defect: old montage builder assigns audio TOTAL duration/6 to images even though spoken segments have different lengths. Scene changes do not reliably follow narration boundaries. New renderer must use measured duration of each SC01.wav..SC06.wav + a small defined silence pause; do not estimate from transcript word count.
+- Technical audio scan of narrated MP4 detected non-silent AAC audio and short silence intervals near 4.76-4.96s, 6.75-7.16s, 12.58-12.97s, 18.68-19.09s, 23.93-24.33s, 25.99-26.35s, 29.85-30.26s, 32.18-32.66s. These are threshold-dependent signal measurements, NOT confirmation of pronunciation/naturalness. No independent perceptual listening judgment established.
+- New source to use: tools/build-mli-pilot-synced.ps1, duration-based narrated renderer. It should preserve the original equal-duration builder and images, validate six WAVs, and generate a new run folder with MP4 + durations/manifest. On failure never report success; do not silently overwrite assets.
+
+### Next steps
+1. Execute synced renderer against EXISTING six WAVs; do not pay or generate audio again unless missing/invalid.
+2. Review narrated MP4 and adjust speech pacing; production quality requires listening review by human or actual audio-capable analysis. If user provides individual six WAVs, measure per-scene duration directly.
+3. Improve cut frequency/pace and SC05 storyboard mismatch as needed; only then finalize 1080p-quality assets, sound design, subtitle policy and publication assets.
+4. Latest local files NOT independently verified on Drive. Do not imply cloud upload or publication.
