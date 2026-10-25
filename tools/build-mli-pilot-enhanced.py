@@ -56,6 +56,7 @@ def main():
     ap.add_argument("--root", default=r"C:\AI\MLI-FluxTest-Vulkan")
     ap.add_argument("--audio-dir", default=None)
     ap.add_argument("--output-dir", default=None, help="Render output parent; defaults to Windows Downloads")
+    ap.add_argument("--images-dir", default=None, help="Optional V2 images folder with SC01.png through SC06.png")
     ap.add_argument("--pause", type=float, default=0.25)
     ap.add_argument("--music", default=None, help="Optional locally licensed music file")
     ap.add_argument("--music-volume", type=float, default=0.08, help="Linear amplitude, only if music supplied")
@@ -71,14 +72,14 @@ def main():
     # Preflight ALL inputs before rendering.
     items = []
     for scene, img_relative in SCENES:
-        image = root / img_relative
+        image = (pathlib.Path(args.images_dir) / f"{scene}.png") if args.images_dir else (root / img_relative)
         wav = audio / f"{scene}.wav"
         for file in (image, wav):
             if not file.is_file() or file.stat().st_size < 1000:
                 raise FileNotFoundError(f"Missing or empty: {file}")
         iv = [s for s in media_info(image)["streams"] if s["codec_type"] == "video"][0]
-        if (iv["width"],iv["height"]) != (768,432):
-            raise ValueError(f"Expected 768x432: {image}")
+        if (iv["width"],iv["height"]) not in ((768,432),(1672,941)):
+            raise ValueError(f"Unexpected source dimensions: {image}")
         av = media_info(wav)
         streams = [s for s in av["streams"] if s["codec_type"] == "audio"]
         if not streams:
