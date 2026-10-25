@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 2.4 (2026-10-25)
+Version: 2.5 (2026-10-25)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -251,3 +251,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Windows user run of tools/benchmark-sd-server.ps1 failed at preflight: installed sd-server help does not list --port, no server process started and no benchmark/image generated. Log path: Downloads/MLI_SERVER_BENCH_20261025_183532/server-help.txt.
 - Verified upstream sd-server docs advertise --listen-ip and --listen-port, while older builds may use --host/--port. Updated benchmark to inspect local executable help for either pair and select compatible flags dynamically; HTTP readiness now checks GET / instead of assuming GET /v1/models. GitHub file update verified by commit. Current environment's exact help and API semantics still unknown; next user run is required before claiming operational success.
 - The image endpoint /sdapi/v1/txt2img and reference field extra_images remain exploratory; a successful launch does not establish compatibility or measured speedup. If endpoint fails, inspect generated logs instead of adding arbitrary new rendering tests. Original FLUX models left untouched.
+
+## 2026-10-25: sd-server finished benchmark evidence (v2.5)
+- User supplied complete MLI_SERVER_BENCH_20261025_184025.zip. benchmark.json status COMPLETE_NOT_VISUALLY_APPROVED, startup 13.48 seconds, request times SC01 287.49s and SC05 202.68s, completed 18:48:52 Europe/Madrid.
+- Server internal logs: SC01 reference encode 42.39s, conditioning 49.87s, sampling 103.22s, VAE 91.18s, generation 287.03s; SC05 reference encode 35.41s, conditioning 18.30s, sampling 58.21s, VAE 74.46s, generation 201.83s. Distinguish per-request durations from internal totals.
+- Same two shots prior CLI: SC01 166.21s, SC05 152.02s. Persistent server 54.0% slower per-image on average for these two cases (245.085s vs 159.115s), even excluding cold startup. SC05 faster than SC01 server, but still above CLI. No measured speedup proven; do not adopt sd-server for production on this setup.
+- Images SC01 and SC05 rendered 768x432 with coherent lead, but SC01 contains unintended background faces and SC05 displays two phone-like rectangular devices despite one phone on separated shelf requirement. Server not editorially approved; default CLI remains performance baseline. Preserve test evidence and revisit with controlled identical request/input API tests only if justified. Next major priorities: semantic image QC and VAE optimization with reproducible identical settings.
