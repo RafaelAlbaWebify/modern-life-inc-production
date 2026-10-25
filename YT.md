@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 1.2 (2026-10-25)
+Version: 1.3 (2026-10-25)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -110,3 +110,37 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 2. Review narrated MP4 and adjust speech pacing; production quality requires listening review by human or actual audio-capable analysis. If user provides individual six WAVs, measure per-scene duration directly.
 3. Improve cut frequency/pace and SC05 storyboard mismatch as needed; only then finalize 1080p-quality assets, sound design, subtitle policy and publication assets.
 4. Latest local files NOT independently verified on Drive. Do not imply cloud upload or publication.
+
+
+## 2026-10-25: Production policy and enhanced first-cut pipeline (v1.3)
+
+### Agreed creative and operational policy
+- User approved continuing with existing VoiceStudio profile Modern Life Narrator v1, voice_id e46c2df1, rather than conducting indefinite TTS experiments. Goal: clearly intelligible, sufficiently natural and engaging voice; subjective listening remains a human approval gate. Acoustic metrics are diagnostic, never publication blockers on their own.
+- Prioritize producing the first engaging, publishable MLI video and a repeatable pipeline: story hook, pacing, visual motion, subtitles, sound design, overall viewing experience.
+- Never describe the pilot as published or publication-ready until actual rendered output and human qualitative review. Voice 'accepted for continued production' is not 'perceptually certified'.
+
+### Implementation: enhanced renderer
+- New script: tools/build-mli-pilot-enhanced.py; built on top of prior validated six scene selection and duration-based build. Requires Python 3.10+ standard library, ffmpeg and ffprobe in PATH, plus the SIX pre-existing narration clips C:\AI\MLI-FluxTest-Vulkan\pilot_audio\SC01.wav ... SC06.wav. Does not call VoiceStudio or regenerate any image.
+- Source images: SC01 and SC02 and SC05 from story_consistency_20261024_210606; SC03_V2, SC04_V2 and SC06_V2 from story_consistency_revised, both under C:\AI\MLI-FluxTest-Vulkan. Input dimensions checked for 768x432.
+- Preflight validates all six files and probes EACH individual WAV's true duration. Audio drives scene length (no division of total movie length by six). Configurable pause defaults to 0.25 seconds after each scene except last (previous synced script used 0.35 s; shortening is an editorial TEST because natural trailing silences were observed).
+- Per-scene FFmpeg video: 1920x1080 30fps H.264 libx264 CRF 20, slow ~4.5% alternating Ken Burns center zoom using zoompan; original images are untouched. Native visual data is still 768x432, merely upscaled. Audio: local scene WAV, 24 kHz mono AAC 192k, apad during pause, segment times controlled by WAV length. Splice segments via ffconcat with -c copy. Still images and input WAV preserved.
+- English captions: scene-based approximated two chunks per scene from existing episodes/MLI_PILOT_001/narration.md transcription; generated sidecar MLI_PILOT_001_CAPTIONS_ESTIMATED.srt. NOT word-aligned, NOT burnt into video, NOT automatically approved. Captions can be loaded via a player and reviewed, then styled/burned for delivery later. Do not claim video contains embedded captions.
+- Music: optional --music FILE --music-volume 0.08 (linear multiplier). Use only properly licensed and documented audio. With no music supplied, video has narration ONLY. Do not manufacture or promise a soundtrack.
+- Every run makes enhanced_MLI_PILOT_001_YYYYMMDD_HHMMSS under root, containing scene MP4s, intermediate assembled MP4, final MLI_PILOT_001_ENHANCED.mp4, external estimated SRT, and manifest.json reporting timing and status rendered_not_approved. Output never silently overwrites previous run.
+- Execution on local PC (PowerShell): 
+  1. Invoke-WebRequest "https://raw.githubusercontent.com/RafaelAlbaWebify/modern-life-inc-production/main/tools/build-mli-pilot-enhanced.py" -OutFile "$env:TEMP\build-mli-pilot-enhanced.py"
+  2. python "$env:TEMP\build-mli-pilot-enhanced.py" --pause 0.25
+  3. Optional with rights-cleared local music: python "$env:TEMP\build-mli-pilot-enhanced.py" --pause 0.25 --music "C:\path\licensed_music.wav" --music-volume 0.08
+  4. Inspect newest enhanced_MLI_PILOT_001_* folder, upload MP4, SRT and manifest for independent QC.
+- The script has been saved and read back from GitHub, but HAS NOT YET been executed and verified in the user's local environment. Report the status accurately. Review actual cuts, zoom smoothness, captions, sound/music mix, and final file integrity before promotion.
+- Known scene-content issues still exist: SC05 is holding a phone while writing priorities and SC06 expression somewhat worried; motion does not fix underlying visual storyboarding.
+- Script is a pilot-specific production iteration, not yet a fully generalized multi-episode renderer. Future iterations should load scene map and text as external structured input instead of hardcoding six script lines.
+
+### Publication gate and quality checklist
+1. Clip has six aligned scene boundaries and no sentence truncation; inspect actual audio and runtime.
+2. Captions fit legibly and match speech sufficiently; align and burn/style if needed, using final deliverable requirements, not just sidecar.
+3. Camera motion unobtrusive and smooth; no disorienting crop, character morphology changes or harsh cuts.
+4. Soundtrack is optional and rights-cleared. Check voice intelligibility with music, no masking.
+5. Script title/hook and claims edited for narrative retention and accuracy; thumbnail and final branding consistent with channel assets.
+6. Export native source quality honestly (768x432 tests scaled to 1080p, not new native 1080p details); reconsider production render resolution before publishing.
+7. Explicit human final screening and approval. Record per-stage acceptance in GitHub metadata; verify Drive uploads separately if requested.
