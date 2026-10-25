@@ -187,3 +187,10 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - V2 run: extract MLI_PILOT_001_V2_IMAGES.zip into $HOME\Downloads\MLI_PILOT_001_V2_IMAGES (files directly inside directory); download latest GitHub script; run python $env:TEMP\build-mli-pilot-enhanced.py --pause 0.25 --images-dir "$HOME\Downloads\MLI_PILOT_001_V2_IMAGES".
 - Important: native size 1672x941 is near 16:9 but not exact; scale to 1920x1080 can cause slight aspect mismatch, check visually. Text-based caption SRT remains estimated; not aligned/embedded.
 - Current status: script/source/metadata saved and verified in GitHub; image package produced in conversation, V2 local video execution, visual QA, Drive upload, release all pending.
+
+### 2026-10-25 V2 local render receipt
+- User extracted six V2 images successfully into C:\Users\ralba\Downloads\MLI_PILOT_001_V2_IMAGES. Console confirmed all SC01.png..SC06.png present.
+- User ran latest Python enhanced builder with `--pause 0.25 --images-dir $images` successfully (zero exit status) on 2026-10-25 17:41.
+- MP4: C:\Users\ralba\Downloads\MLI_PILOT_001_20261025_174118\MLI_PILOT_001_ENHANCED.mp4
+- SRT and manifest.json are in the same folder. Reported scene render lengths: SC01 7.21, SC02 6.05, SC03 6.37, SC04 5.51, SC05 6.16, SC06 5.71 seconds (37.01 seconds summed, rounded).
+- STATUS: RENDERED, NOT QC APPROVED. No new MP4 from this run uploaded to this chat yet; audiovisual inspection, captions, story flow and acceptance remain pending. Original PNGs and WAVs were not overwritten.
