@@ -222,3 +222,8 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - tests/test_shot_contract.py added test_invocation_from_unrelated_cwd using a temporary working directory. Test is committed but NOT yet executed on user PC or CI; do not claim passed.
 - Correct invocation from anywhere, using absolute path to script: `python "C:\path\to\modern-life-inc-production\tools\plan-shots.py"`. Or supply `--shots "C:\path\to\shots.json"` for a standalone script. No `cd` or assumption of current directory.
 - Existing render scripts already use anchored C:\AI paths / their --root flags rather than relying on CWD; audit future scripts and strengthen tests to catch regressions. Avoid vague instructions 'run from repo root'.
+
+### 2026-10-25 shot-planner Windows execution receipt
+- User executed the self-contained PowerShell downloader from C:\Users\ralba and successfully obtained `PASS: 6 shot contracts validated` from tools/plan-shots.py; test step returned exit code 0 (full individual test output not supplied).
+- Generated seven files at C:\Users\ralba\Downloads\MLI_PILOT_001_PROMPTS: SC01.txt..SC06.txt and prompt_manifest.json (sizes 1102, 1084, 1084, 1074, 1163, 1185, 1462 bytes respectively).
+- Confirms CWD-independent downloader + planner prompt output on user's PC; does NOT demonstrate image quality, semantic validation, engine reliability or end-to-end automation. Next stage is a bounded 3-shot engine trial against the prompt contracts.
