@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 1.4 (2026-10-25)
+Version: 1.5 (2026-10-25)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -161,3 +161,13 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Reported scenes: SC01 7.21s, SC02 6.05s, SC03 6.37s, SC04 5.51s, SC05 6.16s, SC06 5.71s. Sum 37.01s approximate (rounded per-scene console values).
 - Reported artifacts: MLI_PILOT_001_ENHANCED.mp4; MLI_PILOT_001_CAPTIONS_ESTIMATED.srt; manifest.json under that folder.
 - No new MP4 or manifest uploaded in this message: visual motion behavior and final file contents still require independent inspection. Do not claim approval.
+
+
+## 2026-10-25: Local render output isolation (v1.5)
+- User requested that all **new render output artifacts**, including MP4 and intermediary segments/manifest/SRT, be written under Windows user Downloads, not inside the source checkout / model workspace.
+- Updated tools/build-mli-pilot-enhanced.py: by default uses Python pathlib.Path.home() / "Downloads", creates a run-specific folder MLI_PILOT_001_YYYYMMDD_HHMMSS with MP4, scene segments, SRT, concat manifest, QC JSON and other derived files. Optional `--output-dir "D:\\SomeFolder"` overrides this root.
+- Input PNGs remain read-only in C:\\AI\\MLI-FluxTest-Vulkan\\story_consistency_*; narration WAVs remain read-only in C:\\AI\\MLI-FluxTest-Vulkan\\pilot_audio. This change relocates **output only**; it does not move/delete originals or prior test folders.
+- Invocation remains: python "$env:TEMP\\build-mli-pilot-enhanced.py" --pause 0.25. Output now expected at C:\\Users\\<WindowsUser>\\Downloads\\MLI_PILOT_001_<timestamp>\\ (unless custom --output-dir).
+- Verification: updated source was read back successfully from GitHub. Windows local execution of this revised version has NOT yet been verified.
+- Older renderers/tools/build-mli-pilot-roughcut.ps1 and tools/build-mli-pilot-synced.ps1 retain their historical root-output defaults; use enhanced script for current production. When revising other active tools, apply the same output separation convention.
+- Do not automatically delete previous outputs or user files. Offer a reviewed selective cleanup when requested.
