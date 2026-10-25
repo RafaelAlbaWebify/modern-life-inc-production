@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "episode_id": "MLI_PILOT_001",
+  "reference": "C:\\AI\\MLI-FluxTest-Vulkan\\story_consistency_revised\\CHARACTER_REFERENCE.png",
+  "style": "Cinematic illustrated 2D urban storybook, clean black contours, warm amber and cool blue accents, consistent realistic perspective. No anime redesign. 16:9.",
+  "character": "Same iconic protagonist: pale minimal face with two oval eyes, messy short dark hair, oversized orange headphones, teal hoodie and dark trousers. Never normal-detailed face for protagonist.",
+  "supporting": "Background supporting people may have ordinary stylized eyes, nose and mouth; never copy protagonist's minimal facial design or bright teal/orange outfit.",
+  "max_attempts": 2,
+  "scenes": [
+    {
+      "id": "SC01",
+      "beat": "Every notification feels urgent. A friend needs a favor. A client wants a quick answer. So you reply, even when you're exhausted.",
+      "purpose": "Pressure arrives",
+      "location": "home desk at night",
+      "framing": "medium",
+      "action": "Slumped, holding smartphone in left hand, other hand at temple",
+      "required": [
+        "one smartphone held",
+        "tired downward gaze",
+        "laptop on desk"
+      ],
+      "forbidden": [
+        "confident smile",
+        "duplicate hands"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 3101
+    },
+    {
+      "id": "SC02",
+      "beat": "Soon you're checking your phone everywhere, afraid that taking too long to respond might disappoint someone.",
+      "purpose": "Pressure follows outside",
+      "location": "city pavement at dusk",
+      "framing": "wide",
+      "action": "Walking while distracted by phone",
+      "required": [
+        "smartphone in hand",
+        "two or three normal-faced passersby",
+        "city pavement"
+      ],
+      "forbidden": [
+        "second protagonist",
+        "extra phones floating"
+      ],
+      "secondaries": 3,
+      "motion": "hold",
+      "seed": 3102
+    },
+    {
+      "id": "SC03",
+      "beat": "But being reachable every minute can quietly turn your time into something people expect rather than appreciate.",
+      "purpose": "Social disconnection",
+      "location": "cafe with warm window light",
+      "framing": "medium",
+      "action": "Sits apart, gazing at untouched cup, phone face down on table",
+      "required": [
+        "phone on table",
+        "cup",
+        "background guests conversing"
+      ],
+      "forbidden": [
+        "phone in protagonist hands"
+      ],
+      "secondaries": 2,
+      "motion": "hold",
+      "seed": 3103
+    },
+    {
+      "id": "SC04",
+      "beat": "The change begins when you put the phone down. You don't have to explain every moment of silence.",
+      "purpose": "Boundary moment",
+      "location": "rooftop sunset",
+      "framing": "wide",
+      "action": "Calmly looks over skyline with BOTH hands in hoodie pockets",
+      "required": [
+        "phone lying on parapet away from hands",
+        "hands in pockets",
+        "sunset"
+      ],
+      "forbidden": [
+        "phone in either hand",
+        "looking at phone"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 3104
+    },
+    {
+      "id": "SC05",
+      "beat": "Decide what deserves your attention. Reply when you're available, not simply whenever a message arrives.",
+      "purpose": "Intentional priority setting",
+      "location": "home desk",
+      "framing": "medium",
+      "action": "RIGHT hand writes in open notebook with pen; LEFT hand flat on notebook",
+      "required": [
+        "pen right hand",
+        "left hand on notebook",
+        "smartphone screen-down on a separate shelf at least an arm-length away"
+      ],
+      "forbidden": [
+        "phone in any hand",
+        "writing on smartphone",
+        "three hands"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 3105
+    },
+    {
+      "id": "SC06",
+      "beat": "Boundaries aren't about caring less. They're how you protect the time and energy that let you care well.",
+      "purpose": "Present with someone",
+      "location": "cozy sofa at home",
+      "framing": "medium",
+      "action": "Protagonist makes mutual EYE CONTACT with a friend and smiles gently; both holding mugs",
+      "required": [
+        "one friendly secondary with regular stylized facial features",
+        "protagonist looking at friend",
+        "two mugs"
+      ],
+      "forbidden": [
+        "protagonist looking down",
+        "phone in either hand",
+        "identical two faces"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 3106
+    }
+  ]
+}
