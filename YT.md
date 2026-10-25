@@ -154,3 +154,10 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Re-render command: download latest https://raw.githubusercontent.com/RafaelAlbaWebify/modern-life-inc-production/main/tools/build-mli-pilot-enhanced.py to $env:TEMP\build-mli-pilot-enhanced.py, run python $env:TEMP\build-mli-pilot-enhanced.py --pause 0.25. Creates a separate enhanced_MLI_PILOT_001_timestamp folder; retains originals and previous output.
 - Source updated and read back in GitHub. The revised local MP4 is not yet rendered/visually verified; requires user execution and review before acceptance. Script SRT remains approximate external subtitle timing; optional soundtrack is only present if provided with proven usage rights.
 - Later improvement: explicitly author scene/shot motion cues in a small JSON storyboard (e.g., hold / target / onset / speed / easing) rather than hardcoding per-scene camera rules. Introduce scene-internal cuts on actual story beats when justified, not automatic motion.
+
+### 2026-10-25 local enhanced render receipt (user PowerShell)
+- User executed latest tools/build-mli-pilot-enhanced.py --pause 0.25; command completed with no reported error and printed STATUS: RENDERED, NOT QC APPROVED.
+- Folder: C:\AI\MLI-FluxTest-Vulkan\enhanced_MLI_PILOT_001_20261025_121249\
+- Reported scenes: SC01 7.21s, SC02 6.05s, SC03 6.37s, SC04 5.51s, SC05 6.16s, SC06 5.71s. Sum 37.01s approximate (rounded per-scene console values).
+- Reported artifacts: MLI_PILOT_001_ENHANCED.mp4; MLI_PILOT_001_CAPTIONS_ESTIMATED.srt; manifest.json under that folder.
+- No new MP4 or manifest uploaded in this message: visual motion behavior and final file contents still require independent inspection. Do not claim approval.
