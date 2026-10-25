@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 2.0 (2026-10-25)
+Version: 2.1 (2026-10-25)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -227,3 +227,10 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - User executed the self-contained PowerShell downloader from C:\Users\ralba and successfully obtained `PASS: 6 shot contracts validated` from tools/plan-shots.py; test step returned exit code 0 (full individual test output not supplied).
 - Generated seven files at C:\Users\ralba\Downloads\MLI_PILOT_001_PROMPTS: SC01.txt..SC06.txt and prompt_manifest.json (sizes 1102, 1084, 1084, 1074, 1163, 1185, 1462 bytes respectively).
 - Confirms CWD-independent downloader + planner prompt output on user's PC; does NOT demonstrate image quality, semantic validation, engine reliability or end-to-end automation. Next stage is a bounded 3-shot engine trial against the prompt contracts.
+
+## 2026-10-25: Single-command FLUX engine acceptance batch (v2.1)
+- Created tools/run-mli-engine-gate.ps1 (saved and fetched in GitHub) for PowerShell 7 from ANY working directory. It downloads current shot contract, planner and tests into $env:TEMP/MLI-Pipeline, runs tests, validates all six prompts, and generates SC01/SC02/SC05 using local FLUX2 Klein CLI and canonical character reference. Seed and model flags are fixed; at most 2 attempts PER SHOT on technical failure. FLUX flags use --diffusion-model, --llm, --vae, reference -r, Vulkan backend, 4 Euler steps, CFG1, 768x432.
+- Local inputs: C:\AI\MLI-FluxTest-Vulkan\sd-cli.exe, C:\AI\MLI-FluxTest\models\{flux-2-klein-4b-q4_0.gguf,Qwen3-4B-Q4_K_S.gguf,flux2-vae.safetensors}, reference C:\AI\MLI-FluxTest-Vulkan\story_consistency_revised\CHARACTER_REFERENCE.png.
+- Outputs: $HOME\Downloads\MLI_ENGINE_GATE_timestamp\ with prompts, images, invocation logs, tests log, engine_gate_results.json, README. Also ZIP in Downloads for review. Never writes render files inside repo or model folders; no model download or modification.
+- Gate checks technical PNG signature, nontrivial file length, 768x432 dimensions and exit code. Semantic compliance of people/hands/phone and character consistency NEEDS VISUAL REVIEW. The tool does NOT claim semantic auto-QC or produce complete episode. IMPORTANT: script committed but has not yet been run on user's GPU; errors/CLI compatibility still subject to live execution.
+- From ANY PowerShell path: `& { $s=Join-Path $env:TEMP 'run-mli-engine-gate.ps1'; Invoke-WebRequest 'https://raw.githubusercontent.com/RafaelAlbaWebify/modern-life-inc-production/main/tools/run-mli-engine-gate.ps1' -OutFile $s; & $s }`
