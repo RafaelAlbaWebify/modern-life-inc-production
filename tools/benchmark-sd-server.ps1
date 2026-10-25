@@ -22,9 +22,11 @@ try{
  $helpText=(& $server --help 2>&1|Out-String)
  $helpText|Set-Content -LiteralPath $help -Encoding UTF8
  # Avoid guessing: stop before generation if this local build lacks required CLI and HTTP options.
- foreach($flag in @("--diffusion-model","--llm","--vae","--backend","--params-backend","--port")){
+ foreach($flag in @("--diffusion-model","--llm","--vae","--backend","--params-backend")){
   if(-not $helpText.Contains($flag)){throw "Server binary does not advertise required option $flag; inspect $help (no changes made)"}
  }
+ $ipFlag=if($helpText.Contains("--listen-ip")){"--listen-ip"}elseif($helpText.Contains("--host")){"--host"}else{throw "Neither --listen-ip nor --host supported; inspect $help"}
+ $portFlag=if($helpText.Contains("--listen-port")){"--listen-port"}elseif($helpText.Contains("--port")){"--port"}else{throw "Neither --listen-port nor --port supported; inspect $help"}
  # Never kill/attach to an unrelated service.
  $client=[Net.Sockets.TcpClient]::new()
  try{$client.Connect("127.0.0.1",$Port);throw "Port $Port already in use. No process killed; use -Port 7862."}
@@ -32,7 +34,7 @@ try{
  finally{$client.Dispose()}
  $stdout=Join-Path $run "sd-server.stdout.log"
  $stderr=Join-Path $run "sd-server.stderr.log"
- $args=@("--diffusion-model",$diff,"--llm",$llm,"--vae",$vae,"--backend","te=cpu,diffusion=vulkan0,vae=cpu","--params-backend","te=cpu,diffusion=cpu,vae=cpu","--host","127.0.0.1","--port","$Port")
+ $args=@("--diffusion-model",$diff,"--llm",$llm,"--vae",$vae,"--backend","te=cpu,diffusion=vulkan0,vae=cpu","--params-backend","te=cpu,diffusion=cpu,vae=cpu",$ipFlag,"127.0.0.1",$portFlag,"$Port")
  $t0=[Diagnostics.Stopwatch]::StartNew()
  $process=Start-Process -FilePath $server -ArgumentList $args -RedirectStandardOutput $stdout -RedirectStandardError $stderr -PassThru -NoNewWindow
  $url="http://127.0.0.1:$Port"
@@ -40,7 +42,7 @@ try{
  while($t0.Elapsed.TotalSeconds -lt 300){
   if($process.HasExited){throw "sd-server exited early code $($process.ExitCode). Review $stderr"}
   try{
-   $null=Invoke-RestMethod -Uri "$url/v1/models" -Method Get -TimeoutSec 5
+   $null=Invoke-WebRequest -Uri "$url/" -Method Get -TimeoutSec 5
    $ready=$true;break
   }catch{Start-Sleep -Seconds 2}
  }
