@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 1.8 (2026-10-25)
+Version: 1.9 (2026-10-25)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -207,3 +207,11 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - New production design recorded in docs/production-pipeline-contract.md; it is a **proposal, not yet implemented or validated**. Includes structured shots.json, character/style references, precise required/forbidden actions, bounded generation attempts, targeted test panel, configurable renderer, QA gates and explicit human acceptance.
 - Example SC05: phone must be on separate shelf and never in protagonist's hands; SC06: lead must make eye contact with friend. Define observable visual facts, not vague mood adjectives.
 - Do not repeatedly re-render 6-scene videos just to discover failed shots. Validate the plan and image candidates before montage; pilot 3 representative difficult shots, assess engine quality before locking.
+
+## 2026-10-25: Structured pipeline implementation (v1.9)
+- Created episodes/MLI_PILOT_001/shots.json with six structured visual shot contracts, exact existing scene narration, explicit required/forbidden props, secondary characters, canonical identity instructions, framing and seeds. Scene movement defaults to hold.
+- Created tools/plan-shots.py: checks schema, duplicate IDs, nonempty contract fields, constraints, and bounded attempt setting; generates prompts and SHA256 manifest with pending visual QC status. It does not generate images or certify that an image obeys instructions.
+- Created tests/test_shot_contract.py: regression tests for schema errors, duplicate IDs, unapproved movement, SC05 phone positioning and SC06 eye contact. Committed but not yet executed on user's Windows machine.
+- Run from local repo: python -m unittest discover -s tests -p test_shot_contract.py -v ; python tools/plan-shots.py --shots episodes/MLI_PILOT_001/shots.json --out C:\Users\ralba\Downloads\MLI_PILOT_001_PROMPTS
+- Next gate: generate only 3 difficult proof shots with <=2 attempts each, score observable adherence (especially props/gaze/supporting cast), then choose engine. Do not launch whole video until passing this gate.
+- Not yet implemented: batch FLUX generation, reference hashing, semantic image QA, multi-shot timeline renderer, accurate subtitles and full integration. Enhanced renderer remains legacy six-scene prototype.
