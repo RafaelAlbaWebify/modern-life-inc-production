@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 1.5 (2026-10-25)
+Version: 1.6 (2026-10-25)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -171,3 +171,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Verification: updated source was read back successfully from GitHub. Windows local execution of this revised version has NOT yet been verified.
 - Older renderers/tools/build-mli-pilot-roughcut.ps1 and tools/build-mli-pilot-synced.ps1 retain their historical root-output defaults; use enhanced script for current production. When revising other active tools, apply the same output separation convention.
 - Do not automatically delete previous outputs or user files. Offer a reviewed selective cleanup when requested.
+
+## 2026-10-25: Workspace cleanup convention (v1.6)
+- User requested latest MP4 moved to Windows Downloads and earlier test output cleanup. Verified mover in tools/move-latest-pilot-mp4.ps1; it selects newest enhanced_MLI_PILOT_001_*/MLI_PILOT_001_ENHANCED.mp4 and moves it into Downloads with run-folder-derived unique name. Only executed by user locally; not performed via GitHub.
+- For local cleanup, use a strict allowlist of output folders: enhanced_MLI_PILOT_001_*, synced_MLI_PILOT_001_*, roughcut_MLI_PILOT_001_*. Never delete models, WAVs, story_consistency original/revised, CHARACTER_REFERENCE, sources or source code. Preview first, quarantine old render folders in Downloads; preserve latest run. Do not permanently delete without review. Cloud cleanup cannot be inferred from local naming.
+- Google Drive production folder was inspected: contains scene assets and storyboard, rejected candidates and prior transfer/test assets. Do not bulk-delete: old scene images may be required for future episodes, and uploaded local FLUX2 final candidates were not independently verified there. No Drive deletions made.
+- GitHub source, narration, scripts and evidence are retained. No confirmed obsolete code or large generated MP4 files identified via GitHub inventory, so no repository deletion was made. GitHub cleanup requires a targeted review/manifest, not blind deletion.
