@@ -194,3 +194,10 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - MP4: C:\Users\ralba\Downloads\MLI_PILOT_001_20261025_174118\MLI_PILOT_001_ENHANCED.mp4
 - SRT and manifest.json are in the same folder. Reported scene render lengths: SC01 7.21, SC02 6.05, SC03 6.37, SC04 5.51, SC05 6.16, SC06 5.71 seconds (37.01 seconds summed, rounded).
 - STATUS: RENDERED, NOT QC APPROVED. No new MP4 from this run uploaded to this chat yet; audiovisual inspection, captions, story flow and acceptance remain pending. Original PNGs and WAVs were not overwritten.
+
+### 2026-10-25 V2 archive and video inspection receipt
+- User uploaded MLI_PILOT_001_20261025_174118.zip. Archive examined: manifest.json; external MLI_PILOT_001_CAPTIONS_ESTIMATED.srt; final MLI_PILOT_001_ENHANCED.mp4; interim MLI_PILOT_001_MOTION_NO_MUSIC.mp4; six SC01..SC06.mp4; segments.ffconcat. All six scene videos supplied.
+- ffprobe final: duration 37.041016 s; 1920x1080 H.264 30fps and AAC audio; manifest status rendered_not_approved; no music; external SRT estimated not burned.
+- Six frames extracted at 3, 10, 16, 22, 28, 34 s visually checked; foreground iconic lead stays consistent and secondary supporting figures present in SC02, SC03, SC06. Visual story is improved over V1 but NOT approved for release.
+- SC05 still actively holds phone while writing, contradicting intentional boundaries. SC06 friend adds warmth, but lead gaze is downward and engagement with friend could be stronger. Each of six still images lasts ~5-7 seconds, limiting narrative variety despite new background characters. Proposed: SC05 phone aside, SC06 protagonist responsive, a few additional meaningful story-beat cuts rather than arbitrary zoom.
+- Do not claim subjective voice quality audited by human listening. Final release must review SRT real-word timing and any captions burned in. Preserve this V2 render as baseline, not master.
