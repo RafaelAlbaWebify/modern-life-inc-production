@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 1.9 (2026-10-25)
+Version: 2.0 (2026-10-25)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -215,3 +215,10 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Run from local repo: python -m unittest discover -s tests -p test_shot_contract.py -v ; python tools/plan-shots.py --shots episodes/MLI_PILOT_001/shots.json --out C:\Users\ralba\Downloads\MLI_PILOT_001_PROMPTS
 - Next gate: generate only 3 difficult proof shots with <=2 attempts each, score observable adherence (especially props/gaze/supporting cast), then choose engine. Do not launch whole video until passing this gate.
 - Not yet implemented: batch FLUX generation, reference hashing, semantic image QA, multi-shot timeline renderer, accurate subtitles and full integration. Enhanced renderer remains legacy six-scene prototype.
+
+## 2026-10-25: Universal working-directory independence (v2.0)
+- Mandatory convention for ALL current and future scripts: callable from any PowerShell/CMD working directory. Never assume current directory contains repository, assets, inputs or output. Resolve repository paths from Python __file__ / PowerShell $PSScriptRoot; use absolute paths for externally supplied roots and explicit flags when a script is downloaded standalone.
+- tools/plan-shots.py now defaults shots.json to the parent of its OWN physical script path (`Path(__file__).resolve().parents[1]/episodes/MLI_PILOT_001/shots.json`) and output to user Downloads/MLI_PILOT_001_PROMPTS; optional --shots/--out override these. Executing from C:\Users\ralba or C:\Windows\Temp is supported when the script remains in the full checkout. Standalone downloaded Python source requires --shots ABSOLUTE_PATH.
+- tests/test_shot_contract.py added test_invocation_from_unrelated_cwd using a temporary working directory. Test is committed but NOT yet executed on user PC or CI; do not claim passed.
+- Correct invocation from anywhere, using absolute path to script: `python "C:\path\to\modern-life-inc-production\tools\plan-shots.py"`. Or supply `--shots "C:\path\to\shots.json"` for a standalone script. No `cd` or assumption of current directory.
+- Existing render scripts already use anchored C:\AI paths / their --root flags rather than relying on CWD; audit future scripts and strengthen tests to catch regressions. Avoid vague instructions 'run from repo root'.
