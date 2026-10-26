@@ -18,7 +18,7 @@ def load(run):return json.loads((run/"state.json").read_text(encoding="utf-8"))
 def save(run,state):write_json(run/"state.json",state)
 def images(run):return run/"images"
 def prompt(spec,s):
- return "\n".join((spec["style"],spec["character"],spec["supporting"],"LOCATION: "+s["location"],"SHOT: "+s["framing"],"VISIBLE ACTION: "+s["action"],"REQUIRED: "+"; ".join(s["required"]),"EXCLUDE: "+"; ".join(s["forbidden"]), "SUPPORTING CHARACTERS: "+str(s["secondaries"]),"NARRATIVE BEAT: "+s["beat"],"FORMAT: no captions, logos or watermarks."))
+ return "\n".join((spec["style"],spec["character"],spec["supporting"],"LOCATION: "+s["location"],"SHOT: "+s["framing"],"COMPOSITION: "+s.get("composition","Narrative-first framing; split panels permitted."),"VISIBLE ACTION: "+s["action"],"REQUIRED: "+"; ".join(s["required"]),"EXCLUDE: "+"; ".join(s["forbidden"]), "SUPPORTING CHARACTERS: "+str(s["secondaries"]),"NARRATIVE BEAT: "+s["beat"],"FORMAT: no captions, logos or watermarks."))
 def prepare(a):
  run=root(a)
  if (run/"state.json").exists():raise ValueError("Existing run; use new --work or another command")
@@ -48,11 +48,16 @@ def generate(a):
  for sid,shot in state["shots"].items():
   if shot["state"] not in ("UNGENERATED","RETRY_AUTHORIZED"):continue
   attempt=len(shot["attempts"])+1
-  if attempt>2:shot["state"]="BLOCKED";continue
+  if attempt>2:shot["state"]="BLOCKED";save(run,state);continue
   target=images(run)/(sid+"_attempt"+str(attempt)+".png")
   if target.exists():raise FileExistsError(str(target))
   seed=next(s["seed"] for s in spec["scenes"] if s["id"]==sid)+(attempt-1)
   prompt_text=(run/"prompts"/(sid+".txt")).read_text(encoding="utf-8")
+  if attempt==2:
+   failures=[(key,val.get("evidence","")) for key,val in shot.get("review",{}).items() if val.get("status")=="FAIL"]
+   if not failures:raise ValueError("Attempt 2 requires explicit prior failed visual evidence")
+   prompt_text+="\nRETRY CORRECTIONS FROM VISUAL REVIEW:\n"+"\n".join("Correct "+key+": "+note for key,note in failures)
+   (run/"prompts"/(sid+"_attempt2.txt")).write_text(prompt_text+"\n",encoding="utf-8")
   args=[str(exe),"--diffusion-model",str(files[2]),"--llm",str(files[3]),"--vae",str(files[4]),"--backend","te=cpu,diffusion=vulkan0,vae=cpu","--params-backend","te=cpu,diffusion=cpu,vae=cpu","-r",str(ref),"--ref-image-args","preset=flux2","-p",prompt_text,"--cfg-scale","1","--sampling-method","euler","--steps","4","-W","768","-H","432","-t","4","--seed",str(seed),"--output",str(target)]
   logfile=run/"logs"/(sid+"_attempt"+str(attempt)+".log")
   print("GENERATING",sid,"attempt",attempt,flush=True)
@@ -70,7 +75,7 @@ def package(a):
  run=root(a);state=load(run);todo=[]
  for sid,shot in state["shots"].items():
   if shot["state"]=="NEEDS_REVIEW":
-   last=shot["attempts"][-1];todo.append({"image":last["file"],"sha256":last["sha256"],"scene":sid,"attempt":last["number"],"required_criteria":["identity","style","anatomy","action","objects","composition"],"criteria_descriptions":{"identity":json.loads((run/"contract.json").read_text(encoding="utf-8"))["character"],"style":json.loads((run/"contract.json").read_text(encoding="utf-8"))["style"],"anatomy":"Plausible hands and limbs","action":next(x["action"] for x in json.loads((run/"contract.json").read_text(encoding="utf-8"))["scenes"] if x["id"]==sid),"objects":"Required: "+"; ".join(next(x["required"] for x in json.loads((run/"contract.json").read_text(encoding="utf-8"))["scenes"] if x["id"]==sid))+" | Forbidden: "+"; ".join(next(x["forbidden"] for x in json.loads((run/"contract.json").read_text(encoding="utf-8"))["scenes"] if x["id"]==sid)),"composition":"Composition serves narrative; panels permitted when purposeful, never blanket-reject split panel."},"status":"PENDING"})
+   last=shot["attempts"][-1];todo.append({"image":last["file"],"sha256":last["sha256"],"scene":sid,"attempt":last["number"],"required_criteria":["identity","style","anatomy","action","objects","composition"],"criteria_descriptions":{"identity":json.loads((run/"contract.json").read_text(encoding="utf-8"))["character"],"style":json.loads((run/"contract.json").read_text(encoding="utf-8"))["style"],"anatomy":"Plausible hands and limbs","action":next(x["action"] for x in json.loads((run/"contract.json").read_text(encoding="utf-8"))["scenes"] if x["id"]==sid),"objects":"Required: "+"; ".join(next(x["required"] for x in json.loads((run/"contract.json").read_text(encoding="utf-8"))["scenes"] if x["id"]==sid))+" | Forbidden: "+"; ".join(next(x["forbidden"] for x in json.loads((run/"contract.json").read_text(encoding="utf-8"))["scenes"] if x["id"]==sid)),"composition":next(x.get("composition","Narrative-first layout") for x in json.loads((run/"contract.json").read_text(encoding="utf-8"))["scenes"] if x["id"]==sid)},"status":"PENDING"})
  if not todo:raise ValueError("No pending images to review")
  request={"format":"MLI_CHAT_QC_V1","episode":state["episode"],"results":todo,"guidance":"Inspect actual PNG; each criterion requires PASS/FAIL/UNCERTAIN and visible evidence. Allow multiple-panel composition if narratively appropriate. Never infer from prompt."}
  write_json(run/"review_request.json",request)
