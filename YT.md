@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 3.3 (2026-10-26)
+Version: 3.4 (2026-10-26)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -302,3 +302,8 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - SC01 image candidate PASS for five listed criteria: iconic protagonist, clean style/anatomy, exhausted desk action, no secondary people or portraits. SC02 candidate PASS for lead identity, style/anatomy, looking at phone while walking, and exactly three clearly depicted outdoor pedestrians (distant silhouettes visible indoors but are not additional passersby).
 - SC05 FAIL on phone position, though character, illustration/anatomy and writing hands PASS: exactly one phone is clearly on the SAME DESK to the right of laptop, contrary to required separate shelf/location. Single targeted retry on SC05 only is appropriate; do NOT regenerate accepted SC01/SC02. A visible evidence JSON has been generated for download in chat and can be imported via import-chat-review.py to drive bounded retry decision.
 - Insight: stronger prompts corrected excess persons and duplicate phones, but complex object-placement instruction still failed. Prefer modifying SC05 composition by moving shelf into distinct plane or controlled image edit, not repeated generic negative prompts. This is candidate review, not final video approval.
+
+## 2026-10-26: SC05 retry runner restored source ZIP support (v3.4)
+- Windows run failed before GPU execution because retry-sc05-once.ps1 checked malformed concatenated paths (`imagesSC01_attempt1.png`) instead of `images/SC01_attempt1.png`.
+- Fixed path joins and added fallback: recover SC01/SC02/SC05 original attempt1 PNG files from newest `Downloads/MLI_ENGINE_GATE_*.zip` when extracted engine gate folders are unavailable. Only the three named PNG members are extracted to a separate staging directory, preserving originals; only SC05 attempt2 is generated.
+- Script committed; no local Windows run yet. Do not state that an image was regenerated until console evidence. Acceptance rate remains only 2/3 in the most recent review, with SC05 spatial phone placement failing.
