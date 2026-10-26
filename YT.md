@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 4.0 (2026-10-26)
+Version: 4.1 (2026-10-26)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -345,3 +345,8 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - tools/mli-production.ps1 now defaults `start` to all six pilot scenes (SC01..SC06) rather than the earlier 3-shot gate; review mode resumes existing run and selectively retries only failed scenes; `render` mode requires all six scenes accepted, calls verify/export, checks existing SC01..SC06.wav and invokes existing build-mli-pilot-enhanced.py using accepted_images. Output is still in Downloads; render status is not audiovisual release approval.
 - This is a coherent local production path: prepare -> generate -> ZIP review in chat -> import review JSON -> retry only failed -> verify/export -> narrated MP4. No paid API. Every operation independent of current PowerShell directory; history and images persisted per run.
 - IMPORTANT: repository changes committed but automated tests/runtime on the user's Windows PC still pending. The earlier V2 production exposed repeated bugs, so do not assert end-to-end success before unit tests and actual execution. Online sources on stable-diffusion.cpp confirm FLUX.2 editing/reference support and model-specific preprocessing; retaining current proven sd-cli flags rather than changing backend/vae speculatively.
+
+## 2026-10-26: Critical PowerShell launcher bugfix (v4.1)
+- User launched mli-production.ps1 and PowerShell parser failed before execution on `"Missing WAV for $sid: $audio"`; `$sid:` is not valid PowerShell variable syntax. Fixed to `${sid}:`.
+- Also fixed `RunPipeline @(...)` and `RunPipeline (...)` argument calls to explicit `RunPipeline -argList @(...)` so the full argument vector reaches the Python subprocess. This could otherwise cause subsequent launch errors.
+- Refetched updated script from GitHub and checked patched content. No PowerShell runtime/actual GPU test performed in this environment. User must rerun same main bootstrap command; no images or run folder were created by the original parse failure.
