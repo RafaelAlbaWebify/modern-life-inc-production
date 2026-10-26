@@ -70,7 +70,7 @@ def package(a):
  run=root(a);state=load(run);todo=[]
  for sid,shot in state["shots"].items():
   if shot["state"]=="NEEDS_REVIEW":
-   last=shot["attempts"][-1];todo.append({"image":last["file"],"sha256":last["sha256"],"scene":sid,"attempt":last["number"],"required_criteria":["identity","style","anatomy","action","objects","composition"],"status":"PENDING"})
+   last=shot["attempts"][-1];todo.append({"image":last["file"],"sha256":last["sha256"],"scene":sid,"attempt":last["number"],"required_criteria":["identity","style","anatomy","action","objects","composition"],"criteria_descriptions":{"identity":json.loads((run/"contract.json").read_text(encoding="utf-8"))["character"],"style":json.loads((run/"contract.json").read_text(encoding="utf-8"))["style"],"anatomy":"Plausible hands and limbs","action":next(x["action"] for x in json.loads((run/"contract.json").read_text(encoding="utf-8"))["scenes"] if x["id"]==sid),"objects":"Required: "+"; ".join(next(x["required"] for x in json.loads((run/"contract.json").read_text(encoding="utf-8"))["scenes"] if x["id"]==sid))+" | Forbidden: "+"; ".join(next(x["forbidden"] for x in json.loads((run/"contract.json").read_text(encoding="utf-8"))["scenes"] if x["id"]==sid)),"composition":"Composition serves narrative; panels permitted when purposeful, never blanket-reject split panel."},"status":"PENDING"})
  if not todo:raise ValueError("No pending images to review")
  request={"format":"MLI_CHAT_QC_V1","episode":state["episode"],"results":todo,"guidance":"Inspect actual PNG; each criterion requires PASS/FAIL/UNCERTAIN and visible evidence. Allow multiple-panel composition if narratively appropriate. Never infer from prompt."}
  write_json(run/"review_request.json",request)
