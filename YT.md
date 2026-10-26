@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 3.1 (2026-10-26)
+Version: 3.2 (2026-10-26)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -291,3 +291,8 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Added tools/prepare-chat-review.py to collect existing PNG files from the engine test ZIP, check dimensions and hashes, and produce a chat review package and JSON checklist in Downloads.
 - Added tools/import-chat-review.py to verify the review report has matching image hashes and complete per-scene PASS/FAIL/UNCERTAIN assessments before the retry planner reads it.
 - User uploads review ZIP to this chat. Vision review happens within the conversation and the resulting evidence-bearing JSON is supplied back to the Windows workflow. This is human-in-the-loop, not fully unattended machine automation. Uncertain cases block; selective second attempts use existing frozen FLUX settings. Scripts committed but not yet locally exercised.
+
+## 2026-10-26: Hardened prompt test correction (v3.2)
+- User ran previous hardened-prompt block. It created `Downloads/MLI_PILOT_001_PROMPTS` but failed during Github REST downloader with HTTP 404 before image generation. PowerShell URL interpolation used `$Name?ref=...`; replace with `${Name}?ref=...` to delimit variables.
+- More importantly, old tools/run-mli-engine-gate.ps1 regenerated all prompts internally, silently overwriting hardened external prompts. Updated script now supports `-PromptsDir ABSOLUTE_PATH`: after validating original contract, copies user-supplied SC01, SC02, SC05 prompts into the run-specific prompts folder and explicitly reports override. Generation therefore uses actual hardened prompts. Defaults remain unchanged for ordinary runs.
+- Next command must download updated script, validate `-PromptsDir` exists in its content, invoke with Downloads/MLI_PILOT_001_PROMPTS, then use latest gate ZIP for offline chat review. This correction is committed, not yet executed on user's machine. No new images from failed 404 run.
