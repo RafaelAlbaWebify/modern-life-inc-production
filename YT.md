@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 2.5 (2026-10-25)
+Version: 2.6 (2026-10-26)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -257,3 +257,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Server internal logs: SC01 reference encode 42.39s, conditioning 49.87s, sampling 103.22s, VAE 91.18s, generation 287.03s; SC05 reference encode 35.41s, conditioning 18.30s, sampling 58.21s, VAE 74.46s, generation 201.83s. Distinguish per-request durations from internal totals.
 - Same two shots prior CLI: SC01 166.21s, SC05 152.02s. Persistent server 54.0% slower per-image on average for these two cases (245.085s vs 159.115s), even excluding cold startup. SC05 faster than SC01 server, but still above CLI. No measured speedup proven; do not adopt sd-server for production on this setup.
 - Images SC01 and SC05 rendered 768x432 with coherent lead, but SC01 contains unintended background faces and SC05 displays two phone-like rectangular devices despite one phone on separated shelf requirement. Server not editorially approved; default CLI remains performance baseline. Preserve test evidence and revisit with controlled identical request/input API tests only if justified. Next major priorities: semantic image QC and VAE optimization with reproducible identical settings.
+
+## 2026-10-26: Visual acceptance gate and isolated VAE A/B trial (v2.6)
+- New tools/visual-qc.py: verifies real PNG signature/size/dimensions/SHA256; creates per-scene observable review criteria (lead orange headphones/teal hoodie, hands, phone count/location, gaze, extras); produces visual_qc.json and review_template.json. It FAILS CLOSED with exit code 3 for pending/unreviewed semantic judgments. Reviewer must supply evidence and identity in decisions JSON; there is **NO automatic image understanding or false claim of semantic certification**.
+- New tools/run-visual-qc-vae.ps1: cwd-independent downloader via GitHub REST content to avoid stale raw-cache; locates most recent existing extracted MLI_ENGINE_GATE images in Downloads; runs offline visual technical QC, captures installed sd-cli --help and VAE feature support to new Downloads/MLI_QC_VAE_timestamp folder. Optional -RunVaeTrial generates SC05 baseline and SC05 --vae-conv-direct with same model, seed, resolution, reference, steps, backend and prompt. It only trials when option is advertised in installed local CLI. Logs both runs and elapsed timings, never changes/deletes original models, and does not replace the standard CLI configuration.
+- Caveat: this uses two generations and may take several minutes; baseline comparable to prior SC05 but paired same-session baseline is needed for fair A/B. VAE optimization isn't accepted unless total, decode duration and image quality improve reproducibly. CLI may fail due to build-specific flags; inspect logs and stop rather than guessing. Both scripts saved in GitHub, **not yet run on user's Windows installation**.
+- Current video generation stays BLOCKED until explicit visual QC approval. Previous engine gate's three output PNGs remain technically valid but semantically unapproved. Pipeline is integrated at acceptance/reporting level; automatic computer vision semantic scoring remains FUTURE work.
