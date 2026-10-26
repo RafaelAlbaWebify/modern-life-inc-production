@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 3.9 (2026-10-26)
+Version: 4.0 (2026-10-26)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -339,3 +339,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Canonical shots.json now preserves scene composition constraints from historical accepted tests. The Python generator now uses composition field; attempt2 prompt includes evidence of failed criteria. Automatic publication is never asserted. Binary setup still local stable-diffusion.cpp sd-cli, with known frozen Vulkan configuration.
 - Added verify command to tools/mli-pipeline.py: checks selected shots candidate-pass, image hashes and review evidence, writes acceptance_gate.json and blocks on any missing/failed item. This is an image gate, not yet a complete voice/edit/render/publish pipeline.
 - Source committed, but PowerShell entrypoint has NOT been tested on user's PC yet; run-based tests are the next validation. Avoid promising fully working until live execution returns PASS.
+
+## 2026-10-26: End-to-end connection to narrated pilot renderer (v4.0)
+- Extended tools/mli-pipeline.py with `export` command: copies ONLY candidate-pass PNGs with verified SHA256 and review evidence to accepted_images/SCxx.png; refuses incomplete or failed review. Writes accepted_manifest.json.
+- tools/mli-production.ps1 now defaults `start` to all six pilot scenes (SC01..SC06) rather than the earlier 3-shot gate; review mode resumes existing run and selectively retries only failed scenes; `render` mode requires all six scenes accepted, calls verify/export, checks existing SC01..SC06.wav and invokes existing build-mli-pilot-enhanced.py using accepted_images. Output is still in Downloads; render status is not audiovisual release approval.
+- This is a coherent local production path: prepare -> generate -> ZIP review in chat -> import review JSON -> retry only failed -> verify/export -> narrated MP4. No paid API. Every operation independent of current PowerShell directory; history and images persisted per run.
+- IMPORTANT: repository changes committed but automated tests/runtime on the user's Windows PC still pending. The earlier V2 production exposed repeated bugs, so do not assert end-to-end success before unit tests and actual execution. Online sources on stable-diffusion.cpp confirm FLUX.2 editing/reference support and model-specific preprocessing; retaining current proven sd-cli flags rather than changing backend/vae speculatively.
