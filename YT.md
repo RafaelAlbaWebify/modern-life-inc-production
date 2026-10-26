@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 2.8 (2026-10-26)
+Version: 2.9 (2026-10-26)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -275,3 +275,8 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - New tools/semantic-retry-plan.py consumes semantic_report.json and determines REVIEW_CANDIDATE, RETRY or BLOCK per scene, max 2 attempts. REVIEW_CANDIDATE never means publish approved; script never generates images or changes original assets.
 - New tools/run-semantic-gate.ps1 downloads latest tools through GitHub REST and locates existing gate images in Downloads from ANY current path, runs remote vision (only if key available), then generates retry_plan.json. Outputs in Downloads/MLI_SEMANTIC_GATE_timestamp. Scripts committed in GitHub; NOT YET EXECUTED against user's GPU or a live model API; no visual benchmark/cost/reliability established. In particular, the retry plan is implemented but actual selective generation execution is not yet wired. Full episode remains BLOCKED.
 - Command using existing extracted images: download tools/run-semantic-gate.ps1 from GitHub API and invoke. If no OPENAI_API_KEY, report explicitly records PENDING rather than pretending vision took place. Production policy requires human review of CANDIDATE_PASS images and checks semantic performance of model against known defects (SC02 missing headphones) before unattended use.
+
+### 2026-10-26: Capped selective regeneration integrated (v2.9)
+- tools/execute-semantic-retries.py now executes only RETRY decisions returned by semantic-retry-plan.py, and ONLY when latest attempt was 1. It reuses frozen sd-cli model/backend, prompt, reference, four steps, 768x432, and increments the seed by one for attempt 2; never overwrites existing attempt2 or originals. Dry-run by default, --execute explicit.
+- tools/run-semantic-gate.ps1 updated: optional -ExecuteRetries performs first remote image QC, decision plan, selective FLUX retry (only FAIL, never PENDING), second remote QC and final decision plan. Without switch: assess and plan only, no GPU. From any PowerShell working directory; gets tools via REST API to avoid stale raw caching. No publication approved automatically; remaining BLOCK and REVIEW_CANDIDATE require human acceptance.
+- IMPORTANT: this requires OPENAI_API_KEY configured in the local Windows process environment, and paid OpenAI API access separate from ChatGPT subscription. No key is stored in scripts. If absent, semantic_report.json is PENDING and no attempts are generated. API/schema compatibility and visual accuracy have NOT YET been validated in user's Windows setup; cost and image transfer must be explicitly understood before execution. No model credentials invented. Tool source committed but not verified by running live API or GPU. Never declare fully operational before user runtime receipt and quality evaluation.
