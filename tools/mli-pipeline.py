@@ -107,6 +107,24 @@ def ingest(a):
   entry["state"]="CANDIDATE_PASS" if decision=="CANDIDATE_PASS" else ("RETRY_AUTHORIZED" if decision=="FAIL" and len(entry["attempts"])<2 else "BLOCKED")
   state["history"].append({"event":"REVIEW","shot":sid,"decision":entry["state"]})
  save(run,state);print("Imported:",[(sid,state["shots"][sid]["state"]) for sid,_,_ in pending])
+def export(a):
+ run=root(a);state=load(run)
+ accepted=run/"accepted_images";accepted.mkdir(exist_ok=True)
+ problems=[]
+ for sid,shot in state["shots"].items():
+  if shot["state"]!="CANDIDATE_PASS":
+   problems.append(sid+": "+shot["state"]);continue
+  last=shot["attempts"][-1]
+  source=images(run)/last["file"]
+  if png(source)!=last["sha256"] or not shot.get("review"):
+   problems.append(sid+": review/hash invalid");continue
+  dest=accepted/(sid+".png")
+  if dest.exists() and png(dest)!=last["sha256"]:raise ValueError("Conflicting accepted copy "+str(dest))
+  if not dest.exists():dest.write_bytes(source.read_bytes())
+ manifest={"episode":state["episode"],"status":"EXPORTED_NOT_PUBLISHED" if not problems else "BLOCKED","accepted":sorted(p.name for p in accepted.glob("SC*.png")),"blockers":problems}
+ write_json(run/"accepted_manifest.json",manifest)
+ if problems:raise ValueError("Export blocked: "+"; ".join(problems))
+ print("EXPORTED:",accepted,"scenes",len(state["shots"]))
 def status(a):
  state=load(root(a));print(json.dumps({"shots":{k:v["state"] for k,v in state["shots"].items()},"release_approved":False},indent=2))
 def verify(a):
@@ -127,11 +145,11 @@ def verify(a):
  print(json.dumps(result,indent=2))
  if bad:raise ValueError("Acceptance gate blocked")
 def main():
- p=argparse.ArgumentParser();p.add_argument("command",choices=["prepare","generate","package","ingest","status","verify"]);p.add_argument("--work",required=True)
+ p=argparse.ArgumentParser();p.add_argument("command",choices=["prepare","generate","package","ingest","status","verify","export"]);p.add_argument("--work",required=True)
  p.add_argument("--shots");p.add_argument("--scenes",nargs="*");p.add_argument("--models",default=r"C:\AI\MLI-FluxTest\models");p.add_argument("--engine",default=r"C:\AI\MLI-FluxTest-Vulkan");p.add_argument("--zip");p.add_argument("--report")
  a=p.parse_args()
  try:
-  {"prepare":prepare,"generate":generate,"package":package,"ingest":ingest,"status":status,"verify":verify}[a.command](a)
+  {"prepare":prepare,"generate":generate,"package":package,"ingest":ingest,"status":status,"verify":verify,"export":export}[a.command](a)
  except Exception as e:print("FAILED:",e,file=sys.stderr);return 1
  return 0
 if __name__=="__main__":sys.exit(main())
