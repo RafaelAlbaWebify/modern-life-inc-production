@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 3.0 (2026-10-26)
+Version: 3.1 (2026-10-26)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -285,3 +285,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - User executed `run-semantic-gate.ps1` from `C:\Users\ralba` and got `No extracted engine gate images`; previous engine-gate run was shared as `MLI_ENGINE_GATE_20261025_180715.zip`, and no extracted engine folder was found by the runner.
 - Updated runner to search for extracted engine gate candidates first, then newest `Downloads\MLI_ENGINE_GATE_*.zip`. When ZIP exists, it extracts ONLY `SCxx_attempt1.png`/`SCxx_attempt2.png` entries into a temporary staging folder based on ZIP basename. It does not require manual extraction or modify archived source files. Still cwd-independent.
 - API-based vision evaluation requires `OPENAI_API_KEY` to be set by user; without it reports PENDING (no billable requests, no retries). No claim of successful live model evaluation yet.
+
+## 2026-10-26: Chat-based visual review (v3.1)
+- No paid API services will be used. The previous remote vision runner is not the default workflow.
+- Added tools/prepare-chat-review.py to collect existing PNG files from the engine test ZIP, check dimensions and hashes, and produce a chat review package and JSON checklist in Downloads.
+- Added tools/import-chat-review.py to verify the review report has matching image hashes and complete per-scene PASS/FAIL/UNCERTAIN assessments before the retry planner reads it.
+- User uploads review ZIP to this chat. Vision review happens within the conversation and the resulting evidence-bearing JSON is supplied back to the Windows workflow. This is human-in-the-loop, not fully unattended machine automation. Uncertain cases block; selective second attempts use existing frozen FLUX settings. Scripts committed but not yet locally exercised.
