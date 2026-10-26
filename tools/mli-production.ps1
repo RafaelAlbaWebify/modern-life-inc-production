@@ -1,4 +1,4 @@
-param([ValidateSet("start","review","status","verify")][string]$Mode="start",[string]$Work="",[string]$Review="",[string[]]$Scenes=@("SC01","SC02","SC05"))
+param([ValidateSet("start","review","status","verify","render")][string]$Mode="start",[string]$Work="",[string]$Review="",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
 $ErrorActionPreference="Stop";$ProgressPreference="SilentlyContinue"
 $repo="RafaelAlbaWebify/modern-life-inc-production"
 $storage=Join-Path $env:TEMP "MLI-Pipeline"
@@ -46,4 +46,22 @@ elseif($Mode -eq "review"){
  }
 }
 elseif($Mode -eq "verify"){RunPipeline @("verify","--work",$Work)}
+elseif($Mode -eq "render"){
+ RunPipeline @("verify","--work",$Work)
+ $state=Get-Content (Join-Path $Work "state.json") -Raw | ConvertFrom-Json
+ $sceneIDs=@($state.shots.PSObject.Properties.Name)
+ if($sceneIDs.Count -ne 6 -or (@("SC01","SC02","SC03","SC04","SC05","SC06") | Where-Object {$_ -notin $sceneIDs}).Count -gt 0){
+  throw "Render requires all SC01..SC06 reviewed and accepted in this run."
+ }
+ RunPipeline @("export","--work",$Work)
+ $builder=Join-Path $toolsDir "build-mli-pilot-enhanced.py"
+ FetchFile "tools/build-mli-pilot-enhanced.py" $builder
+ $audio="C:\AI\MLI-FluxTest-Vulkan\pilot_audio"
+ foreach($sid in @("SC01","SC02","SC03","SC04","SC05","SC06")){
+  if(-not(Test-Path (Join-Path $audio ($sid+".wav")))){throw "Missing WAV for $sid: $audio"}
+ }
+ & python $builder --images-dir (Join-Path $Work "accepted_images") --audio-dir $audio --pause 0.25
+ if($LASTEXITCODE -ne 0){throw "Renderer failed"}
+ Write-Host "VIDEO RENDERED, FINAL AUDIOVISUAL QC STILL REQUIRED" -ForegroundColor Green
+}
 else{RunPipeline @("status","--work",$Work)}
