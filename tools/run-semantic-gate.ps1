@@ -7,9 +7,30 @@ foreach($name in @("semantic-qc.py","semantic-retry-plan.py","execute-semantic-r
  [IO.File]::WriteAllBytes((Join-Path $work $name),[Convert]::FromBase64String(($r.content -replace '\s','')))
 }
 if(-not $Images){
- $g=Get-ChildItem (Join-Path $HOME "Downloads") -Directory -Filter "MLI_ENGINE_GATE_*" |Where-Object {Test-Path (Join-Path $_.FullName "images\SC01_attempt1.png")} |Sort-Object LastWriteTime -Descending|Select-Object -First 1
- if(-not $g){throw "No extracted engine gate images; supply -Images ABSOLUTE_PATH"}
- $Images=Join-Path $g.FullName "images"
+ $downloads=Join-Path $HOME "Downloads"
+ $g=Get-ChildItem $downloads -Directory -Filter "MLI_ENGINE_GATE_*" |Where-Object {Test-Path (Join-Path $_.FullName "images\SC01_attempt1.png")} |Sort-Object LastWriteTime -Descending|Select-Object -First 1
+ if($g){$Images=Join-Path $g.FullName "images"}
+ else{
+  $archive=Get-ChildItem $downloads -File -Filter "MLI_ENGINE_GATE_*.zip" |Sort-Object LastWriteTime -Descending|Select-Object -First 1
+  if(-not $archive){throw "No existing engine gate images or MLI_ENGINE_GATE_*.zip in Downloads"}
+  $stage=Join-Path $work ("extracted_"+$archive.BaseName)
+  New-Item -ItemType Directory -Force -Path $stage|Out-Null
+  Add-Type -AssemblyName System.IO.Compression
+  $z=[IO.Compression.ZipFile]::OpenRead($archive.FullName)
+  try{
+   $found=0
+   foreach($entry in $z.Entries){
+    if($entry.Name -match '^SC\d{2}_attempt[12]\.png$'){
+     $dest=Join-Path $stage $entry.Name
+     [IO.Compression.ZipFileExtensions]::ExtractToFile($entry,$dest,$true)
+     $found++
+    }
+   }
+  }finally{$z.Dispose()}
+  if($found -eq 0){throw "No SCxx_attemptN.png inside $($archive.FullName)"}
+  $Images=$stage
+  Write-Host "Extracted $found existing PNGs from $($archive.Name)" -ForegroundColor Cyan
+ }
 }
 if(-not(Test-Path -LiteralPath $Images -PathType Container)){throw "Missing images directory $Images"}
 $out=Join-Path $HOME ("Downloads\MLI_SEMANTIC_GATE_"+(Get-Date -Format "yyyyMMdd_HHmmss"))
