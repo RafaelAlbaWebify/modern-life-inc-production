@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 2.6 (2026-10-26)
+Version: 2.7 (2026-10-26)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -263,3 +263,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - New tools/run-visual-qc-vae.ps1: cwd-independent downloader via GitHub REST content to avoid stale raw-cache; locates most recent existing extracted MLI_ENGINE_GATE images in Downloads; runs offline visual technical QC, captures installed sd-cli --help and VAE feature support to new Downloads/MLI_QC_VAE_timestamp folder. Optional -RunVaeTrial generates SC05 baseline and SC05 --vae-conv-direct with same model, seed, resolution, reference, steps, backend and prompt. It only trials when option is advertised in installed local CLI. Logs both runs and elapsed timings, never changes/deletes original models, and does not replace the standard CLI configuration.
 - Caveat: this uses two generations and may take several minutes; baseline comparable to prior SC05 but paired same-session baseline is needed for fair A/B. VAE optimization isn't accepted unless total, decode duration and image quality improve reproducibly. CLI may fail due to build-specific flags; inspect logs and stop rather than guessing. Both scripts saved in GitHub, **not yet run on user's Windows installation**.
 - Current video generation stays BLOCKED until explicit visual QC approval. Previous engine gate's three output PNGs remain technically valid but semantically unapproved. Pipeline is integrated at acceptance/reporting level; automatic computer vision semantic scoring remains FUTURE work.
+
+## 2026-10-26: VAE A/B and visual QC run receipt (v2.7)
+- Uploaded archive MLI_QC_VAE_20261026_081621.zip verified. Baseline: PowerShell wall 176.25s, internal generation 164.35s, sampling 54.05s, VAE decode 65.37s, reference encode 26.31s. `--vae-conv-direct`: wall 176.76s, internal 173.70s, sampling 54.55s, VAE decode 68.46s, reference encode 32.65s. Both exit_code 0.
+- Both images exactly binary-identical (SHA-256 149fee0e2c9855b94cea95271ece29a47118df244653ee185f4de2b18aaa1225), also same as earlier SC05 attempt; no semantic improvement. Do not enable option. Experimental log warns: deprecated --vae-conv-direct; suggested replacement --conv-direct auto,vae=on; replacement not benchmarked.
+- visual_qc.json validates SC01, SC02, SC05 as technical PASS but each semantic criterion remains PENDING because evidence-based image interpretation is not automated and reviewer decisions were not provided. FAIL_CLOSED behavior working as intended; this is not full visual auto-QC.
+- Preserve sd-cli baseline; stop VAE flag trials without evidence of a different meaningful backend. Next deliverable should integrate actual independent semantic image analysis or reviewer-signed acceptance in production, rather than claiming that an unevaluated checklist is automation. No full episode authorized yet.
