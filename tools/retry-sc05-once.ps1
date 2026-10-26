@@ -2,9 +2,27 @@
 param()
 $ErrorActionPreference="Stop";$ProgressPreference="SilentlyContinue"
 $downloads=Join-Path $HOME "Downloads"
-$gate=Get-ChildItem $downloads -Directory -Filter "MLI_ENGINE_GATE_*" |Where-Object {(Test-Path (Join-Path $_.FullName "imagesSC01_attempt1.png")) -and (Test-Path (Join-Path $_.FullName "imagesSC02_attempt1.png")) -and (Test-Path (Join-Path $_.FullName "imagesSC05_attempt1.png"))} |Sort-Object LastWriteTime -Descending |Select-Object -First 1
-if(-not $gate){throw "No gate folder with all 3 image files found in Downloads. No regeneration attempted."}
-$images=Join-Path $gate.FullName "images"
+$gate=Get-ChildItem $downloads -Directory -Filter "MLI_ENGINE_GATE_*" | Where-Object {
+ $d=Join-Path $_.FullName "images"
+ @("SC01_attempt1.png","SC02_attempt1.png","SC05_attempt1.png") | ForEach-Object {Test-Path (Join-Path $d $_)} | Where-Object {-not $_} | Measure-Object | Select-Object -ExpandProperty Count | ForEach-Object {$_ -eq 0}
+} | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+if($gate){$images=Join-Path $gate.FullName "images"}
+else{
+ $archive=Get-ChildItem $downloads -File -Filter "MLI_ENGINE_GATE_*.zip" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+ if(-not $archive){throw "No MLI_ENGINE_GATE archive or extracted image folder found in Downloads"}
+ $images=Join-Path $downloads ("MLI_SC05_SOURCE_"+$archive.BaseName)
+ New-Item -ItemType Directory -Force -Path $images | Out-Null
+ Add-Type -AssemblyName System.IO.Compression
+ $z=[IO.Compression.ZipFile]::OpenRead($archive.FullName)
+ try {
+  foreach($n in @("SC01_attempt1.png","SC02_attempt1.png","SC05_attempt1.png")){
+   $entry=$z.Entries | Where-Object {$_.Name -eq $n} | Select-Object -First 1
+   if(-not $entry){throw "Archive missing $n : $($archive.FullName)"}
+   [IO.Compression.ZipFileExtensions]::ExtractToFile($entry,(Join-Path $images $n),$true)
+  }
+ } finally {$z.Dispose()}
+ Write-Host "Restored 3 original PNGs from $($archive.Name)"
+}
 $ref="C:\AI\MLI-FluxTest-Vulkan\story_consistency_revised\CHARACTER_REFERENCE.png"
 $exe="C:\AI\MLI-FluxTest-Vulkan\sd-cli.exe";$models="C:\AI\MLI-FluxTest\models"
 foreach($f in @($ref,$exe,(Join-Path $models "flux-2-klein-4b-q4_0.gguf"),(Join-Path $models "Qwen3-4B-Q4_K_S.gguf"),(Join-Path $models "flux2-vae.safetensors"))){if(-not(Test-Path -LiteralPath $f)){throw "Missing $f"}}
