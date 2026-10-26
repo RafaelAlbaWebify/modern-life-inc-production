@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 4.1 (2026-10-26)
+Version: 4.2 (2026-10-26)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -350,3 +350,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - User launched mli-production.ps1 and PowerShell parser failed before execution on `"Missing WAV for $sid: $audio"`; `$sid:` is not valid PowerShell variable syntax. Fixed to `${sid}:`.
 - Also fixed `RunPipeline @(...)` and `RunPipeline (...)` argument calls to explicit `RunPipeline -argList @(...)` so the full argument vector reaches the Python subprocess. This could otherwise cause subsequent launch errors.
 - Refetched updated script from GitHub and checked patched content. No PowerShell runtime/actual GPU test performed in this environment. User must rerun same main bootstrap command; no images or run folder were created by the original parse failure.
+
+## 2026-10-26: Six-scene production QA receipt (v4.2)
+- Received and inspected MLI_PIPELINE_20261026_201214_CHAT_REVIEW.zip with all six PNGs and review_request.json. All six SHA256 hashes matched the request. Created MLI_PIPELINE_20261026_201214_REVIEW.json for ingest with all six criteria per image and visible evidence.
+- SC01 CANDIDATE_PASS: exhausted lead alone at desk, phone in hand. SC04 CANDIDATE_PASS: narratively useful side-by-side composition, hands in pockets and phone apart on parapet. Split panels allowed; don't reject them as a matter of style.
+- SC02 FAIL: more than 3 supporting pedestrians and shop-window figures. SC03 FAIL: right-hand panel shows lead holding phone, contrary to required phone on cafe table. SC05 FAIL: phone appropriately on separate shelf but upright with visibly illuminated screen rather than lying screen down. SC06 FAIL: garbled speech bubbles, and only protagonist clearly holds mug, whereas both characters should hold mugs.
+- First pass scene-specific acceptance 2/6. Full video release remains blocked. Import review JSON into exact run folder MLI_PIPELINE_20261026_201214 to trigger at most one second attempt for ONLY SC02, SC03, SC05 and SC06; SC01 and SC04 MUST remain unchanged. Inspect next ZIP before rendering.
