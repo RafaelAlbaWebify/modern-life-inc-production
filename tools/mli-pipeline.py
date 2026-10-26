@@ -109,12 +109,29 @@ def ingest(a):
  save(run,state);print("Imported:",[(sid,state["shots"][sid]["state"]) for sid,_,_ in pending])
 def status(a):
  state=load(root(a));print(json.dumps({"shots":{k:v["state"] for k,v in state["shots"].items()},"release_approved":False},indent=2))
+def verify(a):
+ run=root(a);state=load(run)
+ summary={}
+ bad=[]
+ for sid,shot in state["shots"].items():
+  if shot["state"]=="CANDIDATE_PASS":
+   last=shot["attempts"][-1]
+   try:
+    if png(images(run)/last["file"])!=last["sha256"]:raise ValueError("hash mismatch")
+    if not shot.get("review"):raise ValueError("missing verified review")
+   except Exception as e:bad.append(sid+": "+str(e))
+  else:bad.append(sid+": "+shot["state"])
+  summary[sid]=shot["state"]
+ result={"ready_for_editorial":not bad,"publication_approved":False,"shots":summary,"blockers":bad}
+ write_json(run/"acceptance_gate.json",result)
+ print(json.dumps(result,indent=2))
+ if bad:raise ValueError("Acceptance gate blocked")
 def main():
- p=argparse.ArgumentParser();p.add_argument("command",choices=["prepare","generate","package","ingest","status"]);p.add_argument("--work",required=True)
+ p=argparse.ArgumentParser();p.add_argument("command",choices=["prepare","generate","package","ingest","status","verify"]);p.add_argument("--work",required=True)
  p.add_argument("--shots");p.add_argument("--scenes",nargs="*");p.add_argument("--models",default=r"C:\AI\MLI-FluxTest\models");p.add_argument("--engine",default=r"C:\AI\MLI-FluxTest-Vulkan");p.add_argument("--zip");p.add_argument("--report")
  a=p.parse_args()
  try:
-  {"prepare":prepare,"generate":generate,"package":package,"ingest":ingest,"status":status}[a.command](a)
+  {"prepare":prepare,"generate":generate,"package":package,"ingest":ingest,"status":status,"verify":verify}[a.command](a)
  except Exception as e:print("FAILED:",e,file=sys.stderr);return 1
  return 0
 if __name__=="__main__":sys.exit(main())
