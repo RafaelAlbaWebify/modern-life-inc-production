@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 3.6 (2026-10-26)
+Version: 3.7 (2026-10-26)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -321,3 +321,10 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Added tools/run-mli-pipeline.ps1 to fetch fresh script via GitHub REST and run prepare/generate/package in one PowerShell invocation from any directory, output isolated in Downloads/MLI_PIPELINE_timestamp. Defaults to SC01 SC02 SC05 pilot gate; `-Scenes` parameter accepts any known shot IDs from contract. No paid API calls.
 - Added tests/test_mli_pipeline.py for no-GPU state/package/hash/retry behavior. Source files committed; **not yet executed against Windows GPU or test environment**. Do not claim QA complete or video pipeline fully integrated. This is the image pipeline; audio, shot timing and renderer integration are still independent.
 - Production efficiency: fail closed on uncertain review; accepted assets are not regenerated; after 2 failures block and change method. Composition controls must be explicit in shot contracts, never imposed by arbitrary aesthetic rules. Next practical step: execute unit tests and one complete prepare/generate/chat-review/import round, then integrate release gate with multi-shot renderer.
+
+## 2026-10-26: First unified pipeline GPU review receipt (v3.7)
+- User uploaded MLI_PIPELINE_20261026_181922_CHAT_REVIEW.zip with SC01/SC02/SC05 attempt1 PNGs and specific review_request.json. Chat visual evaluation produced MLI_PIPELINE_20261026_CHAT_REVIEW_RESULT.json with exactly six evidence-supported checks per image and hash match to request.
+- SC01 CANDIDATE_PASS: recognizable exhausted lead, phone held, hand to temple, laptop; extra people appear but THIS version of SC01 contract does not prohibit them. Extra people may detract editorially; do not silently impose prior prompt constraints that are absent from current contract.
+- SC02 FAIL: more than two or three passersby visible, although lead identity/action maintained.
+- SC05 FAIL: writing hands correct, but two phones visible on desk, zero on separate shelf; foreground also includes two others despite prior desire for solitary decision. Current JSON contract lacks exact 'no extras' constraint. No automatic editorial ban on multi-panel composition; creative policy remains script-first.
+- Result 1/3 first-attempt candidate acceptance (33%). Do NOT trigger automatic 2nd attempts until contract is corrected to include proven scene-specific composition/layout instructions; otherwise second attempts likely repeat known failures. Technical image generation is working, semantic accuracy remains major bottleneck. Review JSON downloadable in conversation; source files on user's PC remain separate.
