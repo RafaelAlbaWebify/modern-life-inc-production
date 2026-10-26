@@ -1,8 +1,8 @@
-param([string]$Images="")
+param([string]$Images="",[switch]$ExecuteRetries)
 $ErrorActionPreference="Stop";$ProgressPreference="SilentlyContinue"
 $base="https://api.github.com/repos/RafaelAlbaWebify/modern-life-inc-production/contents/tools/"
 $work=Join-Path $env:TEMP "MLI-Pipeline";New-Item -ItemType Directory -Force $work|Out-Null
-foreach($name in @("semantic-qc.py","semantic-retry-plan.py")){
+foreach($name in @("semantic-qc.py","semantic-retry-plan.py","execute-semantic-retries.py")){
  $r=Invoke-RestMethod -Uri ($base+$name+"?ref=main&v="+[DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds()) -Headers @{"Accept"="application/vnd.github+json"}
  [IO.File]::WriteAllBytes((Join-Path $work $name),[Convert]::FromBase64String(($r.content -replace '\s','')))
 }
@@ -20,5 +20,13 @@ $qcExit=$LASTEXITCODE
 $report=Join-Path $out "semantic_report.json"
 if(-not(Test-Path $report)){throw "No semantic QC report generated"}
 & python (Join-Path $work "semantic-retry-plan.py") --report $report --out (Join-Path $out "retry_plan.json")
+if($ExecuteRetries){
+ $prompts=Join-Path $HOME "Downloads\MLI_PILOT_001_PROMPTS"
+ if(-not(Test-Path (Join-Path $prompts "SC01.txt"))){throw "Prompts missing"}
+ & python (Join-Path $work "execute-semantic-retries.py") --plan (Join-Path $out "retry_plan.json") --prompts $prompts --images $Images --logs $out --execute
+ if($LASTEXITCODE -ne 0){throw "Selective retry failed; see logs $out"}
+ & python (Join-Path $work "semantic-qc.py") --images $Images --out $out
+ & python (Join-Path $work "semantic-retry-plan.py") --report (Join-Path $out "semantic_report.json") --out (Join-Path $out "retry_plan.json")
+}
 Write-Host "Decision and evidence: $out"
 Write-Host "Vision code $qcExit ; release remains BLOCKED until human approval."
