@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 3.2 (2026-10-26)
+Version: 3.3 (2026-10-26)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -296,3 +296,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - User ran previous hardened-prompt block. It created `Downloads/MLI_PILOT_001_PROMPTS` but failed during Github REST downloader with HTTP 404 before image generation. PowerShell URL interpolation used `$Name?ref=...`; replace with `${Name}?ref=...` to delimit variables.
 - More importantly, old tools/run-mli-engine-gate.ps1 regenerated all prompts internally, silently overwriting hardened external prompts. Updated script now supports `-PromptsDir ABSOLUTE_PATH`: after validating original contract, copies user-supplied SC01, SC02, SC05 prompts into the run-specific prompts folder and explicitly reports override. Generation therefore uses actual hardened prompts. Defaults remain unchanged for ordinary runs.
 - Next command must download updated script, validate `-PromptsDir` exists in its content, invoke with Downloads/MLI_PILOT_001_PROMPTS, then use latest gate ZIP for offline chat review. This correction is committed, not yet executed on user's machine. No new images from failed 404 run.
+
+## 2026-10-26: Hardened-prompt visual review receipt (v3.3)
+- User submitted MLI_CHAT_REVIEW(1).zip containing SC01_attempt1.png, SC02_attempt1.png, SC05_attempt1.png and review_request.json; hash-matched visual inspection performed in this chat.
+- SC01 image candidate PASS for five listed criteria: iconic protagonist, clean style/anatomy, exhausted desk action, no secondary people or portraits. SC02 candidate PASS for lead identity, style/anatomy, looking at phone while walking, and exactly three clearly depicted outdoor pedestrians (distant silhouettes visible indoors but are not additional passersby).
+- SC05 FAIL on phone position, though character, illustration/anatomy and writing hands PASS: exactly one phone is clearly on the SAME DESK to the right of laptop, contrary to required separate shelf/location. Single targeted retry on SC05 only is appropriate; do NOT regenerate accepted SC01/SC02. A visible evidence JSON has been generated for download in chat and can be imported via import-chat-review.py to drive bounded retry decision.
+- Insight: stronger prompts corrected excess persons and duplicate phones, but complex object-placement instruction still failed. Prefer modifying SC05 composition by moving shelf into distinct plane or controlled image edit, not repeated generic negative prompts. This is candidate review, not final video approval.
