@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 3.7 (2026-10-26)
+Version: 3.8 (2026-10-26)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -328,3 +328,8 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - SC02 FAIL: more than two or three passersby visible, although lead identity/action maintained.
 - SC05 FAIL: writing hands correct, but two phones visible on desk, zero on separate shelf; foreground also includes two others despite prior desire for solitary decision. Current JSON contract lacks exact 'no extras' constraint. No automatic editorial ban on multi-panel composition; creative policy remains script-first.
 - Result 1/3 first-attempt candidate acceptance (33%). Do NOT trigger automatic 2nd attempts until contract is corrected to include proven scene-specific composition/layout instructions; otherwise second attempts likely repeat known failures. Technical image generation is working, semantic accuracy remains major bottleneck. Review JSON downloadable in conversation; source files on user's PC remain separate.
+
+## 2026-10-26: Persistent composition constraints and review-driven retry (v3.8)
+- Canonical pilot shots.json now explicitly includes scene-specific composition requirements: SC01 no extraneous figures or portraits; SC02 exactly three or fewer background pedestrians; SC05 single phone on physically separate shelf with visible gap and optional narratively purposeful panels. Previous learned constraints no longer disappear between runs.
+- tools/mli-pipeline.py now includes shot composition in generated prompts and incorporates actual failed-criterion evidence into attempt2 prompts. It continues to preserve accepted scenes, enforce two attempts and keep full-image QC as a separate chat step.
+- Both changes committed to GitHub, but have not yet been executed in the user's Windows runtime. No new MP4 or generated images claimed. Further automated testing and complete six-scene acceptance are still required.
