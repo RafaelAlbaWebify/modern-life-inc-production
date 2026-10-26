@@ -1,4 +1,4 @@
-param([switch]$SkipGeneration)
+param([switch]$SkipGeneration,[string]$PromptsDir="")
 $ErrorActionPreference="Stop"
 $ProgressPreference="SilentlyContinue"
 $base="https://raw.githubusercontent.com/RafaelAlbaWebify/modern-life-inc-production/main"
@@ -30,6 +30,15 @@ foreach($f in $files.Keys){
 if($LASTEXITCODE -ne 0){throw "Unit tests failed"}
 & python (Join-Path $src "tools\plan-shots.py") --shots (Join-Path $src "episodes\MLI_PILOT_001\shots.json") --out $prompts
 if($LASTEXITCODE -ne 0){throw "Prompt contract validation failed"}
+if($PromptsDir){
+ $pdir=(Resolve-Path -LiteralPath $PromptsDir -ErrorAction Stop).Path
+ foreach($sid in @("SC01","SC02","SC05")){
+  $from=Join-Path $pdir ($sid+".txt")
+  if(-not(Test-Path -LiteralPath $from -PathType Leaf)){throw "Missing override prompt $from"}
+  Copy-Item -LiteralPath $from -Destination (Join-Path $prompts ($sid+".txt")) -Force
+ }
+ Write-Host "USING VERIFIED OVERRIDE PROMPTS FROM $pdir" -ForegroundColor Yellow
+}
 $shots=@("SC01","SC02","SC05")
 $results=@()
 if(-not $SkipGeneration){
