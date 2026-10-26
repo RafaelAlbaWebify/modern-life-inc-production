@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 3.8 (2026-10-26)
+Version: 3.9 (2026-10-26)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -333,3 +333,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Canonical pilot shots.json now explicitly includes scene-specific composition requirements: SC01 no extraneous figures or portraits; SC02 exactly three or fewer background pedestrians; SC05 single phone on physically separate shelf with visible gap and optional narratively purposeful panels. Previous learned constraints no longer disappear between runs.
 - tools/mli-pipeline.py now includes shot composition in generated prompts and incorporates actual failed-criterion evidence into attempt2 prompts. It continues to preserve accepted scenes, enforce two attempts and keep full-image QC as a separate chat step.
 - Both changes committed to GitHub, but have not yet been executed in the user's Windows runtime. No new MP4 or generated images claimed. Further automated testing and complete six-scene acceptance are still required.
+
+## 2026-10-26: Operational image production entrypoint (v3.9)
+- New tools/mli-production.ps1 is the single PowerShell entrypoint for `start`, `review`, `status`, `verify` from any CWD. It downloads mli-pipeline.py plus test_mli_pipeline.py directly via GitHub API, runs tests before GPU, creates a run in Downloads, packages first-attempt images for chat; review mode ingests returned JSON, never regenerates candidate-pass images, generates only RETRY_AUTHORIZED shots, repackages and enforces strict review round; verify mode checks all accepted candidates and hashes. The user must explicitly bridge ZIP and JSON with the chat, not a paid API.
+- Canonical shots.json now preserves scene composition constraints from historical accepted tests. The Python generator now uses composition field; attempt2 prompt includes evidence of failed criteria. Automatic publication is never asserted. Binary setup still local stable-diffusion.cpp sd-cli, with known frozen Vulkan configuration.
+- Added verify command to tools/mli-pipeline.py: checks selected shots candidate-pass, image hashes and review evidence, writes acceptance_gate.json and blocks on any missing/failed item. This is an image gate, not yet a complete voice/edit/render/publish pipeline.
+- Source committed, but PowerShell entrypoint has NOT been tested on user's PC yet; run-based tests are the next validation. Avoid promising fully working until live execution returns PASS.
