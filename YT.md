@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 2.7 (2026-10-26)
+Version: 2.8 (2026-10-26)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -269,3 +269,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Both images exactly binary-identical (SHA-256 149fee0e2c9855b94cea95271ece29a47118df244653ee185f4de2b18aaa1225), also same as earlier SC05 attempt; no semantic improvement. Do not enable option. Experimental log warns: deprecated --vae-conv-direct; suggested replacement --conv-direct auto,vae=on; replacement not benchmarked.
 - visual_qc.json validates SC01, SC02, SC05 as technical PASS but each semantic criterion remains PENDING because evidence-based image interpretation is not automated and reviewer decisions were not provided. FAIL_CLOSED behavior working as intended; this is not full visual auto-QC.
 - Preserve sd-cli baseline; stop VAE flag trials without evidence of a different meaningful backend. Next deliverable should integrate actual independent semantic image analysis or reviewer-signed acceptance in production, rather than claiming that an unevaluated checklist is automation. No full episode authorized yet.
+
+## 2026-10-26: Actual image-based semantic assessment foundation (v2.8)
+- New tools/semantic-qc.py sends existing 768x432 PNG images to the OpenAI Responses API using image input with OPENAI_API_KEY from Windows environment (not recorded). Checks iconic lead identity, hands, phone positions, gazes and secondary character counts, with per-scene PASS/FAIL/UNCERTAIN plus visible evidence text. Uses gpt-4.1-mini default (model/account access must be confirmed locally). API charges/online use apply. On missing key, any API error, malformed response or uncertainty, status PENDING and no approval. No user images are transmitted unless the local command is deliberately executed with a configured API key.
+- New tools/semantic-retry-plan.py consumes semantic_report.json and determines REVIEW_CANDIDATE, RETRY or BLOCK per scene, max 2 attempts. REVIEW_CANDIDATE never means publish approved; script never generates images or changes original assets.
+- New tools/run-semantic-gate.ps1 downloads latest tools through GitHub REST and locates existing gate images in Downloads from ANY current path, runs remote vision (only if key available), then generates retry_plan.json. Outputs in Downloads/MLI_SEMANTIC_GATE_timestamp. Scripts committed in GitHub; NOT YET EXECUTED against user's GPU or a live model API; no visual benchmark/cost/reliability established. In particular, the retry plan is implemented but actual selective generation execution is not yet wired. Full episode remains BLOCKED.
+- Command using existing extracted images: download tools/run-semantic-gate.ps1 from GitHub API and invoke. If no OPENAI_API_KEY, report explicitly records PENDING rather than pretending vision took place. Production policy requires human review of CANDIDATE_PASS images and checks semantic performance of model against known defects (SC02 missing headphones) before unattended use.
