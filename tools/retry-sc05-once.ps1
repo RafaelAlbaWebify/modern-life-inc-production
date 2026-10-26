@@ -4,7 +4,9 @@ $ErrorActionPreference="Stop";$ProgressPreference="SilentlyContinue"
 $downloads=Join-Path $HOME "Downloads"
 $gate=Get-ChildItem $downloads -Directory -Filter "MLI_ENGINE_GATE_*" | Where-Object {
  $d=Join-Path $_.FullName "images"
- @("SC01_attempt1.png","SC02_attempt1.png","SC05_attempt1.png") | ForEach-Object {Test-Path (Join-Path $d $_)} | Where-Object {-not $_} | Measure-Object | Select-Object -ExpandProperty Count | ForEach-Object {$_ -eq 0}
+ (Test-Path (Join-Path $d "SC01_attempt1.png")) -and
+ (Test-Path (Join-Path $d "SC02_attempt1.png")) -and
+ (Test-Path (Join-Path $d "SC05_attempt1.png"))
 } | Sort-Object LastWriteTime -Descending | Select-Object -First 1
 if($gate){$images=Join-Path $gate.FullName "images"}
 else{
