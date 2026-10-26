@@ -25,43 +25,43 @@ function RunPipeline([string[]]$argList){
  if($LASTEXITCODE -ne 0){throw "Pipeline failed at $($argList[0]); check $Work"}
 }
 if($Mode -eq "start"){
- RunPipeline (@("prepare","--work",$Work,"--scenes") + $Scenes)
- RunPipeline @("generate","--work",$Work)
- RunPipeline @("package","--work",$Work)
+ RunPipeline -argList (@("prepare","--work",$Work,"--scenes") + $Scenes)
+ RunPipeline -argList @("generate","--work",$Work)
+ RunPipeline -argList @("package","--work",$Work)
  Write-Host "UPLOAD: $($Work)_CHAT_REVIEW.zip" -ForegroundColor Green
 }
 elseif($Mode -eq "review"){
  if(-not(Test-Path -LiteralPath $Review -PathType Leaf)){throw "Review JSON missing: $Review"}
- RunPipeline @("ingest","--work",$Work,"--report",$Review)
+ RunPipeline -argList @("ingest","--work",$Work,"--report",$Review)
  $state=Get-Content (Join-Path $Work "state.json") -Raw | ConvertFrom-Json
  $retry=@($state.shots.PSObject.Properties | Where-Object {$_.Value.state -eq "RETRY_AUTHORIZED"})
  if($retry.Count -gt 0){
   Write-Host "Retry only: $($retry.Name -join ', ')" -ForegroundColor Cyan
-  RunPipeline @("generate","--work",$Work)
-  RunPipeline @("package","--work",$Work)
+  RunPipeline -argList @("generate","--work",$Work)
+  RunPipeline -argList @("package","--work",$Work)
   Write-Host "UPLOAD: $($Work)_CHAT_REVIEW.zip" -ForegroundColor Yellow
  }else{
   & python $script verify --work $Work
   if($LASTEXITCODE -ne 0){Write-Warning "Blocked: see acceptance_gate.json"}
  }
 }
-elseif($Mode -eq "verify"){RunPipeline @("verify","--work",$Work)}
+elseif($Mode -eq "verify"){RunPipeline -argList @("verify","--work",$Work)}
 elseif($Mode -eq "render"){
- RunPipeline @("verify","--work",$Work)
+ RunPipeline -argList @("verify","--work",$Work)
  $state=Get-Content (Join-Path $Work "state.json") -Raw | ConvertFrom-Json
  $sceneIDs=@($state.shots.PSObject.Properties.Name)
  if($sceneIDs.Count -ne 6 -or (@("SC01","SC02","SC03","SC04","SC05","SC06") | Where-Object {$_ -notin $sceneIDs}).Count -gt 0){
   throw "Render requires all SC01..SC06 reviewed and accepted in this run."
  }
- RunPipeline @("export","--work",$Work)
+ RunPipeline -argList @("export","--work",$Work)
  $builder=Join-Path $toolsDir "build-mli-pilot-enhanced.py"
  FetchFile "tools/build-mli-pilot-enhanced.py" $builder
  $audio="C:\AI\MLI-FluxTest-Vulkan\pilot_audio"
  foreach($sid in @("SC01","SC02","SC03","SC04","SC05","SC06")){
-  if(-not(Test-Path (Join-Path $audio ($sid+".wav")))){throw "Missing WAV for $sid: $audio"}
+  if(-not(Test-Path (Join-Path $audio ($sid+".wav")))){throw "Missing WAV for ${sid}: $audio"}
  }
  & python $builder --images-dir (Join-Path $Work "accepted_images") --audio-dir $audio --pause 0.25
  if($LASTEXITCODE -ne 0){throw "Renderer failed"}
  Write-Host "VIDEO RENDERED, FINAL AUDIOVISUAL QC STILL REQUIRED" -ForegroundColor Green
 }
-else{RunPipeline @("status","--work",$Work)}
+else{RunPipeline -argList @("status","--work",$Work)}
