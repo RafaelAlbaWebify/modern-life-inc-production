@@ -21,11 +21,14 @@
       ],
       "forbidden": [
         "confident smile",
-        "duplicate hands"
+        "duplicate hands",
+        "background people",
+        "portraits and framed faces"
       ],
       "secondaries": 0,
       "motion": "hold",
-      "seed": 3101
+      "seed": 3101,
+      "composition": "One protagonist at desk, no extra people, silhouettes, photo portraits or faces in frames; background only plants books and abstract art."
     },
     {
       "id": "SC02",
@@ -41,11 +44,14 @@
       ],
       "forbidden": [
         "second protagonist",
-        "extra phones floating"
+        "extra phones floating",
+        "crowds",
+        "more than three background people"
       ],
       "secondaries": 3,
       "motion": "hold",
-      "seed": 3102
+      "seed": 3102,
+      "composition": "Quiet street with exactly three supporting pedestrians maximum, visibly separate from foreground lead; no crowd, no figures in shop windows."
     },
     {
       "id": "SC03",
@@ -64,7 +70,8 @@
       ],
       "secondaries": 2,
       "motion": "hold",
-      "seed": 3103
+      "seed": 3103,
+      "composition": "Composition chosen to serve the narrative beat; split panels allowed if narratively useful."
     },
     {
       "id": "SC04",
@@ -84,7 +91,8 @@
       ],
       "secondaries": 0,
       "motion": "hold",
-      "seed": 3104
+      "seed": 3104,
+      "composition": "Composition chosen to serve the narrative beat; split panels allowed if narratively useful."
     },
     {
       "id": "SC05",
@@ -96,16 +104,22 @@
       "required": [
         "pen right hand",
         "left hand on notebook",
-        "smartphone screen-down on a separate shelf at least an arm-length away"
+        "smartphone screen-down on a separate shelf at least an arm-length away",
+        "exactly one smartphone total",
+        "phone on independent shelf separated by visible gap"
       ],
       "forbidden": [
         "phone in any hand",
         "writing on smartphone",
-        "three hands"
+        "three hands",
+        "phone on desk",
+        "second phone or tablet",
+        "other people"
       ],
       "secondaries": 0,
       "motion": "hold",
-      "seed": 3105
+      "seed": 3105,
+      "composition": "Two clearly distinguishable areas: left desk with notebook and laptop ONLY, right independent freestanding shelf divided by visible gap holding the single phone. Two-panel illustration allowed when it clarifies phone separation."
     },
     {
       "id": "SC06",
@@ -126,7 +140,8 @@
       ],
       "secondaries": 1,
       "motion": "hold",
-      "seed": 3106
+      "seed": 3106,
+      "composition": "Composition chosen to serve the narrative beat; split panels allowed if narratively useful."
     }
   ]
 }
