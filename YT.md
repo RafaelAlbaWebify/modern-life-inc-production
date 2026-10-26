@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 2.9 (2026-10-26)
+Version: 3.0 (2026-10-26)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -280,3 +280,8 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - tools/execute-semantic-retries.py now executes only RETRY decisions returned by semantic-retry-plan.py, and ONLY when latest attempt was 1. It reuses frozen sd-cli model/backend, prompt, reference, four steps, 768x432, and increments the seed by one for attempt 2; never overwrites existing attempt2 or originals. Dry-run by default, --execute explicit.
 - tools/run-semantic-gate.ps1 updated: optional -ExecuteRetries performs first remote image QC, decision plan, selective FLUX retry (only FAIL, never PENDING), second remote QC and final decision plan. Without switch: assess and plan only, no GPU. From any PowerShell working directory; gets tools via REST API to avoid stale raw caching. No publication approved automatically; remaining BLOCK and REVIEW_CANDIDATE require human acceptance.
 - IMPORTANT: this requires OPENAI_API_KEY configured in the local Windows process environment, and paid OpenAI API access separate from ChatGPT subscription. No key is stored in scripts. If absent, semantic_report.json is PENDING and no attempts are generated. API/schema compatibility and visual accuracy have NOT YET been validated in user's Windows setup; cost and image transfer must be explicitly understood before execution. No model credentials invented. Tool source committed but not verified by running live API or GPU. Never declare fully operational before user runtime receipt and quality evaluation.
+
+## 2026-10-26: Archived engine-gate input support (v3.0)
+- User executed `run-semantic-gate.ps1` from `C:\Users\ralba` and got `No extracted engine gate images`; previous engine-gate run was shared as `MLI_ENGINE_GATE_20261025_180715.zip`, and no extracted engine folder was found by the runner.
+- Updated runner to search for extracted engine gate candidates first, then newest `Downloads\MLI_ENGINE_GATE_*.zip`. When ZIP exists, it extracts ONLY `SCxx_attempt1.png`/`SCxx_attempt2.png` entries into a temporary staging folder based on ZIP basename. It does not require manual extraction or modify archived source files. Still cwd-independent.
+- API-based vision evaluation requires `OPENAI_API_KEY` to be set by user; without it reports PENDING (no billable requests, no retries). No claim of successful live model evaluation yet.
