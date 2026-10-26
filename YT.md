@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 4.2 (2026-10-26)
+Version: 4.3 (2026-10-26)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -356,3 +356,8 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - SC01 CANDIDATE_PASS: exhausted lead alone at desk, phone in hand. SC04 CANDIDATE_PASS: narratively useful side-by-side composition, hands in pockets and phone apart on parapet. Split panels allowed; don't reject them as a matter of style.
 - SC02 FAIL: more than 3 supporting pedestrians and shop-window figures. SC03 FAIL: right-hand panel shows lead holding phone, contrary to required phone on cafe table. SC05 FAIL: phone appropriately on separate shelf but upright with visibly illuminated screen rather than lying screen down. SC06 FAIL: garbled speech bubbles, and only protagonist clearly holds mug, whereas both characters should hold mugs.
 - First pass scene-specific acceptance 2/6. Full video release remains blocked. Import review JSON into exact run folder MLI_PIPELINE_20261026_201214 to trigger at most one second attempt for ONLY SC02, SC03, SC05 and SC06; SC01 and SC04 MUST remain unchanged. Inspect next ZIP before rendering.
+
+## 2026-10-26: Narrative-first acceptance correction (v4.3)
+- Earlier rejection 4/6 was a strict literal-prompt compliance score, NOT a meaningful editorial failure rate. User correctly challenged excessive failures. New policy docs/image-acceptance-rubric.md: blockers = story contradiction, character drift, serious anatomy, distracting text/artifacts; minor count/angle details nonblocking; prefer localized repair for generated gibberish text; split panels are fine when narratively useful.
+- Reassessment: SC01 ACCEPT, SC02 ACCEPT despite pedestrian count, SC03 requires narrative review of held phone, SC04 ACCEPT, SC05 ACCEPT because phone is away from desk, SC06 prefer localized repair of illegible speech bubbles and evaluate human interaction. Do NOT execute old import report blindly: it would trigger unnecessary GPU retries.
+- This is an editorial decision-policy change; legacy Python ingest currently uses FAIL on any criterion. It needs migration to severity-tagged acceptance before automatic retries can be trusted.
