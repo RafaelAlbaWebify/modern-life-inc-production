@@ -17,6 +17,12 @@ FetchFile "tests/test_mli_pipeline.py" $test
 Write-Host "Preflight: unit tests..." -ForegroundColor Cyan
 & python $test -v
 if($LASTEXITCODE -ne 0){throw "Unit tests failed. No GPU executed."}
+$finishingTest=Join-Path $testsDir "test_mli_finishing.py"
+FetchFile "tests/test_mli_finishing.py" $finishingTest
+FetchFile "tools/mli-align.py" (Join-Path $toolsDir "mli-align.py")
+FetchFile "tools/mli-finish.py" (Join-Path $toolsDir "mli-finish.py")
+& python $finishingTest -v
+if($LASTEXITCODE -ne 0){throw "Finishing regression tests failed."}
 if(-not $Work -and $Mode -eq "start"){$Work=Join-Path $HOME ("Downloads\MLI_PIPELINE_"+(Get-Date -Format "yyyyMMdd_HHmmss"))}
 if(-not $Work -and $Mode -notin @("qc","finish")){throw "-Work required for review/status/verify"}
 $Work=if($Work){[IO.Path]::GetFullPath($Work)}else{""}
