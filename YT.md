@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 6.3 (2026-10-27)
+Version: 6.4 (2026-10-27)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -454,3 +454,11 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Added tools/mli-render-episode.py: renders variable scene counts from contract.json, accepted_images and WAVs in <work>/audio, concatenates a clean episode master and emits manifests; no image or voice generation, no release approval.
 - Added tools/mli-qc-episode.py: scene-agnostic MP4 codec/stream/duration/hash/decode verification against render manifest; publication remains blocked.
 - Launcher now exposes -Mode episode-render -Work <work> and -Mode episode-qc -RenderFolder <render>, while preserving pilot-specific commands. Source committed but NOT yet locally tested on Windows; no WAVs/images for EP002 have been generated or accepted. More work needed on narration voice generation, generalized word alignment and final Soft Karaoke burn in variable-scene exports. Do not run episode-render until all accepted images and per-scene WAVs are ready.
+
+## 2026-10-27: Pipeline-wide EP002 postproduction stages (v6.4)
+- User requested all production activities be integrated into single pipeline with comprehensive phase-appropriate preflight. Added tools/mli-audio-episode.py: writes voice_jobs.json and audio_audit.json, checks all 18 WAVs with hash/duration/mono PCM format, never stops at first missing file, returns incomplete status without generating voice.
+- Added tools/mli-align-episode.py: local WhisperX word-level alignment using canonical beat texts from work/contract.json, scene order and clip timeline from render manifest, dynamic scene count. Outputs alignment.json and captions_words.srt. Does NOT use estimated fallback.
+- Added tools/mli-finish-episode.py: uses actual word timing to burn standard Soft Karaoke ASS over clean episode MP4 and record finishing_manifest.json, preserves original master.
+- Added tools/mli-qc-episode.py checks for Soft Karaoke final video, valid audio, SHA256, ASS/alignment sidecars, full FFmpeg decode (when finishing manifest exists) while retaining clean-master checks and publication_approved false.
+- Extended launcher mli-production.ps1 with modes episode-audio, episode-render (existing), episode-final and episode-qc; episode-final chains align->burn->QC. Added episode preflight for work/contract/state, final render folder and WhisperX environment. Added tests/test_mli_episode_stages.py (18-scene karaoke and scene boundaries) in preflight. Fixed episode-qc to require only render folder.
+- Important honest limit: VoiceStudio voice synthesis has not been API/CLI-integrated. Pipeline produces a complete per-scene voice job manifest and verifies WAVs, but missing WAVs remain blocking, not silently synthesized. Requires investigation/validation of real locally installed VoiceStudio interface and access. No GPU images or WAVs generated for EP002; newly added episode stages committed but not yet exercised on user Windows; do not claim full operability. The final episode still needs editorial approval.
