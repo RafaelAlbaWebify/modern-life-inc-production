@@ -125,6 +125,45 @@ def export(a):
  write_json(run/"accepted_manifest.json",manifest)
  if problems:raise ValueError("Export blocked: "+"; ".join(problems))
  print("EXPORTED:",accepted,"scenes",len(state["shots"]))
+def recover(a):
+ run=root(a);state=load(run);log=[]
+ for sid,shot in state["shots"].items():
+  known={record["number"] for record in shot["attempts"]}
+  for attempt in (1,2):
+   file=images(run)/(sid+"_attempt"+str(attempt)+".png")
+   if not file.exists() or attempt in known:continue
+   try:
+    digest=png(file)
+    promptfile=run/"prompts"/(sid+"_attempt2.txt" if attempt==2 else sid+".txt")
+    record={"number":attempt,"file":file.name,"sha256":digest,"seed":next(x["seed"] for x in json.loads((run/"contract.json").read_text(encoding="utf-8"))["scenes"] if x["id"]==sid)+attempt-1,"recovered":True,"prompt_sha256":sha(promptfile.read_bytes()) if promptfile.exists() else None}
+    if len(shot["attempts"])>=attempt:raise ValueError("Untracked attempt clashes with existing attempt history")
+    shot["attempts"].append(record)
+    shot["state"]="NEEDS_REVIEW"
+    log.append({"scene":sid,"action":"RECOVERED","file":file.name})
+   except Exception as exc:
+    quarantine=run/"quarantine";quarantine.mkdir(exist_ok=True)
+    dest=quarantine/file.name
+    if dest.exists():raise ValueError("Quarantine collision "+str(dest))
+    file.rename(dest)
+    shot["state"]="BLOCKED"
+    log.append({"scene":sid,"action":"QUARANTINED","reason":str(exc)})
+  for record in shot["attempts"]:
+   file=images(run)/record["file"]
+   if file.exists():
+    try:
+     digest=png(file)
+     if record.get("sha256") and digest!=record["sha256"]:raise ValueError("hash mismatch")
+    except Exception as exc:
+     shot["state"]="BLOCKED";log.append({"scene":sid,"action":"BLOCKED_INTEGRITY","reason":str(exc)})
+ # Stop automatic retries authorized by an obsolete review policy; user must re-review.
+ for sid,shot in state["shots"].items():
+  if shot["state"]=="RETRY_AUTHORIZED":
+   shot["state"]="REVIEW_POLICY_HOLD"
+   log.append({"scene":sid,"action":"HOLD_OLD_RETRY"})
+ state["history"].extend({"event":"RECOVERY","detail":x} for x in log)
+ save(run,state)
+ write_json(run/"recovery_report.json",{"operations":log,"states":{k:v["state"] for k,v in state["shots"].items()},"gpu_used":False})
+ print(json.dumps({"states":{k:v["state"] for k,v in state["shots"].items()},"operations":log},indent=2))
 def status(a):
  state=load(root(a));print(json.dumps({"shots":{k:v["state"] for k,v in state["shots"].items()},"release_approved":False},indent=2))
 def verify(a):
@@ -145,11 +184,11 @@ def verify(a):
  print(json.dumps(result,indent=2))
  if bad:raise ValueError("Acceptance gate blocked")
 def main():
- p=argparse.ArgumentParser();p.add_argument("command",choices=["prepare","generate","package","ingest","status","verify","export"]);p.add_argument("--work",required=True)
+ p=argparse.ArgumentParser();p.add_argument("command",choices=["prepare","generate","package","ingest","status","verify","export","recover"]);p.add_argument("--work",required=True)
  p.add_argument("--shots");p.add_argument("--scenes",nargs="*");p.add_argument("--models",default=r"C:\AI\MLI-FluxTest\models");p.add_argument("--engine",default=r"C:\AI\MLI-FluxTest-Vulkan");p.add_argument("--zip");p.add_argument("--report")
  a=p.parse_args()
  try:
-  {"prepare":prepare,"generate":generate,"package":package,"ingest":ingest,"status":status,"verify":verify,"export":export}[a.command](a)
+  {"prepare":prepare,"generate":generate,"package":package,"ingest":ingest,"status":status,"verify":verify,"export":export,"recover":recover}[a.command](a)
  except Exception as e:print("FAILED:",e,file=sys.stderr);return 1
  return 0
 if __name__=="__main__":sys.exit(main())
