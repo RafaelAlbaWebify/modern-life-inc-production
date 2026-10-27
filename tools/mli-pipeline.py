@@ -185,6 +185,25 @@ def adopt(a):
  save(run,state)
  write_json(run/"editorial_adoption.json",d)
  print("Adopted",[(x["scene"],x["decision"]) for x in rows])
+def repair_import(a):
+ run=root(a);state=load(run);sid=a.scene
+ if sid not in state["shots"]:raise ValueError("Unknown scene")
+ entry=state["shots"][sid]
+ if entry["state"]!="LOCAL_REPAIR":raise ValueError("Not awaiting localized repair: "+sid)
+ source=pathlib.Path(a.image).expanduser().resolve()
+ digest=png(source)
+ original=entry.get("editorial_choice",{})
+ if not original:raise ValueError("Missing prior editorial selection")
+ target=images(run)/(sid+"_repaired.png")
+ if target.exists():
+  if png(target)!=digest:raise ValueError("Existing repaired asset is different")
+ else:target.write_bytes(source.read_bytes())
+ entry["attempts"].append({"number":len(entry["attempts"])+1,"file":target.name,"sha256":digest,"localized_repair":True,"source_file":original["file"],"source_sha256":original["sha256"]})
+ entry["editorial_choice"]={"file":target.name,"sha256":digest,"decision":"ACCEPT","notes":"Localized text cleanup; subject to final video QC"}
+ entry["review"]={"narrative":{"status":"PASS","evidence":"Editor-chosen localized text repair; source preserved"}}
+ entry["state"]="CANDIDATE_PASS"
+ state["history"].append({"event":"LOCAL_REPAIR_IMPORTED","scene":sid,"sha256":digest})
+ save(run,state);print("Repair imported",sid,target.name,digest)
 def status(a):
  state=load(root(a));print(json.dumps({"shots":{k:v["state"] for k,v in state["shots"].items()},"release_approved":False},indent=2))
 def verify(a):
@@ -205,11 +224,11 @@ def verify(a):
  print(json.dumps(result,indent=2))
  if bad:raise ValueError("Acceptance gate blocked")
 def main():
- p=argparse.ArgumentParser();p.add_argument("command",choices=["prepare","generate","package","ingest","status","verify","export","recover","adopt"]);p.add_argument("--work",required=True)
- p.add_argument("--shots");p.add_argument("--scenes",nargs="*");p.add_argument("--models",default=r"C:\AI\MLI-FluxTest\models");p.add_argument("--engine",default=r"C:\AI\MLI-FluxTest-Vulkan");p.add_argument("--zip");p.add_argument("--report")
+ p=argparse.ArgumentParser();p.add_argument("command",choices=["prepare","generate","package","ingest","status","verify","export","recover","adopt","repair-import"]);p.add_argument("--work",required=True)
+ p.add_argument("--shots");p.add_argument("--scenes",nargs="*");p.add_argument("--models",default=r"C:\AI\MLI-FluxTest\models");p.add_argument("--engine",default=r"C:\AI\MLI-FluxTest-Vulkan");p.add_argument("--zip");p.add_argument("--report");p.add_argument("--image");p.add_argument("--scene")
  a=p.parse_args()
  try:
-  {"prepare":prepare,"generate":generate,"package":package,"ingest":ingest,"status":status,"verify":verify,"export":export,"recover":recover,"adopt":adopt}[a.command](a)
+  {"prepare":prepare,"generate":generate,"package":package,"ingest":ingest,"status":status,"verify":verify,"export":export,"recover":recover,"adopt":adopt,"repair-import":repair_import}[a.command](a)
  except Exception as e:print("FAILED:",e,file=sys.stderr);return 1
  return 0
 if __name__=="__main__":sys.exit(main())
