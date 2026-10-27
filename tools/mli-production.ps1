@@ -11,38 +11,62 @@ function FetchFile([string]$remote,[string]$dest){
  [IO.File]::WriteAllBytes($dest,[Convert]::FromBase64String(($response.content -replace '\s','')))
  if((Get-Item $dest).Length -lt 100){throw "Empty download: $dest"}
 }
-function Assert-File([string]$path,[string]$description){
- if(-not(Test-Path -LiteralPath $path -PathType Leaf)){throw "PREFLIGHT FAIL: $description missing: $path"}
+$script:preflightFindings=[System.Collections.Generic.List[object]]::new()
+function Check([string]$name,[bool]$ok,[string]$detail){
+ $status=if($ok){"PASS"}else{"FAIL"}
+ $script:preflightFindings.Add([pscustomobject]@{Check=$name;Status=$status;Detail=$detail})
 }
-function Assert-Command([string]$name){
- if(-not(Get-Command $name -ErrorAction SilentlyContinue)){throw "PREFLIGHT FAIL: $name unavailable in PATH"}
+function CheckFile([string]$name,[string]$path){
+ Check $name (Test-Path -LiteralPath $path -PathType Leaf) $path
 }
 function Preflight([string]$stage){
- Write-Host "MLI PRE-FLIGHT [$stage]" -ForegroundColor Cyan
- Assert-Command "python"
- & python -c "import sys;sys.exit(0 if (3,10)<=sys.version_info[:2]<(3,14) else 1)"
- if($LASTEXITCODE -ne 0){throw "PREFLIGHT FAIL: Python 3.10-3.13 required"}
+ Write-Host "MLI PRE-FLIGHT [$stage] - comprehensive checks" -ForegroundColor Cyan
+ $script:preflightFindings.Clear()
+ $pythonCmd=Get-Command python -ErrorAction SilentlyContinue
+ Check "Python command" ($null -ne $pythonCmd) "python in PATH"
+ if($pythonCmd){
+  & python -c "import sys;sys.exit(0 if (3,10)<=sys.version_info[:2]<(3,14) else 1)" 2>$null
+  Check "Python version" ($LASTEXITCODE -eq 0) "Python 3.10-3.13 required"
+ }
  if($stage -in @("start","render","finish","qc")){
-  Assert-Command "ffmpeg";Assert-Command "ffprobe"
+  foreach($name in @("ffmpeg","ffprobe")){
+   Check "$name executable" ($null -ne (Get-Command $name -ErrorAction SilentlyContinue)) "$name in PATH"
+  }
  }
  if($stage -eq "start"){
   $engine="C:\AI\MLI-FluxTest-Vulkan"
   $models="C:\AI\MLI-FluxTest\models"
   foreach($f in @("$engine\sd-cli.exe","$engine\story_consistency_revised\CHARACTER_REFERENCE.png",
     "$models\flux-2-klein-4b-q4_0.gguf","$models\Qwen3-4B-Q4_K_S.gguf","$models\flux2-vae.safetensors")){
-   Assert-File $f "Image generation dependency"
+   CheckFile "Image generation asset" $f
   }
  }
  if($stage -eq "render"){
   $audio="C:\AI\MLI-FluxTest-Vulkan\pilot_audio"
-  foreach($n in 1..6){Assert-File (Join-Path $audio ("SC{0:00}.wav" -f $n)) "Pilot narration"}
+  foreach($n in 1..6){CheckFile ("Narration SC{0:00}" -f $n) (Join-Path $audio ("SC{0:00}.wav" -f $n))}
  }
  if($stage -eq "finish"){
-  if(-not $RenderFolder){throw "PREFLIGHT FAIL: -RenderFolder required"}
-  Assert-File (Join-Path $RenderFolder "alignment.json") "Word alignment"
-  Assert-File (Join-Path $RenderFolder "MLI_PILOT_001_CAPTIONS_ALIGNED.srt") "Aligned captions"
-  Assert-File $Scene06Image "SC06 chosen image"
+  Check "Render folder" (-not [string]::IsNullOrWhiteSpace($RenderFolder) -and (Test-Path -LiteralPath $RenderFolder -PathType Container)) $RenderFolder
+  if($RenderFolder){
+   CheckFile "Word alignment" (Join-Path $RenderFolder "alignment.json")
+   CheckFile "Aligned captions" (Join-Path $RenderFolder "MLI_PILOT_001_CAPTIONS_ALIGNED.srt")
+   foreach($n in 1..6){CheckFile ("Rendered SC{0:00}" -f $n) (Join-Path $RenderFolder ("SC{0:00}.mp4" -f $n))}
+  }
+  CheckFile "Selected SC06" $Scene06Image
  }
+ if($stage -eq "plan"){
+  Check "Episode ID" ($Episode -match '^MLI_[A-Z0-9_]+$') $Episode
+ }
+ if($stage -notin @("start","plan","qc","finish")){
+  Check "Work folder" (-not [string]::IsNullOrWhiteSpace($Work) -and (Test-Path -LiteralPath $Work -PathType Container)) $Work
+ }
+ $fails=@($script:preflightFindings | Where-Object {$_.Status -eq "FAIL"})
+ $script:preflightFindings | Format-Table -AutoSize | Out-Host
+ $report=[pscustomobject]@{mode=$stage;checked=$script:preflightFindings.Count;failures=$fails.Count;checks=@($script:preflightFindings);can_proceed=($fails.Count -eq 0)}
+ $reportPath=Join-Path $storage "preflight_$stage.json"
+ $report | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $reportPath -Encoding utf8
+ Write-Host "PREFLIGHT REPORT: $reportPath"
+ if($fails.Count){throw "PREFLIGHT FAILED: $($fails.Count) requirements failed out of $($script:preflightFindings.Count). No production tasks started."}
  Write-Host "PREFLIGHT PASS [$stage]" -ForegroundColor Green
 }
 Preflight $Mode
