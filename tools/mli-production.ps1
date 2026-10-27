@@ -1,4 +1,4 @@
-param([ValidateSet("start","review","status","verify","render","recover")][string]$Mode="start",[string]$Work="",[string]$Review="",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
+param([ValidateSet("start","review","status","verify","render","recover","qc")][string]$Mode="start",[string]$Work="",[string]$Review="",[string]$RenderFolder="",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
 $ErrorActionPreference="Stop";$ProgressPreference="SilentlyContinue"
 $repo="RafaelAlbaWebify/modern-life-inc-production"
 $storage=Join-Path $env:TEMP "MLI-Pipeline"
@@ -18,8 +18,8 @@ Write-Host "Preflight: unit tests..." -ForegroundColor Cyan
 & python $test -v
 if($LASTEXITCODE -ne 0){throw "Unit tests failed. No GPU executed."}
 if(-not $Work -and $Mode -eq "start"){$Work=Join-Path $HOME ("Downloads\MLI_PIPELINE_"+(Get-Date -Format "yyyyMMdd_HHmmss"))}
-if(-not $Work){throw "-Work required for review/status/verify"}
-$Work=[IO.Path]::GetFullPath($Work)
+if(-not $Work -and $Mode -ne "qc"){throw "-Work required for review/status/verify"}
+$Work=if($Work){[IO.Path]::GetFullPath($Work)}else{""}
 function RunPipeline([string[]]$argList){
  & python $script @argList
  if($LASTEXITCODE -ne 0){throw "Pipeline failed at $($argList[0]); check $Work"}
@@ -44,6 +44,13 @@ elseif($Mode -eq "review"){
   & python $script verify --work $Work
   if($LASTEXITCODE -ne 0){Write-Warning "Blocked: see acceptance_gate.json"}
  }
+}
+elseif($Mode -eq "qc"){
+ if(-not $RenderFolder){throw "-RenderFolder is required for qc"}
+ $qc=Join-Path $toolsDir "mli-qc.py"
+ FetchFile "tools/mli-qc.py" $qc
+ & python $qc --folder $RenderFolder
+ if($LASTEXITCODE -ne 0){throw "Technical QC failed; read technical_qc.json"}
 }
 elseif($Mode -eq "recover"){RunPipeline -argList @("recover","--work",$Work)}
 elseif($Mode -eq "verify"){RunPipeline -argList @("verify","--work",$Work)}
