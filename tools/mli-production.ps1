@@ -23,10 +23,12 @@ function Preflight([string]$stage){
  Write-Host "MLI PRE-FLIGHT [$stage] - comprehensive checks" -ForegroundColor Cyan
  $script:preflightFindings.Clear()
  $pythonCmd=Get-Command python -ErrorAction SilentlyContinue
- Check "Python command" ($null -ne $pythonCmd) "python in PATH"
+ Check "Python command" ($null -ne $pythonCmd) $(if($pythonCmd){$pythonCmd.Source}else{"python not found"})
  if($pythonCmd){
-  & python -c "import sys;sys.exit(0 if (3,10)<=sys.version_info[:2]<(3,14) else 1)" 2>$null
-  Check "Python version" ($LASTEXITCODE -eq 0) "Python 3.10-3.13 required"
+  $versionOutput = & python -c "import sys;print('{}.{}'.format(sys.version_info.major,sys.version_info.minor));sys.exit(0 if (3,10) <= sys.version_info[:2] < (3,14) else 1)" 2>&1
+  $versionCode=$LASTEXITCODE
+  $versionText=($versionOutput | Out-String).Trim()
+  Check "Python version" ($versionCode -eq 0) "Detected: $versionText; Python 3.10-3.13 required"
  }
  if($stage -in @("start","render","finish","qc")){
   foreach($name in @("ffmpeg","ffprobe")){
