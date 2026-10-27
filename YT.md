@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 5.8 (2026-10-27)
+Version: 5.9 (2026-10-27)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -433,3 +433,8 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Added -Mode plan -Episode MLI_EP002 to tools/mli-production.ps1: downloads the episode contract from GitHub and invokes prepare with --shots. Creates prompts and state without GPU use.
 - Important limits: start, render, build-mli-pilot-enhanced.py and mli-qc.py still assume six pilot scenes; never use those on EP002 until generalized. Next phases: dynamic scene-count renderer and audio alignment, scene-agnostic QC, measured GPU generation in small batches.
 - Soft Karaoke was stabilized with margin 135 and balanced two-line grouping; latest Windows render still unverified.
+
+## 2026-10-27: EP002 planning operational refinement (v5.9)
+- Fixed malformed intermediate PowerShell launcher plan insertion and restored original start block; checked rendered source around branches. Removed duplicated caption file preflight download.
+- Updated tools/mli-pipeline.py prepare: writes narration_draft.txt and planning_summary.json with actual scene count, word count, estimated speaking seconds at 140 wpm, planned duration range and explicit GPU not used/release not approved. Works for other shot contracts passed by --shots.
+- Plan mode downloads 18-shot MLI_EP002 contract into TEMP and initializes a separate timestamped Downloads run; it does NOT generate, render or publish assets. Still needs Windows runtime smoke test and editorial review, then dynamic rendering/voice/QC generalization before GPU operation.
