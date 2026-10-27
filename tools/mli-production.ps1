@@ -112,7 +112,7 @@ FetchFile "tools/mli-align-episode.py" (Join-Path $toolsDir "mli-align-episode.p
 & $script:runtimePython $episodeTest -v
 if($LASTEXITCODE -ne 0){throw "Episode regression tests failed."}
 if(-not $Work -and $Mode -in @("start","plan")){$Work=Join-Path $HOME ("Downloads\$($Episode)_PIPELINE_"+(Get-Date -Format "yyyyMMdd_HHmmss"))}
-if(-not $Work -and $Mode -notin @("qc","finish")){throw "-Work required for review/status/verify"}
+if(-not $Work -and $Mode -notin @("qc","finish","episode-qc")){throw "-Work required for review/status/verify"}
 $Work=if($Work){[IO.Path]::GetFullPath($Work)}else{""}
 function RunPipeline([string[]]$argList){
  & $script:runtimePython $script @argList
