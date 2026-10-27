@@ -12,9 +12,24 @@ foreach($sid in @("SC01","SC02","SC03","SC04","SC05","SC06")){
 }
 foreach($cmd in @("ffmpeg","ffprobe")){if(-not(Get-Command $cmd -ErrorAction SilentlyContinue)){throw "Missing: $cmd"}}
 if(-not(Test-Path -LiteralPath $python)){
- if(-not(Get-Command py -ErrorAction SilentlyContinue)){throw "Install Python 3.11 with Windows launcher"}
- & py -3.11 -m venv $venv
- if($LASTEXITCODE -ne 0){throw "Install Python 3.11, then retry"}
+ $candidates=@()
+ if(Get-Command py -ErrorAction SilentlyContinue){
+  foreach($version in @("3.11","3.12","3.13","3.10")){
+   & py "-$version" -c "import sys;print(sys.executable)" 2>$null
+   if($LASTEXITCODE -eq 0){$candidates+=@("py","-$version");break}
+  }
+ }
+ if($candidates.Count -eq 0){
+  $command=Get-Command python -ErrorAction SilentlyContinue
+  if($command){
+   & python -c "import sys;v=sys.version_info;sys.exit(0 if (3,10)<=v[:2]<(3,14) else 1)" 2>$null
+   if($LASTEXITCODE -eq 0){$candidates=@("python")}
+  }
+ }
+ if($candidates.Count -eq 0){throw "No compatible Python 3.10-3.13 installed. Run: py --list-paths; python --version. Install Python 3.11 only if needed."}
+ Write-Host "Creating isolated WhisperX environment using $($candidates -join ' ')" -ForegroundColor Cyan
+ if($candidates.Count -eq 2){& py $candidates[1] -m venv $venv}else{& python -m venv $venv}
+ if($LASTEXITCODE -ne 0){throw "Python virtual environment creation failed"}
 }
 if(-not(Test-Path $python)){throw "Python environment unavailable"}
 & $python -c "import importlib.util,sys;sys.exit(0 if importlib.util.find_spec('whisperx') else 2)"
