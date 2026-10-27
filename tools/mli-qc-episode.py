@@ -36,6 +36,20 @@ def main():
    if hashlib.sha256(master.read_bytes()).hexdigest()!=manifest["master_sha256"]:issues.append("Master SHA mismatch")
    execute(["ffmpeg","-hide_banner","-v","error","-i",master,"-f","null","-"])
   except Exception as ex:issues.append("Master "+str(ex))
+ finishing=folder/"finishing_manifest.json"
+ if finishing.exists():
+  try:
+   info=json.loads(finishing.read_text(encoding="utf-8"))
+   output=folder/info["final_video"]
+   if not output.is_file():issues.append("Soft Karaoke final MP4 missing")
+   else:
+    finalmeta=probe(output)
+    if not any(x["codec_type"]=="audio" for x in finalmeta["streams"]):issues.append("Soft Karaoke MP4 missing audio")
+    if hashlib.sha256(output.read_bytes()).hexdigest()!=info["sha256"]:issues.append("Soft Karaoke MP4 hash mismatch")
+    execute(["ffmpeg","-hide_banner","-v","error","-i",output,"-f","null","-"])
+   if not (folder/"SOFT_KARAOKE.ass").is_file():issues.append("Soft Karaoke ASS missing")
+   if not (folder/"alignment.json").is_file():issues.append("Word-level alignment JSON missing")
+  except Exception as exc:issues.append("Soft Karaoke verification "+str(exc))
  result={"technical_pass":not issues,"editorial_approved":False,"publication_approved":False,"scene_count":len(ids),"issues":issues}
  (folder/"technical_qc.json").write_text(json.dumps(result,indent=2)+"\n",encoding="utf-8")
  print(json.dumps(result,indent=2))
