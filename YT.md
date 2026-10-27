@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 6.0 (2026-10-27)
+Version: 6.2 (2026-10-27)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -443,3 +443,8 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - User tried `-Mode plan -Episode MLI_EP002` and got ParserError at line 112. Inspected live GitHub file: trailing duplicate malformed block after initial launcher end; removed tail after primary status fallback. Root cause was corrupt source commit, NOT a missing Windows dependency. Avoid claiming smoke-tested on user PC.
 - Added mode-scoped Preflight to launcher: Python availability/version for all stages; ffmpeg+ffprobe for GPU render/final/qc; FLUX executable, identity reference and model files for start; pilot narration WAV for render; alignment SRT, word timestamps and explicit SC06 file for finish. Checks avoid starting unneeded heavy dependencies during plan and fail with concrete missing file. Unit tests continue after preflight.
 - Plan still only produces 18 prompts, 302-word narrator draft and summary, without GPU. Next immediate step is fetch + PowerShell ParseFile validation before invocation, then local success output. Full dynamic 18-scene narrator/render/qc and staged GPU generation still pending.
+
+## 2026-10-27: Python runtime selection fix (v6.2)
+- User diagnosed `python` command resolving to C:\Python314\python.exe (Python 3.14.0) while Python 3.12 exists under AppData Local Programs. Previous preflight incorrectly blocked on default PATH interpreter despite suitable existing runtime.
+- Updated tools/mli-production.ps1 preflight to collect interpreter candidates from PATH and Windows `py` launcher, prefer compatible 3.12 among alternatives, and reuse selected interpreter for unit tests, main pipeline, finishing, rendering and QC. Existing checks remain aggregate-report style, not fail-fast. No Python installation or WhisperX reinstallation needed.
+- This selection code is committed but awaiting Windows execution verification. Be careful when altering launcher; protect against duplicate source tails and parse failures.
