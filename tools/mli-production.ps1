@@ -62,7 +62,9 @@ elseif($Mode -eq "finish"){
  FetchFile "tools/build-mli-pilot-enhanced.py" $builder
  $audio="C:\AI\MLI-FluxTest-Vulkan\pilot_audio"
  Write-Host "Forced-aligning narration to six WAVs (CPU)..." -ForegroundColor Cyan
- & python $align --audio-dir $audio --render-folder $RenderFolder --builder $builder
+ $alignPython=Join-Path $HOME "Downloads\MLI_WHISPERX_ENV\Scripts\python.exe"
+ if(-not(Test-Path -LiteralPath $alignPython)){throw "WhisperX environment missing. Run setup-and-align.ps1 first."}
+ & $alignPython $align --audio-dir $audio --render-folder $RenderFolder --builder $builder
  if($LASTEXITCODE -ne 0){throw "Word alignment failed; no estimated captions substituted"}
  $srt=Join-Path $RenderFolder "MLI_PILOT_001_CAPTIONS_ALIGNED.srt"
  Write-Host "Building final review cut with chosen SC06 and aligned captions..." -ForegroundColor Cyan
