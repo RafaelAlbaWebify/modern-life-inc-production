@@ -1,4 +1,4 @@
-param([ValidateSet("start","review","status","verify","render","recover","qc","finish","plan")][string]$Mode="start",[string]$Work="",[string]$Episode="MLI_PILOT_001",[string]$Review="",[string]$RenderFolder="",[string]$Scene06Image="",[ValidateSet("karaoke","cinematic","amber")][string]$CaptionStyle="karaoke",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
+param([ValidateSet("start","review","status","verify","render","recover","qc","finish","plan","episode-render","episode-qc")][string]$Mode="start",[string]$Work="",[string]$Episode="MLI_PILOT_001",[string]$Review="",[string]$RenderFolder="",[string]$Scene06Image="",[ValidateSet("karaoke","cinematic","amber")][string]$CaptionStyle="karaoke",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
 $ErrorActionPreference="Stop";$ProgressPreference="SilentlyContinue"
 $repo="RafaelAlbaWebify/modern-life-inc-production"
 $storage=Join-Path $env:TEMP "MLI-Pipeline"
@@ -38,7 +38,7 @@ function Preflight([string]$stage){
   if($LASTEXITCODE -eq 0){$script:runtimePython=$candidate;break}
  }
  Check "Compatible Python" ($null -ne $script:runtimePython) $(if($script:runtimePython){"Selected: $script:runtimePython"}else{"No compatible Python; checked: $($candidates -join ', ')"})
- if($stage -in @("start","render","finish","qc")){
+ if($stage -in @("start","render","finish","qc","episode-render","episode-qc")){
   foreach($name in @("ffmpeg","ffprobe")){
    Check "$name executable" ($null -ne (Get-Command $name -ErrorAction SilentlyContinue)) "$name in PATH"
   }
@@ -127,6 +127,23 @@ elseif($Mode -eq "review"){
   & python $script verify --work $Work
   if($LASTEXITCODE -ne 0){Write-Warning "Blocked: see acceptance_gate.json"}
  }
+}
+elseif($Mode -eq "episode-render"){
+ if(-not $Work){throw "-Work required for episode-render"}
+ $audio=Join-Path $Work "audio"
+ $renderer=Join-Path $toolsDir "mli-render-episode.py"
+ FetchFile "tools/mli-render-episode.py" $renderer
+ RunPipeline -argList @("verify","--work",$Work)
+ RunPipeline -argList @("export","--work",$Work)
+ & $script:runtimePython $renderer --work $Work --audio-dir $audio
+ if($LASTEXITCODE -ne 0){throw "Episode render failed"}
+}
+elseif($Mode -eq "episode-qc"){
+ if(-not $RenderFolder){throw "-RenderFolder required"}
+ $qc=Join-Path $toolsDir "mli-qc-episode.py"
+ FetchFile "tools/mli-qc-episode.py" $qc
+ & $script:runtimePython $qc --folder $RenderFolder
+ if($LASTEXITCODE -ne 0){throw "Episode QC failed"}
 }
 elseif($Mode -eq "finish"){
  if(-not $RenderFolder -or -not $Scene06Image){throw "Need -RenderFolder and -Scene06Image"}
