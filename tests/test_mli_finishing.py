@@ -29,6 +29,18 @@ class FinishingTests(unittest.TestCase):
   self.assertEqual([w for c in chunks for w in c],w)
   self.assertTrue(any(c[-1]["word"]=="boundaries." for c in chunks))
   self.assertTrue(all(len(c)<=caption.MAX_WORDS for c in chunks))
+ def test_two_line_balance_avoids_single_word_orphans(self):
+  words="Setting personal boundaries can help reclaim the time and attention that matter every day".split()
+  items=[{"word":w,"start":i*0.2,"end":i*0.2+0.15,"scene":"SC01"} for i,w in enumerate(words)]
+  for chunk in caption.groups(items):
+   pos=caption.split_line(chunk)
+   if pos is not None:
+    self.assertGreaterEqual(pos,2)
+    self.assertGreaterEqual(len(chunk)-pos,2)
+ def test_multi_scene_caption_generator(self):
+  words=[{"word":"Hello","start":0,"end":0.2,"scene":"SC01"},{"word":"world","start":0.25,"end":0.5,"scene":"SC01"},{"word":"Again","start":1.0,"end":1.2,"scene":"SC02"}]
+  self.assertEqual(len(caption.groups(words)),2)
+  self.assertIn("MarginV",caption.render(words,"karaoke"))
  def test_line_break_max_two_lines(self):
   w=[{"word":word,"start":i*0.2,"end":i*0.2+0.15,"scene":"SC01"} for i,word in enumerate("Choosing your own boundaries helps you recover the attention and time that really matter".split())]
   for chunk in caption.groups(w):
