@@ -1,4 +1,4 @@
-param([ValidateSet("start","review","status","verify","render","recover","qc","finish")][string]$Mode="start",[string]$Work="",[string]$Review="",[string]$RenderFolder="",[string]$Scene06Image="",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
+param([ValidateSet("start","review","status","verify","render","recover","qc","finish")][string]$Mode="start",[string]$Work="",[string]$Review="",[string]$RenderFolder="",[string]$Scene06Image="",[ValidateSet("karaoke","cinematic","amber")][string]$CaptionStyle="karaoke",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
 $ErrorActionPreference="Stop";$ProgressPreference="SilentlyContinue"
 $repo="RafaelAlbaWebify/modern-life-inc-production"
 $storage=Join-Path $env:TEMP "MLI-Pipeline"
@@ -57,6 +57,8 @@ elseif($Mode -eq "finish"){
  $align=Join-Path $toolsDir "mli-align.py"
  $finish=Join-Path $toolsDir "mli-finish.py"
  $builder=Join-Path $toolsDir "build-mli-pilot-enhanced.py"
+ $captionScript=Join-Path $toolsDir "mli-caption-styles.py"
+ FetchFile "tools/mli-caption-styles.py" $captionScript
  FetchFile "tools/mli-align.py" $align
  FetchFile "tools/mli-finish.py" $finish
  FetchFile "tools/build-mli-pilot-enhanced.py" $builder
@@ -68,7 +70,7 @@ elseif($Mode -eq "finish"){
  if($alignmentData.words.Count -lt 50 -or $alignmentData.scenes.Count -ne 6){throw "Alignment incomplete: expected six scenes and word timing"}
  Write-Host "Reusing existing aligned subtitles ($($alignmentData.words.Count) words)" -ForegroundColor Green
  Write-Host "Building final review cut with chosen SC06 and aligned captions..." -ForegroundColor Cyan
- & python $finish --source-folder $RenderFolder --scene06-image $Scene06Image --aligned-srt $srt
+ & python $finish --source-folder $RenderFolder --scene06-image $Scene06Image --aligned-srt $srt --alignment $alignment --caption-script $captionScript --caption-style $CaptionStyle
  if($LASTEXITCODE -ne 0){throw "Final cut failed"}
 }
 elseif($Mode -eq "qc"){
