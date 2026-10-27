@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 4.7 (2026-10-27)
+Version: 4.8 (2026-10-27)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -383,3 +383,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Re-rendered SC06 clip with FFmpeg and source clip audio copied, reused original SC01–SC05 clips unchanged, concatenated to `MLI_PILOT_001_FINAL_REVIEW.mp4`, output duration 37.042 s; full decode succeeded. Mean audio -17.8 dB, peak -1.8 dB. Measured inter-scene silences ~0.64-0.71 s including embedded source audio silence; retained original pacing, not automatically changed. Existing scene-level estimated SRT preserved externally.
 - Delivered sandbox files `MLI_PILOT_FINAL_REVIEW/MLI_PILOT_001_FINAL_REVIEW.mp4` and `MLI_PILOT_001_FINISHING_REVIEW.zip` with MP4, SC06 crop, SRT, QC_REPORT.json. This is local chat product only; NOT imported to Windows run state, not committed as binary to GitHub, not yet user editorial-approved/published. No speech recognition/forced subtitle alignment or listening-based narration proof was performed.
 - Next step: user watches new MP4, approves or identifies exact issues; only then mark editorial complete and create reproducible local edit procedure. Avoid falsely claiming full production system automation from this one-off chat edit.
+
+## 2026-10-27: Reusable post-render technical QC (v4.8)
+- User rated pilot acceptable overall but SC06 remains creatively unsatisfactory. Do not mark editorial approved or published. Continue hardening the workflow rather than regenerating blindly.
+- Added tools/mli-qc.py: verifies six source MP4 clips, master video/audio streams and 1080p dimensions, duration consistency, FFmpeg full master decode, SRT and manifest; writes technical_qc.json with distinct technical_pass, editorial_approved and publication_approved flags (latter two never automatically true). No GPU or paid services.
+- Added `-Mode qc -RenderFolder` to tools/mli-production.ps1 so quality control can run independently on original render folder from any CWD. The chat-produced finishing ZIP does not include six original segments, so QC targets original render folder, not finishing ZIP.
+- Remaining work: improve SC06 without losing character identity, upgrade estimated SRT timing to proven transcript alignment, manual audiovisual acceptance and reusable final-cut/repair integration. Do not claim fully automatic production system complete on strength of technical checks alone.
