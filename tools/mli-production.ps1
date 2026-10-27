@@ -1,4 +1,4 @@
-param([ValidateSet("start","review","status","verify","render","recover","qc","finish","plan","episode-render","episode-qc")][string]$Mode="start",[string]$Work="",[string]$Episode="MLI_PILOT_001",[string]$Review="",[string]$RenderFolder="",[string]$Scene06Image="",[ValidateSet("karaoke","cinematic","amber")][string]$CaptionStyle="karaoke",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
+param([ValidateSet("start","review","status","verify","render","recover","qc","finish","plan","episode-render","episode-qc","episode-audio","episode-final")][string]$Mode="start",[string]$Work="",[string]$Episode="MLI_PILOT_001",[string]$Review="",[string]$RenderFolder="",[string]$Scene06Image="",[ValidateSet("karaoke","cinematic","amber")][string]$CaptionStyle="karaoke",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
 $ErrorActionPreference="Stop";$ProgressPreference="SilentlyContinue"
 $repo="RafaelAlbaWebify/modern-life-inc-production"
 $storage=Join-Path $env:TEMP "MLI-Pipeline"
@@ -38,7 +38,7 @@ function Preflight([string]$stage){
   if($LASTEXITCODE -eq 0){$script:runtimePython=$candidate;break}
  }
  Check "Compatible Python" ($null -ne $script:runtimePython) $(if($script:runtimePython){"Selected: $script:runtimePython"}else{"No compatible Python; checked: $($candidates -join ', ')"})
- if($stage -in @("start","render","finish","qc","episode-render","episode-qc")){
+ if($stage -in @("start","render","finish","qc","episode-render","episode-qc","episode-final")){
   foreach($name in @("ffmpeg","ffprobe")){
    Check "$name executable" ($null -ne (Get-Command $name -ErrorAction SilentlyContinue)) "$name in PATH"
   }
@@ -127,6 +127,30 @@ elseif($Mode -eq "review"){
   & python $script verify --work $Work
   if($LASTEXITCODE -ne 0){Write-Warning "Blocked: see acceptance_gate.json"}
  }
+}
+elseif($Mode -eq "episode-audio"){
+ $audit=Join-Path $toolsDir "mli-audio-episode.py"
+ FetchFile "tools/mli-audio-episode.py" $audit
+ & $script:runtimePython $audit --work $Work
+ if($LASTEXITCODE -ne 0){Write-Warning "Not all voice WAVs available; see $Work\audio_audit.json"}
+}
+elseif($Mode -eq "episode-final"){
+ if(-not $RenderFolder){throw "-RenderFolder is required for episode-final"}
+ $alignment=Join-Path $toolsDir "mli-align-episode.py"
+ $finisher=Join-Path $toolsDir "mli-finish-episode.py"
+ $captions=Join-Path $toolsDir "mli-caption-styles.py"
+ $qcs=Join-Path $toolsDir "mli-qc-episode.py"
+ foreach($pair in @(@("tools/mli-align-episode.py",$alignment),@("tools/mli-finish-episode.py",$finisher),@("tools/mli-qc-episode.py",$qcs))){
+  FetchFile $pair[0] $pair[1]
+ }
+ $whisperPython=Join-Path $HOME "Downloads\MLI_WHISPERX_ENV\Scripts\python.exe"
+ if(-not(Test-Path -LiteralPath $whisperPython)){throw "Isolated WhisperX Python missing: $whisperPython"}
+ & $whisperPython $alignment --work $Work --render-folder $RenderFolder
+ if($LASTEXITCODE -ne 0){throw "Episode alignment failed"}
+ & $script:runtimePython $finisher --render-folder $RenderFolder --caption-script $captions
+ if($LASTEXITCODE -ne 0){throw "Episode karaoke finish failed"}
+ & $script:runtimePython $qcs --folder $RenderFolder
+ if($LASTEXITCODE -ne 0){throw "Episode technical QC failed"}
 }
 elseif($Mode -eq "episode-render"){
  if(-not $Work){throw "-Work required for episode-render"}
