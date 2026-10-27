@@ -1,4 +1,4 @@
-param([ValidateSet("start","review","status","verify","render","recover","qc")][string]$Mode="start",[string]$Work="",[string]$Review="",[string]$RenderFolder="",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
+param([ValidateSet("start","review","status","verify","render","recover","qc","finish")][string]$Mode="start",[string]$Work="",[string]$Review="",[string]$RenderFolder="",[string]$Scene06Image="",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
 $ErrorActionPreference="Stop";$ProgressPreference="SilentlyContinue"
 $repo="RafaelAlbaWebify/modern-life-inc-production"
 $storage=Join-Path $env:TEMP "MLI-Pipeline"
@@ -18,7 +18,7 @@ Write-Host "Preflight: unit tests..." -ForegroundColor Cyan
 & python $test -v
 if($LASTEXITCODE -ne 0){throw "Unit tests failed. No GPU executed."}
 if(-not $Work -and $Mode -eq "start"){$Work=Join-Path $HOME ("Downloads\MLI_PIPELINE_"+(Get-Date -Format "yyyyMMdd_HHmmss"))}
-if(-not $Work -and $Mode -ne "qc"){throw "-Work required for review/status/verify"}
+if(-not $Work -and $Mode -notin @("qc","finish")){throw "-Work required for review/status/verify"}
 $Work=if($Work){[IO.Path]::GetFullPath($Work)}else{""}
 function RunPipeline([string[]]$argList){
  & python $script @argList
@@ -44,6 +44,24 @@ elseif($Mode -eq "review"){
   & python $script verify --work $Work
   if($LASTEXITCODE -ne 0){Write-Warning "Blocked: see acceptance_gate.json"}
  }
+}
+elseif($Mode -eq "finish"){
+ if(-not $RenderFolder -or -not $Scene06Image){throw "Need -RenderFolder and -Scene06Image"}
+ if(-not (Test-Path -LiteralPath $Scene06Image -PathType Leaf)){throw "Missing chosen SC06 image"}
+ $align=Join-Path $toolsDir "mli-align.py"
+ $finish=Join-Path $toolsDir "mli-finish.py"
+ $builder=Join-Path $toolsDir "build-mli-pilot-enhanced.py"
+ FetchFile "tools/mli-align.py" $align
+ FetchFile "tools/mli-finish.py" $finish
+ FetchFile "tools/build-mli-pilot-enhanced.py" $builder
+ $audio="C:\AI\MLI-FluxTest-Vulkan\pilot_audio"
+ Write-Host "Forced-aligning narration to six WAVs (CPU)..." -ForegroundColor Cyan
+ & python $align --audio-dir $audio --render-folder $RenderFolder --builder $builder
+ if($LASTEXITCODE -ne 0){throw "Word alignment failed; no estimated captions substituted"}
+ $srt=Join-Path $RenderFolder "MLI_PILOT_001_CAPTIONS_ALIGNED.srt"
+ Write-Host "Building final review cut with chosen SC06 and aligned captions..." -ForegroundColor Cyan
+ & python $finish --source-folder $RenderFolder --scene06-image $Scene06Image --aligned-srt $srt
+ if($LASTEXITCODE -ne 0){throw "Final cut failed"}
 }
 elseif($Mode -eq "qc"){
  if(-not $RenderFolder){throw "-RenderFolder is required for qc"}
