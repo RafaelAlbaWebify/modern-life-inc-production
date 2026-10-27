@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 4.4 (2026-10-27)
+Version: 4.5 (2026-10-27)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -367,3 +367,8 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Implemented `recover` in tools/mli-pipeline.py and `-Mode recover` in tools/mli-production.ps1: inspect run/ images and state without GPU, recover intact untracked PNG attempt records with hashes, quarantine corrupt/untracked PNG, verify hashes of recorded assets, place obsolete RETRY_AUTHORIZED states on REVIEW_POLICY_HOLD. Writes `recovery_report.json`. Does not run generation, restart old retries or overwrite accepted images.
 - Added no-GPU regression tests for untracked valid PNG recovery and obsolete retry holding. Committed, but must still be run in user's Windows context. Standard launcher downloads current code and runs tests before recovery.
 - Next step: user runs safe -Mode recover command using exact run folder; inspect resulting states and adopt narrative-first acceptance without regenerating merely for pedestrian counts or phone angle. Do NOT import old stricter JSON again. Assess SC03 and SC06 for story-critical defects, repair only if required. Full rendering is not yet approved.
+
+## 2026-10-27: Recovery editorial re-evaluation (v4.5)
+- User supplied MLI_RECOVERED_REVIEW.zip. Contains seven PNGs: original attempt1 SC01..SC06 and SC02_attempt2; state matches Windows recovery receipt. Images visually inspected under narrative-first rubric. SC01, SC02 attempt1, SC03, SC04, SC05 usable; SC06 has illegible invented speech/text and needs localized text cleanup, not full-scene regeneration. SC02 attempt2 is technically valid but not a narrative improvement.
+- Created image-hash-bound editorial decision JSON in chat. Added `adopt` to tools/mli-pipeline.py: validates complete set of scene decisions and each asset SHA256 against recorded attempts, selects earlier attempt where better, saves state with CANDIDATE_PASS or LOCAL_REPAIR, blocks release until repair. Export and verify prefer editorial-selected attempt. No GPU needed for adoption.
+- Do not reject split panels per se; prioritize comprehensible narrative. Full release still blocked on SC06 text cleanup and final audiovisual QC. Do not run old 4-scene retry report.
