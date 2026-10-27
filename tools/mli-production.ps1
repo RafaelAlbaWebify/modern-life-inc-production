@@ -61,12 +61,12 @@ elseif($Mode -eq "finish"){
  FetchFile "tools/mli-finish.py" $finish
  FetchFile "tools/build-mli-pilot-enhanced.py" $builder
  $audio="C:\AI\MLI-FluxTest-Vulkan\pilot_audio"
- Write-Host "Forced-aligning narration to six WAVs (CPU)..." -ForegroundColor Cyan
- $alignPython=Join-Path $HOME "Downloads\MLI_WHISPERX_ENV\Scripts\python.exe"
- if(-not(Test-Path -LiteralPath $alignPython)){throw "WhisperX environment missing. Run setup-and-align.ps1 first."}
- & $alignPython $align --audio-dir $audio --render-folder $RenderFolder --builder $builder
- if($LASTEXITCODE -ne 0){throw "Word alignment failed; no estimated captions substituted"}
  $srt=Join-Path $RenderFolder "MLI_PILOT_001_CAPTIONS_ALIGNED.srt"
+ $alignment=Join-Path $RenderFolder "alignment.json"
+ if(-not(Test-Path -LiteralPath $srt) -or -not(Test-Path -LiteralPath $alignment)){throw "Verified alignment missing; run setup-and-align.ps1 first"}
+ $alignmentData=Get-Content -LiteralPath $alignment -Raw | ConvertFrom-Json
+ if($alignmentData.words.Count -lt 50 -or $alignmentData.scenes.Count -ne 6){throw "Alignment incomplete: expected six scenes and word timing"}
+ Write-Host "Reusing existing aligned subtitles ($($alignmentData.words.Count) words)" -ForegroundColor Green
  Write-Host "Building final review cut with chosen SC06 and aligned captions..." -ForegroundColor Cyan
  & python $finish --source-folder $RenderFolder --scene06-image $Scene06Image --aligned-srt $srt
  if($LASTEXITCODE -ne 0){throw "Final cut failed"}
