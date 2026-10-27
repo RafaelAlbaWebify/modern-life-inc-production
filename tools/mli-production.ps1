@@ -22,14 +22,22 @@ function CheckFile([string]$name,[string]$path){
 function Preflight([string]$stage){
  Write-Host "MLI PRE-FLIGHT [$stage] - comprehensive checks" -ForegroundColor Cyan
  $script:preflightFindings.Clear()
- $pythonCmd=Get-Command python -ErrorAction SilentlyContinue
- Check "Python command" ($null -ne $pythonCmd) $(if($pythonCmd){$pythonCmd.Source}else{"python not found"})
- if($pythonCmd){
-  $versionOutput = & python -c "import sys;print('{}.{}'.format(sys.version_info.major,sys.version_info.minor));sys.exit(0 if (3,10) <= sys.version_info[:2] < (3,14) else 1)" 2>&1
-  $versionCode=$LASTEXITCODE
-  $versionText=($versionOutput | Out-String).Trim()
-  Check "Python version" ($versionCode -eq 0) "Detected: $versionText; Python 3.10-3.13 required"
+ $script:runtimePython=$null
+ $candidates=@()
+ $current=Get-Command python -ErrorAction SilentlyContinue
+ if($current){$candidates+=,$current.Source}
+ $launcher=Get-Command py -ErrorAction SilentlyContinue
+ if($launcher){
+  foreach($version in @("3.12","3.11","3.13","3.10")){
+   $found=(& py "-$version" -c "import sys;print(sys.executable)" 2>$null | Select-Object -Last 1)
+   if($LASTEXITCODE -eq 0 -and $found){$candidates+=,[string]$found}
+  }
  }
+ foreach($candidate in ($candidates | Select-Object -Unique)){
+  $result=& $candidate -c "import sys;sys.exit(0 if (3,10)<=sys.version_info[:2]<(3,14) else 1)" 2>$null
+  if($LASTEXITCODE -eq 0){$script:runtimePython=$candidate;break}
+ }
+ Check "Compatible Python" ($null -ne $script:runtimePython) $(if($script:runtimePython){"Selected: $script:runtimePython"}else{"No compatible Python; checked: $($candidates -join ', ')"})
  if($stage -in @("start","render","finish","qc")){
   foreach($name in @("ffmpeg","ffprobe")){
    Check "$name executable" ($null -ne (Get-Command $name -ErrorAction SilentlyContinue)) "$name in PATH"
@@ -76,20 +84,20 @@ $script=Join-Path $toolsDir "mli-pipeline.py";$test=Join-Path $testsDir "test_ml
 FetchFile "tools/mli-pipeline.py" $script
 FetchFile "tests/test_mli_pipeline.py" $test
 Write-Host "Preflight: unit tests..." -ForegroundColor Cyan
-& python $test -v
+& $script:runtimePython $test -v
 if($LASTEXITCODE -ne 0){throw "Unit tests failed. No GPU executed."}
 $finishingTest=Join-Path $testsDir "test_mli_finishing.py"
 FetchFile "tests/test_mli_finishing.py" $finishingTest
 FetchFile "tools/mli-align.py" (Join-Path $toolsDir "mli-align.py")
 FetchFile "tools/mli-finish.py" (Join-Path $toolsDir "mli-finish.py")
 FetchFile "tools/mli-caption-styles.py" (Join-Path $toolsDir "mli-caption-styles.py")
-& python $finishingTest -v
+& $script:runtimePython $finishingTest -v
 if($LASTEXITCODE -ne 0){throw "Finishing regression tests failed."}
 if(-not $Work -and $Mode -in @("start","plan")){$Work=Join-Path $HOME ("Downloads\$($Episode)_PIPELINE_"+(Get-Date -Format "yyyyMMdd_HHmmss"))}
 if(-not $Work -and $Mode -notin @("qc","finish")){throw "-Work required for review/status/verify"}
 $Work=if($Work){[IO.Path]::GetFullPath($Work)}else{""}
 function RunPipeline([string[]]$argList){
- & python $script @argList
+ & $script:runtimePython $script @argList
  if($LASTEXITCODE -ne 0){throw "Pipeline failed at $($argList[0]); check $Work"}
 }
 if($Mode -eq "plan"){
@@ -139,14 +147,14 @@ elseif($Mode -eq "finish"){
  if($alignmentData.words.Count -lt 50 -or $alignmentData.scenes.Count -ne 6){throw "Alignment incomplete: expected six scenes and word timing"}
  Write-Host "Reusing existing aligned subtitles ($($alignmentData.words.Count) words)" -ForegroundColor Green
  Write-Host "Building final review cut with chosen SC06 and aligned captions..." -ForegroundColor Cyan
- & python $finish --source-folder $RenderFolder --scene06-image $Scene06Image --aligned-srt $srt --alignment $alignment --caption-script $captionScript --caption-style $CaptionStyle
+ & $script:runtimePython $finish --source-folder $RenderFolder --scene06-image $Scene06Image --aligned-srt $srt --alignment $alignment --caption-script $captionScript --caption-style $CaptionStyle
  if($LASTEXITCODE -ne 0){throw "Final cut failed"}
 }
 elseif($Mode -eq "qc"){
  if(-not $RenderFolder){throw "-RenderFolder is required for qc"}
  $qc=Join-Path $toolsDir "mli-qc.py"
  FetchFile "tools/mli-qc.py" $qc
- & python $qc --folder $RenderFolder
+ & $script:runtimePython $qc --folder $RenderFolder
  if($LASTEXITCODE -ne 0){throw "Technical QC failed; read technical_qc.json"}
 }
 elseif($Mode -eq "recover"){RunPipeline -argList @("recover","--work",$Work)}
@@ -165,7 +173,7 @@ elseif($Mode -eq "render"){
  foreach($sid in @("SC01","SC02","SC03","SC04","SC05","SC06")){
   if(-not(Test-Path (Join-Path $audio ($sid+".wav")))){throw "Missing WAV for ${sid}: $audio"}
  }
- & python $builder --images-dir (Join-Path $Work "accepted_images") --audio-dir $audio --pause 0.25
+ & $script:runtimePython $builder --images-dir (Join-Path $Work "accepted_images") --audio-dir $audio --pause 0.25
  if($LASTEXITCODE -ne 0){throw "Renderer failed"}
  Write-Host "VIDEO RENDERED, FINAL AUDIOVISUAL QC STILL REQUIRED" -ForegroundColor Green
 }
