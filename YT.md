@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 5.6 (2026-10-27)
+Version: 5.7 (2026-10-27)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -420,3 +420,10 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - User selected Soft Karaoke as the canonical subtitle style for Modern Life Inc. Existing tools/mli-caption-styles.py generates word-level ASS from alignment.json. Do not use the interpolated SRT demo for final production.
 - Updated tools/mli-finish.py: requires original WhisperX alignment.json and caption generator, produces MLI_CAPTIONS.ass, burns its word-level karaoke styling using FFmpeg/libass, preserves SRT export and records caption_style in final_manifest.json. Default caption style is karaoke; cinematic and amber still supported as explicit alternatives. Updated tools/mli-production.ps1 -Mode finish to download caption generator and forward `-CaptionStyle`, default karaoke, and word-alignment path. No new GPU or TTS.
 - Source committed but freshly changed karaoke final render not yet executed on user's Windows; next test must validate karaoke motion, actual word timing, and FFmpeg libass output. SC06 remains editorially pending; prior selected repaired candidate usable as technical fixture only, not creative approval.
+
+## 2026-10-27: Karaoke readability stabilization and next-scale gate (v5.7)
+- User approved Soft Karaoke and requested final stabilization before going longer. Existing caption generator already had MarginV=135, semantic/punctuation grouping, short-caption merge, and <=2-line splitting, so changes focus on strengthening rather than restyling.
+- Improved tools/mli-caption-styles.py two-line split selection using 38-character target per line and explicit >=2 words on either side; tightened word time validation for non-finite/negative stamps. Removed six-scene-only restriction in caption ASS CLI to allow arbitrary episode-scene counts (other pilot-specific stages still explicitly require six scenes).
+- Added regression checks for split balance, scene boundary and retained original margin tests in tests/test_mli_finishing.py. Fixed tools/mli-production.ps1 preflight to fetch mli-caption-styles.py before executing tests, including from cold TEMP.
+- These changes are committed, but final Windows render with revised ASS has NOT been validated yet; user should rerun existing finish pipeline once and inspect. No GPU, WhisperX re-alignment, image or voice regeneration needed.
+- Recommended next step: a deliberate 2-3 minute narrative integration pilot (not yet full 8-12 minute episode), using reusable story beats, scene-to-scene character consistency, narrator duration budget, timing, QC and sustainable generation-cost tracking. Only scale further once 2-3 minute pilot passes full editorial and technical gates. Current pipeline has several hardcoded SC01-SC06 and pilot file names, so generalize contracts/render/technical QC before attempting longer episode. SC06 creative defect is still unapproved and must be resolved independently.
