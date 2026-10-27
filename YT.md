@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 5.2 (2026-10-27)
+Version: 5.3 (2026-10-27)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -407,3 +407,7 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - User ran setup-and-align.ps1; Windows Python launcher reported no Python 3.11 runtime. WhisperX never installed/aligned; existing WAV/render state unaffected.
 - Confirmed stable WhisperX 3.8.6 requires Python >=3.10,<3.14 (PyPI). Updated setup-and-align.ps1 to discover Python 3.11,3.12,3.13,3.10 via `py`, or compatible `python` command, and create isolated virtualenv without assuming 3.11. On no compatible runtime, fail explicitly and ask for Python version inspection instead of installing a duplicate blindly.
 - Script remains untested on user's host. Next launch should fetch fresh script and complete installation/alignment or reveal next concrete blocker. Creative SC06 and finishing render still pending.
+
+## 2026-10-27: WhisperX installation and alignment validated on user's Windows (v5.3)
+- User supplied complete setup log. Existing Python 3.12 discovered; separate Downloads/MLI_WHISPERX_ENV venv created. WhisperX 3.8.6 installed successfully and imported, CPU acoustic model wav2vec2 base 360MB downloaded. Aligned exactly 106 words into 19 captions; generated aligned SRT path Downloads/MLI_PILOT_001_20261027_062750/MLI_PILOT_001_CAPTIONS_ALIGNED.srt and alignment.json. Do not reinstall or repeat alignment unnecessarily.
+- Updated tools/mli-production.ps1 -Mode finish to reuse existing alignment.json/SRT rather than repeat forced-alignment. Checks 6 scenes and >50 word timestamps before final edit. Final cut still not executed on user system; SC06 identity/creative approval remains pending. Previous SC06 local-crop candidate may be used ONLY to test render, not approval.
