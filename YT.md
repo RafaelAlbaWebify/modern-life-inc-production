@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 4.5 (2026-10-27)
+Version: 4.6 (2026-10-27)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -372,3 +372,8 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - User supplied MLI_RECOVERED_REVIEW.zip. Contains seven PNGs: original attempt1 SC01..SC06 and SC02_attempt2; state matches Windows recovery receipt. Images visually inspected under narrative-first rubric. SC01, SC02 attempt1, SC03, SC04, SC05 usable; SC06 has illegible invented speech/text and needs localized text cleanup, not full-scene regeneration. SC02 attempt2 is technically valid but not a narrative improvement.
 - Created image-hash-bound editorial decision JSON in chat. Added `adopt` to tools/mli-pipeline.py: validates complete set of scene decisions and each asset SHA256 against recorded attempts, selects earlier attempt where better, saves state with CANDIDATE_PASS or LOCAL_REPAIR, blocks release until repair. Export and verify prefer editorial-selected attempt. No GPU needed for adoption.
 - Do not reject split panels per se; prioritize comprehensible narrative. Full release still blocked on SC06 text cleanup and final audiovisual QC. Do not run old 4-scene retry report.
+
+## 2026-10-27: SC06 localized cleanup path (v4.6)
+- User confirmed editorial adoption: SC01..SC05 CANDIDATE_PASS, SC06 LOCAL_REPAIR, no publication approval. Prepared chat-exported localized SC06 candidate from original SC06_attempt1.png: removed invented balloon lettering and hoodie lettering without FLUX; picture keeps original triple-panel cartoon but a blank dialogue balloon persists. Image requires final human viewing and may still be editorially inferior to a professionally redrawn version; do not call this final approval.
+- Added `repair-import --work --scene SC06 --image <path>` to tools/mli-pipeline.py; validates image PNG/hash, requires LOCAL_REPAIR, preserves original, writes SC06_repaired.png and provenance into state; selected asset is used by verify/export. No GPU.
+- Existing tools/build-mli-pilot-enhanced.py accepts `--images-dir` with SC01.png..SC06.png, WAVs from local pilot_audio and produces a reviewable narrated MP4 in Downloads. Render is not a release gate and audiovisual QC remains necessary.
