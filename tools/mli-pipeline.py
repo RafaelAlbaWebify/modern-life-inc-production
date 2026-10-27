@@ -32,6 +32,10 @@ def prepare(a):
  (run/"prompts").mkdir()
  for sid in chosen:(run/"prompts"/(sid+".txt")).write_text(prompt(spec,scenes[sid])+"\n",encoding="utf-8")
  write_json(run/"contract.json",spec)
+ narration=" ".join(scene["beat"].strip() for scene in spec["scenes"] if scene["id"] in chosen)
+ word_count=len(narration.split())
+ write_json(run/"planning_summary.json",{"episode":spec["episode_id"],"scene_count":len(chosen),"narration_word_count":word_count,"estimated_voice_seconds_at_140_wpm":round(word_count*60/140,1),"planned_duration_range":spec.get("target_seconds"),"generation_authorized":False,"gpu_used":False,"editing_note":"Before generation, review all prompt and narration beats; durations omit scene gaps and pauses."})
+ (run/"narration_draft.txt").write_text("\n\n".join(f"{s['id']}: {s['beat']}" for s in spec["scenes"] if s["id"] in chosen)+"\n",encoding="utf-8")
  state={"episode":spec["episode_id"],"created":datetime.datetime.now(datetime.timezone.utc).isoformat(),"source_contract_sha256":sha(json.dumps(spec,sort_keys=True).encode()),"shots":{sid:{"attempts":[],"state":"UNGENERATED"} for sid in chosen},"history":[{"event":"PREPARED"}],"release_approved":False}
  save(run,state);print("PREPARED",run,"shots:",",".join(chosen))
 def png(p):
