@@ -28,6 +28,22 @@ class PipelineTests(unittest.TestCase):
   state=pipeline.load(self.work)
   self.assertEqual(state["shots"]["SC01"]["state"],"RETRY_AUTHORIZED")
   self.assertFalse(state["release_approved"])
+ def test_recover_untracked_valid_png_without_regeneration(self):
+  state=pipeline.load(self.work)
+  state["shots"]["SC01"]["attempts"]=[]
+  state["shots"]["SC01"]["state"]="RETRY_AUTHORIZED"
+  pipeline.save(self.work,state)
+  pipeline.recover(types.SimpleNamespace(work=str(self.work)))
+  recovered=pipeline.load(self.work)["shots"]["SC01"]
+  self.assertEqual(recovered["state"],"NEEDS_REVIEW")
+  self.assertEqual(len(recovered["attempts"]),1)
+  self.assertTrue(recovered["attempts"][0]["recovered"])
+ def test_recover_does_not_authorize_obsolete_retries(self):
+  state=pipeline.load(self.work)
+  state["shots"]["SC01"]["state"]="RETRY_AUTHORIZED"
+  pipeline.save(self.work,state)
+  pipeline.recover(types.SimpleNamespace(work=str(self.work)))
+  self.assertEqual(pipeline.load(self.work)["shots"]["SC01"]["state"],"REVIEW_POLICY_HOLD")
  def test_mismatched_hash_blocks(self):
   pipeline.package(types.SimpleNamespace(work=str(self.work),zip=None))
   req=json.loads((self.work/"review_request.json").read_text())["results"][0]
