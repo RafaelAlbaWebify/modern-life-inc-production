@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """Generate branded ASS subtitles from verified WhisperX word timing. No paid APIs."""
-import argparse,json,pathlib
+import argparse,json,pathlib,math
 STYLES={"cinematic":("&H00FFFFFF","&H00FFFFFF"),"amber":("&H00FFFFFF","&H0000ADFF"),"karaoke":("&H00FFFFFF","&H0000ADFF")}
 def t(sec):
  n=round(sec*100);h,n=divmod(n,360000);m,n=divmod(n,6000);s,cs=divmod(n,100)
  return f"{h}:{m:02}:{s:02}.{cs:02}"
 MAX_WORDS=10
 MAX_CHARS=65
+MAX_LINE_CHARS=38
 MIN_MARGIN_V=135
 
 def groups(words):
@@ -36,11 +37,16 @@ def groups(words):
  return merged
 
 def split_line(group):
- """Return index for balanced two-line layout without splitting source order."""
+ """Choose balanced two lines; never create a single-word orphan."""
  content=[w["word"] for w in group]
- if len(" ".join(content))<=34:return None
+ if len(" ".join(content))<=MAX_LINE_CHARS:return None
  options=range(2,len(content)-1)
- return min(options,key=lambda i:abs(len(" ".join(content[:i]))-len(" ".join(content[i:])))) if options else None
+ if not options:return None
+ return min(options,key=lambda i:(
+  max(len(" ".join(content[:i])),len(" ".join(content[i:])))>MAX_LINE_CHARS,
+  abs(len(" ".join(content[:i]))-len(" ".join(content[i:])))
+ ))
+
 
 def render(words,style):
  primary,secondary=STYLES[style]
@@ -72,9 +78,9 @@ def render(words,style):
 def main():
  p=argparse.ArgumentParser();p.add_argument("--alignment",required=True);p.add_argument("--out",required=True)
  a=p.parse_args();d=json.loads(pathlib.Path(a.alignment).read_text(encoding="utf-8"));words=d.get("words",[])
- if not isinstance(words,list) or len(words)<50 or len(d.get("scenes",[]))!=6:raise ValueError("Alignment incomplete")
+ if not isinstance(words,list) or not words or not d.get("scenes"):raise ValueError("Alignment incomplete")
  for w in words:
-  if not isinstance(w.get("start"),(float,int)) or not isinstance(w.get("end"),(float,int)) or w["end"]<=w["start"]:raise ValueError("Bad word timing")
+  if not isinstance(w.get("start"),(float,int)) or not isinstance(w.get("end"),(float,int)) or not math.isfinite(w["start"]) or not math.isfinite(w["end"]) or w["start"]<0 or w["end"]<=w["start"]:raise ValueError("Bad word timing")
  out=pathlib.Path(a.out);out.mkdir(parents=True,exist_ok=True)
  for name in STYLES:(out/(name+".ass")).write_text(render(words,name),encoding="utf-8")
  print("ASS CREATED",len(words),"words",out)
