@@ -64,10 +64,23 @@ function Preflight([string]$stage){
   }
   CheckFile "Selected SC06" $Scene06Image
  }
+ if($stage -in @("episode-render","episode-audio","episode-final")){
+  Check "Episode work folder" (-not [string]::IsNullOrWhiteSpace($Work) -and (Test-Path -LiteralPath $Work -PathType Container)) $Work
+  if($Work){
+   CheckFile "Episode contract" (Join-Path $Work "contract.json")
+   CheckFile "Episode state" (Join-Path $Work "state.json")
+  }
+ }
+ if($stage -eq "episode-final"){
+  Check "Episode render folder" (-not [string]::IsNullOrWhiteSpace($RenderFolder) -and (Test-Path -LiteralPath $RenderFolder -PathType Container)) $RenderFolder
+  if($RenderFolder){CheckFile "Episode render manifest" (Join-Path $RenderFolder "manifest.json")}
+  $wpx=Join-Path $HOME "Downloads\MLI_WHISPERX_ENV\Scripts\python.exe"
+  CheckFile "WhisperX environment" $wpx
+ }
  if($stage -eq "plan"){
   Check "Episode ID" ($Episode -match '^MLI_[A-Z0-9_]+$') $Episode
  }
- if($stage -notin @("start","plan","qc","finish")){
+ if($stage -notin @("start","plan","qc","finish","episode-render","episode-audio","episode-final")){
   Check "Work folder" (-not [string]::IsNullOrWhiteSpace($Work) -and (Test-Path -LiteralPath $Work -PathType Container)) $Work
  }
  $fails=@($script:preflightFindings | Where-Object {$_.Status -eq "FAIL"})
