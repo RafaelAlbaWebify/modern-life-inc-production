@@ -1,0 +1,467 @@
+{
+  "schema_version": 1,
+  "episode_id": "MLI_EP002",
+  "working_title": "Who Owns Your Attention?",
+  "status": "CREATIVE_DRAFT_NOT_GENERATION_APPROVED",
+  "target_seconds": [
+    120,
+    180
+  ],
+  "reference": "C:\\AI\\MLI-FluxTest-Vulkan\\story_consistency_revised\\CHARACTER_REFERENCE.png",
+  "style": "Cinematic illustrated 2D urban storybook, clean black contours, warm amber and cool blue accents, consistent realistic perspective. No anime redesign. 16:9. No lettering or speech bubbles.",
+  "character": "Same iconic protagonist: pale minimal face with two oval eyes, messy short dark hair, oversized orange headphones, teal hoodie and dark trousers. Never normal-detailed face for protagonist.",
+  "supporting": "Background supporting people may have ordinary stylized eyes, nose and mouth; never copy protagonist's minimal facial design or teal/orange outfit.",
+  "max_attempts": 2,
+  "scenes": [
+    {
+      "id": "SC01",
+      "purpose": "The invisible queue",
+      "location": "home desk at dawn",
+      "framing": "medium",
+      "action": "phone and laptop notifications accumulate while the protagonist rubs tired eyes",
+      "beat": "Every day begins with a queue nobody can see. Messages, favors, reminders, and tiny requests arrive before we've even decided what matters.",
+      "required": [
+        "single phone on desk",
+        "pale minimalist lead face",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "no visible letters",
+        "speech bubbles",
+        "legible signage",
+        "watermarks",
+        "unintended second protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4201,
+      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+    },
+    {
+      "id": "SC02",
+      "purpose": "First interruption",
+      "location": "kitchen morning",
+      "framing": "wide",
+      "action": "protagonist pauses breakfast to inspect glowing phone",
+      "beat": "You sit down for breakfast, and one notification pulls you away. It seems harmless, until another follows.",
+      "required": [
+        "one mug and one phone",
+        "pale minimalist lead face",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "no duplicate hands",
+        "speech bubbles",
+        "legible signage",
+        "watermarks",
+        "unintended second protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4202,
+      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+    },
+    {
+      "id": "SC03",
+      "purpose": "Work interruption",
+      "location": "quiet workplace",
+      "framing": "medium",
+      "action": "protagonist faces laptop, hand hovering uncertainly between keyboard and phone",
+      "beat": "At work, the pattern repeats. An answer takes seconds, but recovering your concentration can take much longer.",
+      "required": [
+        "office desk",
+        "pale minimalist lead face",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "no readable screen text",
+        "speech bubbles",
+        "legible signage",
+        "watermarks",
+        "unintended second protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4203,
+      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+    },
+    {
+      "id": "SC04",
+      "purpose": "Walking distracted",
+      "location": "city pavement midday",
+      "framing": "medium",
+      "action": "protagonist walks distractedly past shops, phone near waist",
+      "beat": "Soon, even a short walk becomes time you feel obliged to give away.",
+      "required": [
+        "orange headphones and teal hoodie",
+        "pale minimalist lead face",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "no crowds",
+        "speech bubbles",
+        "legible signage",
+        "watermarks",
+        "unintended second protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4204,
+      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+    },
+    {
+      "id": "SC05",
+      "purpose": "Internal pressure",
+      "location": "bus shelter rainy afternoon",
+      "framing": "medium",
+      "action": "protagonist gazes at phone while raindrops blur city lights",
+      "beat": "Nobody may actually be demanding an instant reply. Sometimes the pressure comes from our own expectations.",
+      "required": [
+        "wet shelter and single phone",
+        "pale minimalist lead face",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "no dialogue bubbles",
+        "speech bubbles",
+        "legible signage",
+        "watermarks",
+        "unintended second protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4205,
+      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+    },
+    {
+      "id": "SC06",
+      "purpose": "Missed moment",
+      "location": "park bench sunlight",
+      "framing": "wide",
+      "action": "protagonist overlooks beautiful moment while a friend notices birds overhead",
+      "beat": "And the cost is easy to miss: a conversation half heard, a view barely noticed, a moment that won't return.",
+      "required": [
+        "friend separate recognizable silhouette",
+        "pale minimalist lead face",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "no duplicate protagonist",
+        "speech bubbles",
+        "legible signage",
+        "watermarks",
+        "unintended second protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4206,
+      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+    },
+    {
+      "id": "SC07",
+      "purpose": "The realization",
+      "location": "café window",
+      "framing": "medium",
+      "action": "protagonist puts phone face down and looks toward sunlit street",
+      "beat": "The solution isn't to disappear or stop caring. It's to notice when availability has become automatic.",
+      "required": [
+        "phone face down",
+        "pale minimalist lead face",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "no text labels",
+        "speech bubbles",
+        "legible signage",
+        "watermarks",
+        "unintended second protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4207,
+      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+    },
+    {
+      "id": "SC08",
+      "purpose": "Pause",
+      "location": "apartment near window",
+      "framing": "medium",
+      "action": "protagonist gently sets phone on shelf away from chair",
+      "beat": "A small pause can be enough to change the habit. Put the phone somewhere it won't decide your next move.",
+      "required": [
+        "phone visibly on distinct shelf",
+        "pale minimalist lead face",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "no phone in hands",
+        "speech bubbles",
+        "legible signage",
+        "watermarks",
+        "unintended second protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4208,
+      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+    },
+    {
+      "id": "SC09",
+      "purpose": "Choose priority",
+      "location": "desk with notebook",
+      "framing": "medium",
+      "action": "protagonist circles one handwritten-free planning mark in open notebook",
+      "beat": "Before responding, ask yourself one useful question: what deserves my attention right now?",
+      "required": [
+        "open notebook and pen",
+        "pale minimalist lead face",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "no readable handwriting",
+        "speech bubbles",
+        "legible signage",
+        "watermarks",
+        "unintended second protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4209,
+      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+    },
+    {
+      "id": "SC10",
+      "purpose": "Set a window",
+      "location": "sunny desk scene",
+      "framing": "wide",
+      "action": "protagonist looks at wall clock while phone remains out of reach",
+      "beat": "You can choose a time for replies. A boundary is easier to keep when it's simple and predictable.",
+      "required": [
+        "clock and distant phone",
+        "pale minimalist lead face",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "no textual clock overlays",
+        "speech bubbles",
+        "legible signage",
+        "watermarks",
+        "unintended second protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4210,
+      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+    },
+    {
+      "id": "SC11",
+      "purpose": "The first no",
+      "location": "building corridor",
+      "framing": "medium",
+      "action": "protagonist calmly gestures open palm to friendly colleague",
+      "beat": "You can decline a request without giving a long defense. Clear, kind words are often enough.",
+      "required": [
+        "colleague with detailed normal face",
+        "pale minimalist lead face",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "no speech bubbles",
+        "speech bubbles",
+        "legible signage",
+        "watermarks",
+        "unintended second protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4211,
+      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+    },
+    {
+      "id": "SC12",
+      "purpose": "A moment of discomfort",
+      "location": "night lamp corner",
+      "framing": "medium",
+      "action": "protagonist thoughtful but relaxed with phone resting on side table",
+      "beat": "At first, silence may feel uncomfortable. That feeling doesn't mean you've done something wrong.",
+      "required": [
+        "subtle worried posture",
+        "pale minimalist lead face",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "no distressed horror expression",
+        "speech bubbles",
+        "legible signage",
+        "watermarks",
+        "unintended second protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4212,
+      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+    },
+    {
+      "id": "SC13",
+      "purpose": "New freedom",
+      "location": "rooftop golden sunset",
+      "framing": "medium",
+      "action": "protagonist watches skyline, both hands in pockets, phone left aside",
+      "beat": "Give yourself time to adjust. Every small decision makes the next one easier.",
+      "required": [
+        "sunset skyline and phone on parapet",
+        "pale minimalist lead face",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "no duplicate devices",
+        "speech bubbles",
+        "legible signage",
+        "watermarks",
+        "unintended second protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4213,
+      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+    },
+    {
+      "id": "SC14",
+      "purpose": "Deeper focus",
+      "location": "studio desk afternoon",
+      "framing": "wide",
+      "action": "protagonist concentrates on drawing shapes on blank paper",
+      "beat": "With fewer interruptions, there is room for deeper work and the quiet pleasure of finishing something.",
+      "required": [
+        "paper and pencil",
+        "pale minimalist lead face",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "no written text",
+        "speech bubbles",
+        "legible signage",
+        "watermarks",
+        "unintended second protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4214,
+      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+    },
+    {
+      "id": "SC15",
+      "purpose": "Real company",
+      "location": "cozy sofa evening",
+      "framing": "medium",
+      "action": "protagonist listens to friend holding a warm mug, headphones orange visible",
+      "beat": "There is room for people, too. Not because you reply every minute, but because you're truly there when it matters.",
+      "required": [
+        "two mugs and single friend",
+        "pale minimalist lead face",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "no balloons or dialogue text",
+        "speech bubbles",
+        "legible signage",
+        "watermarks",
+        "unintended second protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4215,
+      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+    },
+    {
+      "id": "SC16",
+      "purpose": "Keeping a promise",
+      "location": "park walking path sunset",
+      "framing": "medium",
+      "action": "protagonist walks beside friend with phone tucked away",
+      "beat": "Boundaries make your yes more meaningful. You choose to be present rather than constantly on call.",
+      "required": [
+        "friend, relaxed walking",
+        "pale minimalist lead face",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "no phone in hands",
+        "speech bubbles",
+        "legible signage",
+        "watermarks",
+        "unintended second protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4216,
+      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+    },
+    {
+      "id": "SC17",
+      "purpose": "The change",
+      "location": "home window quiet night",
+      "framing": "medium",
+      "action": "protagonist watches city lights, shoulders relaxed",
+      "beat": "The world doesn't fall apart when you take time for yourself. Most messages can wait.",
+      "required": [
+        "city lights and teal hoodie",
+        "pale minimalist lead face",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "no screen text",
+        "speech bubbles",
+        "legible signage",
+        "watermarks",
+        "unintended second protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4217,
+      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+    },
+    {
+      "id": "SC18",
+      "purpose": "Final perspective",
+      "location": "home sofa warm lamp",
+      "framing": "wide",
+      "action": "protagonist and friend share smiling eye contact with mugs, bright orange headphones unmistakable",
+      "beat": "Protecting your attention isn't caring less. It's how you make space for the people and moments you care about most.",
+      "required": [
+        "two mugs, eye contact, no speech balloon",
+        "pale minimalist lead face",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "no panel lettering",
+        "speech bubbles",
+        "legible signage",
+        "watermarks",
+        "unintended second protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4218,
+      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+    }
+  ]
+}
