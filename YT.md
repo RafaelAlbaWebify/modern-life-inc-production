@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 4.8 (2026-10-27)
+Version: 5.0 (2026-10-27)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -389,3 +389,11 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Added tools/mli-qc.py: verifies six source MP4 clips, master video/audio streams and 1080p dimensions, duration consistency, FFmpeg full master decode, SRT and manifest; writes technical_qc.json with distinct technical_pass, editorial_approved and publication_approved flags (latter two never automatically true). No GPU or paid services.
 - Added `-Mode qc -RenderFolder` to tools/mli-production.ps1 so quality control can run independently on original render folder from any CWD. The chat-produced finishing ZIP does not include six original segments, so QC targets original render folder, not finishing ZIP.
 - Remaining work: improve SC06 without losing character identity, upgrade estimated SRT timing to proven transcript alignment, manual audiovisual acceptance and reusable final-cut/repair integration. Do not claim fully automatic production system complete on strength of technical checks alone.
+
+## 2026-10-27: Reusable final-cut workflow with word-level local alignment (v5.0)
+- User requested three changes: SC06 with retained protagonist identity, word-aligned subtitles from real narration, and reproducible final edits. Added `tools/mli-align.py`, `tools/mli-finish.py`, `tests/test_mli_finishing.py`; launcher `-Mode finish -RenderFolder <old folder> -Scene06Image <approved PNG>`.
+- Alignment uses local WhisperX phoneme forced alignment on six existing WAVs with the canonical narrator text from `build-mli-pilot-enhanced.py`; returns word timestamps, strict failure if any word lacks timing, outputs `MLI_PILOT_001_CAPTIONS_ALIGNED.srt` and `alignment.json`; does not substitute estimated timestamps or run transcription in place of canonical text. Requires separate local `python -m pip install whisperx` and first-use model downloads; no paid API. Windows CPU model alignment compatibility/performance not yet proven.
+- Finisher preserves SC01-SC05 rendered segment videos without re-encode (copies), explicitly substitutes one selected SC06 still over original SC06 audio, combines clips and burns aligned captions via ffmpeg/libass. Writes result in a new timestamped Downloads folder and final_manifest.json; does NOT auto-approve publication.
+- Fast isolated tests added for SRT timestamp/grouping/scene coverage and wired into launch preflight, alongside existing tests. Integration not yet run on user's Windows and no claim that final MP4 generated.
+- Creative SC06 attempt through image-generation looks appealing but protagonist face is too detailed and deviates from canonical minimal-face design; NOT accepted as source until actual character fidelity verified. Do not silently swap. Existing crop also has identity weakness due missing headphones. Need an approved new or edited SC06 image to finish creatively.
+- External verification: WhisperX documented word-level alignment (m-bain/whisperX); stable-diffusion.cpp FLUX.2 reference mode flux2 can edit, but does not guarantee character consistency. Further production work: validate forced alignment on user PC; smoke-test final rendering/FFmpeg subtitle support, assess revised SC06 visually, then run final technical QC.
