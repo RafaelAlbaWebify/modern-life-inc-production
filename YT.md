@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 4.6 (2026-10-27)
+Version: 4.7 (2026-10-27)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -377,3 +377,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - User confirmed editorial adoption: SC01..SC05 CANDIDATE_PASS, SC06 LOCAL_REPAIR, no publication approval. Prepared chat-exported localized SC06 candidate from original SC06_attempt1.png: removed invented balloon lettering and hoodie lettering without FLUX; picture keeps original triple-panel cartoon but a blank dialogue balloon persists. Image requires final human viewing and may still be editorially inferior to a professionally redrawn version; do not call this final approval.
 - Added `repair-import --work --scene SC06 --image <path>` to tools/mli-pipeline.py; validates image PNG/hash, requires LOCAL_REPAIR, preserves original, writes SC06_repaired.png and provenance into state; selected asset is used by verify/export. No GPU.
 - Existing tools/build-mli-pilot-enhanced.py accepts `--images-dir` with SC01.png..SC06.png, WAVs from local pilot_audio and produces a reviewable narrated MP4 in Downloads. Render is not a release gate and audiovisual QC remains necessary.
+
+## 2026-10-27: First pilot finishing edit produced in chat (v4.7)
+- User supplied narrated pilot ZIP `MLI_PILOT_001_20261027_062750.zip`; six original per-scene MP4s and final master verified. Edited only SC06: selected the existing lower-right conversational vignette from the already accepted source and reframed to 768x432 to omit blank speech balloon; does not regenerate with FLUX. Result SC06 still shows teal hoodie and interpersonal engagement but orange headphones are not visible in this subpanel. User must evaluate creative acceptability before final signoff.
+- Re-rendered SC06 clip with FFmpeg and source clip audio copied, reused original SC01–SC05 clips unchanged, concatenated to `MLI_PILOT_001_FINAL_REVIEW.mp4`, output duration 37.042 s; full decode succeeded. Mean audio -17.8 dB, peak -1.8 dB. Measured inter-scene silences ~0.64-0.71 s including embedded source audio silence; retained original pacing, not automatically changed. Existing scene-level estimated SRT preserved externally.
+- Delivered sandbox files `MLI_PILOT_FINAL_REVIEW/MLI_PILOT_001_FINAL_REVIEW.mp4` and `MLI_PILOT_001_FINISHING_REVIEW.zip` with MP4, SC06 crop, SRT, QC_REPORT.json. This is local chat product only; NOT imported to Windows run state, not committed as binary to GitHub, not yet user editorial-approved/published. No speech recognition/forced subtitle alignment or listening-based narration proof was performed.
+- Next step: user watches new MP4, approves or identifies exact issues; only then mark editorial complete and create reproducible local edit procedure. Avoid falsely claiming full production system automation from this one-off chat edit.
