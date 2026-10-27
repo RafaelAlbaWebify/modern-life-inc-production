@@ -114,7 +114,7 @@ def export(a):
  for sid,shot in state["shots"].items():
   if shot["state"]!="CANDIDATE_PASS":
    problems.append(sid+": "+shot["state"]);continue
-  last=shot["attempts"][-1]
+  last=next((x for x in shot["attempts"] if x["file"]==shot.get("editorial_choice",{}).get("file")),shot["attempts"][-1])
   source=images(run)/last["file"]
   if png(source)!=last["sha256"] or not shot.get("review"):
    problems.append(sid+": review/hash invalid");continue
@@ -164,6 +164,27 @@ def recover(a):
  save(run,state)
  write_json(run/"recovery_report.json",{"operations":log,"states":{k:v["state"] for k,v in state["shots"].items()},"gpu_used":False})
  print(json.dumps({"states":{k:v["state"] for k,v in state["shots"].items()},"operations":log},indent=2))
+def adopt(a):
+ run=root(a);state=load(run)
+ d=json.loads(pathlib.Path(a.report).read_text(encoding="utf-8"))
+ if d.get("run")!=run.name or d.get("policy")!="narrative-first":raise ValueError("Wrong run/policy")
+ rows=d.get("decisions",[])
+ if len(rows)!=len(state["shots"]) or set(x["scene"] for x in rows)!=set(state["shots"]):raise ValueError("All scene decisions required exactly once")
+ for row in rows:
+  sid=row["scene"];entry=state["shots"][sid]
+  if row["decision"] not in ("ACCEPT","LOCAL_REPAIR","BLOCK"):raise ValueError("Unsupported decision")
+  record=next((x for x in entry["attempts"] if x["file"]==row["image"]),None)
+  if record is None:raise ValueError("Unrecorded attempt "+row["image"])
+  if png(images(run)/row["image"])!=row["sha256"] or row["sha256"]!=record["sha256"]:raise ValueError("Image digest mismatch "+sid)
+ for row in rows:
+  entry=state["shots"][row["scene"]]
+  entry["editorial_choice"]={"file":row["image"],"sha256":row["sha256"],"decision":row["decision"],"notes":row.get("note","")}
+  entry["state"]={"ACCEPT":"CANDIDATE_PASS","LOCAL_REPAIR":"LOCAL_REPAIR","BLOCK":"BLOCKED"}[row["decision"]]
+  entry["review"]={"narrative":{"status":"PASS" if row["decision"]=="ACCEPT" else "PENDING","evidence":row.get("note","editorial decision")}}
+ state["history"].append({"event":"EDITORIAL_ADOPTION","policy":"narrative-first"})
+ save(run,state)
+ write_json(run/"editorial_adoption.json",d)
+ print("Adopted",[(x["scene"],x["decision"]) for x in rows])
 def status(a):
  state=load(root(a));print(json.dumps({"shots":{k:v["state"] for k,v in state["shots"].items()},"release_approved":False},indent=2))
 def verify(a):
@@ -172,7 +193,7 @@ def verify(a):
  bad=[]
  for sid,shot in state["shots"].items():
   if shot["state"]=="CANDIDATE_PASS":
-   last=shot["attempts"][-1]
+   last=next((x for x in shot["attempts"] if x["file"]==shot.get("editorial_choice",{}).get("file")),shot["attempts"][-1])
    try:
     if png(images(run)/last["file"])!=last["sha256"]:raise ValueError("hash mismatch")
     if not shot.get("review"):raise ValueError("missing verified review")
@@ -184,11 +205,11 @@ def verify(a):
  print(json.dumps(result,indent=2))
  if bad:raise ValueError("Acceptance gate blocked")
 def main():
- p=argparse.ArgumentParser();p.add_argument("command",choices=["prepare","generate","package","ingest","status","verify","export","recover"]);p.add_argument("--work",required=True)
+ p=argparse.ArgumentParser();p.add_argument("command",choices=["prepare","generate","package","ingest","status","verify","export","recover","adopt"]);p.add_argument("--work",required=True)
  p.add_argument("--shots");p.add_argument("--scenes",nargs="*");p.add_argument("--models",default=r"C:\AI\MLI-FluxTest\models");p.add_argument("--engine",default=r"C:\AI\MLI-FluxTest-Vulkan");p.add_argument("--zip");p.add_argument("--report")
  a=p.parse_args()
  try:
-  {"prepare":prepare,"generate":generate,"package":package,"ingest":ingest,"status":status,"verify":verify,"export":export,"recover":recover}[a.command](a)
+  {"prepare":prepare,"generate":generate,"package":package,"ingest":ingest,"status":status,"verify":verify,"export":export,"recover":recover,"adopt":adopt}[a.command](a)
  except Exception as e:print("FAILED:",e,file=sys.stderr);return 1
  return 0
 if __name__=="__main__":sys.exit(main())
