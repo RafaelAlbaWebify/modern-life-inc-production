@@ -22,7 +22,6 @@ FetchFile "tests/test_mli_finishing.py" $finishingTest
 FetchFile "tools/mli-align.py" (Join-Path $toolsDir "mli-align.py")
 FetchFile "tools/mli-finish.py" (Join-Path $toolsDir "mli-finish.py")
 FetchFile "tools/mli-caption-styles.py" (Join-Path $toolsDir "mli-caption-styles.py")
-FetchFile "tools/mli-caption-styles.py" (Join-Path $toolsDir "mli-caption-styles.py")
 & python $finishingTest -v
 if($LASTEXITCODE -ne 0){throw "Finishing regression tests failed."}
 if(-not $Work -and $Mode -in @("start","plan")){$Work=Join-Path $HOME ("Downloads\$($Episode)_PIPELINE_"+(Get-Date -Format "yyyyMMdd_HHmmss"))}
@@ -33,7 +32,14 @@ function RunPipeline([string[]]$argList){
  if($LASTEXITCODE -ne 0){throw "Pipeline failed at $($argList[0]); check $Work"}
 }
 if($Mode -eq "plan"){
- if($Episode -notmatch '^MLI_[A-Z0-9_]+
+ if($Episode -notmatch '^MLI_[A-Z0-9_]+$'){throw "Invalid episode ID"}
+ $contract=Join-Path $storage ($Episode+"_shots.json")
+ FetchFile "episodes/$Episode/shots.json" $contract
+ RunPipeline -argList @("prepare","--work",$Work,"--shots",$contract)
+ Write-Host "PLAN READY: $Work (no GPU used)" -ForegroundColor Green
+}
+elseif($Mode -eq "start"){
+ RunPipeline -argList (@("prepare","--work",$Work,"--scenes") + $Scenes)
  RunPipeline -argList @("generate","--work",$Work)
  RunPipeline -argList @("package","--work",$Work)
  Write-Host "UPLOAD: $($Work)_CHAT_REVIEW.zip" -ForegroundColor Green
