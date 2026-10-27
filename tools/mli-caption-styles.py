@@ -20,7 +20,7 @@ def groups(words):
    gap=w["start"]-current[-1]["end"]
    previous=current[-1]["word"]
    natural=previous.endswith((".", "!", "?", ":", ";")) or (previous.endswith(",") and gap>=0.12)
-   if gap>0.65 or (natural and len(current)>=4) or len(current)>=MAX_WORDS or len(span)>MAX_CHARS:
+   if gap>0.65 or (natural and len(current)>=3) or len(current)>=MAX_WORDS or len(span)>MAX_CHARS:
     out.append(current);current=[]
   current.append(w)
  if current:out.append(current)
