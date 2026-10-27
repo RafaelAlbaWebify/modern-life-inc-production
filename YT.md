@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 5.3 (2026-10-27)
+Version: 5.5 (2026-10-27)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -411,3 +411,7 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 ## 2026-10-27: WhisperX installation and alignment validated on user's Windows (v5.3)
 - User supplied complete setup log. Existing Python 3.12 discovered; separate Downloads/MLI_WHISPERX_ENV venv created. WhisperX 3.8.6 installed successfully and imported, CPU acoustic model wav2vec2 base 360MB downloaded. Aligned exactly 106 words into 19 captions; generated aligned SRT path Downloads/MLI_PILOT_001_20261027_062750/MLI_PILOT_001_CAPTIONS_ALIGNED.srt and alignment.json. Do not reinstall or repeat alignment unnecessarily.
 - Updated tools/mli-production.ps1 -Mode finish to reuse existing alignment.json/SRT rather than repeat forced-alignment. Checks 6 scenes and >50 word timestamps before final edit. Final cut still not executed on user system; SC06 identity/creative approval remains pending. Previous SC06 local-crop candidate may be used ONLY to test render, not approval.
+
+## 2026-10-27: Branded subtitle style comparisons (v5.5)
+- Produced 3 nine-second sample videos in chat from the actual clean master: cinematic (white), amber (channel colour emphasis), soft karaoke (progressive amber). Demonstration only: ZIP supplied SRT but no alignment.json; preview per-word timings interpolated within SRT segments and are NOT evidence of final accuracy. Do not misrepresent these as true word-aligned renders.
+- Added tools/mli-caption-styles.py to GitHub: generates cinematic.ass, amber.ass with selected keyword emphasis, and karaoke.ass using actual WhisperX alignment.json with word timestamps. Local ASS generation via standard Python, no paid services. Use FFmpeg libass for final burn. Production script not yet wired to chosen style; user should select after preview. Correctness and native Windows final render not yet verified.
