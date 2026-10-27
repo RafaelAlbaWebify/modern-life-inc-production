@@ -106,6 +106,11 @@ FetchFile "tools/mli-finish.py" (Join-Path $toolsDir "mli-finish.py")
 FetchFile "tools/mli-caption-styles.py" (Join-Path $toolsDir "mli-caption-styles.py")
 & $script:runtimePython $finishingTest -v
 if($LASTEXITCODE -ne 0){throw "Finishing regression tests failed."}
+$episodeTest=Join-Path $testsDir "test_mli_episode_stages.py"
+FetchFile "tests/test_mli_episode_stages.py" $episodeTest
+FetchFile "tools/mli-align-episode.py" (Join-Path $toolsDir "mli-align-episode.py")
+& $script:runtimePython $episodeTest -v
+if($LASTEXITCODE -ne 0){throw "Episode regression tests failed."}
 if(-not $Work -and $Mode -in @("start","plan")){$Work=Join-Path $HOME ("Downloads\$($Episode)_PIPELINE_"+(Get-Date -Format "yyyyMMdd_HHmmss"))}
 if(-not $Work -and $Mode -notin @("qc","finish")){throw "-Work required for review/status/verify"}
 $Work=if($Work){[IO.Path]::GetFullPath($Work)}else{""}
