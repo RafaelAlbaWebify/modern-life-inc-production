@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 5.7 (2026-10-27)
+Version: 5.8 (2026-10-27)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -427,3 +427,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Added regression checks for split balance, scene boundary and retained original margin tests in tests/test_mli_finishing.py. Fixed tools/mli-production.ps1 preflight to fetch mli-caption-styles.py before executing tests, including from cold TEMP.
 - These changes are committed, but final Windows render with revised ASS has NOT been validated yet; user should rerun existing finish pipeline once and inspect. No GPU, WhisperX re-alignment, image or voice regeneration needed.
 - Recommended next step: a deliberate 2-3 minute narrative integration pilot (not yet full 8-12 minute episode), using reusable story beats, scene-to-scene character consistency, narrator duration budget, timing, QC and sustainable generation-cost tracking. Only scale further once 2-3 minute pilot passes full editorial and technical gates. Current pipeline has several hardcoded SC01-SC06 and pilot file names, so generalize contracts/render/technical QC before attempting longer episode. SC06 creative defect is still unapproved and must be resolved independently.
+
+## 2026-10-27: EP002 scaling experiment scaffold (v5.8)
+- Created episodes/MLI_EP002/shots.json with 18 beats and 302 narration words (~2m10s at 140 wpm without pauses), titled "Who Owns Your Attention?". Explicit canonical character reference and no-dialogue-bubble rules. Creative DRAFT, not GPU approved.
+- Added -Mode plan -Episode MLI_EP002 to tools/mli-production.ps1: downloads the episode contract from GitHub and invokes prepare with --shots. Creates prompts and state without GPU use.
+- Important limits: start, render, build-mli-pilot-enhanced.py and mli-qc.py still assume six pilot scenes; never use those on EP002 until generalized. Next phases: dynamic scene-count renderer and audio alignment, scene-agnostic QC, measured GPU generation in small batches.
+- Soft Karaoke was stabilized with margin 135 and balanced two-line grouping; latest Windows render still unverified.
