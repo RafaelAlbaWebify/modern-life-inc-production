@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 6.2 (2026-10-27)
+Version: 6.3 (2026-10-27)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -448,3 +448,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - User diagnosed `python` command resolving to C:\Python314\python.exe (Python 3.14.0) while Python 3.12 exists under AppData Local Programs. Previous preflight incorrectly blocked on default PATH interpreter despite suitable existing runtime.
 - Updated tools/mli-production.ps1 preflight to collect interpreter candidates from PATH and Windows `py` launcher, prefer compatible 3.12 among alternatives, and reuse selected interpreter for unit tests, main pipeline, finishing, rendering and QC. Existing checks remain aggregate-report style, not fail-fast. No Python installation or WhisperX reinstallation needed.
 - This selection code is committed but awaiting Windows execution verification. Be careful when altering launcher; protect against duplicate source tails and parse failures.
+
+## 2026-10-27: EP002 planned locally, variable-scene render and QC added (v6.3)
+- User ran -Mode plan -Episode MLI_EP002 successfully at 2026-10-27 18:28:25. Preflight selected installed Python 3.12; 5 pipeline unit tests and 8 finishing tests passed. Created C:\Users\ralba\Downloads\MLI_EP002_PIPELINE_20261027_182825 with 18 scenes and no GPU use.
+- Added tools/mli-render-episode.py: renders variable scene counts from contract.json, accepted_images and WAVs in <work>/audio, concatenates a clean episode master and emits manifests; no image or voice generation, no release approval.
+- Added tools/mli-qc-episode.py: scene-agnostic MP4 codec/stream/duration/hash/decode verification against render manifest; publication remains blocked.
+- Launcher now exposes -Mode episode-render -Work <work> and -Mode episode-qc -RenderFolder <render>, while preserving pilot-specific commands. Source committed but NOT yet locally tested on Windows; no WAVs/images for EP002 have been generated or accepted. More work needed on narration voice generation, generalized word alignment and final Soft Karaoke burn in variable-scene exports. Do not run episode-render until all accepted images and per-scene WAVs are ready.
