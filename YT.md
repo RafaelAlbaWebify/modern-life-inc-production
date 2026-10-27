@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 5.9 (2026-10-27)
+Version: 6.0 (2026-10-27)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -438,3 +438,8 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Fixed malformed intermediate PowerShell launcher plan insertion and restored original start block; checked rendered source around branches. Removed duplicated caption file preflight download.
 - Updated tools/mli-pipeline.py prepare: writes narration_draft.txt and planning_summary.json with actual scene count, word count, estimated speaking seconds at 140 wpm, planned duration range and explicit GPU not used/release not approved. Works for other shot contracts passed by --shots.
 - Plan mode downloads 18-shot MLI_EP002 contract into TEMP and initializes a separate timestamped Downloads run; it does NOT generate, render or publish assets. Still needs Windows runtime smoke test and editorial review, then dynamic rendering/voice/QC generalization before GPU operation.
+
+## 2026-10-27: Preflight and broken launcher repair (v6.0)
+- User tried `-Mode plan -Episode MLI_EP002` and got ParserError at line 112. Inspected live GitHub file: trailing duplicate malformed block after initial launcher end; removed tail after primary status fallback. Root cause was corrupt source commit, NOT a missing Windows dependency. Avoid claiming smoke-tested on user PC.
+- Added mode-scoped Preflight to launcher: Python availability/version for all stages; ffmpeg+ffprobe for GPU render/final/qc; FLUX executable, identity reference and model files for start; pilot narration WAV for render; alignment SRT, word timestamps and explicit SC06 file for finish. Checks avoid starting unneeded heavy dependencies during plan and fail with concrete missing file. Unit tests continue after preflight.
+- Plan still only produces 18 prompts, 302-word narrator draft and summary, without GPU. Next immediate step is fetch + PowerShell ParseFile validation before invocation, then local success output. Full dynamic 18-scene narrator/render/qc and staged GPU generation still pending.
