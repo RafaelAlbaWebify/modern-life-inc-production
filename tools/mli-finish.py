@@ -3,7 +3,7 @@
 SC06 replacement is explicit; never silently approve creative artwork.
 Optional aligned subtitle burn-in requires an existing aligned SRT.
 """
-import argparse,datetime,hashlib,json,pathlib,shutil,subprocess,sys
+import argparse,datetime,hashlib,json,pathlib,shutil,subprocess,sys,importlib.util
 SCENES=[f"SC{i:02}" for i in range(1,7)]
 def run(*cmd):
  p=subprocess.run([str(x) for x in cmd],capture_output=True,text=True)
@@ -16,12 +16,16 @@ def main():
  ap.add_argument("--source-folder",required=True)
  ap.add_argument("--scene06-image",required=True)
  ap.add_argument("--aligned-srt",required=True)
+ ap.add_argument("--alignment",required=True)
+ ap.add_argument("--caption-style",choices=["karaoke","amber","cinematic"],default="karaoke")
+ ap.add_argument("--caption-script",required=True)
  ap.add_argument("--output-root",default=str(pathlib.Path.home()/"Downloads"))
  a=ap.parse_args()
  origin=pathlib.Path(a.source_folder).resolve()
  replacement=pathlib.Path(a.scene06_image).resolve()
  captions=pathlib.Path(a.aligned_srt).resolve()
- for p in [replacement,captions]+[origin/(sid+".mp4") for sid in SCENES]:
+ word_alignment=pathlib.Path(a.alignment).resolve()
+ for p in [replacement,captions,word_alignment,pathlib.Path(a.caption_script)]+[origin/(sid+".mp4") for sid in SCENES]:
   if not p.is_file():raise FileNotFoundError(p)
  image_stream=[x for x in media(replacement)["streams"] if x["codec_type"]=="video"]
  if not image_stream:raise ValueError("SC06 image has no visual stream")
@@ -43,16 +47,23 @@ def main():
  clean=folder/"MLI_PILOT_FINAL_CLEAN.mp4"
  run("ffmpeg","-hide_banner","-loglevel","error","-y","-safe","0","-f","concat","-i",concat,"-c","copy","-movflags","+faststart",clean)
  aligned=folder/"MLI_PILOT_FINAL_ALIGNED.srt";shutil.copy2(captions,aligned)
+ spec=importlib.util.spec_from_file_location("mli_captions",a.caption_script)
+ capmodule=importlib.util.module_from_spec(spec);spec.loader.exec_module(capmodule)
+ timing=json.loads(word_alignment.read_text(encoding="utf-8"))
+ words=timing.get("words",[])
+ if len(words)<50 or len(timing.get("scenes",[]))!=6:raise ValueError("Incomplete word timing")
+ ass=folder/"MLI_CAPTIONS.ass"
+ ass.write_text(capmodule.render(words,a.caption_style),encoding="utf-8")
  master=folder/"MLI_PILOT_FINAL_SUBTITLED.mp4"
  # FFmpeg subtitle filter escaping is difficult on Windows; use current directory for safely relative filter path.
- p=subprocess.run(["ffmpeg","-hide_banner","-loglevel","error","-y","-i",str(clean),"-vf","subtitles=MLI_PILOT_FINAL_ALIGNED.srt",
+ p=subprocess.run(["ffmpeg","-hide_banner","-loglevel","error","-y","-i",str(clean),"-vf","ass=MLI_CAPTIONS.ass",
                    "-c:v","libx264","-preset","veryfast","-crf","20","-c:a","copy",str(master)],cwd=str(folder),capture_output=True,text=True)
  if p.returncode:raise RuntimeError("Subtitle burn failed. Check ffmpeg libass support: "+p.stderr[-1500:])
  meta=media(master)
  if not any(x["codec_type"]=="audio" for x in meta["streams"]):raise ValueError("Rendered master missing audio")
  record={"rendered":True,"technical_qc_pending":True,"editorial_approved":False,"publication_approved":False,
          "source_folder":str(origin),"SC06_override":str(replacement),"SC06_sha256":hashlib.sha256(replacement.read_bytes()).hexdigest(),
-         "captions_method":"WhisperX local forced alignment","source_srt":str(captions),"render":str(master)}
+         "captions_method":"WhisperX word-level ASS","caption_style":a.caption_style,"caption_ass":str(ass),"source_srt":str(captions),"render":str(master)}
  (folder/"final_manifest.json").write_text(json.dumps(record,indent=2)+"\n",encoding="utf-8")
  print("FINAL PREVIEW:",master,"\nMANIFEST:",folder/"final_manifest.json")
 if __name__=="__main__":
