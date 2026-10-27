@@ -22,6 +22,7 @@ FetchFile "tests/test_mli_finishing.py" $finishingTest
 FetchFile "tools/mli-align.py" (Join-Path $toolsDir "mli-align.py")
 FetchFile "tools/mli-finish.py" (Join-Path $toolsDir "mli-finish.py")
 FetchFile "tools/mli-caption-styles.py" (Join-Path $toolsDir "mli-caption-styles.py")
+FetchFile "tools/mli-caption-styles.py" (Join-Path $toolsDir "mli-caption-styles.py")
 & python $finishingTest -v
 if($LASTEXITCODE -ne 0){throw "Finishing regression tests failed."}
 if(-not $Work -and $Mode -eq "start"){$Work=Join-Path $HOME ("Downloads\MLI_PIPELINE_"+(Get-Date -Format "yyyyMMdd_HHmmss"))}
