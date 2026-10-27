@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 5.5 (2026-10-27)
+Version: 5.6 (2026-10-27)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -415,3 +415,8 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 ## 2026-10-27: Branded subtitle style comparisons (v5.5)
 - Produced 3 nine-second sample videos in chat from the actual clean master: cinematic (white), amber (channel colour emphasis), soft karaoke (progressive amber). Demonstration only: ZIP supplied SRT but no alignment.json; preview per-word timings interpolated within SRT segments and are NOT evidence of final accuracy. Do not misrepresent these as true word-aligned renders.
 - Added tools/mli-caption-styles.py to GitHub: generates cinematic.ass, amber.ass with selected keyword emphasis, and karaoke.ass using actual WhisperX alignment.json with word timestamps. Local ASS generation via standard Python, no paid services. Use FFmpeg libass for final burn. Production script not yet wired to chosen style; user should select after preview. Correctness and native Windows final render not yet verified.
+
+## 2026-10-27: Soft Karaoke selected as standard captions (v5.6)
+- User selected Soft Karaoke as the canonical subtitle style for Modern Life Inc. Existing tools/mli-caption-styles.py generates word-level ASS from alignment.json. Do not use the interpolated SRT demo for final production.
+- Updated tools/mli-finish.py: requires original WhisperX alignment.json and caption generator, produces MLI_CAPTIONS.ass, burns its word-level karaoke styling using FFmpeg/libass, preserves SRT export and records caption_style in final_manifest.json. Default caption style is karaoke; cinematic and amber still supported as explicit alternatives. Updated tools/mli-production.ps1 -Mode finish to download caption generator and forward `-CaptionStyle`, default karaoke, and word-alignment path. No new GPU or TTS.
+- Source committed but freshly changed karaoke final render not yet executed on user's Windows; next test must validate karaoke motion, actual word timing, and FFmpeg libass output. SC06 remains editorially pending; prior selected repaired candidate usable as technical fixture only, not creative approval.
