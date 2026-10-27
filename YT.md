@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 4.3 (2026-10-26)
+Version: 4.4 (2026-10-27)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -361,3 +361,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Earlier rejection 4/6 was a strict literal-prompt compliance score, NOT a meaningful editorial failure rate. User correctly challenged excessive failures. New policy docs/image-acceptance-rubric.md: blockers = story contradiction, character drift, serious anatomy, distracting text/artifacts; minor count/angle details nonblocking; prefer localized repair for generated gibberish text; split panels are fine when narratively useful.
 - Reassessment: SC01 ACCEPT, SC02 ACCEPT despite pedestrian count, SC03 requires narrative review of held phone, SC04 ACCEPT, SC05 ACCEPT because phone is away from desk, SC06 prefer localized repair of illegible speech bubbles and evaluate human interaction. Do NOT execute old import report blindly: it would trigger unnecessary GPU retries.
 - This is an editorial decision-policy change; legacy Python ingest currently uses FAIL on any criterion. It needs migration to severity-tagged acceptance before automatic retries can be trusted.
+
+## 2026-10-27: Safe recovery after Windows reboot (v4.4)
+- User halted interrupted `mli-production.ps1 -Mode review` on run `Downloads/MLI_PIPELINE_20261026_201214` after SC02 attempt2 and during SC03 attempt2. Existing review had marked SC01 and SC04 CANDIDATE_PASS; SC02/03/05/06 RETRY_AUTHORIZED under old overstrict rubric. Actual completion states after reboot unknown; do NOT assume SC03 finished.
+- Implemented `recover` in tools/mli-pipeline.py and `-Mode recover` in tools/mli-production.ps1: inspect run/ images and state without GPU, recover intact untracked PNG attempt records with hashes, quarantine corrupt/untracked PNG, verify hashes of recorded assets, place obsolete RETRY_AUTHORIZED states on REVIEW_POLICY_HOLD. Writes `recovery_report.json`. Does not run generation, restart old retries or overwrite accepted images.
+- Added no-GPU regression tests for untracked valid PNG recovery and obsolete retry holding. Committed, but must still be run in user's Windows context. Standard launcher downloads current code and runs tests before recovery.
+- Next step: user runs safe -Mode recover command using exact run folder; inspect resulting states and adopt narrative-first acceptance without regenerating merely for pedestrian counts or phone angle. Do NOT import old stricter JSON again. Assess SC03 and SC06 for story-critical defects, repair only if required. Full rendering is not yet approved.
