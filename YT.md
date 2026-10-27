@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 5.0 (2026-10-27)
+Version: 5.1 (2026-10-27)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -397,3 +397,8 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Fast isolated tests added for SRT timestamp/grouping/scene coverage and wired into launch preflight, alongside existing tests. Integration not yet run on user's Windows and no claim that final MP4 generated.
 - Creative SC06 attempt through image-generation looks appealing but protagonist face is too detailed and deviates from canonical minimal-face design; NOT accepted as source until actual character fidelity verified. Do not silently swap. Existing crop also has identity weakness due missing headphones. Need an approved new or edited SC06 image to finish creatively.
 - External verification: WhisperX documented word-level alignment (m-bain/whisperX); stable-diffusion.cpp FLUX.2 reference mode flux2 can edit, but does not guarantee character consistency. Further production work: validate forced alignment on user PC; smoke-test final rendering/FFmpeg subtitle support, assess revised SC06 visually, then run final technical QC.
+
+## 2026-10-27: Isolated alignment bootstrap and final-cut integration (v5.1)
+- Added tools/setup-and-align.ps1 to check exact six WAV+MP4 inputs and ffmpeg, use isolated Python 3.11 venv in Downloads/MLI_WHISPERX_ENV, install CPU-compatible PyPI whisperx only when absent, download current mli-align.py and source builder, perform forced alignment without modifying existing estimated SRT. Models may download on first run; no paid API or GPU required.
+- Corrected tools/mli-production.ps1 -Mode finish so alignment runs using isolated WhisperX venv rather than system Python. It still needs explicitly chosen approved SC06 image, existing render folder, and FFmpeg with subtitle/libass support.
+- SC06 experimental generated replacement has stylistic/identity drift and is NOT automatically approved. The user needs either an acceptable image-based edit consistent with pale minimal face/headphones, or a creative decision about one compromise; do not claim SC06 closed. Word alignment and final-cut not yet executed on user PC; await local bootstrap output before claim.
