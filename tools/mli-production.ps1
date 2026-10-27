@@ -1,4 +1,4 @@
-param([ValidateSet("start","review","status","verify","render")][string]$Mode="start",[string]$Work="",[string]$Review="",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
+param([ValidateSet("start","review","status","verify","render","recover")][string]$Mode="start",[string]$Work="",[string]$Review="",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
 $ErrorActionPreference="Stop";$ProgressPreference="SilentlyContinue"
 $repo="RafaelAlbaWebify/modern-life-inc-production"
 $storage=Join-Path $env:TEMP "MLI-Pipeline"
@@ -45,6 +45,7 @@ elseif($Mode -eq "review"){
   if($LASTEXITCODE -ne 0){Write-Warning "Blocked: see acceptance_gate.json"}
  }
 }
+elseif($Mode -eq "recover"){RunPipeline -argList @("recover","--work",$Work)}
 elseif($Mode -eq "verify"){RunPipeline -argList @("verify","--work",$Work)}
 elseif($Mode -eq "render"){
  RunPipeline -argList @("verify","--work",$Work)
