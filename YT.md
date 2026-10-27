@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 6.4 (2026-10-27)
+Version: 6.5 (2026-10-27)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -462,3 +462,8 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Added tools/mli-qc-episode.py checks for Soft Karaoke final video, valid audio, SHA256, ASS/alignment sidecars, full FFmpeg decode (when finishing manifest exists) while retaining clean-master checks and publication_approved false.
 - Extended launcher mli-production.ps1 with modes episode-audio, episode-render (existing), episode-final and episode-qc; episode-final chains align->burn->QC. Added episode preflight for work/contract/state, final render folder and WhisperX environment. Added tests/test_mli_episode_stages.py (18-scene karaoke and scene boundaries) in preflight. Fixed episode-qc to require only render folder.
 - Important honest limit: VoiceStudio voice synthesis has not been API/CLI-integrated. Pipeline produces a complete per-scene voice job manifest and verifies WAVs, but missing WAVs remain blocking, not silently synthesized. Requires investigation/validation of real locally installed VoiceStudio interface and access. No GPU images or WAVs generated for EP002; newly added episode stages committed but not yet exercised on user Windows; do not claim full operability. The final episode still needs editorial approval.
+
+## 2026-10-27: VoiceStudio readiness clarification and safe restart handover (v6.5)
+- User confirmed VoiceStudio was closed during successful episode-audio preflight. Previous checks did not inspect VoiceStudio; episode-audio intentionally only audits existing WAV files and 0/18 narration WAV were present. A PASS did not mean VoiceStudio was operational.
+- Restored tools/mli-production.ps1 from known-good commit a147738 after detecting a malformed duplicated tail in interim VoiceStudio modification. Added informational VoiceStudio process visibility for WAV-audit mode (no false requirement that it be open), and a separate `episode-voice-check` that flags no detected app plus missing verified TTS integration. Process-name detection is heuristic, not proof of CLI readiness. Report still aggregates findings. This has NOT been tested on user's PC.
+- Continue after PC reboot tomorrow. Do not ask user to run anything today. Starting point: preflight voice diagnosis and investigate actual installed VoiceStudio CLI/HTTP API for automatic TTS before claiming full pipeline. Existing EP002 work C:\Users\ralba\Downloads\MLI_EP002_PIPELINE_20261027_182825 is preserved, 18-scene plan verified, 0/18 WAV available, no new GPU output.
