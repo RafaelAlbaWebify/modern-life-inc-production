@@ -44,7 +44,9 @@ def prepare(a):
  save(run,state);print("PREPARED",run,"shots:",",".join(chosen))
 def png(p):
  b=p.read_bytes()
- if len(b)<10000 or b[:8]!=b"\x89PNG\r\n\x1a\n" or b[12:16]!=b"IHDR" or struct.unpack(">II",b[16:24])!=(768,432):raise ValueError("Invalid PNG "+str(p))
+ if len(b)<10000 or b[:8]!=b"\x89PNG\r\n\x1a\n" or b[12:16]!=b"IHDR":raise ValueError("Invalid PNG "+str(p))
+ width,height=struct.unpack(">II",b[16:24])
+ if width<768 or height<432 or max(width,height)>4096 or abs(width/height-16/9)>0.01:raise ValueError("Invalid landscape PNG dimensions "+str(p))
  return sha(b)
 def generate(a):
  run=root(a);state=load(run);spec=json.loads((run/"contract.json").read_text(encoding="utf-8"))
