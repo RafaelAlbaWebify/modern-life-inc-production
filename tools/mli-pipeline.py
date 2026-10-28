@@ -50,6 +50,7 @@ def png(p):
  return sha(b)
 def generate(a):
  run=root(a);state=load(run);spec=json.loads((run/"contract.json").read_text(encoding="utf-8"))
+ if spec.get("image_generation_backend","local_flux")!="local_flux":raise ValueError("This episode uses chat image production. Import reviewed assets; local FLUX generation is not the selected backend.")
  models=pathlib.Path(a.models);home=pathlib.Path(a.engine)
  exe=home/"sd-cli.exe";ref=pathlib.Path(spec["reference"]);files=[exe,ref,models/"flux-2-klein-4b-q4_0.gguf",models/"Qwen3-4B-Q4_K_S.gguf",models/"flux2-vae.safetensors"]
  for f in files:
