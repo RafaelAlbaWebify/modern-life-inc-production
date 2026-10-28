@@ -1,0 +1,37 @@
+name: MLI pipeline source validation
+on:
+  push:
+    paths:
+      - 'tools/**'
+      - 'tests/**'
+      - '.github/workflows/mli-source-check.yml'
+  pull_request:
+    paths:
+      - 'tools/**'
+      - 'tests/**'
+      - '.github/workflows/mli-source-check.yml'
+jobs:
+  syntax-and-tests:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify PowerShell syntax before execution
+        shell: pwsh
+        run: |
+          $errors = $null
+          $tokens = $null
+          [System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path 'tools/mli-production.ps1'), [ref]$tokens, [ref]$errors) | Out-Null
+          if ($errors.Count -gt 0) {
+            $errors | Format-List | Out-Host
+            throw "Pipeline launcher syntax is invalid"
+          }
+      - name: Python syntax and unit regressions
+        shell: pwsh
+        run: |
+          python -m compileall -q tools tests
+          python tests/test_mli_pipeline.py
+          python tests/test_mli_finishing.py
+          python tests/test_mli_episode_stages.py
