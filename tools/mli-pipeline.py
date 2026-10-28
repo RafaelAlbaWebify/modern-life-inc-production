@@ -115,7 +115,12 @@ def ingest(a):
   pending.append((sid,decision,checks))
  for sid,decision,checks in pending:
   entry=state["shots"][sid];entry["review"]=checks
-  entry["state"]="CANDIDATE_PASS" if decision=="CANDIDATE_PASS" else ("RETRY_AUTHORIZED" if decision=="FAIL" and len(entry["attempts"])<2 else "BLOCKED")
+  backend=json.loads((run/"contract.json").read_text(encoding="utf-8")).get("image_generation_backend","local_flux")
+  if backend=="chat_image_edit":
+   chat_count=sum(x.get("producer")=="chat_imagegen" or x.get("method")=="built_in_image_edit" for x in entry["attempts"])
+   entry["state"]="CANDIDATE_PASS" if decision=="CANDIDATE_PASS" else ("CHAT_REVISION_REQUIRED" if decision=="FAIL" and chat_count<2 else "BLOCKED")
+  else:
+   entry["state"]="CANDIDATE_PASS" if decision=="CANDIDATE_PASS" else ("RETRY_AUTHORIZED" if decision=="FAIL" and len(entry["attempts"])<2 else "BLOCKED")
   state["history"].append({"event":"REVIEW","shot":sid,"decision":entry["state"]})
  save(run,state);print("Imported:",[(sid,state["shots"][sid]["state"]) for sid,_,_ in pending])
 def export(a):
@@ -215,6 +220,72 @@ def repair_import(a):
  entry["state"]="CANDIDATE_PASS"
  state["history"].append({"event":"LOCAL_REPAIR_IMPORTED","scene":sid,"sha256":digest})
  save(run,state);print("Repair imported",sid,target.name,digest)
+def contract_digest(spec):return sha(json.dumps(spec,sort_keys=True).encode())
+def chat_export(a):
+ run=root(a);state=load(run);spec=json.loads((run/"contract.json").read_text(encoding="utf-8"))
+ if spec.get("image_generation_backend")!="chat_image_edit":raise ValueError("Episode is not configured for chat image production")
+ digest=contract_digest(spec)
+ if state.get("source_contract_sha256")!=digest:raise ValueError("Contract changed; migrate with provenance before exporting jobs")
+ selected=a.scenes or list(state["shots"])
+ if not selected or len(selected)!=len(set(selected)) or not set(selected)<=set(state["shots"]):raise ValueError("Invalid chat scene selection")
+ scene_map={s["id"]:s for s in spec["scenes"]};jobs=[]
+ for sid in selected:
+  text=(run/"prompts"/(sid+".txt")).read_text(encoding="utf-8")
+  jobs.append({"scene":sid,"prompt":text,"prompt_sha256":sha(text.encode()),"narration":scene_map[sid]["beat"],"visual_layout":scene_map[sid].get("visual_layout","single_frame"),"layout_rationale":scene_map[sid].get("layout_rationale"),"current_state":state["shots"][sid]["state"],"review_corrections":{k:v for k,v in state["shots"][sid].get("review",{}).items() if v.get("status")=="FAIL"}})
+ ref=pathlib.Path(spec["reference"]).expanduser()
+ payload={"format":"MLI_CHAT_IMAGE_JOBS_V1","episode":spec["episode_id"],"contract_sha256":digest,"backend":"chat_image_edit","reference":{"path":str(ref),"sha256":sha(ref.read_bytes()) if ref.is_file() else None},"jobs":jobs,"instructions":"Create/edit images with the chat integrated image tool. Supply actual source images/references as needed. Return real image files plus MLI_CHAT_IMAGES_V1 manifest; do not fabricate file references or acceptance. Generation is chat-mediated, not a local paid API.","publication_approved":False}
+ write_json(run/"chat_image_jobs.json",payload)
+ print("CHAT IMAGE JOBS:",run/"chat_image_jobs.json","scenes",len(jobs),"NO GPU OR NETWORK GENERATION")
+def chat_import(a):
+ run=root(a);state=load(run);spec=json.loads((run/"contract.json").read_text(encoding="utf-8"))
+ if spec.get("image_generation_backend")!="chat_image_edit":raise ValueError("Episode is not configured for chat image production")
+ report_path=pathlib.Path(a.report).expanduser().resolve();bundle=report_path.parent
+ report=json.loads(report_path.read_text(encoding="utf-8-sig"));jobs=json.loads((run/"chat_image_jobs.json").read_text(encoding="utf-8"))
+ digest=contract_digest(spec)
+ if state.get("source_contract_sha256")!=digest or jobs.get("contract_sha256")!=digest or report.get("contract_sha256")!=digest:raise ValueError("Contract digest mismatch")
+ if report.get("format")!="MLI_CHAT_IMAGES_V1" or report.get("episode")!=spec["episode_id"] or jobs.get("episode")!=spec["episode_id"]:raise ValueError("Wrong chat image manifest format/episode")
+ rows=report.get("images");expected={j["scene"]:j for j in jobs["jobs"]}
+ if not isinstance(rows,list) or not rows or len({r.get("scene") for r in rows})!=len(rows):raise ValueError("Empty or duplicate scene import")
+ validated=[]
+ for row in rows:
+  sid=row.get("scene")
+  if sid not in expected or sid not in state["shots"]:raise ValueError("Unrequested scene")
+  if row.get("producer")!="chat_imagegen" or not str(row.get("source_artifact","")).strip():raise ValueError("Missing chat image provenance")
+  text=(run/"prompts"/(sid+".txt")).read_text(encoding="utf-8")
+  if row.get("prompt_sha256")!=expected[sid]["prompt_sha256"] or sha(text.encode())!=expected[sid]["prompt_sha256"]:raise ValueError("Prompt digest mismatch "+sid)
+  source=(bundle/row["file"]).resolve()
+  if not source.is_relative_to(bundle):raise ValueError("Image path escapes bundle")
+  digest_image=png(source)
+  if digest_image!=row.get("sha256"):raise ValueError("Image digest mismatch "+sid)
+  dest=images(run)/(sid+"_chat_"+digest_image[:16]+".png")
+  if dest.exists() and png(dest)!=digest_image:raise ValueError("Conflicting imported image")
+  accepted=run/"accepted_images"/(sid+".png")
+  if accepted.exists():png(accepted)
+  validated.append((row,source,dest,digest_image))
+ # All validation completes before files, selections or state are modified.
+ import_id=datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%S_%fZ")
+ backup=run/"chat_import_history";backup.mkdir(exist_ok=True)
+ (backup/(import_id+"_state_before.json")).write_bytes((run/"state.json").read_bytes())
+ write_json(backup/(import_id+"_manifest.json"),report)
+ imported=[];reused=[]
+ for row,source,dest,digest_image in validated:
+  sid=row["scene"];entry=state["shots"][sid]
+  if entry["attempts"] and entry["attempts"][-1].get("sha256")==digest_image:
+   reused.append(sid);continue
+  if not dest.exists():dest.write_bytes(source.read_bytes())
+  accepted=run/"accepted_images"/(sid+".png")
+  if accepted.exists():
+   archive=run/"superseded_exports"/import_id;archive.mkdir(parents=True,exist_ok=True)
+   accepted.rename(archive/(sid+".png"))
+  if entry.get("editorial_choice"):entry.setdefault("editorial_history",[]).append(entry.pop("editorial_choice"))
+  if entry.get("review"):entry.setdefault("review_history",[]).append(entry.pop("review"))
+  entry["attempts"].append({"number":len(entry["attempts"])+1,"file":dest.name,"sha256":digest_image,"prompt_sha256":row["prompt_sha256"],"producer":"chat_imagegen","source_artifact":row["source_artifact"],"import_id":import_id})
+  entry["state"]="NEEDS_REVIEW";imported.append(sid)
+ state["history"].append({"event":"CHAT_IMAGES_IMPORTED","import_id":import_id,"scenes":imported,"reused":reused});state["release_approved"]=False
+ temp=run/"state.chat_import.pending.json";write_json(temp,state);temp.replace(run/"state.json")
+ write_json(run/"chat_import_receipt.json",{"import_id":import_id,"imported":imported,"reused":reused,"publication_approved":False})
+ print("CHAT IMPORT:",len(imported),"new;",len(reused),"reused; visual review still required")
+
 def status(a):
  state=load(root(a));print(json.dumps({"shots":{k:v["state"] for k,v in state["shots"].items()},"release_approved":False},indent=2))
 def verify(a):
@@ -235,11 +306,12 @@ def verify(a):
  print(json.dumps(result,indent=2))
  if bad:raise ValueError("Acceptance gate blocked")
 def main():
- p=argparse.ArgumentParser();p.add_argument("command",choices=["prepare","generate","package","ingest","status","verify","export","recover","adopt","repair-import"]);p.add_argument("--work",required=True)
+ p=argparse.ArgumentParser();p.add_argument("command",choices=["prepare","generate","package","ingest","status","verify","export","recover","adopt","repair-import","chat-export","chat-import"]);p.add_argument("--work",required=True)
  p.add_argument("--shots");p.add_argument("--scenes",nargs="*");p.add_argument("--models",default=r"C:\AI\MLI-FluxTest\models");p.add_argument("--engine",default=r"C:\AI\MLI-FluxTest-Vulkan");p.add_argument("--zip");p.add_argument("--report");p.add_argument("--image");p.add_argument("--scene")
  a=p.parse_args()
  try:
-  {"prepare":prepare,"generate":generate,"package":package,"ingest":ingest,"status":status,"verify":verify,"export":export,"recover":recover,"adopt":adopt,"repair-import":repair_import}[a.command](a)
+  {"prepare":prepare,"generate":generate,"package":package,"ingest":ingest,"status":status,"verify":verify,"export":export,"recover":recover,"adopt":adopt,"repair-import":repair_import,"chat-export":chat_export,"chat-import":chat_import}[a.command](a)
  except Exception as e:print("FAILED:",e,file=sys.stderr);return 1
  return 0
 if __name__=="__main__":sys.exit(main())
+
