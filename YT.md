@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 7.3 (2026-10-28)
+Version: 7.4 (2026-10-28)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -529,3 +529,14 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - New independent workspace/package: MLI_EP002_SINGLE_FRAME_V2. Original Windows work untouched. All 18 source WAV hashes retained; no new voice synthesis. New 16 image assets retain original edit resolution (near 1672x941); SC11/SC15 compatibility copies remain 768x432. Source state/contract and history retained for provenance; original source media remain in previous user workspace.
 - Revised clean master independently checked: 103.723s, 18 scenes, full FFmpeg -xerror decode PASS and episode technical QC true/issues=[]. No captions/music in this preview. A failed intermediate was replaced before final validation; do not use an incomplete early render. Continuous narration assembled from original PCM scene samples with silence matching measured clip offsets, then one AAC encode to avoid per-clip AAC concat timestamp overlaps. This exact assembly improvement is used in this V2 artifact, not yet generalized into the canonical renderer; do not claim otherwise.
 - Package includes local finishing helper that reuses existing real alignment only after matching episode, scene order, normalized transcript, audio durations, timeline offsets and word bounds, then burns Soft Karaoke using existing modules. It does not generate estimated word times, install models or synthesize audio. Compiled locally, but Windows helper execution and V2 final captioned MP4 remain unverified until user run. Original alignment.json was not attached in chat, so no captioned V2 render is claimed.
+
+
+
+## 2026-10-28: Canonical chat image production stages (v7.4)
+- Integrated the built-in chat image-production handoff into tools/mli-pipeline.py and the single tools/mli-production.ps1 launcher. New modes: episode-chat-export and episode-chat-import. Full procedure and manifest schema: docs/chat-image-production.md.
+- episode-chat-export freezes the episode contract digest, scene prompts/digests, layout, narration, reference path/hash where available and failed visible review evidence in chat_image_jobs.json. Optional -Scenes selects an explicit subset; no selection means all episode scenes, not the pilot default six. It generates no image, audio, network image request or local GPU workload.
+- Image creation/editing is performed by the assistant using the integrated tool in the conversation, with supplied real references. PowerShell cannot directly invoke this chat tool. Do not claim unattended image generation or a paid API requirement for this workflow.
+- episode-chat-import accepts real image files plus MLI_CHAT_IMAGES_V1 manifest. It validates episode/contract/requested scenes, frozen/current prompt digest, relative image paths, PNG dimensions and image hashes plus declared chat source provenance before modifying selections. Saves prior state and import manifests, preserves original images, archives superseded accepted exports and removes stale active editorial selection/review from replacement scenes. New assets become NEEDS_REVIEW; import is not acceptance. Identical re-import is idempotent.
+- Existing review mode recognizes chat-backed failures: CHAT_REVISION_REQUIRED -> exports only failed jobs with review evidence, never local FLUX. After two failed chat candidates, block rather than regenerate blindly. Local-FLUX workflows retain their previous explicit retry behavior. The existing verify/export/render/voice/alignment/Soft Karaoke gates remain downstream.
+- Validation: 17 Python pipeline regression tests PASS, covering stale contracts/prompts, source hashes, path escape, idempotence, archived original exports, replacement review gate and bounded chat revision routing. Real EP002 V2 snapshot export also verified 18 jobs and continuous-layout metadata without generation. Python source compile PASS. PowerShell wrapper reviewed in source but NOT executed with native PowerShell in this environment; Windows use remains the final wrapper validation.
+- This repository update does not modify the user's Windows folders or regenerate any V2 images/voices. Historical V2 receipts predate this new handoff and must not be relabeled as retroactively frozen-job evidence. Use canonical jobs/import for subsequent work; retain historical receipts for existing assets.
