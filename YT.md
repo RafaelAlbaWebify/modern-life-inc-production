@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 6.6 (2026-10-28)
+Version: 6.7 (2026-10-28)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -472,3 +472,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Confirmed from VoiceStudio public documentation: its local API defaults to http://localhost:3900, supports GET /health, GET /openapi.json and GET /v1/audio/voices. Its API, not process name, is the appropriate readiness signal. No cloud account is needed for local endpoint.
 - Updated tools/mli-production.ps1 preflight for episode-voice-check to probe localhost health, then report OpenAPI and available-voice endpoint HTTP status, aggregate errors, and avoid false TTS-ready assertions. For episode-audio, localhost status remains informational only: that mode audits previously generated WAVs. No automatic voice synthesis implemented yet until exact installed API/voices/models are confirmed.
 - Await actual Windows run following reboot. Work folder retained: C:\Users\ralba\Downloads\MLI_EP002_PIPELINE_20261027_182825. Do not regenerate planning, images, or audio without valid production gate.
+
+## 2026-10-28: VoiceStudio prerequisite workflow and parser regression fix (v6.7)
+- User reported Windows PowerShell ParserError MissingEndParenthesisInExpression line 1. Root cause: launcher param attribute had ValidateSet(...) followed immediately by [string], missing the attribute closing `]`? Explicit repaired syntax now uses `[ValidateSet(...)] [string]` shape via replacing the closing `"]` with `")]`; verify with parser CI and user smoke test. The actual error was missing `) ` before `[string]` at end of ValidateSet arguments; fixed source.
+- VoiceStudio readiness must account for Open app > Install Local Runtime > Settings/Models/OmniVoice model installation. Updated episode-voice-check to test GET /health, /setup/status models_ready, /system/info ffmpeg_ok and /v1/audio/voices. Missing runtime/model returns explicit actionable instructions rather than success; episode-audio only audits WAVs, so app need not be running then.
+- Added .github/workflows/mli-source-check.yml using windows-latest PowerShell ParseFile and Python 3.12 compileall plus pipeline/finishing/episode regression suites. CI execution result still pending; not validated in user's PC.
+- Must still confirm installed OmniVoice engine is actually selected and narrator voice chosen; synthetic generation of 18 WAVs remains unimplemented until local API contract is verified live.
