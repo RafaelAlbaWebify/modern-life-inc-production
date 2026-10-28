@@ -1,4 +1,4 @@
-param([ValidateSet("start","review","status","verify","render","recover","qc","finish","plan","episode-render","episode-qc","episode-audio","episode-final","episode-voice-check")][string]$Mode="start",[string]$Work="",[string]$Episode="MLI_PILOT_001",[string]$Review="",[string]$RenderFolder="",[string]$Scene06Image="",[ValidateSet("karaoke","cinematic","amber")][string]$CaptionStyle="karaoke",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
+param([ValidateSet("start","review","status","verify","render","recover","qc","finish","plan","episode-render","episode-qc","episode-audio","episode-final","episode-voice-check","episode-voice-smoke","episode-voice-batch")][string]$Mode="start",[string]$Work="",[string]$Episode="MLI_PILOT_001",[switch]$ApproveNarration,[string]$Review="",[string]$RenderFolder="",[string]$Scene06Image="",[ValidateSet("karaoke","cinematic","amber")][string]$CaptionStyle="karaoke",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
 $ErrorActionPreference="Stop";$ProgressPreference="SilentlyContinue"
 $repo="RafaelAlbaWebify/modern-life-inc-production"
 $storage=Join-Path $env:TEMP "MLI-Pipeline"
@@ -67,7 +67,7 @@ function Preflight([string]$stage){
   }
   CheckFile "Selected SC06" $Scene06Image
  }
- if($stage -in @("episode-render","episode-audio","episode-final","episode-voice-check")){
+ if($stage -in @("episode-render","episode-audio","episode-final","episode-voice-check","episode-voice-smoke","episode-voice-batch")){
   Check "Episode work folder" (-not [string]::IsNullOrWhiteSpace($Work) -and (Test-Path -LiteralPath $Work -PathType Container)) $Work
   if($Work){
    CheckFile "Episode contract" (Join-Path $Work "contract.json")
@@ -80,14 +80,14 @@ function Preflight([string]$stage){
   $wpx=Join-Path $HOME "Downloads\MLI_WHISPERX_ENV\Scripts\python.exe"
   CheckFile "WhisperX environment" $wpx
  }
- if($stage -in @("episode-audio","episode-voice-check")){
+ if($stage -in @("episode-audio","episode-voice-check","episode-voice-smoke","episode-voice-batch")){
   $base="http://127.0.0.1:3900"
   $online=$false
   try{
    $health=Invoke-RestMethod -Uri "$base/health" -TimeoutSec 4 -ErrorAction Stop
    $online=$true
   }catch{}
-  if($stage -eq "episode-voice-check"){
+  if($stage -in @("episode-voice-check","episode-voice-smoke","episode-voice-batch")){
    Check "VoiceStudio local API" $online $(if($online){"Responding: $base/health"}else{"Open VoiceStudio. Install Local Runtime if prompted; retry after setup completes."})
    if($online){
     $setup=$null
@@ -109,7 +109,7 @@ function Preflight([string]$stage){
  if($stage -eq "plan"){
   Check "Episode ID" ($Episode -match '^MLI_[A-Z0-9_]+$') $Episode
  }
- if($stage -notin @("start","plan","qc","finish","episode-render","episode-audio","episode-final","episode-voice-check")){
+ if($stage -notin @("start","plan","qc","finish","episode-render","episode-audio","episode-final","episode-voice-check","episode-voice-smoke","episode-voice-batch")){
   Check "Work folder" (-not [string]::IsNullOrWhiteSpace($Work) -and (Test-Path -LiteralPath $Work -PathType Container)) $Work
  }
  $fails=@($script:preflightFindings | Where-Object {$_.Status -eq "FAIL"})
@@ -259,6 +259,16 @@ elseif($Mode -eq "render"){
  & $script:runtimePython $builder --images-dir (Join-Path $Work "accepted_images") --audio-dir $audio --pause 0.25
  if($LASTEXITCODE -ne 0){throw "Renderer failed"}
  Write-Host "VIDEO RENDERED, FINAL AUDIOVISUAL QC STILL REQUIRED" -ForegroundColor Green
+}
+elseif($Mode -in @("episode-voice-smoke","episode-voice-batch")){
+ $tts=Join-Path $toolsDir "mli-voicestudio-tts.py"
+ FetchFile "tools/mli-voicestudio-tts.py" $tts
+ $ttsMode=if($Mode -eq "episode-voice-smoke"){"smoke"}else{"batch"}
+ if($ttsMode -eq "batch" -and -not $ApproveNarration){throw "Review SC01.wav before using -ApproveNarration"}
+ $ttsArgs=@($tts,"--work",$Work,"--mode",$ttsMode)
+ if($ApproveNarration){$ttsArgs+=,"--approved"}
+ & $script:runtimePython @ttsArgs
+ if($LASTEXITCODE -ne 0){throw "VoiceStudio TTS failed. Inspect voice_production_report.json"}
 }
 elseif($Mode -eq "episode-voice-check"){
  $discovery=Join-Path $toolsDir "mli-voicestudio-discover.py"
