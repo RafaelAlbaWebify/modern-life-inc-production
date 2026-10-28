@@ -481,5 +481,6 @@
       "composition": "One continuous cinematic 16:9 composition showing one readable narrative action. No split panels, collage, inset views, artificial dividers or repeated views of the protagonist.",
       "visual_layout": "single_frame"
     }
-  ]
+  ],
+  "image_generation_backend": "chat_image_edit"
 }
