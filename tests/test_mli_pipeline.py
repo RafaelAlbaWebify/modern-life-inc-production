@@ -14,6 +14,11 @@ class PipelineTests(unittest.TestCase):
   pipeline.prepare(types.SimpleNamespace(work=str(self.work),shots=str(self.shots),scenes=["SC01"]))
   (self.work/"images"/"SC01_attempt1.png").write_bytes(fake_png())
   state=pipeline.load(self.work);state["shots"]["SC01"]={"state":"NEEDS_REVIEW","attempts":[{"number":1,"file":"SC01_attempt1.png","sha256":pipeline.png(self.work/"images"/"SC01_attempt1.png")}]};pipeline.save(self.work,state)
+ def test_chat_backend_does_not_start_local_generation(self):
+  contract=json.loads((self.work/"contract.json").read_text());contract["image_generation_backend"]="chat_image_edit"
+  (self.work/"contract.json").write_text(json.dumps(contract))
+  with self.assertRaisesRegex(ValueError,"chat image production"):
+   pipeline.generate(types.SimpleNamespace(work=str(self.work)))
  def test_high_resolution_landscape_preserved(self):
   data=bytearray(fake_png());data[16:24]=struct.pack(">II",1672,941)
   file=self.path/"highres.png";file.write_bytes(data)
