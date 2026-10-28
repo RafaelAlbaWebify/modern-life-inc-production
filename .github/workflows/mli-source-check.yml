@@ -33,7 +33,7 @@ jobs:
         run: |
           python -m compileall -q tools tests
           if ($LASTEXITCODE -ne 0) { throw "Python syntax failed" }
-          foreach ($test in @('test_mli_pipeline.py', 'test_mli_finishing.py', 'test_mli_episode_stages.py', 'test_mli_production_reliability.py')) {
+          foreach ($test in @('test_mli_pipeline.py', 'test_mli_finishing.py', 'test_mli_episode_stages.py', 'test_mli_production_reliability.py', 'test_mli_publish_package.py')) {
             python "tests/$test"
             if ($LASTEXITCODE -ne 0) { throw "Regression failed: $test" }
           }
