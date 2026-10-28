@@ -1,0 +1,14 @@
+{
+  "episode": "MLI_EP003",
+  "checkpoint": "FINAL_SOFT_KARAOKE_DELIVERED_FOR_SCREENING",
+  "script_words": 1680,
+  "estimated_seconds_at_EP002_rate_including_gaps": 564.5,
+  "actual_video_seconds": 548.733333,
+  "selected_images": 48,
+  "image_requests": 49,
+  "audio_received": true,
+  "final_video_exists": true,
+  "publication_approved": false,
+  "next_action": "Full user screening of story, pacing, narration and subtitle timing; publication remains unapproved.",
+  "real_word_alignment_validated": true
+}
