@@ -81,14 +81,25 @@ function Preflight([string]$stage){
   CheckFile "WhisperX environment" $wpx
  }
  if($stage -in @("episode-audio","episode-voice-check")){
-  $running=@(Get-Process -ErrorAction SilentlyContinue | Where-Object { $_.ProcessName -match "VoiceStudio|Voice_Studio|Voice-Studio" })
-  $found=($running.Count -gt 0)
+  $apiBase="http://127.0.0.1:3900"
+  $health=$null
+  try{$health=Invoke-WebRequest -Uri "$apiBase/health" -TimeoutSec 3 -UseBasicParsing -ErrorAction Stop}catch{}
+  $alive=($null -ne $health -and $health.StatusCode -eq 200)
   if($stage -eq "episode-voice-check"){
-   Check "VoiceStudio process" $found $(if($found){"Candidate: $($running[0].ProcessName); integration unverified"}else{"Not detected: closed or different process name"})
-   Check "VoiceStudio automated TTS adapter" $false "No validated CLI/API integration exists"
+   Check "VoiceStudio local API" $alive "$apiBase/health (HTTP 200 required); start VoiceStudio if offline"
+   if($alive){
+    foreach($path in @("/openapi.json","/v1/audio/voices")){
+     try{
+      $response=Invoke-WebRequest -Uri ($apiBase+$path) -TimeoutSec 5 -UseBasicParsing -ErrorAction Stop
+      Check "VoiceStudio $path" ($response.StatusCode -eq 200) "HTTP $($response.StatusCode)"
+     }catch{Check "VoiceStudio $path" $false $_.Exception.Message}
+    }
+   }else{
+    Note "VoiceStudio contract discovery" "Skipped: local API not available; no connection attempts to cloud"
+   }
   }else{
-   Note "VoiceStudio process" $(if($found){"Detected candidate; no validated TTS integration"}else{"Not detected; WAV-only audit does not need app running"})
-   Note "Narration generation" "Not automated; episode-audio audits existing WAV files only"
+   Note "VoiceStudio local API" $(if($alive){"Available at $apiBase"}else{"Not running; existing WAV audit does not require it"})
+   Note "Narration generation" "episode-audio audits existing WAVs; it does not synthesize new audio"
   }
  }
  if($stage -eq "plan"){
@@ -245,5 +256,5 @@ elseif($Mode -eq "render"){
  if($LASTEXITCODE -ne 0){throw "Renderer failed"}
  Write-Host "VIDEO RENDERED, FINAL AUDIOVISUAL QC STILL REQUIRED" -ForegroundColor Green
 }
-elseif($Mode -eq "episode-voice-check"){throw "VoiceStudio TTS automation not configured. See preflight report."}
+elseif($Mode -eq "episode-voice-check"){Write-Host "VoiceStudio API diagnostics completed. Narration generation remains gated until voice and model are validated." -ForegroundColor Yellow}
 else{RunPipeline -argList @("status","--work",$Work)}
