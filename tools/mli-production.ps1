@@ -1,4 +1,4 @@
-param([ValidateSet("start","review","status","verify","render","recover","qc","finish","plan","episode-render","episode-qc","episode-audio","episode-final","episode-voice-check","episode-voice-smoke","episode-voice-batch")][string]$Mode="start",[string]$Work="",[string]$Episode="MLI_PILOT_001",[switch]$ApproveNarration,[string]$Review="",[string]$RenderFolder="",[string]$Scene06Image="",[ValidateSet("karaoke","cinematic","amber")][string]$CaptionStyle="karaoke",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
+param([ValidateSet("start","review","status","verify","render","recover","qc","finish","plan","episode-chat-export","episode-chat-import","episode-render","episode-qc","episode-audio","episode-final","episode-voice-check","episode-voice-smoke","episode-voice-batch")][string]$Mode="start",[string]$Work="",[string]$Episode="MLI_PILOT_001",[switch]$ApproveNarration,[string]$Review="",[string]$RenderFolder="",[string]$Scene06Image="",[ValidateSet("karaoke","cinematic","amber")][string]$CaptionStyle="karaoke",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
 $ErrorActionPreference="Stop";$ProgressPreference="SilentlyContinue"
 $repo="RafaelAlbaWebify/modern-life-inc-production"
 $storage=Join-Path $env:TEMP "MLI-Pipeline"
@@ -67,7 +67,7 @@ function Preflight([string]$stage){
   }
   CheckFile "Selected SC06" $Scene06Image
  }
- if($stage -in @("episode-render","episode-audio","episode-final","episode-voice-check","episode-voice-smoke","episode-voice-batch")){
+ if($stage -in @("episode-chat-export","episode-chat-import","episode-render","episode-audio","episode-final","episode-voice-check","episode-voice-smoke","episode-voice-batch")){
   Check "Episode work folder" (-not [string]::IsNullOrWhiteSpace($Work) -and (Test-Path -LiteralPath $Work -PathType Container)) $Work
   if($Work){
    CheckFile "Episode contract" (Join-Path $Work "contract.json")
@@ -159,16 +159,35 @@ elseif($Mode -eq "review"){
  if(-not(Test-Path -LiteralPath $Review -PathType Leaf)){throw "Review JSON missing: $Review"}
  RunPipeline -argList @("ingest","--work",$Work,"--report",$Review)
  $state=Get-Content (Join-Path $Work "state.json") -Raw | ConvertFrom-Json
- $retry=@($state.shots.PSObject.Properties | Where-Object {$_.Value.state -eq "RETRY_AUTHORIZED"})
+ $retry=@($state.shots.PSObject.Properties | Where-Object {$_.Value.state -in @("RETRY_AUTHORIZED","CHAT_REVISION_REQUIRED")})
  if($retry.Count -gt 0){
   Write-Host "Retry only: $($retry.Name -join ', ')" -ForegroundColor Cyan
-  RunPipeline -argList @("generate","--work",$Work)
-  RunPipeline -argList @("package","--work",$Work)
-  Write-Host "UPLOAD: $($Work)_CHAT_REVIEW.zip" -ForegroundColor Yellow
+  $reviewContract=Get-Content (Join-Path $Work "contract.json") -Raw | ConvertFrom-Json
+  if($reviewContract.image_generation_backend -eq "chat_image_edit"){
+   RunPipeline -argList (@("chat-export","--work",$Work,"--scenes")+@($retry.Name))
+   Write-Host "CHAT REVISION REQUIRED: $Work\chat_image_jobs.json (no local GPU generation)" -ForegroundColor Yellow
+  }else{
+   RunPipeline -argList @("generate","--work",$Work)
+   RunPipeline -argList @("package","--work",$Work)
+   Write-Host "UPLOAD: $($Work)_CHAT_REVIEW.zip" -ForegroundColor Yellow
+  }
  }else{
-  & python $script verify --work $Work
+  & $script:runtimePython $script verify --work $Work
   if($LASTEXITCODE -ne 0){Write-Warning "Blocked: see acceptance_gate.json"}
  }
+}
+elseif($Mode -eq "episode-chat-export"){
+ $chatArgs=@("chat-export","--work",$Work)
+ if($PSBoundParameters.ContainsKey("Scenes")){$chatArgs+=@("--scenes")+$Scenes}
+ RunPipeline -argList $chatArgs
+}
+elseif($Mode -eq "episode-chat-import"){
+ if(-not(Test-Path -LiteralPath $Review -PathType Leaf)){throw "Chat image manifest missing: $Review"}
+ RunPipeline -argList @("chat-import","--work",$Work,"--report",$Review)
+ $chatState=Get-Content (Join-Path $Work "state.json") -Raw | ConvertFrom-Json
+ $pendingChat=@($chatState.shots.PSObject.Properties | Where-Object {$_.Value.state -eq "NEEDS_REVIEW"})
+ if($pendingChat.Count){RunPipeline -argList @("package","--work",$Work)}
+ Write-Host "Chat images imported. Review package must be evaluated before acceptance/render." -ForegroundColor Yellow
 }
 elseif($Mode -eq "episode-audio"){
  $audit=Join-Path $toolsDir "mli-audio-episode.py"
@@ -278,3 +297,4 @@ elseif($Mode -eq "episode-voice-check"){
  Write-Host "VoiceStudio discovered; full narration generation remains blocked pending verified narrator voice and test WAV." -ForegroundColor Yellow
 }
 else{RunPipeline -argList @("status","--work",$Work)}
+
