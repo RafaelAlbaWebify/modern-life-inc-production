@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 7.7 (2026-10-28)
+Version: 7.8 (2026-10-28)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Current production route (v7.6)
@@ -580,3 +580,11 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Measured integrated image-tool request time totals 2,090.925 seconds (~34m51s), including the one repair; median request 43.246 seconds. Earliest explicit clock sample after initial repository reads was 19:53:12 UTC, visual selections ready 20:43:02 UTC (~49m51s since that sample). This is partial chat wall time, not active human labor or complete video production time. No image-count quota/failure encountered in these 49 requests; do not infer unlimited availability.
 - New episode voice remains the approved local OmniVoice/Modern Life Narrator v1. Chat has no established access to the user's localhost. Added pinned, resumable GENERAR_VOZ_EP003.ps1: new isolated work, exact contract conflict guard, scene WAV reuse, per-run timings and ZIP, no image generation. Added TERMINAR_EP003.ps1 and matching-contract audio importer for canonical render -> new real word alignment in existing WhisperX environment -> Soft Karaoke -> strict final decode/QC. New episode cannot reuse EP002 word times. Native Windows execution of these new helpers is not yet observed.
 - At this checkpoint there is NO EP003 narration received, measured video runtime, final render, listening certification or publication approval. Resume from existing 48 selected images after local audio is supplied/executed; never regenerate them due merely to a new turn. Exact script, shots, timing evidence and helper code live under episodes/MLI_EP003/. Heavy image package is separately persisted for handoff.
+
+
+## 2026-10-28: EP003 first native Windows voice run interrupted (v7.8)
+- User console confirms GENERAR_VOZ_EP003.ps1 executed on Windows after Unblock-File removed the downloaded-file block. Native execution is now observed for the voice helper only, not TERMINAR_EP003.ps1.
+- Console reports SC01–SC39 GENERATED, followed by SC40 HTTP 500: OmniVoice subprocess sidecar sent no response for 300 seconds and VoiceStudio stopped it. Weight-loading progress reached completion, but the log does not establish an out-of-memory event, a file-count ceiling, or successful SC40 synthesis. Same failure class occurred in EP002 on a different scene index; do not infer a limit at 39 files.
+- First local run elapsed 33.5 minutes (user console, rounded), including timeout. Partial recovery archive: C:\Users\ralba\Downloads\MLI_EP003_AUDIO_20261028_224903_833.zip. Actual WAV bytes/archive have not been received or independently checked in chat. Previous unrelated JOLT_MARKET_PROFILE(1).zip contained only jolt_market_profile.json, no narration.
+- Code inspection confirms retrying the same voice helper with unchanged default work validates/reuses existing scene WAVs and attempts missing scenes, starting with SC40 if the previous 39 files are intact. Remaining target SC40–SC48: nine scenes. Do one resumable retry; on repeat failure inspect preserved detailed report before changing engine deadlines or regenerating audio. Preserve first partial ZIP and voice_history. No unconditional model reinstall, global execution-policy change or image regeneration warranted.
+- EP003 remains incomplete: 48 image selections retained, partial voice success reported, final audio audit/render/new alignment/Soft Karaoke/listening review pending. The 33.5-minute partial voice run is not the full episode's voice-production time or a full video-production benchmark.
