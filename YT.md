@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 7.1 (2026-10-28)
+Version: 7.2 (2026-10-28)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -510,3 +510,12 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Independently probed uploaded final: duration 103.766341 s, H.264 1920x1080, nominal 30fps, AAC mono 24000 Hz. Full FFmpeg decode with -xerror succeeded without diagnostics. Audio/video stream durations differ by ~33ms; no material duration issue identified.
 - Visually inspected ten extracted frames at 2,10,23,39,51,61,73,83,94,101 s. Embedded white/amber Soft Karaoke visible, outlined and within frame margins, no clipped captions in these samples. Corrected SC11 and SC15 are present in final MP4. Retain practical integration-cut acceptance; do not reopen minor face/count variations.
 - This confirms rendered captions and technical output, not independent listening certification or exact per-word synchrony. No alignment.json or ASS supplied in this upload, so timestamp/source-word audit was not performed. Final human screening of pacing, intelligibility and synchronization remains needed before publication approval. No regeneration or rerender requested by current evidence.
+
+
+## 2026-10-28: Visual acceptance withdrawn after editorial screening (v7.2)
+- User rejected pervasive unnecessary panel divisions in EP002. Screenshot at ~00:51 shows near-duplicate notebook views without a meaningful narrative contrast. User also identified the breakfast scene right-side division cutting across the protagonist's neck. These are substantive composition defects, not minor prompt deviations.
+- Earlier 16+2 practical visual acceptance and final-caption sample review were insufficient. Technical PASS and readable captions do not establish editorial quality. Withdrawal supersedes previous visual acceptance for the affected compositions and publication remains blocked; do not imply current video approved or fix only SC11/SC15.
+- Updated production default: one continuous cinematic frame per scene. A multi-panel image is allowed only with an explicitly authored per-scene visual_layout=multi_panel and nonempty layout_rationale stating the story information/contrast/progression gained. Mere style, repeated near-identical poses or filling frame space is insufficient. Artificial borders cutting heads/necks, ambiguous simultaneous lookalikes and repeated pointless panels are blockers.
+- mli-pipeline.py prompt now adds mandatory layout instructions, defaults to single_frame and rejects multi_panel without explicit rationale. EP002 source shots.json now requests continuous compositions for all 18 beats and marks visual revision required. No image generation or user-host state changes performed by this repository update.
+- Existing Windows work/contract.json, prompts and state are historical snapshots: updating repository shots.json does NOT migrate those files or revoke CANDIDATE_PASS locally. Do not run old generation/review scripts blindly. A backed-up, provenance-preserving migration/review decision is required before selective regeneration or image repairs. Preserve 18 valid WAVs, alignment, original PNGs, logs and render evidence; do not regenerate voices.
+- Practical acceptance still tolerates minor harmless variations. It must not waive defects that undermine composition or meaning. Assess full scene sequence for repetitive layouts, not only individual PNG checklist and ten caption frames. Next work: scene-by-scene replacement plan, prioritize coherent existing panels only when a 16:9 reframe retains necessary story information and source quality, otherwise generate a single continuous scene with unchanged canonical identity. Do not conceal major image replacements as small repairs.
