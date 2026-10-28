@@ -81,25 +81,29 @@ function Preflight([string]$stage){
   CheckFile "WhisperX environment" $wpx
  }
  if($stage -in @("episode-audio","episode-voice-check")){
-  $apiBase="http://127.0.0.1:3900"
-  $health=$null
-  try{$health=Invoke-WebRequest -Uri "$apiBase/health" -TimeoutSec 3 -UseBasicParsing -ErrorAction Stop}catch{}
-  $alive=($null -ne $health -and $health.StatusCode -eq 200)
+  $base="http://127.0.0.1:3900"
+  $online=$false
+  try{
+   $health=Invoke-RestMethod -Uri "$base/health" -TimeoutSec 4 -ErrorAction Stop
+   $online=$true
+  }catch{}
   if($stage -eq "episode-voice-check"){
-   Check "VoiceStudio local API" $alive "$apiBase/health (HTTP 200 required); start VoiceStudio if offline"
-   if($alive){
-    foreach($path in @("/openapi.json","/v1/audio/voices")){
-     try{
-      $response=Invoke-WebRequest -Uri ($apiBase+$path) -TimeoutSec 5 -UseBasicParsing -ErrorAction Stop
-      Check "VoiceStudio $path" ($response.StatusCode -eq 200) "HTTP $($response.StatusCode)"
-     }catch{Check "VoiceStudio $path" $false $_.Exception.Message}
-    }
+   Check "VoiceStudio local API" $online $(if($online){"Responding: $base/health"}else{"Open VoiceStudio. Install Local Runtime if prompted; retry after setup completes."})
+   if($online){
+    $setup=$null
+    try{$setup=Invoke-RestMethod -Uri "$base/setup/status" -TimeoutSec 5 -ErrorAction Stop}catch{}
+    Check "VoiceStudio model setup" ($null -ne $setup -and $setup.models_ready -eq $true) $(if($null -eq $setup){"Could not read /setup/status"}elseif($setup.models_ready){"models_ready=true"}else{"Models missing; open VoiceStudio > Settings / Model Catalogue > OmniVoice; install required engine/model"})
+    $sys=$null
+    try{$sys=Invoke-RestMethod -Uri "$base/system/info" -TimeoutSec 5 -ErrorAction Stop}catch{}
+    Check "VoiceStudio FFmpeg" ($null -ne $sys -and $sys.ffmpeg_ok -eq $true) $(if($null -eq $sys){"Could not read /system/info"}else{"ffmpeg_ok=$($sys.ffmpeg_ok); device=$($sys.device)"})
+    $voices=$null
+    try{$voices=Invoke-RestMethod -Uri "$base/v1/audio/voices" -TimeoutSec 5 -ErrorAction Stop}catch{}
+    Check "VoiceStudio voices endpoint" ($null -ne $voices) $(if($null -eq $voices){"Cannot access /v1/audio/voices"}else{"Voice API responding; narrator voice selection still required"})
    }else{
-    Note "VoiceStudio contract discovery" "Skipped: local API not available; no connection attempts to cloud"
+    Note "VoiceStudio setup steps" "1 Open app; 2 Install Local Runtime; 3 Settings > Models or Catalogue > OmniVoice install/repair; 4 choose voice and compute device; 5 rerun episode-voice-check"
    }
   }else{
-   Note "VoiceStudio local API" $(if($alive){"Available at $apiBase"}else{"Not running; existing WAV audit does not require it"})
-   Note "Narration generation" "episode-audio audits existing WAVs; it does not synthesize new audio"
+   Note "VoiceStudio local runtime" $(if($online){"Online at $base"}else{"Offline; episode-audio only audits existing WAVs"})
   }
  }
  if($stage -eq "plan"){
