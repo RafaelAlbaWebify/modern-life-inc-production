@@ -1,0 +1,321 @@
+{
+  "episode": "MLI_EP003",
+  "earliest_explicit_clock_sample_utc": "2026-10-28T19:53:12Z",
+  "sample_note": "Clock sampled after initial repository reads; not exact first action. No end-to-end duration claimed.",
+  "script_ready_utc": "2026-10-28T19:56:29.350862+00:00",
+  "script_words": 1680,
+  "image_count_target": 48,
+  "end_to_end_complete": false,
+  "stages": [],
+  "images_ready_utc": "2026-10-28T20:43:02.981578+00:00",
+  "images_generated": 49,
+  "images_selected": 48,
+  "image_revisions": 1,
+  "sum_image_request_seconds": 2090.925,
+  "median_image_request_seconds": 43.246,
+  "image_request_timings": [
+    {
+      "scene": "SC19",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-46046163-9c31-4ec3-ad14-b7a6bd192412.png",
+      "request_seconds": 44.747,
+      "finished_utc": "2026-10-28T20:14:28.159Z"
+    },
+    {
+      "scene": "SC26",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-3fb8bcab-3e7a-4894-a23a-471d9bb9f460.png",
+      "request_seconds": 26.226,
+      "finished_utc": "2026-10-28T20:20:02.541Z"
+    },
+    {
+      "scene": "SC40",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-2ea9a5bb-43a9-4f9f-a0e1-ccddc510cd06.png",
+      "request_seconds": 56.628,
+      "finished_utc": "2026-10-28T20:31:57.958Z"
+    },
+    {
+      "scene": "SC17",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-d861572f-6602-4674-86a1-4232e453da59.png",
+      "request_seconds": 37.172,
+      "finished_utc": "2026-10-28T20:12:46.282Z"
+    },
+    {
+      "scene": "SC31",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-8fe1bc2d-de8b-44ae-9619-d4668e7b236c.png",
+      "request_seconds": 31.427,
+      "finished_utc": "2026-10-28T20:23:02.778Z"
+    },
+    {
+      "scene": "SC30",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-856be9ac-1d11-46a9-bca2-de628f5356d8.png",
+      "request_seconds": 27.304,
+      "finished_utc": "2026-10-28T20:22:29.336Z"
+    },
+    {
+      "scene": "SC07",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-31867cc2-3aa6-4542-8c5a-2a4104ed0b4a.png",
+      "request_seconds": 44.792,
+      "finished_utc": "2026-10-28T20:02:51.662Z"
+    },
+    {
+      "scene": "SC32",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-b13ee7ed-2e65-4285-bef5-0cd0bac20eac.png",
+      "request_seconds": 32.78,
+      "finished_utc": "2026-10-28T20:24:47.598Z"
+    },
+    {
+      "scene": "SC34",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-c675bb79-0fee-4e44-8e7b-f07495082a7b.png",
+      "request_seconds": 35.611,
+      "finished_utc": "2026-10-28T20:26:44.489Z"
+    },
+    {
+      "scene": "SC01",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-e18a63fd-41c1-4b82-917a-c62433f46e81.png",
+      "request_seconds": 29.891,
+      "finished_utc": null,
+      "finished_note": "Original generation timestamp not captured; use file metadata only if needed."
+    },
+    {
+      "scene": "SC13",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-300c1190-f6b6-4a36-b11e-6607f47d4904.png",
+      "request_seconds": 27.979,
+      "finished_utc": "2026-10-28T20:07:47.489Z"
+    },
+    {
+      "scene": "SC42",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-e07fcfce-3107-409d-b244-daed550ce8d9.png",
+      "request_seconds": 34.091,
+      "finished_utc": "2026-10-28T20:34:16.181Z"
+    },
+    {
+      "scene": "SC28",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-b85d9ad6-c0c5-455c-a640-9cb63cb3e903.png",
+      "request_seconds": 27.409,
+      "finished_utc": "2026-10-28T20:21:17.255Z"
+    },
+    {
+      "scene": "SC33",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-f9d1873c-64cb-405a-97bf-fa9e0874dc6c.png",
+      "request_seconds": 38.797,
+      "finished_utc": "2026-10-28T20:26:06.805Z"
+    },
+    {
+      "scene": "SC39",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-bb44b651-c8c5-4fe9-b2fd-b0a8bc468128.png",
+      "request_seconds": 43.594,
+      "finished_utc": "2026-10-28T20:30:59.228Z"
+    },
+    {
+      "scene": "SC06",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-88e927d2-932a-490b-9ba7-1c1d352aa788.png",
+      "request_seconds": 51.817,
+      "finished_utc": "2026-10-28T20:02:04.839Z"
+    },
+    {
+      "scene": "SC09",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-7c12bf1a-5b3b-46ce-a344-88d69afa87c7.png",
+      "request_seconds": 55.35,
+      "finished_utc": "2026-10-28T20:05:05.816Z"
+    },
+    {
+      "scene": "SC15",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-b2e69885-566e-4bdc-997e-b01f6cc1bea4.png",
+      "request_seconds": 42.748,
+      "finished_utc": "2026-10-28T20:09:50.723Z"
+    },
+    {
+      "scene": "SC24",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-b748bd45-7ae3-42d3-a24c-618a1ddbc077.png",
+      "request_seconds": 41.343,
+      "finished_utc": "2026-10-28T20:18:09.038Z"
+    },
+    {
+      "scene": "SC23",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-f8b0c182-0a44-48fa-a396-e16fc30aae60.png",
+      "request_seconds": 30.838,
+      "finished_utc": "2026-10-28T20:17:25.662Z"
+    },
+    {
+      "scene": "SC27",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-8d6d4eb2-ba0b-4478-a4d5-05ba2b9d015c.png",
+      "request_seconds": 43.246,
+      "finished_utc": "2026-10-28T20:20:47.822Z"
+    },
+    {
+      "scene": "SC02",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-f7cc5154-fbf1-4703-9f06-23ebda104a94.png",
+      "request_seconds": 53.655,
+      "finished_utc": "2026-10-28T19:59:07.377Z"
+    },
+    {
+      "scene": "SC37",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-b1f70fa9-1c96-4ce4-8340-84dcf37ca884.png",
+      "request_seconds": 63.583,
+      "finished_utc": "2026-10-28T20:29:27.056Z"
+    },
+    {
+      "scene": "SC29",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-aeb5448f-ff4b-4838-aad2-c6cf178bf15f.png",
+      "request_seconds": 40.71,
+      "finished_utc": "2026-10-28T20:21:59.993Z"
+    },
+    {
+      "scene": "SC20",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-98acd6fa-2008-4279-ad0a-fb394bea5682.png",
+      "request_seconds": 42.231,
+      "finished_utc": "2026-10-28T20:15:12.442Z"
+    },
+    {
+      "scene": "SC45",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-b9e492d3-ee73-437f-b362-35caa1a5729d.png",
+      "request_seconds": 43.724,
+      "finished_utc": "2026-10-28T20:36:43.448Z"
+    },
+    {
+      "scene": "SC31",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-51fc761e-8945-4c15-a4d4-7b8b0f332ac0.png",
+      "request_seconds": 24.378,
+      "finished_utc": "2026-10-28T20:41:40.503Z",
+      "revision_reason": "Remove unrequested colleague from private kitchen; preserve original first pass."
+    },
+    {
+      "scene": "SC21",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-5cd5e616-8c0d-4efb-bdb5-48e18ca1dc6a.png",
+      "request_seconds": 53.249,
+      "finished_utc": "2026-10-28T20:16:07.721Z"
+    },
+    {
+      "scene": "SC08",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-3913dd36-88e9-4a70-9449-e8ca43a55200.png",
+      "request_seconds": 38.902,
+      "finished_utc": "2026-10-28T20:03:32.649Z"
+    },
+    {
+      "scene": "SC35",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-6c376a89-fb81-4059-a62e-8aa0c4548adb.png",
+      "request_seconds": 54.396,
+      "finished_utc": "2026-10-28T20:27:40.952Z"
+    },
+    {
+      "scene": "SC47",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-df52caba-79eb-47dc-b3c9-36cdd554273c.png",
+      "request_seconds": 51.228,
+      "finished_utc": "2026-10-28T20:38:29.869Z"
+    },
+    {
+      "scene": "SC04",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-fafe0d15-8c68-41b4-898a-d250c024baa6.png",
+      "request_seconds": 45.808,
+      "finished_utc": "2026-10-28T20:00:40.814Z"
+    },
+    {
+      "scene": "SC10",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-7fa9c625-7683-4c9a-9d11-60bfc5b2313b.png",
+      "request_seconds": 35.277,
+      "finished_utc": "2026-10-28T20:05:43.145Z"
+    },
+    {
+      "scene": "SC03",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-6dbf5754-8913-4b8e-9752-1bc970e651fb.png",
+      "request_seconds": 43.513,
+      "finished_utc": "2026-10-28T19:59:52.959Z"
+    },
+    {
+      "scene": "SC44",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-320521d2-1b6d-425c-9580-e2afe6db4674.png",
+      "request_seconds": 44.608,
+      "finished_utc": "2026-10-28T20:35:57.644Z"
+    },
+    {
+      "scene": "SC18",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-db06057b-250b-47a1-be71-6dedd1ccc63c.png",
+      "request_seconds": 52.913,
+      "finished_utc": "2026-10-28T20:13:41.370Z"
+    },
+    {
+      "scene": "SC22",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-e69976c8-19d8-45bd-9919-48c1a8b6291f.png",
+      "request_seconds": 43.012,
+      "finished_utc": "2026-10-28T20:16:52.775Z"
+    },
+    {
+      "scene": "SC05",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-c2dd271f-3a6b-4dc7-8138-135ee0984afe.png",
+      "request_seconds": 28.114,
+      "finished_utc": "2026-10-28T20:01:10.984Z"
+    },
+    {
+      "scene": "SC48",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-919c1c17-76ec-41d3-ac8d-0bc359b2b822.png",
+      "request_seconds": 27.947,
+      "finished_utc": "2026-10-28T20:38:59.906Z"
+    },
+    {
+      "scene": "SC25",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-85a04fee-06d2-4f87-b8ec-3f09e3e7108f.png",
+      "request_seconds": 30.819,
+      "finished_utc": "2026-10-28T20:19:34.296Z"
+    },
+    {
+      "scene": "SC36",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-224a3f34-6032-4e1f-8e66-3edc1bbc067e.png",
+      "request_seconds": 38.36,
+      "finished_utc": "2026-10-28T20:28:21.393Z"
+    },
+    {
+      "scene": "SC12",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-b5c54b2d-2168-4430-8314-e361da2665c5.png",
+      "request_seconds": 43.303,
+      "finished_utc": "2026-10-28T20:07:17.480Z"
+    },
+    {
+      "scene": "SC41",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-d6ec8bc1-9537-4693-a393-274d93fb6575.png",
+      "request_seconds": 66.201,
+      "finished_utc": "2026-10-28T20:33:39.779Z"
+    },
+    {
+      "scene": "SC14",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-ea5cd220-2ee8-40c9-8202-c24f78d030be.png",
+      "request_seconds": 76.413,
+      "finished_utc": "2026-10-28T20:09:05.940Z"
+    },
+    {
+      "scene": "SC16",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-c47f18bd-363a-4fad-a706-34d2191f1d73.png",
+      "request_seconds": 49.784,
+      "finished_utc": "2026-10-28T20:10:42.545Z"
+    },
+    {
+      "scene": "SC43",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-bd16cef2-4529-448c-841d-384e37aa50fb.png",
+      "request_seconds": 52.662,
+      "finished_utc": "2026-10-28T20:35:10.945Z"
+    },
+    {
+      "scene": "SC11",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-b8a12f53-47d3-4089-b58f-a26a6a9cbe77.png",
+      "request_seconds": 46.962,
+      "finished_utc": "2026-10-28T20:06:32.140Z"
+    },
+    {
+      "scene": "SC38",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-77419e81-0334-4dfc-8126-19c6d4f5e1a6.png",
+      "request_seconds": 44.364,
+      "finished_utc": "2026-10-28T20:30:13.521Z"
+    },
+    {
+      "scene": "SC46",
+      "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-b94eaca2-6958-405b-b3e5-b0ad9048a0f8.png",
+      "request_seconds": 51.019,
+      "finished_utc": "2026-10-28T20:37:36.541Z"
+    }
+  ],
+  "remaining": [
+    "new episode narration WAVs from user local VoiceStudio",
+    "measured render",
+    "new real word alignment",
+    "Soft Karaoke final export",
+    "complete audiovisual screening"
+  ]
+}
