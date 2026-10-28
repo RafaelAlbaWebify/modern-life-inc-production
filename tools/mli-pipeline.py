@@ -18,7 +18,11 @@ def load(run):return json.loads((run/"state.json").read_text(encoding="utf-8"))
 def save(run,state):write_json(run/"state.json",state)
 def images(run):return run/"images"
 def prompt(spec,s):
- return "\n".join((spec["style"],spec["character"],spec["supporting"],"LOCATION: "+s["location"],"SHOT: "+s["framing"],"COMPOSITION: "+s.get("composition","Narrative-first framing; split panels permitted."),"VISIBLE ACTION: "+s["action"],"REQUIRED: "+"; ".join(s["required"]),"EXCLUDE: "+"; ".join(s["forbidden"]), "SUPPORTING CHARACTERS: "+str(s["secondaries"]),"NARRATIVE BEAT: "+s["beat"],"FORMAT: no captions, logos or watermarks."))
+ layout=s.get("visual_layout","single_frame")
+ if layout not in ("single_frame","multi_panel"):raise ValueError("Unknown visual_layout")
+ if layout=="multi_panel" and not str(s.get("layout_rationale","")).strip():raise ValueError("Multi-panel scene requires explicit narrative layout_rationale")
+ layout_instruction=("One continuous 16:9 scene. No split panels, collage, inset frames, white gutters or repeated protagonist views. Preserve coherent framing and do not cut through heads or necks with artificial borders." if layout=="single_frame" else "Multiple panels explicitly authorized for this scene only. Narrative purpose: "+s["layout_rationale"])
+ return "\n".join((spec["style"],spec["character"],spec["supporting"],"LOCATION: "+s["location"],"SHOT: "+s["framing"],"COMPOSITION: "+s.get("composition","Narrative-first framing; split panels permitted."),"VISIBLE ACTION: "+s["action"],"REQUIRED: "+"; ".join(s["required"]),"EXCLUDE: "+"; ".join(s["forbidden"]), "SUPPORTING CHARACTERS: "+str(s["secondaries"]),"NARRATIVE BEAT: "+s["beat"],"LAYOUT (mandatory): "+layout_instruction,"FORMAT: no captions, logos or watermarks."))
 def prepare(a):
  run=root(a)
  if (run/"state.json").exists():raise ValueError("Existing run; use new --work or another command")
