@@ -1,0 +1,28 @@
+{
+  "episode": "MLI_EP003",
+  "status": "FINAL_REVIEW_EXPORT",
+  "final_file": "MLI_EP003_SOFT_KARAOKE.mp4",
+  "duration_seconds": 548.733333,
+  "video": "H.264 1920x1080",
+  "audio": "AAC mono 24000Hz",
+  "scene_count": 48,
+  "real_aligned_words": 1680,
+  "received_word_times_unchanged": true,
+  "caption_style": "soft_karaoke_white_amber",
+  "sampled_final_frames": 48,
+  "technical_qc": {
+    "technical_pass": true,
+    "editorial_approved": false,
+    "publication_approved": false,
+    "scene_count": 48,
+    "issues": []
+  },
+  "sha256": "ad970d678005bfe7ce132c61a4d8a938deb94b5824e0fadfdc763db0cfe42f9c",
+  "bytes": 44539145,
+  "native_alignment_seconds": 164.1606879,
+  "publication_approved": false,
+  "full_listening_review_pending": true,
+  "completed_utc": "2026-10-28T22:50:09.326336+00:00",
+  "strict_full_decode_pass": true,
+  "library_file_id": "libfile_86f97ae2be288191857bab48932f0034"
+}
