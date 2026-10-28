@@ -1,0 +1,1362 @@
+{
+  "schema_version": 1,
+  "episode_id": "MLI_EP003",
+  "working_title": "Why Being Helpful Is Making You Overwhelmed",
+  "status": "SCRIPT_LOCKED_FOR_PRODUCTION",
+  "target_seconds": [
+    480,
+    600
+  ],
+  "reference": "references/MLI_STYLE_REFERENCE.png",
+  "style": "Cinematic illustrated 2D urban storybook, clean black contours, warm amber and cool blue accents, consistent perspective. Match approved reference. No anime redesign. 16:9 single continuous cinematic scene. No panels, collage, inset frames, gutters, lettering or speech bubbles.",
+  "character": "Same iconic protagonist as reference: pale minimal face with two simple black oval eyes, messy short black hair, oversized orange over-ear headphones, teal hoodie, dark trousers. Preserve simple face, never detailed anime face.",
+  "supporting": "Supporting adults have ordinary stylized facial details. Recurring colleague: woman short brown bob, rust sweater. Friend: man curly brown hair, mustard jacket. Manager: woman navy blazer. Never duplicate protagonist or orange headphones.",
+  "max_attempts": 2,
+  "image_generation_backend": "chat_image_edit",
+  "scenes": [
+    {
+      "id": "SC01",
+      "block": 1,
+      "purpose": "The borrowed evening",
+      "location": "apartment doorway at dusk",
+      "framing": "wide",
+      "action": "protagonist arrives carrying a small grocery bag, notices phone vibrating on entry table",
+      "beat": "On Monday, he gets home with one simple plan: eat something, open his sketchbook, and finally spend an evening on his own project. Then his phone lights up. Someone needs a small favor.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4301,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC02",
+      "block": 1,
+      "purpose": "The easy yes",
+      "location": "warm apartment kitchen",
+      "framing": "medium",
+      "action": "protagonist pauses unpacking groceries to pick up phone, food remains on counter",
+      "beat": "Nothing dramatic. A colleague wants another pair of eyes on a presentation. Ten minutes, apparently. He says yes before checking what the favor involves. Being helpful feels easier than making the conversation awkward.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4302,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC03",
+      "block": 1,
+      "purpose": "Work arrives",
+      "location": "home desk evening",
+      "framing": "over shoulder",
+      "action": "protagonist studies laptop with abstract presentation shapes, closed sketchbook beside it",
+      "beat": "The presentation needs more than a quick look. A chart makes no sense. The conclusion is missing. He fixes one thing, then another. His own sketchbook stays closed beside the laptop.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4303,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC04",
+      "block": 1,
+      "purpose": "Dinner waits",
+      "location": "kitchen table late evening",
+      "framing": "close medium",
+      "action": "protagonist faces laptop while untouched dinner cools beside him, sketchbook closed",
+      "beat": "When he finally stops, dinner is cold and the evening has gone. His colleague sends a cheerful thank you. He types a smiling reply, then looks at the project he never started.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4304,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC05",
+      "block": 1,
+      "purpose": "Another morning",
+      "location": "apartment bed morning",
+      "framing": "wide",
+      "action": "protagonist sits at edge of bed looking tired, orange headphones on head, dawn through curtains",
+      "beat": "The next morning, he tells himself it was only one evening. Helping a colleague is a good thing. And it is. The problem becomes visible only when the same decision keeps happening.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4305,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC06",
+      "block": 1,
+      "purpose": "A new request",
+      "location": "office desk morning",
+      "framing": "medium",
+      "action": "woman colleague in rust sweater offers protagonist a folder across desk",
+      "beat": "By Tuesday, there is another request. By Wednesday, another. Each one seems reasonable on its own. Together, they begin to fill the spaces where his own plans were supposed to live.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4306,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC07",
+      "block": 1,
+      "purpose": "Invisible cost",
+      "location": "home worktable night",
+      "framing": "top angle medium",
+      "action": "protagonist opens sketchbook to same unfinished city drawing, pencil untouched beside page",
+      "beat": "Nobody sees those missing hours. They see someone capable, friendly, and willing. He sees the same unfinished page every night. How did becoming dependable make his own life feel so difficult to begin?",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4307,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC08",
+      "block": 1,
+      "purpose": "Question before change",
+      "location": "city bridge blue evening",
+      "framing": "wide",
+      "action": "protagonist stops at railing looking over river, shoulders thoughtful, phone in pocket",
+      "beat": "The answer is not that kindness is a mistake. It is that a quick yes can hide a much larger decision. To change the pattern, he first has to see what he is actually agreeing to.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4308,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC09",
+      "block": 2,
+      "purpose": "Immediate relief",
+      "location": "office corridor afternoon",
+      "framing": "medium",
+      "action": "colleague with folder smiles as protagonist nods with uneasy posture",
+      "beat": "Think about the moment a request arrives. There are two possible discomforts. Saying no might disappoint someone right now. Saying yes might disappoint your future self. Only one of those people is standing in front of you.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4309,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC10",
+      "block": 2,
+      "purpose": "The future shift",
+      "location": "apartment kitchen late night",
+      "framing": "wide",
+      "action": "protagonist washes dishes beside laptop bag, dark window and wall clock",
+      "beat": "The future cost is easy to postpone. You imagine finding time later, working a little faster, or catching up at the weekend. Your future evening becomes the place where today's uncomfortable decisions disappear.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4310,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC11",
+      "block": 2,
+      "purpose": "Borrowed confidence",
+      "location": "office shared table",
+      "framing": "wide",
+      "action": "coworker leaves folder with protagonist then returns to own desk, protagonist notices growing pile",
+      "beat": "Meanwhile, the person asking may have no idea how difficult refusing feels. Research on requests for help suggests that askers can underestimate this social pressure. A casual request can feel surprisingly heavy to receive.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4311,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC12",
+      "block": 2,
+      "purpose": "The reasonable asker",
+      "location": "office coffee area",
+      "framing": "medium",
+      "action": "rust sweater colleague holds mug with relaxed friendly expression while protagonist considers folder",
+      "beat": "That does not mean every person asking is selfish or manipulative. They may genuinely think you have room. If you keep saying yes without explaining the tradeoff, they have little reason to know otherwise.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4312,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC13",
+      "block": 2,
+      "purpose": "The missing information",
+      "location": "protagonist office desk",
+      "framing": "over shoulder",
+      "action": "protagonist looks between his own open drawing folder and colleague presentation folder",
+      "beat": "From their side, the arrangement seems to work. They ask, you agree, the task gets done. Your lost evening, delayed project, and growing frustration are missing information. Politeness has made the cost invisible.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4313,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC14",
+      "block": 2,
+      "purpose": "Private resentment",
+      "location": "bus window rainy night",
+      "framing": "close medium",
+      "action": "protagonist sits alone with tired shoulders, rain streaks and amber city reflections",
+      "beat": "Eventually, he starts resenting messages from people he actually likes. A familiar name appears and his shoulders tighten. He is angry about commitments they heard him accept, even though he never wanted to make them.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4314,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC15",
+      "block": 2,
+      "purpose": "A different explanation",
+      "location": "small cafe window afternoon",
+      "framing": "medium",
+      "action": "protagonist rests phone face down and looks thoughtfully at blank notebook",
+      "beat": "This is where the story can go wrong. He could decide that everyone takes advantage of kindness. Or he could notice something more useful: his answer is not giving people an accurate picture of his capacity.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4315,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC16",
+      "block": 2,
+      "purpose": "Useful distinction",
+      "location": "sunlit park path",
+      "framing": "wide",
+      "action": "protagonist walks slowly alone beneath trees, calm open posture",
+      "beat": "Being kind and being constantly available are different choices. You can care about someone's problem without becoming the person who solves all of it. That distinction sounds obvious, until someone you like asks for help.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4316,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC17",
+      "block": 3,
+      "purpose": "Saturday promise",
+      "location": "home desk Saturday morning",
+      "framing": "wide",
+      "action": "protagonist starts city drawing in sketchbook with coffee and sunlight",
+      "beat": "On Saturday, he finally sits down to draw. There is no emergency and no meeting. Just an hour he has promised himself. Then a friend asks whether he can help move a few boxes.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4317,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC18",
+      "block": 3,
+      "purpose": "The awkward blank",
+      "location": "home chair by window",
+      "framing": "medium",
+      "action": "protagonist holds phone while looking at inviting drawing desk, hesitant body language",
+      "beat": "He hesitates. He cannot say he is working. He is not traveling. There is nothing official on the calendar. Compared with someone else's practical problem, his own quiet afternoon suddenly feels difficult to defend.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4318,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC19",
+      "block": 3,
+      "purpose": "Real space",
+      "location": "sunlit home studio",
+      "framing": "close medium",
+      "action": "protagonist touches edge of partly finished city sketch, orange headphones visible",
+      "beat": "But free time is not automatically spare time. Rest, friendship, and a personal project do not need an audience to matter. An empty calendar can still contain something you deliberately chose to protect.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4319,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC20",
+      "block": 3,
+      "purpose": "The boxes",
+      "location": "friend apartment staircase daylight",
+      "framing": "wide",
+      "action": "protagonist carries one cardboard box upstairs, friend in mustard jacket carries another",
+      "beat": "He goes anyway. The move takes longer than expected. His friend is grateful and buys lunch. Nothing terrible happens. That is what makes the pattern hard to question: each individual favor looks perfectly harmless.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4320,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC21",
+      "block": 3,
+      "purpose": "The cost after",
+      "location": "home studio late afternoon",
+      "framing": "wide",
+      "action": "protagonist returns to drawing table in fading light with tired posture, sketch unchanged",
+      "beat": "The cost appears afterward, when the good light has gone and his energy has gone with it. The drawing is still there. He tells himself he can do it tomorrow, using the same promise as before.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4321,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC22",
+      "block": 3,
+      "purpose": "Repeated choice",
+      "location": "desk morning with plants",
+      "framing": "medium",
+      "action": "protagonist opens sketchbook and notices many mostly empty pages, no writing",
+      "beat": "One postponed afternoon does not ruin a life. But repeated choices create a direction. If your own plans always lose whenever somebody asks, eventually they become plans you no longer expect yourself to keep.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4322,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC23",
+      "block": 3,
+      "purpose": "No scorekeeping",
+      "location": "park bench afternoon",
+      "framing": "wide",
+      "action": "protagonist and mustard jacket friend share relaxed conversation, separate silhouettes",
+      "beat": "The point is not to keep a secret score of every favor. Helping can be meaningful and enjoyable. The question is whether this particular yes fits the time, energy, and commitments you actually have.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4323,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC24",
+      "block": 3,
+      "purpose": "A better question",
+      "location": "home desk warm evening",
+      "framing": "medium",
+      "action": "protagonist looks calmly at open sketchbook and phone resting far away",
+      "beat": "Instead of asking, would a good person help, he tries a more precise question: what will I have to move if I agree? Suddenly, the decision has a shape. Something real must make room.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4324,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC25",
+      "block": 4,
+      "purpose": "The next request",
+      "location": "office corridor morning",
+      "framing": "wide",
+      "action": "rust sweater colleague approaches protagonist carrying folder, both fully in frame",
+      "beat": "The next request arrives on Monday. His colleague needs help with another presentation. This time, he does not answer immediately. He says, let me check what I have on, and I will get back to you.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4325,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC26",
+      "block": 4,
+      "purpose": "Space to decide",
+      "location": "office quiet corner",
+      "framing": "medium",
+      "action": "protagonist sits alone considering two separate folders on desk, relaxed hands",
+      "beat": "That sentence does not reject anyone. It creates a small gap between being asked and becoming committed. In that gap, he can consider the task without also managing the other person's expression in real time.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4326,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC27",
+      "block": 4,
+      "purpose": "Define the job",
+      "location": "office meeting table",
+      "framing": "wide",
+      "action": "protagonist and colleague examine single presentation sheet with abstract chart, no letters",
+      "beat": "Then he asks what help actually means. Is it a quick opinion on the opening, a complete rewrite, or staying late to finish the slides? Those are different requests, even if all three begin with a favor.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4327,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC28",
+      "block": 4,
+      "purpose": "Find the edge",
+      "location": "office desk daylight",
+      "framing": "close medium",
+      "action": "protagonist points at a single chart sheet while other sheets stay inside closed folder",
+      "beat": "He can offer twenty minutes to review the structure. He cannot take ownership of the whole presentation. A specific offer gives both people an edge they can recognize, instead of an agreement that keeps expanding.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4328,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC29",
+      "block": 4,
+      "purpose": "A useful limit",
+      "location": "office window table",
+      "framing": "medium",
+      "action": "protagonist and rust sweater colleague discuss one sheet, wall clock in background",
+      "beat": "He tells her he can look at the opening tomorrow, but he cannot stay late tonight. It is a smaller yes than she hoped for. It is also an answer he can actually keep without sacrificing his evening.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4329,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC30",
+      "block": 4,
+      "purpose": "The ordinary response",
+      "location": "office corridor daylight",
+      "framing": "medium",
+      "action": "colleague nods matter of factly with folder tucked under arm while protagonist listens",
+      "beat": "She pauses, then says that works. The moment passes. There is no dramatic confrontation. He notices how much preparation he had done for a disaster that, on this occasion, never arrived. Next time might feel different.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4330,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC31",
+      "block": 4,
+      "purpose": "When no is needed",
+      "location": "apartment kitchen afternoon",
+      "framing": "medium",
+      "action": "protagonist sets phone down calmly beside groceries, shoulders relaxed",
+      "beat": "Some requests still need a no. He does not have to invent an appointment or produce a convincing excuse. He can say he cannot help this weekend. A truthful answer can be brief without being cruel.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4331,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC32",
+      "block": 4,
+      "purpose": "No courtroom",
+      "location": "home window blue hour",
+      "framing": "wide",
+      "action": "protagonist stands with mug at window, phone on side table, calm thoughtful stance",
+      "beat": "He also stops treating every explanation like a courtroom defense. More detail is sometimes useful, especially with people who depend on him. But a boundary does not become valid only after nobody can object to it.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4332,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC33",
+      "block": 5,
+      "purpose": "The difficult silence",
+      "location": "home sofa night",
+      "framing": "medium",
+      "action": "protagonist sits with mug and looks toward quiet phone on side table, mildly uneasy",
+      "beat": "The surprising part comes after he sends the message. He still feels uncomfortable. His mind starts offering amendments: perhaps he could manage it, perhaps he sounded unfriendly, perhaps he should explain a little more.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4333,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC34",
+      "block": 5,
+      "purpose": "Let the moment pass",
+      "location": "home kitchen night",
+      "framing": "wide",
+      "action": "protagonist makes tea with phone left on distant shelf, steam above kettle",
+      "beat": "He waits before sending another message. Discomfort is information about how the moment feels; it is not, by itself, proof that he chose badly. He can review his decision without immediately undoing it.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4334,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC35",
+      "block": 5,
+      "purpose": "A disappointed friend",
+      "location": "cafe table afternoon",
+      "framing": "wide",
+      "action": "mustard jacket friend looks mildly disappointed while protagonist listens attentively across table",
+      "beat": "Sometimes a friend is disappointed. That possibility is real. A relationship can include a request, a refusal, and a little disappointment without either person becoming the villain. The next step is a conversation, not a diagnosis.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4335,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC36",
+      "block": 5,
+      "purpose": "The power difference",
+      "location": "office meeting room",
+      "framing": "wide",
+      "action": "protagonist faces manager in navy blazer across table with two task folders",
+      "beat": "Work can be more complicated. A manager controls priorities, and simply refusing may carry consequences. So he asks which task should move if this new one comes first. The conversation becomes about workload and choices.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4336,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC37",
+      "block": 5,
+      "purpose": "Visible priorities",
+      "location": "office meeting table",
+      "framing": "close medium",
+      "action": "manager points to one of two closed folders while protagonist takes note with simple marks",
+      "beat": "He explains that finishing the presentation today means delaying the other assignment. Which should take priority? This does not guarantee a reasonable response. It does make the tradeoff visible, instead of silently absorbing more work.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4337,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC38",
+      "block": 5,
+      "purpose": "Real obligations",
+      "location": "friend apartment daytime",
+      "framing": "wide",
+      "action": "protagonist willingly helps mustard jacket friend lift one end of a small table",
+      "beat": "And some obligations deserve the inconvenience. A friend facing a genuine problem may need more than a tidy time slot. He wants room for that kind of help. Protecting capacity can make those choices easier to honor.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4338,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC39",
+      "block": 5,
+      "purpose": "A chosen yes",
+      "location": "friend apartment warm afternoon",
+      "framing": "medium",
+      "action": "protagonist and friend share relieved smile beside moved table, both physically distinct",
+      "beat": "This time, he chooses to help and adjusts his own plans honestly. He is not pretending the favor costs nothing. Because the decision is deliberate, gratitude feels welcome instead of becoming payment for resentment.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4339,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC40",
+      "block": 5,
+      "purpose": "Flexible not automatic",
+      "location": "city riverside late afternoon",
+      "framing": "wide",
+      "action": "protagonist walks home comfortably with hands in pockets and orange headphones",
+      "beat": "There is no perfect rule that works for every request. The aim is a more accurate answer: yes when he can mean it, no when he cannot, and a clear discussion when responsibility or circumstances make it complicated.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4340,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC41",
+      "block": 6,
+      "purpose": "The protected hour",
+      "location": "home studio morning",
+      "framing": "wide",
+      "action": "protagonist starts drawing at sunlit desk, phone on far shelf, clean city sketch",
+      "beat": "A week later, he sits down with his sketchbook again. His phone is nearby, but the hour has already been chosen. If a nonurgent request arrives, he can answer after he has done what he came to do.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4341,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC42",
+      "block": 6,
+      "purpose": "Still imperfect",
+      "location": "home desk afternoon",
+      "framing": "medium",
+      "action": "protagonist notices phone and pauses with pencil above drawing, thoughtful not distressed",
+      "beat": "He does not become instantly confident. He still catches himself agreeing too quickly. Sometimes he has to return to a conversation and clarify what he can offer. Changing a familiar response takes practice, not a new personality.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4342,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC43",
+      "block": 6,
+      "purpose": "Repair a promise",
+      "location": "cafe window morning",
+      "framing": "medium",
+      "action": "protagonist talks openly with rust sweater colleague who listens calmly, one folder on table",
+      "beat": "When he has already promised too much, he raises it early. He explains what changed and offers a realistic alternative where possible. The point is to become more reliable about commitments, including the ones he makes to himself.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4343,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC44",
+      "block": 6,
+      "purpose": "Time becomes visible",
+      "location": "home drawing desk golden afternoon",
+      "framing": "close medium",
+      "action": "protagonist adds final lines to detailed but simple city sketch, no lettering",
+      "beat": "Over time, the difference is ordinary rather than spectacular. A drawing gets finished. Dinner is eaten while it is warm. He meets a friend without privately calculating all the work waiting for him afterward.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4344,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC45",
+      "block": 6,
+      "purpose": "Present company",
+      "location": "small cafe evening",
+      "framing": "wide",
+      "action": "protagonist and mustard jacket friend laugh over two mugs, phones absent from tabletop",
+      "beat": "He still helps people. He still cares whether they are struggling. But his kindness no longer depends on pretending that his time has no value. Being present feels different when he has chosen to be there.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4345,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC46",
+      "block": 6,
+      "purpose": "One experiment",
+      "location": "home entryway late afternoon",
+      "framing": "medium",
+      "action": "protagonist pauses beside phone on entry table before entering warm studio beyond",
+      "beat": "Try it with one request this week. Before answering, ask what the task involves and what would have to move. If you need a moment, take it. Then give an answer that matches what you can actually do.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4346,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC47",
+      "block": 6,
+      "purpose": "The finished page",
+      "location": "home studio dusk",
+      "framing": "wide",
+      "action": "protagonist pins completed city drawing without letters to wall above desk, sunset outside",
+      "beat": "You do not have to make yourself difficult to reach in order to matter. You do not need to teach everyone a lesson. You need a way to be generous that leaves room for a life of your own.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4347,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC48",
+      "block": 6,
+      "purpose": "An honest answer",
+      "location": "apartment dining table warm night",
+      "framing": "wide",
+      "action": "protagonist and mustard jacket friend share warm meal, finished city drawing visible on wall, orange headphones recognizable",
+      "beat": "The goal is not to say no more often just for the sake of it. It is to make your yes honest. When your own promises count too, helping someone else becomes a choice you can stand behind.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4348,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    }
+  ]
+}
