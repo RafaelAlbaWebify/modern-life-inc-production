@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 6.5 (2026-10-27)
+Version: 6.6 (2026-10-28)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -467,3 +467,8 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - User confirmed VoiceStudio was closed during successful episode-audio preflight. Previous checks did not inspect VoiceStudio; episode-audio intentionally only audits existing WAV files and 0/18 narration WAV were present. A PASS did not mean VoiceStudio was operational.
 - Restored tools/mli-production.ps1 from known-good commit a147738 after detecting a malformed duplicated tail in interim VoiceStudio modification. Added informational VoiceStudio process visibility for WAV-audit mode (no false requirement that it be open), and a separate `episode-voice-check` that flags no detected app plus missing verified TTS integration. Process-name detection is heuristic, not proof of CLI readiness. Report still aggregates findings. This has NOT been tested on user's PC.
 - Continue after PC reboot tomorrow. Do not ask user to run anything today. Starting point: preflight voice diagnosis and investigate actual installed VoiceStudio CLI/HTTP API for automatic TTS before claiming full pipeline. Existing EP002 work C:\Users\ralba\Downloads\MLI_EP002_PIPELINE_20261027_182825 is preserved, 18-scene plan verified, 0/18 WAV available, no new GPU output.
+
+## 2026-10-28: Post-restart VoiceStudio API diagnostic (v6.6)
+- Confirmed from VoiceStudio public documentation: its local API defaults to http://localhost:3900, supports GET /health, GET /openapi.json and GET /v1/audio/voices. Its API, not process name, is the appropriate readiness signal. No cloud account is needed for local endpoint.
+- Updated tools/mli-production.ps1 preflight for episode-voice-check to probe localhost health, then report OpenAPI and available-voice endpoint HTTP status, aggregate errors, and avoid false TTS-ready assertions. For episode-audio, localhost status remains informational only: that mode audits previously generated WAVs. No automatic voice synthesis implemented yet until exact installed API/voices/models are confirmed.
+- Await actual Windows run following reboot. Work folder retained: C:\Users\ralba\Downloads\MLI_EP002_PIPELINE_20261027_182825. Do not regenerate planning, images, or audio without valid production gate.
