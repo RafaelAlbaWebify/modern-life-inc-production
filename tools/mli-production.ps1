@@ -1,4 +1,4 @@
-param([ValidateSet("start","review","status","verify","render","recover","qc","finish","plan","episode-chat-export","episode-chat-import","episode-render","episode-qc","episode-audio","episode-final","episode-voice-check","episode-voice-smoke","episode-voice-batch")][string]$Mode="start",[string]$Work="",[string]$Episode="MLI_PILOT_001",[switch]$ApproveNarration,[string]$Review="",[string]$RenderFolder="",[string]$AlignmentSource="",[string]$Scene06Image="",[ValidateSet("karaoke","cinematic","amber")][string]$CaptionStyle="karaoke",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
+param([ValidateSet("start","review","status","verify","render","recover","qc","finish","plan","episode-chat-export","episode-chat-import","episode-render","episode-qc","episode-audio","episode-final","episode-voice-check","episode-voice-smoke","episode-voice-batch","episode-publish-prepare","episode-publish-check")][string]$Mode="start",[string]$Work="",[string]$Episode="MLI_PILOT_001",[switch]$ApproveNarration,[string]$Review="",[string]$RenderFolder="",[string]$AlignmentSource="",[string]$PublishPlan="",[string]$PublishFolder="",[string]$Scene06Image="",[ValidateSet("karaoke","cinematic","amber")][string]$CaptionStyle="karaoke",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
 $ErrorActionPreference="Stop";$ProgressPreference="SilentlyContinue"
 $repo="RafaelAlbaWebify/modern-life-inc-production"
 $storage=Join-Path $env:TEMP "MLI-Pipeline"
@@ -112,10 +112,23 @@ function Preflight([string]$stage){
    Note "VoiceStudio local runtime" $(if($online){"Online at $base"}else{"Offline; episode-audio only audits existing WAVs"})
   }
  }
+ if($stage -in @("episode-publish-prepare","episode-publish-check")){
+  Check "ffprobe executable" ($null -ne (Get-Command ffprobe -ErrorAction SilentlyContinue)) "ffprobe in PATH"
+  if($stage -eq "episode-publish-prepare"){
+   Check "Episode work folder" ($Work -and (Test-Path -LiteralPath $Work -PathType Container)) $Work
+   if($Work){CheckFile "Episode contract" (Join-Path $Work "contract.json")}
+   Check "Final render folder" ($RenderFolder -and (Test-Path -LiteralPath $RenderFolder -PathType Container)) $RenderFolder
+   if($RenderFolder){foreach($name in @("manifest.json","finishing_manifest.json","technical_qc.json","alignment.json")){CheckFile $name (Join-Path $RenderFolder $name)}}
+   CheckFile "Publication plan" $PublishPlan
+  }else{
+   Check "Publication package folder" ($PublishFolder -and (Test-Path -LiteralPath $PublishFolder -PathType Container)) $PublishFolder
+   if($PublishFolder){CheckFile "Package manifest" (Join-Path $PublishFolder "package_manifest.json")}
+  }
+ }
  if($stage -eq "plan"){
   Check "Episode ID" ($Episode -match '^MLI_[A-Z0-9_]+$') $Episode
  }
- if($stage -notin @("start","plan","qc","finish","episode-render","episode-audio","episode-final","episode-voice-check","episode-voice-smoke","episode-voice-batch")){
+ if($stage -notin @("episode-publish-prepare","episode-publish-check","start","plan","qc","finish","episode-render","episode-audio","episode-final","episode-voice-check","episode-voice-smoke","episode-voice-batch")){
   Check "Work folder" (-not [string]::IsNullOrWhiteSpace($Work) -and (Test-Path -LiteralPath $Work -PathType Container)) $Work
  }
  $fails=@($script:preflightFindings | Where-Object {$_.Status -eq "FAIL"})
@@ -128,6 +141,22 @@ function Preflight([string]$stage){
  Write-Host "PREFLIGHT PASS [$stage]" -ForegroundColor Green
 }
 Preflight $Mode
+if($Mode -in @("episode-publish-prepare","episode-publish-check")){
+ $pub=Join-Path $toolsDir "mli-publish-package.py"
+ $pubTest=Join-Path $testsDir "test_mli_publish_package.py"
+ FetchFile "tools/mli-publish-package.py" $pub
+ FetchFile "tools/mli-caption-styles.py" (Join-Path $toolsDir "mli-caption-styles.py")
+ FetchFile "tests/test_mli_publish_package.py" $pubTest
+ & $script:runtimePython $pubTest
+ if($LASTEXITCODE -ne 0){throw "Publication package guard tests failed"}
+ if($Mode -eq "episode-publish-prepare"){
+  $pubArgs=@($pub,"prepare","--work",$Work,"--render-folder",$RenderFolder,"--plan",$PublishPlan)
+  if($PublishFolder){$pubArgs+=@("--out",$PublishFolder)}
+ }else{$pubArgs=@($pub,"check","--out",$PublishFolder)}
+ & $script:runtimePython @pubArgs
+ if($LASTEXITCODE -ne 0){throw "Publication package failed; no upload or publication performed"}
+ return
+}
 $script=Join-Path $toolsDir "mli-pipeline.py";$test=Join-Path $testsDir "test_mli_pipeline.py"
 FetchFile "tools/mli-pipeline.py" $script
 FetchFile "tests/test_mli_pipeline.py" $test
