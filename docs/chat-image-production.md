@@ -57,3 +57,20 @@ After accepted images and existing voices pass their gates, use `episode-render`
 ## Validation and limits
 
 Python regression tests cover hashes, stale prompts/contracts, directory escape, idempotence, invalidation of old selections, preserved original exports, review-required imports and capped chat revision routing. PowerShell launcher additions have source inspection but require actual Windows execution; do not claim that wrapper exercised by the Python suite. No new image generation is required to test export/import.
+
+
+## Finishing the validated V2 recipe
+
+Once visual acceptance/export and the existing WAV audit pass:
+
+```powershell
+& $script -Mode episode-render -Work $work
+& $script -Mode episode-qc -RenderFolder $renderFolder
+& $script -Mode episode-final -Work $work -RenderFolder $renderFolder -AlignmentSource "C:\absolute\alignment.json"
+```
+
+Use the actual new render folder emitted by episode-render, never an arbitrary older folder. The renderer assembles one continuous narration track from source speech at measured clip offsets and encodes AAC once. It archives failed clip encodes, performs bounded encoding recovery, and validates final streams/duration/full decode before reporting success. This does not regenerate images or voices.
+
+Omit -AlignmentSource when a compatible alignment.json is already in that render folder; it is validated and reused automatically. Reuse checks script, episode/scene order, source durations/hashes where recorded, offsets and word bounds before touching timestamps. Legacy source alignments without recorded WAV hashes are explicitly labeled in provenance; newly produced alignments include those hashes. If there is no alignment, the existing isolated WhisperX environment supplies real timestamps. An invalid existing/provided alignment blocks instead of being replaced with estimates.
+
+Valid reuse does not require loading WhisperX. The finishing module burns the standard Soft Karaoke ASS over the clean master, preserves audio and runs downstream technical QC. Python execution and native Windows launcher execution are separate validation claims; retain the final complete user screening gate.
