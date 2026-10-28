@@ -2,11 +2,23 @@
 """Episode-agnostic renderer. Only accepted PNGs and recorded WAVs; no generation."""
 import argparse,json,pathlib,subprocess,datetime,sys,hashlib
 def run(cmd,cwd=None):
+ cmd=list(cmd)
+ if str(cmd[0])=="ffmpeg":cmd.insert(1,"-nostdin")
  p=subprocess.run([str(x) for x in cmd],capture_output=True,text=True,cwd=cwd)
  if p.returncode:raise RuntimeError(p.stderr[-2000:])
  return p.stdout
 def probe(p):
  return json.loads(run(["ffprobe","-v","error","-show_format","-show_streams","-of","json",p]))
+def validate_media(path, expected_duration, full_decode=False):
+ info=probe(path)
+ kinds={x["codec_type"] for x in info["streams"]}
+ if not {"video","audio"}<=kinds:raise ValueError(f"Missing audio/video stream: {path}")
+ duration=float(info["format"]["duration"])
+ if abs(duration-expected_duration)>0.15:raise ValueError(f"Duration mismatch: {path}: {duration} vs {expected_duration}")
+ if full_decode:
+  errors=run(["ffmpeg","-hide_banner","-v","error","-xerror","-i",path,"-f","null","-"])
+ return duration
+
 def main():
  a=argparse.ArgumentParser()
  a.add_argument("--work",required=True);a.add_argument("--audio-dir",required=True)
@@ -41,7 +53,7 @@ def main():
        "-map","0:v:0","-map","1:a:0","-vf","scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2,setsar=1,format=yuv420p",
        "-af",f"aresample=24000,apad=pad_dur={pause:.3f}","-t",f"{duration+pause:.6f}",
        "-c:v","libx264","-preset","veryfast","-crf","20","-r","30","-c:a","aac","-b:a","192k","-ar","24000","-ac","1",target])
-  measured=float(probe(target)["format"]["duration"])
+  measured=validate_media(target,duration+pause,full_decode=True)
   report.append({"scene":sid,"audio_seconds":duration,"clip_seconds":measured,"timeline_start":offset,"pause":pause})
   offset+=measured;clips.append(target)
  concat=folder/"segments.ffconcat"
@@ -49,9 +61,11 @@ def main():
  concat.write_text("ffconcat version 1.0\n"+"\n".join(f"file '{clip.name}'" for clip in clips)+"\n",encoding="utf-8")
  master=folder/(contract["episode_id"]+"_CLEAN.mp4")
  run(["ffmpeg","-hide_banner","-loglevel","error","-y","-safe","0","-f","concat","-i",concat,"-c","copy","-movflags","+faststart",master],cwd=folder)
- manifest={"episode_id":contract["episode_id"],"status":"technical_render_only","editorial_approved":False,"publication_approved":False,"scene_count":len(clips),"scenes":report,"master":master.name,"duration":float(probe(master)["format"]["duration"]),"master_sha256":hashlib.sha256(master.read_bytes()).hexdigest()}
+ master_duration=validate_media(master,offset,full_decode=True)
+ manifest={"episode_id":contract["episode_id"],"status":"technical_render_only","editorial_approved":False,"publication_approved":False,"scene_count":len(clips),"scenes":report,"master":master.name,"duration":master_duration,"master_sha256":hashlib.sha256(master.read_bytes()).hexdigest()}
  (folder/"manifest.json").write_text(json.dumps(manifest,indent=2)+"\n",encoding="utf-8")
  print("RENDER:",master);print("SCENES:",len(clips));print("NOT EDITORIALLY APPROVED")
 if __name__=="__main__":
  try:main()
  except Exception as e:print("FAILED:",e,file=sys.stderr);sys.exit(1)
+
