@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 7.4 (2026-10-28)
+Version: 7.5 (2026-10-28)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -540,3 +540,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Existing review mode recognizes chat-backed failures: CHAT_REVISION_REQUIRED -> exports only failed jobs with review evidence, never local FLUX. After two failed chat candidates, block rather than regenerate blindly. Local-FLUX workflows retain their previous explicit retry behavior. The existing verify/export/render/voice/alignment/Soft Karaoke gates remain downstream.
 - Validation: 17 Python pipeline regression tests PASS, covering stale contracts/prompts, source hashes, path escape, idempotence, archived original exports, replacement review gate and bounded chat revision routing. Real EP002 V2 snapshot export also verified 18 jobs and continuous-layout metadata without generation. Python source compile PASS. PowerShell wrapper reviewed in source but NOT executed with native PowerShell in this environment; Windows use remains the final wrapper validation.
 - This repository update does not modify the user's Windows folders or regenerate any V2 images/voices. Historical V2 receipts predate this new handoff and must not be relabeled as retroactively frozen-job evidence. Use canonical jobs/import for subsequent work; retain historical receipts for existing assets.
+
+
+## 2026-10-28: V2 Soft Karaoke completed from supplied real alignment (v7.5)
+- User supplied original alignment.json. Validated episode, all 18 scenes/order, exact normalized narration text (302 words), per-scene audio durations, offsets within 40ms and finite word boundaries against revised V2 timeline. Reused this actual alignment; no estimated timestamps, voice synthesis or WhisperX rerun.
+- Burned standard Soft Karaoke over the single-frame V2 cut. Delivered MLI_EP002_V2_SOFT_KARAOKE.mp4: duration 103.733333 s, H.264 1920x1080, AAC mono 24000 Hz. Episode technical QC: true, 18 scenes, issues=[]. Independent full FFmpeg -xerror decode PASS.
+- Visually inspected a rendered frame from each of all 18 scenes, including corrected compositions and caption layout. Continuous image compositions retained; white/amber captions legible within margins in sampled frames. This is completed audiovisual review export, not listening certification or automatic publication approval. Await user screening; do not repeat production merely because earlier V2 preview lacked captions.
