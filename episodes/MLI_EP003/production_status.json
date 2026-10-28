@@ -1,6 +1,6 @@
 {
   "episode": "MLI_EP003",
-  "checkpoint": "FINAL_SOFT_KARAOKE_DELIVERED_FOR_SCREENING",
+  "checkpoint": "POSITIVE_VIDEO_FEEDBACK_PUBLICATION_PACKAGE_PREPARED",
   "script_words": 1680,
   "estimated_seconds_at_EP002_rate_including_gaps": 564.5,
   "actual_video_seconds": 548.733333,
@@ -9,6 +9,11 @@
   "audio_received": true,
   "final_video_exists": true,
   "publication_approved": false,
-  "next_action": "Full user screening of story, pacing, narration and subtitle timing; publication remains unapproved.",
-  "real_word_alignment_validated": true
+  "next_action": "Review concrete title/thumbnail package and choose channel/settings/publication action; preserve completed video.",
+  "real_word_alignment_validated": true,
+  "user_feedback": {
+    "date": "2026-10-29",
+    "quote": "Increible trabajo, me ha gustado bastante.",
+    "interpretation": "Positive EP003 video feedback; no requested video revision. Not an instruction to upload or publish."
+  }
 }
