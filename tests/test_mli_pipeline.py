@@ -14,6 +14,19 @@ class PipelineTests(unittest.TestCase):
   pipeline.prepare(types.SimpleNamespace(work=str(self.work),shots=str(self.shots),scenes=["SC01"]))
   (self.work/"images"/"SC01_attempt1.png").write_bytes(fake_png())
   state=pipeline.load(self.work);state["shots"]["SC01"]={"state":"NEEDS_REVIEW","attempts":[{"number":1,"file":"SC01_attempt1.png","sha256":pipeline.png(self.work/"images"/"SC01_attempt1.png")}]};pipeline.save(self.work,state)
+ def test_high_resolution_landscape_preserved(self):
+  data=bytearray(fake_png());data[16:24]=struct.pack(">II",1672,941)
+  file=self.path/"highres.png";file.write_bytes(data)
+  self.assertEqual(pipeline.png(file),pipeline.sha(data))
+ def test_square_source_rejected(self):
+  data=bytearray(fake_png());data[16:24]=struct.pack(">II",768,768)
+  file=self.path/"square.png";file.write_bytes(data)
+  with self.assertRaises(ValueError):pipeline.png(file)
+ def test_multi_panel_requires_story_rationale(self):
+  contract=json.loads(self.shots.read_text());scene=dict(contract["scenes"][0],visual_layout="multi_panel")
+  with self.assertRaises(ValueError):pipeline.prompt(contract,scene)
+  scene["layout_rationale"]="Contrast the same choice before and after a boundary"
+  self.assertIn(scene["layout_rationale"],pipeline.prompt(contract,scene))
  def test_cwd_independent_and_package(self):
   pipeline.package(types.SimpleNamespace(work=str(self.work),zip=None))
   self.assertTrue(self.work.with_name(self.work.name+"_CHAT_REVIEW.zip").exists())
@@ -50,3 +63,4 @@ class PipelineTests(unittest.TestCase):
   path=self.path/"review.json";path.write_text(json.dumps({"results":[{"image":req["image"],"sha256":"wrong","checks":{k:{"status":"PASS","evidence":"Visible fact"} for k in req["required_criteria"]}}]}))
   with self.assertRaises(ValueError):pipeline.ingest(types.SimpleNamespace(work=str(self.work),report=str(path)))
 if __name__=="__main__":unittest.main()
+
