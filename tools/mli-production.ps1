@@ -1,4 +1,4 @@
-param([ValidateSet("start","review","status","verify","render","recover","qc","finish","plan","episode-chat-export","episode-chat-import","episode-render","episode-qc","episode-audio","episode-final","episode-voice-check","episode-voice-smoke","episode-voice-batch")][string]$Mode="start",[string]$Work="",[string]$Episode="MLI_PILOT_001",[switch]$ApproveNarration,[string]$Review="",[string]$RenderFolder="",[string]$Scene06Image="",[ValidateSet("karaoke","cinematic","amber")][string]$CaptionStyle="karaoke",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
+param([ValidateSet("start","review","status","verify","render","recover","qc","finish","plan","episode-chat-export","episode-chat-import","episode-render","episode-qc","episode-audio","episode-final","episode-voice-check","episode-voice-smoke","episode-voice-batch")][string]$Mode="start",[string]$Work="",[string]$Episode="MLI_PILOT_001",[switch]$ApproveNarration,[string]$Review="",[string]$RenderFolder="",[string]$AlignmentSource="",[string]$Scene06Image="",[ValidateSet("karaoke","cinematic","amber")][string]$CaptionStyle="karaoke",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
 $ErrorActionPreference="Stop";$ProgressPreference="SilentlyContinue"
 $repo="RafaelAlbaWebify/modern-life-inc-production"
 $storage=Join-Path $env:TEMP "MLI-Pipeline"
@@ -77,8 +77,14 @@ function Preflight([string]$stage){
  if($stage -eq "episode-final"){
   Check "Episode render folder" (-not [string]::IsNullOrWhiteSpace($RenderFolder) -and (Test-Path -LiteralPath $RenderFolder -PathType Container)) $RenderFolder
   if($RenderFolder){CheckFile "Episode render manifest" (Join-Path $RenderFolder "manifest.json")}
-  $wpx=Join-Path $HOME "Downloads\MLI_WHISPERX_ENV\Scripts\python.exe"
-  CheckFile "WhisperX environment" $wpx
+  $alignmentForReuse=if($AlignmentSource){$AlignmentSource}elseif($RenderFolder){Join-Path $RenderFolder "alignment.json"}else{""}
+  if($alignmentForReuse -and (Test-Path -LiteralPath $alignmentForReuse -PathType Leaf)){
+   Note "Real alignment reuse" "Validate transcript/audio/timeline before reuse: $alignmentForReuse"
+  }elseif($AlignmentSource){CheckFile "Provided alignment source" $AlignmentSource}
+  else{
+   $wpx=Join-Path $HOME "Downloads\MLI_WHISPERX_ENV\Scripts\python.exe"
+   CheckFile "WhisperX environment" $wpx
+  }
  }
  if($stage -in @("episode-audio","episode-voice-check","episode-voice-smoke","episode-voice-batch")){
   $base="http://127.0.0.1:3900"
@@ -204,9 +210,15 @@ elseif($Mode -eq "episode-final"){
  foreach($pair in @(@("tools/mli-align-episode.py",$alignment),@("tools/mli-finish-episode.py",$finisher),@("tools/mli-qc-episode.py",$qcs))){
   FetchFile $pair[0] $pair[1]
  }
- $whisperPython=Join-Path $HOME "Downloads\MLI_WHISPERX_ENV\Scripts\python.exe"
- if(-not(Test-Path -LiteralPath $whisperPython)){throw "Isolated WhisperX Python missing: $whisperPython"}
- & $whisperPython $alignment --work $Work --render-folder $RenderFolder
+ $existingAlignment=Join-Path $RenderFolder "alignment.json"
+ $alignmentPython=$script:runtimePython
+ $alignmentArgs=@($alignment,"--work",$Work,"--render-folder",$RenderFolder)
+ if($AlignmentSource){$alignmentArgs+=@("--reuse-from",$AlignmentSource)}
+ elseif(-not(Test-Path -LiteralPath $existingAlignment)){
+  $alignmentPython=Join-Path $HOME "Downloads\MLI_WHISPERX_ENV\Scripts\python.exe"
+  if(-not(Test-Path -LiteralPath $alignmentPython)){throw "Isolated WhisperX Python missing: $alignmentPython"}
+ }
+ & $alignmentPython @alignmentArgs
  if($LASTEXITCODE -ne 0){throw "Episode alignment failed"}
  & $script:runtimePython $finisher --render-folder $RenderFolder --caption-script $captions
  if($LASTEXITCODE -ne 0){throw "Episode karaoke finish failed"}
@@ -297,4 +309,5 @@ elseif($Mode -eq "episode-voice-check"){
  Write-Host "VoiceStudio discovered; full narration generation remains blocked pending verified narrator voice and test WAV." -ForegroundColor Yellow
 }
 else{RunPipeline -argList @("status","--work",$Work)}
+
 
