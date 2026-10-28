@@ -1,4 +1,4 @@
-param([ValidateSet("start","review","status","verify","render","recover","qc","finish","plan","episode-render","episode-qc","episode-audio","episode-final","episode-voice-check"][string]$Mode="start",[string]$Work="",[string]$Episode="MLI_PILOT_001",[string]$Review="",[string]$RenderFolder="",[string]$Scene06Image="",[ValidateSet("karaoke","cinematic","amber")][string]$CaptionStyle="karaoke",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
+param([ValidateSet("start","review","status","verify","render","recover","qc","finish","plan","episode-render","episode-qc","episode-audio","episode-final","episode-voice-check")][string]$Mode="start",[string]$Work="",[string]$Episode="MLI_PILOT_001",[string]$Review="",[string]$RenderFolder="",[string]$Scene06Image="",[ValidateSet("karaoke","cinematic","amber")][string]$CaptionStyle="karaoke",[string[]]$Scenes=@("SC01","SC02","SC03","SC04","SC05","SC06"))
 $ErrorActionPreference="Stop";$ProgressPreference="SilentlyContinue"
 $repo="RafaelAlbaWebify/modern-life-inc-production"
 $storage=Join-Path $env:TEMP "MLI-Pipeline"
