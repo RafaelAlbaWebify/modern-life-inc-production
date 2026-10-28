@@ -260,5 +260,11 @@ elseif($Mode -eq "render"){
  if($LASTEXITCODE -ne 0){throw "Renderer failed"}
  Write-Host "VIDEO RENDERED, FINAL AUDIOVISUAL QC STILL REQUIRED" -ForegroundColor Green
 }
-elseif($Mode -eq "episode-voice-check"){Write-Host "VoiceStudio API diagnostics completed. Narration generation remains gated until voice and model are validated." -ForegroundColor Yellow}
+elseif($Mode -eq "episode-voice-check"){
+ $discovery=Join-Path $toolsDir "mli-voicestudio-discover.py"
+ FetchFile "tools/mli-voicestudio-discover.py" $discovery
+ & $script:runtimePython $discovery --work $Work
+ if($LASTEXITCODE -ne 0){throw "VoiceStudio discovery failed"}
+ Write-Host "VoiceStudio discovered; full narration generation remains blocked pending verified narrator voice and test WAV." -ForegroundColor Yellow
+}
 else{RunPipeline -argList @("status","--work",$Work)}
