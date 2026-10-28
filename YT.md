@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 7.0 (2026-10-28)
+Version: 7.1 (2026-10-28)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -503,3 +503,10 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Initial chat render contained incomplete intermediate MP4s despite apparent completion; root cause unproven. Re-encoded affected intermediates and independently validated the complete cut. Hardened episode renderer with FFmpeg -nostdin, per-clip stream/duration/full decode validation and final duration/full decode gate before success manifest. Do not claim -nostdin alone fixes the unproven root cause.
 - Current user operation: episode-render -> episode-qc -> episode-final (WhisperX real word alignment -> Soft Karaoke burn -> technical QC) is PROCESSING on Windows. Await actual outputs; do not mark final captions/alignment or final video verified yet. Do not interrupt or ask to restart the active run due to these repository updates.
 - Do not repeat expensive phases or unit suites once per scene. Keep tests/preflight phase-scoped; expose progress/log location, distinguish technical retry from semantic rejection. Dedicated technical-retry integration and automatic GPU telemetry remain follow-up work, not implemented capabilities.
+
+
+## 2026-10-28: Windows EP002 Soft Karaoke delivery verified (v7.1)
+- User supplied MLI_EP002_SOFT_KARAOKE.mp4 and technical_qc.json after local episode-render -> episode-qc -> episode-final. Report: technical_pass=true, 18 scenes, issues=[], editorial_approved=false, publication_approved=false.
+- Independently probed uploaded final: duration 103.766341 s, H.264 1920x1080, nominal 30fps, AAC mono 24000 Hz. Full FFmpeg decode with -xerror succeeded without diagnostics. Audio/video stream durations differ by ~33ms; no material duration issue identified.
+- Visually inspected ten extracted frames at 2,10,23,39,51,61,73,83,94,101 s. Embedded white/amber Soft Karaoke visible, outlined and within frame margins, no clipped captions in these samples. Corrected SC11 and SC15 are present in final MP4. Retain practical integration-cut acceptance; do not reopen minor face/count variations.
+- This confirms rendered captions and technical output, not independent listening certification or exact per-word synchrony. No alignment.json or ASS supplied in this upload, so timestamp/source-word audit was not performed. Final human screening of pacing, intelligibility and synchronization remains needed before publication approval. No regeneration or rerender requested by current evidence.
