@@ -74,3 +74,10 @@ Use the actual new render folder emitted by episode-render, never an arbitrary o
 Omit -AlignmentSource when a compatible alignment.json is already in that render folder; it is validated and reused automatically. Reuse checks script, episode/scene order, source durations/hashes where recorded, offsets and word bounds before touching timestamps. Legacy source alignments without recorded WAV hashes are explicitly labeled in provenance; newly produced alignments include those hashes. If there is no alignment, the existing isolated WhisperX environment supplies real timestamps. An invalid existing/provided alignment blocks instead of being replaced with estimates.
 
 Valid reuse does not require loading WhisperX. The finishing module burns the standard Soft Karaoke ASS over the clean master, preserves audio and runs downstream technical QC. Python execution and native Windows launcher execution are separate validation claims; retain the final complete user screening gate.
+
+
+## Alignment-only continuation after a chat clean render
+
+When canonical rendering has completed in chat but real-word alignment is available only in the existing Windows WhisperX environment, preserve the clean master and hand off only its actual manifest, matching contract, canonical align module and source-audio hash verifier. The local helper must validate exact narration/audio before inference and return alignment.json, word SRT and measured timing; it must not repeat image generation, voice synthesis or clean rendering. A single-file pinned launcher may fetch these lightweight sources. EP003 example: episodes/MLI_EP003/ALINEAR_EP003.ps1, with the real timeline frozen under episodes/MLI_EP003/alignment/.
+
+After receiving alignment, validate/reuse it through the canonical alignment module, retaining actual word timestamps, then burn established Soft Karaoke over the preserved clean master. No estimated word timing or unrelated episode alignment. A completed clean master is a review deliverable, not a completed captioned video or publication approval.
