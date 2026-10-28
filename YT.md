@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 6.7 (2026-10-28)
+Version: 6.8 (2026-10-28)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -478,3 +478,8 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - VoiceStudio readiness must account for Open app > Install Local Runtime > Settings/Models/OmniVoice model installation. Updated episode-voice-check to test GET /health, /setup/status models_ready, /system/info ffmpeg_ok and /v1/audio/voices. Missing runtime/model returns explicit actionable instructions rather than success; episode-audio only audits WAVs, so app need not be running then.
 - Added .github/workflows/mli-source-check.yml using windows-latest PowerShell ParseFile and Python 3.12 compileall plus pipeline/finishing/episode regression suites. CI execution result still pending; not validated in user's PC.
 - Must still confirm installed OmniVoice engine is actually selected and narrator voice chosen; synthetic generation of 18 WAVs remains unimplemented until local API contract is verified live.
+
+## 2026-10-28: VoiceStudio live API ready, discovery integrated (v6.8)
+- User verified on Windows after reboot: episode-voice-check preflight PASS for Python, episode work/state/contract, local VoiceStudio API at 127.0.0.1:3900, setup.models_ready=true, system.ffmpeg_ok=true on CUDA, and /v1/audio/voices responding. 5 pipeline tests and 8 finishing tests PASS. Voice generation not yet run.
+- Important: models_ready is a generic readiness flag; it does not prove OmniVoice installed/selected or which narrator profile is canonical. Avoid generating 18 WAV based on this alone.
+- Added tools/mli-voicestudio-discover.py (read-only) that saves voice_studio_discovery.json in existing EP002 work using /health, /setup/status, /system/info, /v1/audio/voices and /.well-known/voicestudio-speech. Wired it to episode-voice-check launcher after preflight; no GPU or audio output. Next user run once with freshly fetched launcher, inspect sanitized discovery report, select exact voice+engine, then implement one-scene synthesis smoke test and full 18-scene idempotent TTS.
