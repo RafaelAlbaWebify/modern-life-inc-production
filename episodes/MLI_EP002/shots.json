@@ -2,13 +2,13 @@
   "schema_version": 1,
   "episode_id": "MLI_EP002",
   "working_title": "Who Owns Your Attention?",
-  "status": "CREATIVE_DRAFT_NOT_GENERATION_APPROVED",
+  "status": "VISUAL_REVISION_REQUIRED_SINGLE_FRAME",
   "target_seconds": [
     120,
     180
   ],
   "reference": "C:\\AI\\MLI-FluxTest-Vulkan\\story_consistency_revised\\CHARACTER_REFERENCE.png",
-  "style": "Cinematic illustrated 2D urban storybook, clean black contours, warm amber and cool blue accents, consistent realistic perspective. No anime redesign. 16:9. No lettering or speech bubbles.",
+  "style": "Cinematic illustrated 2D urban storybook, clean black contours, warm amber and cool blue accents, consistent realistic perspective. No anime redesign. 16:9, one continuous cinematic frame per scene. No panels, split screen, collage, inset frames or white gutters. No lettering or speech bubbles.",
   "character": "Same iconic protagonist: pale minimal face with two oval eyes, messy short dark hair, oversized orange headphones, teal hoodie and dark trousers. Never normal-detailed face for protagonist.",
   "supporting": "Background supporting people may have ordinary stylized eyes, nose and mouth; never copy protagonist's minimal facial design or teal/orange outfit.",
   "max_attempts": 2,
@@ -36,7 +36,8 @@
       "secondaries": 0,
       "motion": "hold",
       "seed": 4201,
-      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+      "composition": "One continuous cinematic 16:9 composition showing one readable narrative action. No split panels, collage, inset views, artificial dividers or repeated views of the protagonist.",
+      "visual_layout": "single_frame"
     },
     {
       "id": "SC02",
@@ -61,7 +62,8 @@
       "secondaries": 0,
       "motion": "hold",
       "seed": 4202,
-      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+      "composition": "One continuous cinematic 16:9 composition showing one readable narrative action. No split panels, collage, inset views, artificial dividers or repeated views of the protagonist.",
+      "visual_layout": "single_frame"
     },
     {
       "id": "SC03",
@@ -86,7 +88,8 @@
       "secondaries": 0,
       "motion": "hold",
       "seed": 4203,
-      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+      "composition": "One continuous cinematic 16:9 composition showing one readable narrative action. No split panels, collage, inset views, artificial dividers or repeated views of the protagonist.",
+      "visual_layout": "single_frame"
     },
     {
       "id": "SC04",
@@ -111,7 +114,8 @@
       "secondaries": 0,
       "motion": "hold",
       "seed": 4204,
-      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+      "composition": "One continuous cinematic 16:9 composition showing one readable narrative action. No split panels, collage, inset views, artificial dividers or repeated views of the protagonist.",
+      "visual_layout": "single_frame"
     },
     {
       "id": "SC05",
@@ -136,7 +140,8 @@
       "secondaries": 0,
       "motion": "hold",
       "seed": 4205,
-      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+      "composition": "One continuous cinematic 16:9 composition showing one readable narrative action. No split panels, collage, inset views, artificial dividers or repeated views of the protagonist.",
+      "visual_layout": "single_frame"
     },
     {
       "id": "SC06",
@@ -161,7 +166,8 @@
       "secondaries": 1,
       "motion": "hold",
       "seed": 4206,
-      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+      "composition": "One continuous cinematic 16:9 composition showing one readable narrative action. No split panels, collage, inset views, artificial dividers or repeated views of the protagonist.",
+      "visual_layout": "single_frame"
     },
     {
       "id": "SC07",
@@ -186,7 +192,8 @@
       "secondaries": 0,
       "motion": "hold",
       "seed": 4207,
-      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+      "composition": "One continuous cinematic 16:9 composition showing one readable narrative action. No split panels, collage, inset views, artificial dividers or repeated views of the protagonist.",
+      "visual_layout": "single_frame"
     },
     {
       "id": "SC08",
@@ -211,7 +218,8 @@
       "secondaries": 0,
       "motion": "hold",
       "seed": 4208,
-      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+      "composition": "One continuous cinematic 16:9 composition showing one readable narrative action. No split panels, collage, inset views, artificial dividers or repeated views of the protagonist.",
+      "visual_layout": "single_frame"
     },
     {
       "id": "SC09",
@@ -236,7 +244,8 @@
       "secondaries": 0,
       "motion": "hold",
       "seed": 4209,
-      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+      "composition": "One continuous cinematic 16:9 composition showing one readable narrative action. No split panels, collage, inset views, artificial dividers or repeated views of the protagonist.",
+      "visual_layout": "single_frame"
     },
     {
       "id": "SC10",
@@ -261,7 +270,8 @@
       "secondaries": 0,
       "motion": "hold",
       "seed": 4210,
-      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+      "composition": "One continuous cinematic 16:9 composition showing one readable narrative action. No split panels, collage, inset views, artificial dividers or repeated views of the protagonist.",
+      "visual_layout": "single_frame"
     },
     {
       "id": "SC11",
@@ -286,7 +296,8 @@
       "secondaries": 1,
       "motion": "hold",
       "seed": 4211,
-      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+      "composition": "One continuous cinematic 16:9 composition showing one readable narrative action. No split panels, collage, inset views, artificial dividers or repeated views of the protagonist.",
+      "visual_layout": "single_frame"
     },
     {
       "id": "SC12",
@@ -311,7 +322,8 @@
       "secondaries": 0,
       "motion": "hold",
       "seed": 4212,
-      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+      "composition": "One continuous cinematic 16:9 composition showing one readable narrative action. No split panels, collage, inset views, artificial dividers or repeated views of the protagonist.",
+      "visual_layout": "single_frame"
     },
     {
       "id": "SC13",
@@ -336,7 +348,8 @@
       "secondaries": 0,
       "motion": "hold",
       "seed": 4213,
-      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+      "composition": "One continuous cinematic 16:9 composition showing one readable narrative action. No split panels, collage, inset views, artificial dividers or repeated views of the protagonist.",
+      "visual_layout": "single_frame"
     },
     {
       "id": "SC14",
@@ -361,7 +374,8 @@
       "secondaries": 0,
       "motion": "hold",
       "seed": 4214,
-      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+      "composition": "One continuous cinematic 16:9 composition showing one readable narrative action. No split panels, collage, inset views, artificial dividers or repeated views of the protagonist.",
+      "visual_layout": "single_frame"
     },
     {
       "id": "SC15",
@@ -386,7 +400,8 @@
       "secondaries": 1,
       "motion": "hold",
       "seed": 4215,
-      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+      "composition": "One continuous cinematic 16:9 composition showing one readable narrative action. No split panels, collage, inset views, artificial dividers or repeated views of the protagonist.",
+      "visual_layout": "single_frame"
     },
     {
       "id": "SC16",
@@ -411,7 +426,8 @@
       "secondaries": 1,
       "motion": "hold",
       "seed": 4216,
-      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+      "composition": "One continuous cinematic 16:9 composition showing one readable narrative action. No split panels, collage, inset views, artificial dividers or repeated views of the protagonist.",
+      "visual_layout": "single_frame"
     },
     {
       "id": "SC17",
@@ -436,7 +452,8 @@
       "secondaries": 0,
       "motion": "hold",
       "seed": 4217,
-      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+      "composition": "One continuous cinematic 16:9 composition showing one readable narrative action. No split panels, collage, inset views, artificial dividers or repeated views of the protagonist.",
+      "visual_layout": "single_frame"
     },
     {
       "id": "SC18",
@@ -461,7 +478,8 @@
       "secondaries": 1,
       "motion": "hold",
       "seed": 4218,
-      "composition": "One clear narrative beat; split panels only when they improve story clarity. No written text."
+      "composition": "One continuous cinematic 16:9 composition showing one readable narrative action. No split panels, collage, inset views, artificial dividers or repeated views of the protagonist.",
+      "visual_layout": "single_frame"
     }
   ]
 }
