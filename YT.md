@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 6.8 (2026-10-28)
+Version: 6.9 (2026-10-28)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Scope
@@ -483,3 +483,8 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - User verified on Windows after reboot: episode-voice-check preflight PASS for Python, episode work/state/contract, local VoiceStudio API at 127.0.0.1:3900, setup.models_ready=true, system.ffmpeg_ok=true on CUDA, and /v1/audio/voices responding. 5 pipeline tests and 8 finishing tests PASS. Voice generation not yet run.
 - Important: models_ready is a generic readiness flag; it does not prove OmniVoice installed/selected or which narrator profile is canonical. Avoid generating 18 WAV based on this alone.
 - Added tools/mli-voicestudio-discover.py (read-only) that saves voice_studio_discovery.json in existing EP002 work using /health, /setup/status, /system/info, /v1/audio/voices and /.well-known/voicestudio-speech. Wired it to episode-voice-check launcher after preflight; no GPU or audio output. Next user run once with freshly fetched launcher, inspect sanitized discovery report, select exact voice+engine, then implement one-scene synthesis smoke test and full 18-scene idempotent TTS.
+
+## 2026-10-28: Real local VoiceStudio narrator integration (v6.9)
+- User uploaded voice_studio_discovery.json confirming VoiceStudio 0.5.6, OmniVoice model checkpoint k2-fsa/OmniVoice, installed canonical English voice profile Modern Life Narrator v1 (voice_id=e46c2df1), /v1/audio/voices successful; OmniVoice and subprocess engines available. OmniVoice minimum 6 GB VRAM vs installed GTX 1060 3GB; engine evidence not_loaded, so real synthesis speed/quality unproven and timeout risk significant. CPU fallback may be needed. GGUF binary unavailable; do not select it. Generic models_ready=true is not proof of successful synthesis.
+- Confirmed external official API docs: POST /v1/audio/speech JSON model=omnivoice, voice=e46c2df1, input text, response_format=wav. Added tools/mli-voicestudio-tts.py to perform one-scene smoke, validate RIFF mono WAV and protect existing files with atomic temporary save, produce voice_production_report.json. Batch requires explicit approval, reuses completed WAV files and stops on failure; no regeneration. Uses direct loopback local API; no paid provider.
+- Wired -Mode episode-voice-smoke and -Mode episode-voice-batch -ApproveNarration in tools/mli-production.ps1, with existing aggregated VoiceStudio API/model/runtime preflight. The real synthesis code is committed but NOT yet verified on user Windows; only run smoke first with VoiceStudio open and OmniVoice model loaded; listening QC and batch approval needed. EP002 work folder unchanged; no claims that WAV generation has happened.
