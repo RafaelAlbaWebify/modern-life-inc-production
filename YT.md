@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 7.6 (2026-10-28)
+Version: 7.7 (2026-10-28)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Current production route (v7.6)
@@ -570,3 +570,13 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - The already delivered MLI_EP002_V2_SOFT_KARAOKE.mp4 remains the reviewed product. These source updates do not alter it, regenerate images or voices, or authorize publication. Preserve final user screening and avoid unnecessary reruns.
 
 - Additional real-data acceptance: rerendered all 18 existing V2 scenes with the updated canonical renderer, reused the supplied 302-word alignment via canonical alignment module, burned Soft Karaoke with canonical finisher and passed episode QC (18 scenes, no issues) plus independent strict full decode. This was Python/FFmpeg execution in the chat workspace, not execution of the Windows PowerShell wrapper. Source image and voice files were reused; the delivered final file was not overwritten.
+
+
+## 2026-10-28: EP003 long-form production experiment (v7.7)
+- User authorized starting one roughly 8-minute episode and measuring practical limits instead of relying on the earlier conservative 6–14-hour estimate. That estimate was unmeasured and is not an established production requirement or benchmark.
+- Created MLI_EP003, provisional title Why Being Helpful Is Making You Overwhelmed: 1,680 English words, 48 scene contracts, six internal blocks. At the measured EP002 narration rate plus scene gaps, estimated runtime is ~9:25, not an actual duration. The approved experiment is around 8–10 minutes if the story warrants it; never pad an episode to reach an ad threshold.
+- Generated 48 independent continuous scene PNGs directly with integrated chat imagegen, plus one targeted SC31 edit: 49 successful image requests, 48 selected. Canonical protagonist/style reference actually used, along with established supporting-character references where relevant. Native PNGs retained, no local FLUX pass. All images were inspected in conversation and imported through the canonical frozen-job/hash handoff. Full 48-scene verify/export PASS with no blockers; no automatic publication approval.
+- SC31 first pass wrongly added the woman colleague to the private kitchen, implying an unintended relationship. Recorded action FAIL, exported failed chat job, edited only that scene to remove her, preserved first-pass state/image/review history, reimported and reviewed the repaired actual image. SC31 now has two chat candidates, not blind unlimited retries. Tolerated incidental background people, minor drawing/prop variations and coherent extra-colleague staging in office discussion; no pointless panel divisions accepted.
+- Measured integrated image-tool request time totals 2,090.925 seconds (~34m51s), including the one repair; median request 43.246 seconds. Earliest explicit clock sample after initial repository reads was 19:53:12 UTC, visual selections ready 20:43:02 UTC (~49m51s since that sample). This is partial chat wall time, not active human labor or complete video production time. No image-count quota/failure encountered in these 49 requests; do not infer unlimited availability.
+- New episode voice remains the approved local OmniVoice/Modern Life Narrator v1. Chat has no established access to the user's localhost. Added pinned, resumable GENERAR_VOZ_EP003.ps1: new isolated work, exact contract conflict guard, scene WAV reuse, per-run timings and ZIP, no image generation. Added TERMINAR_EP003.ps1 and matching-contract audio importer for canonical render -> new real word alignment in existing WhisperX environment -> Soft Karaoke -> strict final decode/QC. New episode cannot reuse EP002 word times. Native Windows execution of these new helpers is not yet observed.
+- At this checkpoint there is NO EP003 narration received, measured video runtime, final render, listening certification or publication approval. Resume from existing 48 selected images after local audio is supplied/executed; never regenerate them due merely to a new turn. Exact script, shots, timing evidence and helper code live under episodes/MLI_EP003/. Heavy image package is separately persisted for handoff.
