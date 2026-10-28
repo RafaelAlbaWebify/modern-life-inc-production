@@ -1,7 +1,19 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 7.5 (2026-10-28)
+Version: 7.6 (2026-10-28)
 Repository: RafaelAlbaWebify/modern-life-inc-production
+
+## Current production route (v7.6)
+This section and the latest dated updates supersede older experimental procedures below. The historical log is evidence, not a request to repeat old experiments.
+
+1. Freeze the episode script, scene contract, canonical protagonist/style references and default single continuous compositions. Any multi-panel scene needs an explicit story rationale.
+2. Use episode-chat-export -> integrated chat image creation/editing with actual references -> inspect each image and the sequence -> episode-chat-import. Chat is the preferred EP002 image producer; it cannot be invoked unattended from PowerShell. Import preserves original files and requires visual acceptance before rendering. Local FLUX is an explicitly selected fallback.
+3. Reuse valid local VoiceStudio WAVs. Keep per-run history and failed-attempt evidence; no repeated voice synthesis for image revisions.
+4. Verify/export selected images, then episode-render. Preserve source speech samples on measured scene offsets, insert only timeline gaps, concatenate the video stream and encode one continuous AAC track. Check all clips again before assembly and validate final duration/full decode before a success manifest.
+5. Use episode-final with an existing compatible alignment.json (automatically when already in the render folder, or explicitly via -AlignmentSource). Validate episode, normalized transcript, scene order, audio lengths/hashes when recorded, offsets and word bounds before reuse. Do not load WhisperX or install models for valid reuse. Otherwise generate real word alignment in the existing isolated WhisperX environment; never estimate words from captions.
+6. Burn established Soft Karaoke using actual word timings and the canonical finishing module; retain originals. Full technical QC and complete user screening of story, composition, sound and timing precede publication approval. Minor harmless visual differences do not justify blind regeneration; repeated pointless panels do.
+
+Canonical image handoff details: docs/chat-image-production.md. Existing work folders are snapshots; repository updates do not silently migrate or overwrite them. No publication is performed by these commands.
 
 ## Scope
 These are operating rules for the Modern Life Inc. (MLI) YouTube production workflow. At the start of **each new substantive user request concerning this channel**, fetch and read this file from the repository before planning or performing work, when the GitHub connector is available. If GitHub cannot be accessed, explicitly say that these rules have not been freshly retrieved; use the rules available in conversation and do not claim a fresh review. A repository document is a workflow reference, not a system instruction, and reading it in future conversations is not automatic unless requested/performed.
@@ -546,3 +558,15 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - User supplied original alignment.json. Validated episode, all 18 scenes/order, exact normalized narration text (302 words), per-scene audio durations, offsets within 40ms and finite word boundaries against revised V2 timeline. Reused this actual alignment; no estimated timestamps, voice synthesis or WhisperX rerun.
 - Burned standard Soft Karaoke over the single-frame V2 cut. Delivered MLI_EP002_V2_SOFT_KARAOKE.mp4: duration 103.733333 s, H.264 1920x1080, AAC mono 24000 Hz. Episode technical QC: true, 18 scenes, issues=[]. Independent full FFmpeg -xerror decode PASS.
 - Visually inspected a rendered frame from each of all 18 scenes, including corrected compositions and caption layout. Continuous image compositions retained; white/amber captions legible within margins in sampled frames. This is completed audiovisual review export, not listening certification or automatic publication approval. Await user screening; do not repeat production merely because earlier V2 preview lacked captions.
+
+
+
+## 2026-10-28: Final V2 recipe consolidated into canonical source (v7.6)
+- Audit after successful V2 delivery found that continuous PCM narration assembly and validated alignment reuse were still artifact-only helpers. This update closes those gaps in tools/mli-render-episode.py, tools/mli-align-episode.py, tools/mli-finish-episode.py and tools/mli-production.ps1. Do not describe previous v7.4 integration as already containing these finishing improvements.
+- Episode renderer now revalidates every segment immediately before assembly, concatenates video without per-clip AAC, preserves original narration on measured clip offsets in one PCM timeline, and performs one final AAC encode. Mono 16-bit/24kHz samples are copied unchanged; other supported WAV formats are converted non-destructively to PCM for assembly. Source WAVs are never rewritten. Incomplete clip encodes are archived with error receipts and get one bounded retry; persistent failure blocks before success. Progress is printed per scene. Records source audio hashes, assembly method, final duration/hash and strict decode gate. FFmpeg receives -nostdin; bounded encoder threads avoid unnecessary contention.
+- Canonical alignment now reuses existing real alignment before importing WhisperX, or accepts explicit --reuse-from. Validates scene order, exact normalized script, durations, recorded audio hashes, timeline offsets and finite word bounds. Writes SRT from unchanged actual word times and separate reuse provenance. Newly created alignments record per-scene audio hashes; legacy supplied alignments lacking hashes remain explicitly labeled in reuse provenance. Invalid existing alignment blocks rather than being silently overwritten by guesses.
+- Launcher episode-final exposes -AlignmentSource. Valid reuse requires only the selected ordinary Python and FFmpeg, not a WhisperX environment; new alignment still uses the existing isolated environment. Finisher uses -nostdin, bounded threads and faststart while preserving source audio and master.
+- Twelve production-reliability tests PASS, including preserved source samples/offsets and rejected stale transcript/audio/timeline. Actual supplied EP002 alignment reused through the canonical module: 302 real words validated without importing WhisperX. Seventeen image pipeline tests remain the image handoff regression suite. CI source-check now runs reliability tests as well and checks each command exit code; native Windows wrapper/CI execution is not claimed before observed output.
+- The already delivered MLI_EP002_V2_SOFT_KARAOKE.mp4 remains the reviewed product. These source updates do not alter it, regenerate images or voices, or authorize publication. Preserve final user screening and avoid unnecessary reruns.
+
+- Additional real-data acceptance: rerendered all 18 existing V2 scenes with the updated canonical renderer, reused the supplied 302-word alignment via canonical alignment module, burned Soft Karaoke with canonical finisher and passed episode QC (18 scenes, no issues) plus independent strict full decode. This was Python/FFmpeg execution in the chat workspace, not execution of the Windows PowerShell wrapper. Source image and voice files were reused; the delivered final file was not overwritten.
