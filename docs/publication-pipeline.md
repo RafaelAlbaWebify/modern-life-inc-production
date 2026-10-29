@@ -46,3 +46,22 @@ User decision, 29 October 2026: validate the YouTube channel first. Website crea
 The channel's confirmed reference is Beanie Survives: https://www.beaniesurvives.com/ . It links story episodes to YouTube, routes short parts to Instagram/TikTok and merchandise checkout to Printify. This is a reference for distribution architecture, not permission to copy characters, artwork, text or products.
 
 For Modern Life Inc., a later owned hub can list episodes by relationships/work/money/biases with real YouTube links, brief synopses, channel links and contact. A shop is a separate optional business task requiring an actual provider/catalogue, pricing, fulfillment and user approval; it never blocks a video. Do not create a website, connect a store, buy a domain or publish placeholder offers merely because this pipeline mentions them. Only after this expansion is explicitly reopened, prepare episode-card records from verified video IDs/URLs. Cross-platform excerpts remain optional, separately reviewed assets.
+
+
+## Windows launch convention (v7.15)
+
+For downloaded unsigned MLI scripts, do not present Unblock-File followed by direct invocation as the complete universal solution. Unblock-File only removes the downloaded-file marker; it does not remove an AllSigned requirement.
+
+Launch a reviewed script in a separate PowerShell process with a process-only policy:
+
+```powershell
+& (Get-Process -Id $PID).Path -NoProfile -ExecutionPolicy Bypass -File "$HOME\Downloads\ALINEAR_EP004.ps1"
+```
+
+Use the current host executable to preserve PowerShell version/runtime. Substitute the actual script path and forward its normal arguments. This does not persist a CurrentUser/LocalMachine policy change and needs no administrator session. Keep normal script checks, WAV reuse and real alignment guards.
+
+Offer a companion .cmd launcher beside downloaded .ps1 files; canonical pipeline companion is tools/mli-production.cmd. The companion selects installed PowerShell 7 and invokes only its adjacent known script with -NoProfile -ExecutionPolicy Bypass, preserving exit code. It does not download/execute arbitrary remote code.
+
+MachinePolicy/UserPolicy Group Policy settings take precedence. If the process-only launch is still blocked, request Get-ExecutionPolicy -List and diagnose; do not claim the exact effective policy from the error alone, override organization policy, or recommend repeated Unblock-File, model reinstall, or global unrestricted policies. An internal self-relaunch cannot solve a script blocked before its first line executes.
+
+Reference: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_execution_policies
