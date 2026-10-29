@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 7.12 (2026-10-29)
+Version: 7.13 (2026-10-29)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Current production route (v7.12)
@@ -628,3 +628,12 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - User prefers waiting until the channel works at least minimally before creating a website or buying a domain. Website, domain and merchandise/store expansion are therefore deferred, not active deliverables.
 - Focus current work on finishing publication packages, user-authorized YouTube releases, consistent production and evidence from published videos. Revisit expansion after meaningful audience traction and explicit user instruction; no subscriber/view/revenue threshold has been agreed and none should be invented.
 - Beanie Survives remains a reference, not a requirement to reproduce its wider business infrastructure now. Do not create episode website cards, research domains/vendors or initiate shop setup as routine episode work while deferred.
+
+
+## 2026-10-29: EP003 published by user; EP004 visual production ready (v7.13)
+- User published EP003 at approximately 02:06 Spain peninsular time and supplied screenshots showing Public on Modern Life Inc., then confirmed everything perfect and shared https://youtu.be/j_WvrjeqU_w . This is user-confirmed release/playback, not an independently observed public playback in this request. Duplicate draft shown in Studio was not deleted. Pinned-comment posting is unconfirmed.
+- User approved producing next episode Why You Feel Guilty When You Rest after demand research. Original fictional Sunday narrative, 1,323 whitespace words / 32 scenes, target 390–510 seconds pending actual narration. One narrowly supported research paraphrase: Tonietto et al. (2021), https://doi.org/10.1016/j.jesp.2021.104198 . No universal trauma/nervous-system diagnoses or treatment promises.
+- Generated 32 integrated-chat source illustrations using actual canonical reference and recurring friend reference from EP003; inspected all, repaired SC17 premature night to daylight. 33 image requests including repair, plus separate thumbnail. Imported 32 with actual source paths/hashes, ingested per-image review with concrete observations, canonical verify has no blockers, exported 32 accepted_images for integration cut. Harmless backpack/prop/framing differences explicitly retained; not full-render approval.
+- Standalone GENERAR_VOZ_EP004.ps1 embeds exact contract plus unchanged canonical VoiceStudio/audit helpers; avoids repository-download dependency, keeps own MLI_EP004_AUDIO_V1 folder, preserves WAVs and failure histories. Exact embedded payload checked against source; Windows execution not yet observed. User instructed to generate locally and return ZIP. No access to user localhost assumed.
+- Current state: images ready; voice/audio not received, clean render/new real alignment/Soft Karaoke/final QC pending. Do not invent runtime or estimate word times. Preserve all scenes while waiting; do not regenerate on resume.
+- Thumbnail RESTING... FEELS WRONG inspected at full and 320x180; title/description/pinned-comment drafts prepared, including real previous-video URL. Chapters/SRT intentionally wait for measured timeline and real alignment. No upload/schedule/publication authorized for EP004.
