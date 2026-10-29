@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 7.15 (2026-10-29)
+Version: 7.16 (2026-10-29)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Current production route (v7.12)
@@ -669,3 +669,10 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - User reports ALINEAR_EP004.ps1 still blocked as unsigned after successful Unblock-File command. Actual execution-policy scopes unknown; do not assert AllSigned is confirmed.
 - Added process-scoped current-host launch convention and .cmd companions for main pipeline and EP004 alignment. No permanent execution-policy mutation. Script cannot fix a policy block from inside its body because it has not started.
 - Updated canonical pipeline header and publication documentation. Existing downloaded ALINEAR_EP004.ps1 can run unchanged through the new documented invocation; no media regeneration needed. Windows execution of companions remains unobserved.
+
+
+## 2026-10-29: EP004 final Soft Karaoke and publication assets completed (v7.16)
+- Received MLI_EP004_ALIGNMENT_20261029_030726_553.zip. Windows timing 69.3566417s; exact contract and real render manifest matched. Canonical align validator PASS on all 32 scenes / 1,323 words, original audio hashes/durations, offsets and finite word bounds; received alignment data preserved exactly. Existing real alignment reused without importing WhisperX or redoing voices/images/clean master. Successful alignment is execution evidence for the Windows helper, not proof of which execution-policy command the user used.
+- Burned canonical Soft Karaoke on preserved clean master. Final runtime 411.633333s (6:51.63), H.264 1920x1080 and original AAC audio copied, 33,716,502 bytes. SHA256 61e70521929fef771e255804b637134d8c85ee62821800a9eec070f5dcb9dc69. Canonical technical QC true/issues=[] plus independent complete ffmpeg -xerror decode PASS. Actual captioned output sampled at a real word midpoint in each of all 32 scenes: white/amber text legible in margins, continuous compositions, SC17 daylight repair retained. This does not establish full perceptual listening or user screening.
+- Prepared and checked reviewable publication package using existing canonical exporter: title Why You Feel Guilty When You Rest, thumbnail RESTING... FEELS WRONG, unique description with prior user-published episode URL, four measured chapters (00:00, 01:34, 03:20, 05:04), phrase-level English SRT from unchanged real word times, pinned-comment draft and end-screen proposal pointing to EP003. No website/domain/shop work. No upload, scheduling, comment posting or publication performed; release remains unapproved.
+- Current next step: user screens final video and selects publication package. Do not ask for alignment again or regenerate accepted media. Production status and final_review_receipt.json record verified output and limits. Historical production/alignment ZIPs remain recovery snapshots.
