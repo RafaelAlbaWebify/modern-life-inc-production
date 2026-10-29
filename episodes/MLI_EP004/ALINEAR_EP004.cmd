@@ -1,0 +1,9 @@
+@echo off
+setlocal
+where pwsh.exe >nul 2>&1
+if errorlevel 1 (
+  echo PowerShell 7 ^(pwsh.exe^) was not found in PATH. Run the documented current-host command from your existing PowerShell session.
+  exit /b 1
+)
+pwsh.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0ALINEAR_EP004.ps1" %*
+exit /b %errorlevel%
