@@ -1,0 +1,9 @@
+{
+  "first_assembly_error": "moov atom not found; independently detected after renderer reported completion",
+  "cause": "unknown",
+  "recovery": "Remux preserved validated video_only.mp4 with preserved original continuous_narration.wav; one AAC encode",
+  "duration_seconds": 411.623307,
+  "selected_images_changed": false,
+  "original_speech_samples_equal": 32,
+  "master_sha256": "259ea7ed75cb7b161a19ed7f45bb90b98ce9d292673e893f0057b1ccfbe94624"
+}
