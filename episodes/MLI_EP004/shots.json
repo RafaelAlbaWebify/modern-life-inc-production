@@ -1,0 +1,914 @@
+{
+  "schema_version": 1,
+  "episode_id": "MLI_EP004",
+  "working_title": "Why You Feel Guilty When You Rest",
+  "status": "SCRIPT_LOCKED_FOR_PRODUCTION",
+  "target_seconds": [
+    390,
+    510
+  ],
+  "reference": "references/MLI_STYLE_REFERENCE.png",
+  "style": "Cinematic illustrated 2D urban storybook, clean black contours, warm amber and cool blue accents, consistent perspective. Match approved reference. No anime redesign. 16:9 single continuous cinematic scene. No panels, collage, inset frames, gutters, lettering or speech bubbles.",
+  "character": "Same iconic protagonist as reference: pale minimal face with two simple black oval eyes, messy short black hair, oversized orange over-ear headphones, teal hoodie, dark trousers. Preserve simple face, never detailed anime face.",
+  "supporting": "Only recurring friend: adult man with curly brown hair, mustard jacket. Nobody else indoors unless specifically requested. Do not duplicate protagonist.",
+  "max_attempts": 2,
+  "image_generation_backend": "chat_image_edit",
+  "scenes": [
+    {
+      "id": "SC01",
+      "block": 1,
+      "purpose": "Permission postponed",
+      "location": "living room Sunday morning",
+      "framing": "wide",
+      "action": "sits rigidly at the end of a sofa with an open plain blue novel, gaze drawn toward two cups in the distant kitchen",
+      "beat": "He has been sitting down for forty seconds when he notices the cups. Two cups, beside the sink. Nothing urgent. But suddenly, reading feels irresponsible. He closes the book. He will relax when the kitchen is done.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4401,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC02",
+      "block": 1,
+      "purpose": "Permission postponed",
+      "location": "kitchen morning",
+      "framing": "medium",
+      "action": "washes two cups at the sink, blue novel left visible on the dining table",
+      "beat": "The cups take three minutes. Then he wipes the counter. The cloth reminds him of the laundry. On the way to the washing machine, he notices a bag that should have gone out yesterday. One small task opens the next.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4402,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC03",
+      "block": 1,
+      "purpose": "Permission postponed",
+      "location": "apartment hallway morning",
+      "framing": "wide",
+      "action": "stands holding laundry basket at a doorway with rubbish bag nearby, gaze toward washing machine",
+      "beat": "Nobody has asked him for a favor. His phone is quiet. Today, the person spending his free time is him. And every decision sounds reasonable on its own. Just this first. Then he can stop.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4403,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC04",
+      "block": 1,
+      "purpose": "Permission postponed",
+      "location": "living room late morning",
+      "framing": "medium",
+      "action": "returns to sofa with blue novel and mug, phone lighting up face down on side table",
+      "beat": "An hour later, he returns to the sofa. The book is still on the same page. He picks it up, then remembers an email he could answer before Monday. Not one he must answer. One he could.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4404,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC05",
+      "block": 1,
+      "purpose": "Permission postponed",
+      "location": "small apartment desk",
+      "framing": "over shoulder",
+      "action": "opens laptop while blue novel rests closed beside it, bright morning window",
+      "beat": "Answering it gives him a little relief. That relief is convincing. It makes the interruption feel necessary. So he checks another message, tidies a folder, and starts preparing something that would be useful next week.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4405,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC06",
+      "block": 1,
+      "purpose": "Permission postponed",
+      "location": "apartment window noon",
+      "framing": "wide",
+      "action": "stands at window watching distant people walking toward a leafy park, book held loosely",
+      "beat": "Outside, people are walking toward the park. He had planned to join them, find a bench, and read a few chapters. Now he is negotiating with himself. An afternoon out would feel better if he had earned it properly.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4406,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC07",
+      "block": 1,
+      "purpose": "Permission postponed",
+      "location": "desk beside window",
+      "framing": "close",
+      "action": "hesitates with hand on trackpad, shoulders tense, novel in foreground",
+      "beat": "The difficult part is that he cannot explain what properly means. The kitchen is clean. Nothing is due today. Yet somewhere in his head, there is an unfinished calculation. Enough work, and then permission. He never seems to reach the total.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4407,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC08",
+      "block": 1,
+      "purpose": "Permission postponed",
+      "location": "living room midday",
+      "framing": "wide",
+      "action": "sits on sofa with book open but leans forward toward distant desk instead of reading",
+      "beat": "You might recognize that calculation. Rest is available, but it comes with an invisible condition. Finish everything. Get ahead. Become the sort of person who deserves an easy afternoon. Until then, even doing nothing feels like doing something wrong.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4408,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC09",
+      "block": 2,
+      "purpose": "The invisible calculation",
+      "location": "apartment desk midday",
+      "framing": "medium",
+      "action": "checks notebook of abstract nonletter marks next to closed blue novel and laptop",
+      "beat": "For him, being useful has become an easy way to measure a day. A task disappears. A message gets answered. There is evidence that he did enough. Enjoyment is harder to count, so he keeps asking it to justify itself.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4409,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC10",
+      "block": 2,
+      "purpose": "The invisible calculation",
+      "location": "bookshop on quiet city street",
+      "framing": "wide",
+      "action": "stands outside bookshop holding same blue novel remembering purchase, warm window display no lettering",
+      "beat": "He bought this novel because the opening made him curious. That was all. He did not buy it to improve his focus, become more interesting, or build a morning routine. He wanted to know what happened next. Somehow, that no longer feels sufficient.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4410,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC11",
+      "block": 2,
+      "purpose": "The invisible calculation",
+      "location": "living room with afternoon light",
+      "framing": "medium",
+      "action": "tries reading while sitting upright on edge of sofa, unused cushion and blanket beside him",
+      "beat": "There is research behind one part of this experience. Studies have found that seeing leisure as wasteful can make it less enjoyable. That does not explain every person's guilt. But it helps explain why free time and a sense of freedom are not always the same thing.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4411,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC12",
+      "block": 2,
+      "purpose": "The invisible calculation",
+      "location": "living room afternoon",
+      "framing": "close",
+      "action": "looks distracted over top of open blue novel toward a small basket of clean laundry",
+      "beat": "His body is on the sofa. His attention is inspecting the room for objections. A basket. A shelf. An appointment to arrange. The problem is no longer that a task interrupts his rest. It is that rest itself has started to look like a mistake.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4412,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC13",
+      "block": 2,
+      "purpose": "The invisible calculation",
+      "location": "kitchen table afternoon",
+      "framing": "medium",
+      "action": "checks smartphone beside blue novel and untouched simple lunch, no legible screen",
+      "beat": "He checks his phone for a minute. Scrolling feels easier than reading because it does not require him to declare a break. He can pretend he is between tasks. Twenty minutes later, he has neither finished another job nor enjoyed the time.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4413,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC14",
+      "block": 2,
+      "purpose": "The invisible calculation",
+      "location": "living room afternoon",
+      "framing": "wide",
+      "action": "stands beside sofa putting phone into pocket, blue novel abandoned on cushion",
+      "beat": "Now the guilt has new evidence. Look how much time you wasted. Better do something useful. The afternoon tightens into a loop: discomfort, distraction, regret, another task. He is busy again. He is not especially rested.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4414,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC15",
+      "block": 2,
+      "purpose": "The invisible calculation",
+      "location": "apartment doorway afternoon",
+      "framing": "medium",
+      "action": "opens door to friend curly brown hair mustard jacket holding two takeaway cups, protagonist surprised",
+      "beat": "His friend arrives with coffee before their planned walk. Is he ready? Almost, he says. Just a few things. The friend looks around the tidy apartment and asks which things. He starts listing tomorrow's work. Then next week's. Then something that might be worth organizing.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4415,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC16",
+      "block": 2,
+      "purpose": "The invisible calculation",
+      "location": "kitchen table with friend",
+      "framing": "two shot",
+      "action": "protagonist gestures toward closed laptop while curly brown haired mustard jacket friend listens beside takeaway coffee cups",
+      "beat": "There is a pause. His friend asks a simpler question. What actually needs to happen today? He almost says everything. Instead, he looks at the room. One bill needs checking before the evening. The rest is real, but it is not all due now.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4416,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC17",
+      "block": 3,
+      "purpose": "Choosing without certainty",
+      "location": "kitchen table",
+      "framing": "over shoulder",
+      "action": "protagonist checks one household bill on laptop while friend waits with coffee, no readable text",
+      "beat": "That distinction does not make responsibilities disappear. Some people have shifts, caring duties, or money worries that leave little room to choose. His afternoon happens to contain a choice. Treating every possible task as urgent has been hiding it from him.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4417,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC18",
+      "block": 3,
+      "purpose": "Choosing without certainty",
+      "location": "kitchen table afternoon",
+      "framing": "close",
+      "action": "closes laptop deliberately after checking bill, friend partly visible across table",
+      "beat": "He checks the bill. Then he closes the laptop. Not because the apartment is perfect. Not because every message is answered. Because the thing that needed doing is done, and continuing would be a decision, rather than an obligation.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4418,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC19",
+      "block": 3,
+      "purpose": "Choosing without certainty",
+      "location": "apartment hallway afternoon",
+      "framing": "wide",
+      "action": "puts on shoes beside friend, picks up blue novel instead of returning to desk",
+      "beat": "They leave before he can add another condition. His friend does not give him a speech about balance. They talk about a terrible sandwich, roadworks, and a dog carrying a branch far too large for its mouth. Ordinary things. Nothing to optimize.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4419,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC20",
+      "block": 3,
+      "purpose": "Choosing without certainty",
+      "location": "city park path afternoon",
+      "framing": "wide",
+      "action": "protagonist and mustard jacket friend walk beneath autumn trees, distant small dog with large branch",
+      "beat": "For a few minutes, he forgets to evaluate the walk. Then his hand reaches for his phone. He could track the distance. Make the outing count. He stops with the phone halfway out of his pocket. Would the walk be wasted if it never became a number?",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4420,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC21",
+      "block": 3,
+      "purpose": "Choosing without certainty",
+      "location": "park path near river",
+      "framing": "medium",
+      "action": "slides smartphone back into pocket while looking at leaves over water, friend walking ahead",
+      "beat": "He puts it back. Tracking a walk is not wrong. Today, though, he knows what he was asking the number to do: defend the fact that he went outside. He tries letting the walk be a walk. The discomfort comes along.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4421,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC22",
+      "block": 3,
+      "purpose": "Choosing without certainty",
+      "location": "park bench beside path",
+      "framing": "two shot",
+      "action": "sits on bench beside friend, both holding coffee with calm space between them",
+      "beat": "That is the part he did not expect. Making room for rest does not instantly make resting comfortable. He still thinks about the laundry. He still feels a little behind. He can notice those feelings without immediately turning them into instructions.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4422,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC23",
+      "block": 3,
+      "purpose": "Choosing without certainty",
+      "location": "park bench afternoon",
+      "framing": "close",
+      "action": "rests hands loosely around coffee cup, shoulders lowering, blue novel on lap",
+      "beat": "He does not need to win an argument with every thought. He needs to decide what he is doing for the next little while. Right now, he is sitting with his friend. The laundry exists. So does this conversation.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4423,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC24",
+      "block": 3,
+      "purpose": "Choosing without certainty",
+      "location": "park bench afternoon",
+      "framing": "wide",
+      "action": "friend waves goodbye walking down path while protagonist remains on bench with blue novel",
+      "beat": "When his friend leaves, he almost goes home too. Without company, sitting here seems harder to defend. Instead, he takes the novel from his bag. He will read a chapter. Not as a challenge. Just because he still wants to know what happens.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 1,
+      "motion": "hold",
+      "seed": 4424,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC25",
+      "block": 4,
+      "purpose": "A day that includes him",
+      "location": "park bench beneath tree",
+      "framing": "medium",
+      "action": "reads open blue novel, only abstract line texture on pages, relaxed posture",
+      "beat": "At first, he reads the same paragraph twice. His attention keeps wandering toward unfinished work. He brings it back to the story without scolding himself. A break does not become worthless because the first few minutes feel awkward.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4425,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC26",
+      "block": 4,
+      "purpose": "A day that includes him",
+      "location": "park by river late afternoon",
+      "framing": "wide",
+      "action": "looks up from novel at passing ducks and sunlit water, alone on bench",
+      "beat": "Then something small happens. A character in the book says something unexpected, and he smiles. For a moment, he is not becoming a better employee, earning tomorrow's energy, or proving that he knows how to relax. He is simply enjoying a book.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4426,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC27",
+      "block": 4,
+      "purpose": "A day that includes him",
+      "location": "park bench late afternoon",
+      "framing": "close",
+      "action": "holds novel partly closed with finger marking place, watches water thoughtfully",
+      "beat": "It would be easy to turn that moment into another productivity lesson. Rest now so you can work harder later. That can be a useful benefit. But if every pleasant thing needs a future return, he has only given the old calculation a friendlier name.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4427,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC28",
+      "block": 4,
+      "purpose": "A day that includes him",
+      "location": "apartment entrance early evening",
+      "framing": "wide",
+      "action": "returns home carrying blue novel, warm hallway light and cool outside light",
+      "beat": "He heads home when he wants dinner. The apartment has not collapsed in his absence. There is still laundry to fold. An email is still waiting. He is not magically free of guilt. But the afternoon contains something he chose, instead of only things he cleared.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4428,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC29",
+      "block": 4,
+      "purpose": "A day that includes him",
+      "location": "kitchen early evening",
+      "framing": "medium",
+      "action": "prepares simple dinner while phone remains face down on distant shelf, laundry basket visible beyond doorway",
+      "beat": "He makes food, washes what he needs, and leaves the clean laundry for tomorrow. That is a practical choice tonight, not a rule that chores never matter. Another day, doing the laundry first might genuinely make his evening easier.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4429,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC30",
+      "block": 4,
+      "purpose": "A day that includes him",
+      "location": "dining table evening",
+      "framing": "medium",
+      "action": "eats simple meal alone peacefully with closed blue novel beside plate and phone away",
+      "beat": "The difference is the question he asks. Is this task necessary now, or am I using it to postpone permission? There will not always be a neat answer. But asking gives him a chance to choose, rather than automatically obey the first uneasy feeling.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4430,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC31",
+      "block": 4,
+      "purpose": "A day that includes him",
+      "location": "small desk evening",
+      "framing": "close",
+      "action": "writes short abstract note in notebook then closes it, laptop stays shut",
+      "beat": "Before bed, he leaves himself a short note about tomorrow's important task. He does not plan every minute of the week. He only wants to stop carrying one reminder around all evening. Then he closes the notebook, while the rest of the room remains imperfect.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4431,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    },
+    {
+      "id": "SC32",
+      "block": 4,
+      "purpose": "A day that includes him",
+      "location": "living room night",
+      "framing": "wide",
+      "action": "sits comfortably on sofa reading blue novel under warm lamp, small laundry basket in background",
+      "beat": "He opens the novel again. The thought returns: you should be doing something. This time, he does not get up. He turns the page. There are still things to do. There are also parts of a life that cannot be postponed until the list is empty.",
+      "required": [
+        "single coherent scene",
+        "canonical protagonist",
+        "orange headphones",
+        "teal hoodie"
+      ],
+      "forbidden": [
+        "readable text",
+        "speech bubbles",
+        "panels",
+        "collage",
+        "watermarks",
+        "duplicate protagonist"
+      ],
+      "secondaries": 0,
+      "motion": "hold",
+      "seed": 4432,
+      "composition": "One continuous full 16:9 composition. Keep main action readable above lower caption safe area; varied natural framing, no artificial dividers.",
+      "visual_layout": "single_frame"
+    }
+  ]
+}
