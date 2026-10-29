@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 7.13 (2026-10-29)
+Version: 7.14 (2026-10-29)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Current production route (v7.12)
@@ -637,3 +637,11 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Standalone GENERAR_VOZ_EP004.ps1 embeds exact contract plus unchanged canonical VoiceStudio/audit helpers; avoids repository-download dependency, keeps own MLI_EP004_AUDIO_V1 folder, preserves WAVs and failure histories. Exact embedded payload checked against source; Windows execution not yet observed. User instructed to generate locally and return ZIP. No access to user localhost assumed.
 - Current state: images ready; voice/audio not received, clean render/new real alignment/Soft Karaoke/final QC pending. Do not invent runtime or estimate word times. Preserve all scenes while waiting; do not regenerate on resume.
 - Thumbnail RESTING... FEELS WRONG inspected at full and 320x180; title/description/pinned-comment drafts prepared, including real previous-video URL. Chapters/SRT intentionally wait for measured timeline and real alignment. No upload/schedule/publication authorized for EP004.
+
+
+## 2026-10-29: EP004 original audio verified and clean review rendered (v7.14)
+- Received MLI_EP004_AUDIO_20261029_025401_532.zip. Exact 32-scene contract equality, all 32 supplied audio hashes, mono PCM audit PASS. Original 24kHz speech sums 403.68 seconds. Local voice timing 605.8584572 seconds (~10m06s), success=true; Windows standalone voice launcher now observed. Zero full-scale digital samples in diagnostic scan; not full perceptual listening certification.
+- Rendered 32 unchanged selected illustrations with original voice. First assembly subsequently failed independent ffprobe/QC with moov atom not found despite renderer reporting completion. Preserve invalid first assembly and diagnostic. Root cause remains unknown; do not claim -nostdin proves a fix. Reassembled preserved valid video_only.mp4 and continuous original PCM into new master without regenerating scene clips/images/voices. Verified all 32 original speech PCM segments byte-for-byte at measured offsets.
+- Recovered clean master runtime 411.623307 seconds (6:51.62), H.264 1080p with AAC 24kHz. Canonical technical QC true/issues=[] and separate complete ffmpeg -xerror decode PASS. Inspected eight actual-video frames across opening, desk, bookshop, corrected daylight SC17, park/friend departure, homecoming and night ending. Full user screening/listening pending. No final captioned MP4 exists yet.
+- Current next step: ALINEAR_EP004.ps1, self-contained exact contract + real render manifest + input checker + unchanged canonical alignment module. Checker passed against received 32 WAVs; embedded source bytes verified. Uses existing Downloads/MLI_WHISPERX_ENV and Downloads/MLI_EP004_AUDIO_V1; no new model environment, image/voice generation or rerender. New Windows alignment launcher execution not yet observed. Chat runtime checked: WhisperX absent. Return MLI_EP004_ALIGNMENT_...zip, validate real word alignment and burn canonical Soft Karaoke over preserved clean master.
+- Clean review MP4 and alignment helper/kit saved separately as recovery artifacts. Original production ZIP remains historical visual checkpoint; current status and measured chapters retained in current episode source. Phrase SRT/final publication package await actual word alignment. No publication authorization for EP004.
