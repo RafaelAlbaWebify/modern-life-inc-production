@@ -6,6 +6,17 @@ The integrated ChatGPT image tool is the preferred image producer for EP002. The
 
 `contract.json` must select `image_generation_backend: chat_image_edit`. Local FLUX generation is then blocked. Existing local contracts are snapshots and are not silently migrated by updating GitHub. Preserve source contract/state/voice hashes when preparing a revised run; V2 is an independent run, not an overwrite of the original.
 
+## Next-episode editorial checks (v7.18)
+
+Before freezing a new script/shot contract:
+- Open with a concrete conflict or action in the first seconds; trim explanation that repeats what the scene already shows. This is an editorial experiment, not a measured retention improvement.
+- Review adjacent shots and the sequence, not just each image. Alternate useful close details of hands/objects, wider geography and distinct visible actions. Avoid long runs of nearly identical sofa/bench conversations; retain deliberate visual callbacks when they show change. Do not generate extra images merely to meet a quota.
+- Vary how the protagonist discovers the problem. EP003 and EP004 both use a friend's conversation; for the next episode prefer a consequence, failed attempt, observation or protagonist-led decision instead of repeating the friend-as-explainer resolution.
+- Design the final narrative shot with room for a related-video element and subscribe element, while keeping face and Soft Karaoke clear. Plan the last 5–20 seconds as part of the story; do not pad duration or add an empty outro to reach a threshold. Preview actual platform overlays after rendering.
+- Choose one deliberate improvement to evaluate on the next completed episode. Runtime and scene count follow story needs and measured speech, not advertising eligibility.
+
+These checks apply to new episodes. Existing accepted/published EP003 and EP004 should not be regenerated for these refinements alone.
+
 ## 1. Prepare frozen jobs
 
 From the existing launcher:
