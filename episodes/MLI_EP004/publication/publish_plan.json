@@ -1,0 +1,63 @@
+{
+  "format": "MLI_PUBLISH_PLAN_V1",
+  "episode": "MLI_EP004",
+  "title": "Why You Feel Guilty When You Rest",
+  "description": "You finally have a free afternoon. So why does sitting down feel wrong?\n\nOne quiet Sunday, a book keeps getting pushed aside by dishes, emails, and \u201cjust one more thing.\u201d This illustrated story explores the guilt that can follow us into our free time\u2014and the small choices that let an ordinary afternoon belong to us again.\n\nWatch next: Why Being Helpful Leaves You Overwhelmed\nhttps://youtu.be/j_WvrjeqU_w\n\nModern Life Inc. \u2014 Understand people. Understand modern life.\nOriginal fictional stories about everyday behavior, relationships, and modern life.\n\nResearch informing one part of this episode:\nTonietto, Malkoc, Reczek & Norton (2021), Viewing leisure as wasteful undermines enjoyment.\nhttps://doi.org/10.1016/j.jesp.2021.104198\nThe story and practical examples are fictional; the research does not explain every person's experience or establish a treatment.\n\nCreated with AI-assisted illustrations and a preset synthetic narrator.",
+  "thumbnail_source": "thumbnail.jpg",
+  "thumbnail_text": "RESTING... FEELS WRONG",
+  "thumbnail_provenance": {
+    "producer": "chat_imagegen",
+    "source_artifact": "/workspace/scratch/394f8f418ab9/generated_images/exec-b1424862-cce5-4a31-b1f4-3370ec342c9d.png",
+    "normalization": "1280x720 JPEG; original retained",
+    "visual_review": "Full and 320x180 inspected in production turn: specified headline correct and legible, canonical protagonist, continuous composition. Candidate, no empirical CTR claims."
+  },
+  "chapters": [
+    {
+      "scene": "SC01",
+      "title": "Just one more thing"
+    },
+    {
+      "scene": "SC09",
+      "title": "The invisible calculation"
+    },
+    {
+      "scene": "SC17",
+      "title": "What needs doing today?"
+    },
+    {
+      "scene": "SC25",
+      "title": "An afternoon of his own"
+    }
+  ],
+  "pinned_comment": "What is the first thing your mind tells you to do when you finally sit down to rest?",
+  "tags": [
+    "rest guilt",
+    "productivity guilt",
+    "resting",
+    "modern life",
+    "illustrated story"
+  ],
+  "category_proposal": "Education",
+  "playlist_proposal": null,
+  "settings_to_confirm": {
+    "target_channel_id": null,
+    "initial_visibility_proposal": "private",
+    "audience_proposal": "not made for kids: adult work/relationship topic; confirm in Studio",
+    "ai_disclosure": "Preset synthetic narrator and clearly illustrated fictional scenes, disclosed in description; confirm actual current Studio question.",
+    "paid_promotion": "Confirm whether any sponsorship/product placement applies; none was specified in this production.",
+    "monetization": "Only if channel/video eligible; current eligibility unknown. Review natural breaks before mid-rolls.",
+    "schedule": null,
+    "rights": "Confirm authority for narrator reference and assets before upload; no third-party Beanie material used."
+  },
+  "end_screen_plan": {
+    "status": "studio_preview_required",
+    "start_seconds": 396.62,
+    "end_seconds": 411.62,
+    "elements": [
+      "subscribe",
+      "https://youtu.be/j_WvrjeqU_w"
+    ],
+    "note": "Propose previous user-published episode; preview in Studio to avoid obscuring face/captions. No automatic upload or end-screen edit."
+  },
+  "publication_approved": false
+}
