@@ -1,0 +1,8 @@
+{
+  "contract_equal": true,
+  "received_audit_hashes_match": 32,
+  "technical_audio_audit_passed": 32,
+  "speech_seconds": 403.68,
+  "local_voice_elapsed_seconds": 605.8584572,
+  "full_listening_review": false
+}
