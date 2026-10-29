@@ -3,7 +3,7 @@
   "started_utc": "2026-10-29T01:13:44.404550+00:00",
   "script_words": 1323,
   "scenes": 32,
-  "status": "CLEAN_RENDER_QC_PASS_WAITING_REAL_ALIGNMENT",
+  "status": "FINAL_SOFT_KARAOKE_READY_FOR_USER_SCREENING",
   "publication_approved": false,
   "selected_images": 32,
   "image_requests": 33,
@@ -12,11 +12,15 @@
   "voice_launcher": "GENERAR_VOZ_EP004.ps1",
   "audio_received": true,
   "rendered": true,
-  "alignment_received": false,
+  "alignment_received": true,
   "audio_verified_scenes": 32,
   "speech_seconds": 403.68,
   "local_voice_elapsed_seconds": 605.8584572,
   "clean_runtime_seconds": 411.623307,
   "technical_qc": true,
-  "full_user_screening": false
+  "full_user_screening": false,
+  "final_rendered": true,
+  "final_runtime_seconds": 411.633333,
+  "final_sha256": "61e70521929fef771e255804b637134d8c85ee62821800a9eec070f5dcb9dc69",
+  "publication_package_ready": true
 }
