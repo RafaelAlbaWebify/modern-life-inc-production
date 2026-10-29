@@ -13,6 +13,18 @@ The final MP4 is followed by a publication-package stage. Package preparation/ch
 7. Publish/schedule only under explicit user instruction for the concrete package. Independently verify the actual URL and visible title/thumbnail/audio/captions, then record the publication receipt. Posting the pinned comment also requires authorization.
 8. Review comparable-age analytics (24h/72h/7d when available): impressions, CTR, first-30-second retention, average minutes viewed, traffic and subscribers; revenue only if available. These checkpoints do not create automations.
 
+## First two releases and next production cycle (v7.18)
+
+User screenshot on 29 October 2026 shows both EP003 and EP004 Public on Modern Life Inc. EP003 URL is known; EP004 public URL has not been supplied. User said Done during the end-screen discussion, but exact saved end-screen targets/positions have not been independently verified. Do not invent a URL or claim verified reciprocal links.
+
+Before starting the next production session, briefly check the actual two public videos when accessible: playback, available 1080p quality, captions/chapters and intended end-screen links. Distinguish a player choosing low Auto quality from missing HD processing. Do not reupload solely because Auto starts low. Checks and metrics have not run merely because this checklist exists.
+
+Leave current films, titles and thumbnails in place unless there is a concrete error or enough relevant evidence to justify a change. Early sparse views/CTR are not a verdict. Review comparable-age impressions, traffic and retention with sample-size limits; do not wait for the first videos to take off before producing another.
+
+Begin one further episode as a deliberate iteration, with one improvement recorded, rather than mass-producing an unchanged recipe. This is an agreed starting approach, not a permanent cap or upload-frequency requirement. The user's reference to tomorrow does not create an unattended production task, reminder or automatic publication.
+
+Plan end-screen space during storyboarding (see docs/chat-image-production.md), then choose and preview actual related-video targets in Studio. New video may point to prior relevant release; update prior release toward the new one when appropriate and authorized. Preserve user control over publishing and external edits.
+
 ## Canonical commands
 
 ```powershell
