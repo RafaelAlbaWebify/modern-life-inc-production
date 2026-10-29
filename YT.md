@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 7.17 (2026-10-29)
+Version: 7.18 (2026-10-29)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Current production route (v7.12)
@@ -18,6 +18,29 @@ This section and the latest dated updates supersede older experimental procedure
 8. Website creation, domain purchase and merchandise/store setup are deferred until the channel shows meaningful traction and the user explicitly reopens the decision. Current priority is publishing videos, learning from audience response and keeping production sustainable. Do not spend time or money on website/domain/shop work in the meantime. Keep expansion separate from episode readiness. Confirmed reference: Beanie Survives, https://www.beaniesurvives.com/ (story episode links, YouTube/Instagram/TikTok routes and Printify shop). Reuse distribution principles, never its character/artwork/text. Only use actual published MLI video URLs in any eventual website.
 
 Canonical image handoff details: docs/chat-image-production.md. Existing work folders are snapshots; repository updates do not silently migrate or overwrite them. No publication is performed by these commands.
+
+## Next-episode editorial checks (v7.18)
+
+Before freezing a new script/shot contract:
+- Open with a concrete conflict or action in the first seconds; trim explanation that repeats what the scene already shows. This is an editorial experiment, not a measured retention improvement.
+- Review adjacent shots and the sequence, not just each image. Alternate useful close details of hands/objects, wider geography and distinct visible actions. Avoid long runs of nearly identical sofa/bench conversations; retain deliberate visual callbacks when they show change. Do not generate extra images merely to meet a quota.
+- Vary how the protagonist discovers the problem. EP003 and EP004 both use a friend's conversation; for the next episode prefer a consequence, failed attempt, observation or protagonist-led decision instead of repeating the friend-as-explainer resolution.
+- Design the final narrative shot with room for a related-video element and subscribe element, while keeping face and Soft Karaoke clear. Plan the last 5–20 seconds as part of the story; do not pad duration or add an empty outro to reach a threshold. Preview actual platform overlays after rendering.
+- Choose one deliberate improvement to evaluate on the next completed episode. Runtime and scene count follow story needs and measured speech, not advertising eligibility.
+
+These checks apply to new episodes. Existing accepted/published EP003 and EP004 should not be regenerated for these refinements alone.
+
+## First two releases and next production cycle (v7.18)
+
+User screenshot on 29 October 2026 shows both EP003 and EP004 Public on Modern Life Inc. EP003 URL is known; EP004 public URL has not been supplied. User said Done during the end-screen discussion, but exact saved end-screen targets/positions have not been independently verified. Do not invent a URL or claim verified reciprocal links.
+
+Before starting the next production session, briefly check the actual two public videos when accessible: playback, available 1080p quality, captions/chapters and intended end-screen links. Distinguish a player choosing low Auto quality from missing HD processing. Do not reupload solely because Auto starts low. Checks and metrics have not run merely because this checklist exists.
+
+Leave current films, titles and thumbnails in place unless there is a concrete error or enough relevant evidence to justify a change. Early sparse views/CTR are not a verdict. Review comparable-age impressions, traffic and retention with sample-size limits; do not wait for the first videos to take off before producing another.
+
+Begin one further episode as a deliberate iteration, with one improvement recorded, rather than mass-producing an unchanged recipe. This is an agreed starting approach, not a permanent cap or upload-frequency requirement. The user's reference to tomorrow does not create an unattended production task, reminder or automatic publication.
+
+Plan end-screen space during storyboarding (see docs/chat-image-production.md), then choose and preview actual related-video targets in Studio. New video may point to prior relevant release; update prior release toward the new one when appropriate and authorized. Preserve user control over publishing and external edits.
 
 ## Windows launch convention (v7.15)
 
@@ -681,3 +704,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 ## Description preference (v7.17)
 - User explicitly rejects generic fictional-story/research-treatment disclaimers and AI-assisted illustration/synthetic-narrator production notices in video descriptions. Do not include these or equivalent boilerplate in future MLI descriptions. Keep relevant episode copy, actual links, chapters and useful research attribution. Platform disclosure fields remain separate and must be answered accurately when applicable; they do not require automatic prose in descriptions.
 - Removed these two lines from EP004 source plan and regenerated publication assets; final video unchanged. No published YouTube description changed in this request.
+
+
+## 2026-10-29: Next-episode iteration agreed (v7.18)
+- User agrees to start a third public episode in the next work session, with a brief published-video/HD review first. No topic selected, third episode generated or automated future task created by this documentation update.
+- Editorial checks now live in docs/chat-image-production.md: concrete immediate opening, meaningful shot variety, different discovery/resolution from friend-as-explainer, planned end-screen space, one deliberate improvement. These are hypotheses to assess, not proven analytics findings.
+- docs/publication-pipeline.md records preservation of existing releases unless errors/evidence justify changes, sparse-metric caution and actual end-screen verification. Screenshot confirms two Public entries; EP004 URL and exact cross-link settings remain unverified. Existing media untouched.
