@@ -1,0 +1,17 @@
+{
+  "episode": "MLI_EP004",
+  "runtime_seconds": 411.633333,
+  "sha256": "61e70521929fef771e255804b637134d8c85ee62821800a9eec070f5dcb9dc69",
+  "bytes": 33716502,
+  "canonical_technical_qc": {
+    "technical_pass": true,
+    "editorial_approved": false,
+    "publication_approved": false,
+    "scene_count": 32,
+    "issues": []
+  },
+  "visual_review": "Actual captioned-video frame at real word midpoint in all 32 scenes inspected: legible white/amber captions within margins, continuous compositions, daylight SC17 retained. Sampled review is not full listening or user approval.",
+  "full_user_screening": false,
+  "publication_approved": false,
+  "alignment_windows_seconds": 69.3566417
+}
