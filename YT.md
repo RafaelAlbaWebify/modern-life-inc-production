@@ -1,9 +1,9 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 7.11 (2026-10-29)
+Version: 7.12 (2026-10-29)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
-## Current production route (v7.11)
+## Current production route (v7.12)
 This section and the latest dated updates supersede older experimental procedures below. The historical log is evidence, not a request to repeat old experiments.
 
 1. Freeze the episode script, scene contract, canonical protagonist/style references and default single continuous compositions. Any multi-panel scene needs an explicit story rationale.
@@ -15,7 +15,7 @@ This section and the latest dated updates supersede older experimental procedure
 
 
 7. After final-video feedback, prepare the complete publication package: truthful title/thumbnail, unique description, real-timeline chapters, separate English SRT, pinned-comment draft, proposed Studio settings/end-screen and post-publication verification/metrics. Canonical modes: episode-publish-prepare and episode-publish-check. These create/check local assets only; they never upload, schedule or publish. Full details: docs/publication-pipeline.md.
-8. Keep website/merchandise expansion separate from episode readiness. Confirmed reference: Beanie Survives, https://www.beaniesurvives.com/ (story episode links, YouTube/Instagram/TikTok routes and Printify shop). Reuse distribution principles, never its character/artwork/text. Only use actual published MLI video URLs in any eventual website.
+8. Website creation, domain purchase and merchandise/store setup are deferred until the channel shows meaningful traction and the user explicitly reopens the decision. Current priority is publishing videos, learning from audience response and keeping production sustainable. Do not spend time or money on website/domain/shop work in the meantime. Keep expansion separate from episode readiness. Confirmed reference: Beanie Survives, https://www.beaniesurvives.com/ (story episode links, YouTube/Instagram/TikTok routes and Printify shop). Reuse distribution principles, never its character/artwork/text. Only use actual published MLI video URLs in any eventual website.
 
 Canonical image handoff details: docs/chat-image-production.md. Existing work folders are snapshots; repository updates do not silently migrate or overwrite them. No publication is performed by these commands.
 
@@ -622,3 +622,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Six chapters start 00:00, 01:23, 03:00, 04:28, 05:59 and 07:38 from measured render scene offsets, not script-length guesses. Separate English SRT uses canonical caption grouper and unchanged aligned word times. Description includes story context, research links and transparent AI-assisted artwork/synthetic-narration note; actual Studio AI-use/audience/promotion/monetization/channel/visibility decisions remain to confirm. No invented public MLI website/shop/channel/playlist URL.
 - Eight publication guard tests PASS; real EP003 prepare and repeated package check PASS. CI configured to include these tests and existing PowerShell parsing. New publication-mode Windows execution/CI result is not yet observed; Python implementation was exercised in chat. No prior production suites rerun unnecessarily for unchanged render/audio code.
 - Reviewable package MLI_EP003_PUBLICATION.zip saved; identity libfile_91710626216c8191bd1f54df43f42672. Source plan: episodes/MLI_EP003/publication/publish_plan.json. Completed video remains separate, unchanged SHA256 ad970d678005bfe7ce132c61a4d8a938deb94b5824e0fadfdc763db0cfe42f9c. Next work is concrete packaging review and an explicit publication instruction; website/merch are optional separate projects.
+
+
+## 2026-10-29: Validate the channel before website/domain/shop (v7.12)
+- User prefers waiting until the channel works at least minimally before creating a website or buying a domain. Website, domain and merchandise/store expansion are therefore deferred, not active deliverables.
+- Focus current work on finishing publication packages, user-authorized YouTube releases, consistent production and evidence from published videos. Revisit expansion after meaningful audience traction and explicit user instruction; no subscriber/view/revenue threshold has been agreed and none should be invented.
+- Beanie Survives remains a reference, not a requirement to reproduce its wider business infrastructure now. Do not create episode website cards, research domains/vendors or initiate shop setup as routine episode work while deferred.
