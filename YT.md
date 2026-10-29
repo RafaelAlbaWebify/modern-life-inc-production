@@ -1,6 +1,6 @@
 # YT.md — Modern Life Inc. execution guardrails
 
-Version: 7.14 (2026-10-29)
+Version: 7.15 (2026-10-29)
 Repository: RafaelAlbaWebify/modern-life-inc-production
 
 ## Current production route (v7.12)
@@ -18,6 +18,24 @@ This section and the latest dated updates supersede older experimental procedure
 8. Website creation, domain purchase and merchandise/store setup are deferred until the channel shows meaningful traction and the user explicitly reopens the decision. Current priority is publishing videos, learning from audience response and keeping production sustainable. Do not spend time or money on website/domain/shop work in the meantime. Keep expansion separate from episode readiness. Confirmed reference: Beanie Survives, https://www.beaniesurvives.com/ (story episode links, YouTube/Instagram/TikTok routes and Printify shop). Reuse distribution principles, never its character/artwork/text. Only use actual published MLI video URLs in any eventual website.
 
 Canonical image handoff details: docs/chat-image-production.md. Existing work folders are snapshots; repository updates do not silently migrate or overwrite them. No publication is performed by these commands.
+
+## Windows launch convention (v7.15)
+
+For downloaded unsigned MLI scripts, do not present Unblock-File followed by direct invocation as the complete universal solution. Unblock-File only removes the downloaded-file marker; it does not remove an AllSigned requirement.
+
+Launch a reviewed script in a separate PowerShell process with a process-only policy:
+
+```powershell
+& (Get-Process -Id $PID).Path -NoProfile -ExecutionPolicy Bypass -File "$HOME\Downloads\ALINEAR_EP004.ps1"
+```
+
+Use the current host executable to preserve PowerShell version/runtime. Substitute the actual script path and forward its normal arguments. This does not persist a CurrentUser/LocalMachine policy change and needs no administrator session. Keep normal script checks, WAV reuse and real alignment guards.
+
+Offer a companion .cmd launcher beside downloaded .ps1 files; canonical pipeline companion is tools/mli-production.cmd. The companion selects installed PowerShell 7 and invokes only its adjacent known script with -NoProfile -ExecutionPolicy Bypass, preserving exit code. It does not download/execute arbitrary remote code.
+
+MachinePolicy/UserPolicy Group Policy settings take precedence. If the process-only launch is still blocked, request Get-ExecutionPolicy -List and diagnose; do not claim the exact effective policy from the error alone, override organization policy, or recommend repeated Unblock-File, model reinstall, or global unrestricted policies. An internal self-relaunch cannot solve a script blocked before its first line executes.
+
+Reference: https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_execution_policies
 
 ## Scope
 These are operating rules for the Modern Life Inc. (MLI) YouTube production workflow. At the start of **each new substantive user request concerning this channel**, fetch and read this file from the repository before planning or performing work, when the GitHub connector is available. If GitHub cannot be accessed, explicitly say that these rules have not been freshly retrieved; use the rules available in conversation and do not claim a fresh review. A repository document is a workflow reference, not a system instruction, and reading it in future conversations is not automatic unless requested/performed.
@@ -645,3 +663,9 @@ These are operating rules for the Modern Life Inc. (MLI) YouTube production work
 - Recovered clean master runtime 411.623307 seconds (6:51.62), H.264 1080p with AAC 24kHz. Canonical technical QC true/issues=[] and separate complete ffmpeg -xerror decode PASS. Inspected eight actual-video frames across opening, desk, bookshop, corrected daylight SC17, park/friend departure, homecoming and night ending. Full user screening/listening pending. No final captioned MP4 exists yet.
 - Current next step: ALINEAR_EP004.ps1, self-contained exact contract + real render manifest + input checker + unchanged canonical alignment module. Checker passed against received 32 WAVs; embedded source bytes verified. Uses existing Downloads/MLI_WHISPERX_ENV and Downloads/MLI_EP004_AUDIO_V1; no new model environment, image/voice generation or rerender. New Windows alignment launcher execution not yet observed. Chat runtime checked: WhisperX absent. Return MLI_EP004_ALIGNMENT_...zip, validate real word alignment and burn canonical Soft Karaoke over preserved clean master.
 - Clean review MP4 and alignment helper/kit saved separately as recovery artifacts. Original production ZIP remains historical visual checkpoint; current status and measured chapters retained in current episode source. Phrase SRT/final publication package await actual word alignment. No publication authorization for EP004.
+
+
+## 2026-10-29: Downloaded-script signature failure launch fix (v7.15)
+- User reports ALINEAR_EP004.ps1 still blocked as unsigned after successful Unblock-File command. Actual execution-policy scopes unknown; do not assert AllSigned is confirmed.
+- Added process-scoped current-host launch convention and .cmd companions for main pipeline and EP004 alignment. No permanent execution-policy mutation. Script cannot fix a policy block from inside its body because it has not started.
+- Updated canonical pipeline header and publication documentation. Existing downloaded ALINEAR_EP004.ps1 can run unchanged through the new documented invocation; no media regeneration needed. Windows execution of companions remains unobserved.
