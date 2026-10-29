@@ -1,0 +1,16 @@
+{
+  "episode": "MLI_EP004",
+  "started_utc": "2026-10-29T01:13:44.404550+00:00",
+  "script_words": 1323,
+  "scenes": 32,
+  "status": "VISUALS_READY_WAITING_LOCAL_VOICE",
+  "publication_approved": false,
+  "selected_images": 32,
+  "image_requests": 33,
+  "image_repairs": 1,
+  "thumbnail_ready": true,
+  "voice_launcher": "GENERAR_VOZ_EP004.ps1",
+  "audio_received": false,
+  "rendered": false,
+  "alignment_received": false
+}
